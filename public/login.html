@@ -1,35 +1,179 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hubit - Inicio</title>
     <link rel="stylesheet" href="../style/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
-<body>
-    <nav>
-        <div class="logo">
-            <img src="../img/Hubit_svg_logo.svg" alt="">
-        </div>
 
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="">Conheça o hubit</a>
-                </li>
-                <li>
-                    <a href="">Planos</a>
-                </li>
-            </ul>
-            <a href="">
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="logo">
+                <img src="../img/Hubit_svg_logo.svg" alt="">
+            </div>
+            <a href="" class="d-lg-none ms-auto">
                 <div class="login-btn">
                     Login
                 </div>
             </a>
+            <button class="navbar-toggler ms-4 me-4" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navigation collapse navbar-collapse ms-auto mb-2 mb-lg-0" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Conheça o hubit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Planos</a>
+                    </li>
+                </ul>
+                <a href="" class="d-none d-lg-block">
+                    <div class="login-btn">
+                        Login
+                    </div>
+                </a>
+            </div>
+
         </div>
     </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <main>
+        
+            <div class="main-content-1">
+                <div class="main-block-1">
+                    <div class="text-login-block">
+                        <h1><span style="color: #2F6D88; font-family: Codec;">Expanda</span> suas <br> oportunidades</h1>
+                        <h2>Vagas de TI</h2>
+                    </div>
+                    <div class="login-block">
+                        <input type="email" name="email" id="email" placeholder="E-mail">
+                        <input type="password" name="passwd" id="passwd" placeholder="Senha">
+                        <div class="remember-forgot">
+                            <div class="remember">
+                                <label for="checkbox"> Lembrar de mim</label>
+                                <input class="checkbox" type="checkbox" name="checkbox" id="checkbox">
+                            </div>
+                            <!-- Button trigger modal -->
+                            <a type="button" class="forgot" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Primeira vez aqui?
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="email" name="email" id="emailNewUser" placeholder="E-mail">
+                                            <input type="password" name="passwd" id="passwdNewUser" placeholder="Senha">
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="login-block-enter" onclick="registerNewUser()" style="width: 30%; height: 40px;">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="enter-btn" href="" onclick="login()">
+                            <div class="login-block-enter">
+                                Entrar
+                            </div>
+                        </a>
+                        <h3>Ao continuar, você reconhece a <br> <span style="text-decoration: underline;">Política de
+                                Privacidade</span> da Hubit</h3>
+                    </div>
+                
+                        </div>
+                
+                
+                        <div class="main-block-2">
+                <div class="img-block-login">
+                    <img src="../img/login_hero_img.png" alt="">
+                </div>
+                        </div>
+            </div>
+
+        <section>
+            <div class="about">
+                <h1>Conheça o hubit</h1>
+                <h2>O hubit é uma plataforma de vagas de emprego <br> focada na área da Tecnologia da Informação</h2>
+                
+                <div class="about-content">
+                    <div class="section-block-1">
+                    </div>
+                    <div class="section-block-2">
+                        <h1>Curriculo</h1>
+                        <p>Crie o seu currículo na hubit e use para <span style="color: #2F6D88;">candidatar-se</span> para vagas de empresas </p>
+
+                        <h1>Feed de vagas</h1>
+                        <p>Explore por um feed de vagas, com inúmeras <span style="color: #2F6D88;">oportunidades de trabalho</span>, entre elas, Estágios, CLT ou PJ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script>
+
+        function registerNewUser(){
+            let usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
+            
+            const emailNewUser = document.getElementById('emailNewUser').value;
+            const passwdNewUser = document.getElementById('passwdNewUser').value;
+
+            if (emailNewUser === '' || passwdNewUser === ''){
+                alert('Por favor insira algo no campo');
+                return;
+            };
+
+            let newUser = {
+                email: emailNewUser,
+                passwd: passwdNewUser
+            }
+
+            console.log(newUser);
+
+            usuarios.push(newUser);
+
+            console.log(usuarios);
+            
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+            return false;
+        }
+
+        function login(){
+            
+            const users = JSON.parse(localStorage.getItem('usuarios'));
+            
+            const email = document.getElementById('email')
+            const passwd = document.getElementById('passwd')
+            
+            
+
+            alert(user);
+            return false;
+        }
+
+    </script>
+    <script src="../js/script.js"></script>
 </body>
+
 </html>
