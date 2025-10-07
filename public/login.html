@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hubit - Inicio</title>
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../assets/styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
@@ -14,7 +14,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <div class="logo">
-                <img src="../img/Hubit_svg_logo.svg" alt="">
+                <img src="../assets/img/svg/Hubit_svg_logo.svg" alt="">
             </div>
             <a href="" class="d-lg-none ms-auto">
                 <div class="login-btn">
@@ -46,9 +46,10 @@
     </nav>
 
     <main>
-        
-            <div class="main-content-1">
-                <div class="main-block-1">
+
+        <div class="main-content-1 container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-12 main-block-1">
                     <div class="text-login-block">
                         <h1><span style="color: #2F6D88; font-family: Codec;">Expanda</span> suas <br> oportunidades</h1>
                         <h2>Vagas de TI</h2>
@@ -58,14 +59,14 @@
                         <input type="password" name="passwd" id="passwd" placeholder="Senha">
                         <div class="remember-forgot">
                             <div class="remember">
-                                <label for="checkbox"> Lembrar de mim</label>
                                 <input class="checkbox" type="checkbox" name="checkbox" id="checkbox">
+                                <label for="checkbox"> Lembrar de mim</label>
                             </div>
-                            <!-- Button trigger modal -->
+                
                             <a type="button" class="forgot" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Primeira vez aqui?
                             </a>
-                            <!-- Modal -->
+                
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -78,17 +79,22 @@
                                         <div class="modal-body">
                                             <input type="email" name="email" id="emailNewUser" placeholder="E-mail">
                                             <input type="password" name="passwd" id="passwdNewUser" placeholder="Senha">
+                                            <input type="radio" name="option" id="Usuario">
+                                            <label for="funcionarioUser">Funcionário</label>
+                                            <input type="radio" name="option" id="empresa">
+                                            <label for="empresa">Empresa</label>
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="login-block-enter" onclick="registerNewUser()" style="width: 30%; height: 40px;">Save changes</button>
+                                            <button type="button" class="login-block-enter" onclick="registrarNovoUsuario()"
+                                                style="width: 30%; height: 40px;">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a class="enter-btn" href="" onclick="login()">
+                        <a class="enter-btn" onclick="login()">
                             <div class="login-block-enter">
                                 Entrar
                             </div>
@@ -96,31 +102,112 @@
                         <h3>Ao continuar, você reconhece a <br> <span style="text-decoration: underline;">Política de
                                 Privacidade</span> da Hubit</h3>
                     </div>
-                
-                        </div>
-                
-                
-                        <div class="main-block-2">
-                <div class="img-block-login">
-                    <img src="../img/login_hero_img.png" alt="">
                 </div>
-                        </div>
+                <div class="col-md-6 col-12 main-block-2">
+                    <div class="img-block-login">
+                        <img src="../assets/img/login_hero_img.png" alt="">
+                    </div>
+                </div>
             </div>
+        </div>
 
         <section>
             <div class="about">
                 <h1>Conheça o hubit</h1>
                 <h2>O hubit é uma plataforma de vagas de emprego <br> focada na área da Tecnologia da Informação</h2>
-                
+
                 <div class="about-content">
                     <div class="section-block-1">
+                        <div class="section-block-img-1"><img src="../assets/img/about_hero_img.jpg" alt=""></div>
                     </div>
                     <div class="section-block-2">
-                        <h1>Curriculo</h1>
-                        <p>Crie o seu currículo na hubit e use para <span style="color: #2F6D88;">candidatar-se</span> para vagas de empresas </p>
+                        <div class="section-block-content-2">
+                            <h1>Currículo</h1>
+                            <p>Crie o seu currículo na hubit e use para <span style="color: #2F6D88;">candidatar-se</span>
+                                para vagas de empresas </p>
+                                <br>
+                            <h1>Feed de vagas</h1>
+                            <p>Explore por um feed de vagas,  com inúmeras <span style="color: #2F6D88;">oportunidades de 
+                                    trabalho</span>, entre elas, Estágios, CLT ou PJ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                        <h1>Feed de vagas</h1>
-                        <p>Explore por um feed de vagas, com inúmeras <span style="color: #2F6D88;">oportunidades de trabalho</span>, entre elas, Estágios, CLT ou PJ</p>
+        <section>
+            <div class="about">
+                <h1>Slots</h1>
+                <h2>Uma alternativa prática para se candidatar!</h2>
+
+                <div class="about-content">
+                    <div class="section-block-1">
+                        <div class="section-block-img-2"><img src="../assets/img/Hubit (1).png" alt=""></div>
+                    </div>
+                    <div class="section-block-2">
+                        <div class="section-block-content-2">
+                            <h1>O que são os <span style="color: #30729e;">Slots</span>?</h1>
+                            <p>Slots são espaços de currículos configurados por você, onde podem ser utilizados para se candidatar para vagas especificas.</p>
+                                <br>
+                            <h1><span style="color: #30729e;">Formato desejado</span> pelas empresas</h1>
+                            <p>Aqui seu currículo já sai do jeitinho que as grandes empresas querem.</p>
+                            <br>
+                            <div class="slot-btn">
+                                Experimente agora
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="about">
+                <h1>Planos</h1>
+                <h2>Selecione um plano hubit</h2>
+
+                <div class="plans-content">
+                    <div class="plan1">
+                        <div class="plan1-content">
+                            <h1>8 bits</h1>
+                            <h2>Standard <span style="color: #2F6D88;">bits</span></h2>
+                            <h3>Grátis</h3>
+                            <div class="plan-a-btn">
+                                Começar hoje
+                            </div>
+                            <br>
+                            <div class="plan-content">
+                                <ul>
+                                    <li>1 Slot de currículo</li>
+                                    <li>Navegar pelo feed</li>
+                                    <li>Candidatar-se
+                                    </li>
+                                    <li>Impulsionar o alcance do seu Currículo</li>
+                                    <li>Fique em destaque</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan1">
+                        <div class="plan1-content">
+                            <h1>64 bits</h1>
+                            <h2>Premium bits</span></h2>
+                            <h3>R$ 29.90 /Mês</h3>
+                            <div class="plan-a-btn-2">
+                                Experimente agora
+                            </div>
+                            <br>
+                            <div class="plan-content">
+                                <ul>
+                                    <li>1 Slot de currículo</li>
+                                    <li>Navegar pelo feed</li>
+                                    <li>Candidatar-se
+                                    </li>
+                                    <li>Impulsionar o alcance do seu Currículo</li>
+                                    <li>Fique em destaque</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,50 +217,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script>
-
-        function registerNewUser(){
-            let usuarios = JSON.parse(localStorage.getItem('usuarios')) || []
-            
-            const emailNewUser = document.getElementById('emailNewUser').value;
-            const passwdNewUser = document.getElementById('passwdNewUser').value;
-
-            if (emailNewUser === '' || passwdNewUser === ''){
-                alert('Por favor insira algo no campo');
-                return;
-            };
-
-            let newUser = {
-                email: emailNewUser,
-                passwd: passwdNewUser
-            }
-
-            console.log(newUser);
-
-            usuarios.push(newUser);
-
-            console.log(usuarios);
-            
-            localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-            return false;
-        }
-
-        function login(){
-            
-            const users = JSON.parse(localStorage.getItem('usuarios'));
-            
-            const email = document.getElementById('email')
-            const passwd = document.getElementById('passwd')
-            
-            
-
-            alert(user);
-            return false;
-        }
-
-    </script>
-    <script src="../js/script.js"></script>
+    <script src="../assets/modules/login.js"></script>
 </body>
 
 </html>
