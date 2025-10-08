@@ -30,6 +30,5 @@ function registrarNovoUsuario() {
 		}).catch((err) => {
 			console.error(err);
 		});
-
 }
 
