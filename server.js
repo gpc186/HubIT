@@ -15,5 +15,5 @@ app.get('/contact', (req, asw)=>{
 });
 
 app.listen(port, ()=>{
-	console.log(`Server is up and listening on port: ${port}`);
+	console.log(`Server is up and listening on port: http://localhost:${port}`);
 })
