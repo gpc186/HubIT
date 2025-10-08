@@ -32,7 +32,7 @@
           </nav>
         </header>
         <main>
-            <br><br><br><br><br>
+            <br><br><br><br>
             <div class="container">
                 <div class="img-phone">
                     <img src="./assets/img/contact_hero_img.png" alt="">
@@ -49,21 +49,55 @@
                         <div class="title-SAC">
                             <h2>SAC</h2>
                         </div>
-                        <div class="btn-email">
+                        <button class="btn-email" onclick="CopiarEmail()">
                             <img src="./assets/img/svg/mail-svgrepo-com.svg" alt="email-icon">
-                            <p>hubitcontato@gmail.com</p>
-                        </div>
-                        <div class="btn-phone">
+                            <input class="copiar" type="text" id="copiarE" value="hubitcontato@gmail.com" readonly>
+                        </button>
+                        <div class="btn-phone" onclick="CopiarPhone()">
                             <img src="./assets/img/svg/telephone-svgrepo-com.svg" alt="phone-icon">
-                            <p>11-9000-8999</p>
+                            <input class="copiar" type="text" id="copiarP" value="11-9000-8999" readonly>
                         </div>
                     </div>
-                    <div class="container-doubt">
-                    <p>Dúvidas mais frequentes</p>
-                    <div class="js-doubts">
 
                     </div>
                 </div>
+                </div>
+            </div>
+            <div class="container-FAQ">
+                <div class="texto2">
+                    <h1>Dúvidas Frequentes</h1>
+                </div>
+                <div class="border-d">
+                    <div class="faq-item">
+                    <!--duvida 1-->
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span style="color: #2f6d88">Dúvida 1</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>blablabla</p>
+                        </div>
+                    </div>
+                    <!--duvida 2-->
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span style="color: #2f6d88">Dúvida 1</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>blablabla</p>
+                        </div>
+                    </div>
+                    <!--duvida 3-->
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                           <span style="color: #2f6d88">Dúvida 1</span>
+                            <span class="arrow">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>blablabla</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -72,6 +106,6 @@
 
         </footer>
         
-        <script src="" async defer></script>
+        <script src="./assets/js/contact.js" async defer></script>
     </body>
 </html>

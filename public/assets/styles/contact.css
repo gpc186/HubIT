@@ -11,10 +11,9 @@ body{
 }
 
 main{
-    opacity: 1;
     background-color: #f8f7f2;
     width: 100%;
-    height: 100dvh;
+    height: auto;
 }
 
 
@@ -25,6 +24,7 @@ header{
     width: 100dvw;
     z-index: 999;
     position: fixed;
+    
     
 }
 a {
@@ -134,6 +134,7 @@ h3 {
 }
 
 .container-right{
+    align-items: center;
     margin-top: 5%;
     width: 450px;
     height: auto;
@@ -160,14 +161,15 @@ text-align: center;
 }
 
 .SAC{
+    
     align-items: center;
     display: flex;
     flex-direction: column;
     gap: 20px;
     border-radius: 20px;
-    padding: 30px;
-    width: 450px;
-    height: 350px;
+    padding: 20px;
+    width: 380px;
+    height: 280px;
     border: #70707091 solid 2px;
 }
 
@@ -176,6 +178,7 @@ text-align: center;
 }
 .btn-email{
     width: 330px;
+    height: 70px;
  padding: 20px;
  gap:20px;
  display: flex;
@@ -197,6 +200,7 @@ text-align: center;
 /*button phone*/
 .btn-phone{
 width: 330px;
+height: 70px;
  padding: 20px;
  gap:20px;
  display: flex;
@@ -215,4 +219,77 @@ width: 330px;
 
 .btn-phone img{
     width: 45px;
+}
+
+.copiar{
+    background-color: #2f6d88;
+    border: 0px  none;
+    color: white;
+    cursor: pointer !important;
+    user-select: none; /* Impede seleção do texto */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    
+}
+textarea:focus, input:focus, select:focus{
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
+
+/*FAQ*/
+.container-FAQ{
+    
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px
+    border-radius: 20px;
+}
+.border-d{
+    width: 100%;
+    height: 100%;
+    border: 2px solid #ffff;
+    border-bottom: 0px;
+    border-radius: 20px;
+}
+.faq-item{
+    background-color: #ffff;
+    overflow: hidden;
+    border-bottom: 2px solid #2f6d88;
+    margin-bottom: 15px;
+    border-radius: 20px;
+}
+.faq-question{
+    background-color: #ffff;
+    padding: 20px;
+    cursor:pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    font-weight: 600;
+    font-family: Codec;
+}
+
+.arrow{
+    transition: transform 0.3 ease;
+    font-size: 14px;
+}
+
+.faq-question.active .arrow{
+    transform: rotate(180deg)
+}
+.faq-answer {
+    
+    background-color: #ffff;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 20px;
+}
+
+.faq-answer.show {
+    background-color: #ffff;
+    max-height: 500px;
+    padding: 20px;
 }

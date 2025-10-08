@@ -8,45 +8,51 @@
     <link rel="stylesheet" href="./assets/styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="shortcut icon" href="./assets/img/favicon/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <div class="logo">
-                <img src="./assets/img/svg/Hubit_svg_logo.svg" alt="">
-            </div>
-            <a href="" class="d-lg-none ms-auto">
-                <div class="login-btn">
-                    Login
-                </div>
-            </a>
-            <button class="navbar-toggler ms-4 me-4" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navigation collapse navbar-collapse ms-auto mb-2 mb-lg-0" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Conheça o hubit</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Planos</a>
-                    </li>
-                </ul>
-                <a href="" class="d-none d-lg-block">
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a href="login.html" target="_self">
+                    <div class="logo">
+                        <img src="./assets/img/svg/Hubit_svg_logo.svg" alt="">
+                    </div>
+                </a>
+                <a href="" class="d-lg-none ms-auto">
                     <div class="login-btn">
                         Login
                     </div>
                 </a>
+                <button class="navbar-toggler ms-4 me-4" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navigation collapse navbar-collapse ms-auto mb-2 mb-lg-0" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">Conheça o hubit</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#slots">Slots</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#plans">Planos</a>
+                        </li>
+                    </ul>
+                    <a class="d-none d-lg-block">
+                        <div class="login-btn" onclick="focar()">
+                            Login
+                        </div>
+                    </a>
+                </div>
             </div>
-
-        </div>
-    </nav>
-
+        </nav>
+    </header>
     <main>
-
+        <br><br><br><br>
         <div class="main-content-1 container-fluid">
             <div class="row">
                 <div class="col-md-6 col-12 main-block-1">
@@ -72,23 +78,31 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Registre-se</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <input type="email" name="email" id="emailNewUser" placeholder="E-mail">
-                                            <input type="password" name="passwd" id="passwdNewUser" placeholder="Senha">
-                                            <input type="radio" name="option" id="Usuario">
-                                            <label for="funcionarioUser">Funcionário</label>
-                                            <input type="radio" name="option" id="empresa">
-                                            <label for="empresa">Empresa</label>
+                                            <div class="register-modal">
+                                                <input type="email" name="email" id="emailNewUser" placeholder="E-mail">
+                                                <input type="password" name="passwd" id="passwdNewUser" placeholder="Senha">
+                                            </div>
+                                            <div class="selection-modal">
+                                                <div class="select-radio">
+                                                    <input class="radio-modal" type="radio" name="option" id="usuario">
+                                                    <label for="funcionarioUser">Funcionário</label>
+                                                </div>
+                                                <div class="select-radio">
+                                                    <input class="radio-modal" type="radio" name="option" id="empresa">
+                                                    <label for="empresa">Empresa</label>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                             <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
+                                                data-bs-dismiss="modal">Fechar</button>
                                             <button type="button" class="login-block-enter" onclick="registrarNovoUsuario()"
-                                                style="width: 30%; height: 40px;">Save changes</button>
+                                                style="width: 30%; height: 40px;">Registrar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -99,8 +113,9 @@
                                 Entrar
                             </div>
                         </a>
-                        <h3>Ao continuar, você reconhece a <br> <span style="text-decoration: underline;">Política de
-                                Privacidade</span> da Hubit</h3>
+                        <h3>Ao continuar, você reconhece a <br> <a style="color: #30729e; text-decoration: none;" href="">
+                        Política de Privacidade
+                        </a>da Hubit</h3>
                     </div>
                 </div>
                 <div class="col-md-6 col-12 main-block-2">
@@ -111,6 +126,8 @@
             </div>
         </div>
 
+        <div id="about"></div>
+        <div></div>
         <section>
             <div class="about">
                 <h1>Conheça o hubit</h1>
@@ -135,6 +152,7 @@
             </div>
         </section>
 
+        <div id="slots"></div>
         <section>
             <div class="about">
                 <h1>Slots</h1>
@@ -152,9 +170,12 @@
                             <h1><span style="color: #30729e;">Formato desejado</span> pelas empresas</h1>
                             <p>Aqui seu currículo já sai do jeitinho que as grandes empresas querem.</p>
                             <br>
-                            <div class="slot-btn">
-                                Experimente agora
-                            </div>
+                            <a href="#plans">
+                                <div class="slot-btn">
+                                    Experimente agora
+                                </div>
+                            </a>
+                            <div id="plans"></div>
                         </div>
                     </div>
                 </div>
@@ -172,9 +193,11 @@
                             <h1>8 bits</h1>
                             <h2>Standard <span style="color: #2F6D88;">bits</span></h2>
                             <h3>Grátis</h3>
+                            
                             <div class="plan-a-btn">
                                 Começar hoje
                             </div>
+                            
                             <br>
                             <div class="plan-content">
                                 <ul>
@@ -226,7 +249,7 @@
                         <a href="" target="_blank">
                             <li><img src="assets/img/svg/instagram-167-svgrepo-com.svg" alt=""></li>
                         </a>
-                        <a href="" target="_blank">
+                        <a href="https://github.com/gpc186/HubIT" target="_blank">
                             <li><img src="assets/img/svg/github-142-svgrepo-com.svg" alt=""></li>
                         </a>
                     </ul>
@@ -243,6 +266,12 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="/assets/js/login.js"></script>
+    <script>
+        function focar() {
+            document.getElementById('email').focus();
+        }
+    </script>
+    <script src="assets/js/focus.js"></script>
 </body>
 
 </html>
