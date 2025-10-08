@@ -20,6 +20,11 @@ main {
     background-color: #F8F7F2;
 }
 
+a{
+    text-decoration: none !important;
+    font-style: none !important;
+}
+
 .main-content-1 {
     /* display: flex; */
 
@@ -40,11 +45,25 @@ main {
         width: auto !important;
         height: auto !important;
         flex-direction: column;
+
+        row-gap: 30px;
     }
 }
-a {
-    font-style: normal !important;
-    text-decoration: none !important;
+
+@media (max-width: 734px) {
+    .about-content{
+        height: auto;
+    }
+
+    .section-block-2{
+        height: auto;
+    }
+}
+
+
+    .slot-btn{
+        height: 50px
+        
 }
 
 nav {
@@ -52,7 +71,7 @@ nav {
     width: auto;
     height: 100px;
 
-    background-color: #f8f7f2;
+    background-color: hsla(50, 30%, 96%, 0.384);
 
     align-items: center;
 }
@@ -397,7 +416,7 @@ section {
 
 .slot-btn {
     display: flex;
-    width: 35%;
+    width: 200px;
     height: 50px;
 
     background: linear-gradient(199deg, rgba(26, 120, 161, 1) 0%, rgba(95, 154, 217, 1) 100%);
@@ -449,7 +468,7 @@ section {
 .plans-content {
     display: flex;
     width: 100dvw;
-    height: 800px;
+    height: auto;
 
     background-color: #2f6d8800;
 
@@ -458,6 +477,9 @@ section {
     align-items: center;
 
     column-gap: 20px;
+
+    padding-top: 30px;
+    padding-bottom: 80px;
 }
 
 .plan1{
@@ -552,4 +574,54 @@ section {
     flex-direction: column;
 
     text-align: start;
+}
+
+footer{
+    width: auto;
+    height: auto;
+    background-color: #2F6D88;
+}
+
+.footer-main{
+    padding: 40px;
+    height: 100%;
+}
+
+.footer-main-content-svg{
+    height: auto;
+    width: 400px;
+
+    background-color: #70707000;
+}
+
+.footer-social-svg{
+    display: flex;
+    width: auto;
+    height: 30px;
+
+    margin-top: 80px !important;
+    margin-bottom: 10px;
+}
+
+.footer-social-svg ul{
+    padding: 0;
+    gap: 13px;
+}
+
+.footer-social-svg li{
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-social-svg img{
+    width: 100%;
+    height: 100%;
+
+    filter: invert();
+}
+
+.authors{
+    color: white;
+    opacity: 50%;
 }
