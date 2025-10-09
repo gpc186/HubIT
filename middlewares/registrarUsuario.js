@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
 
     await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
 
-	res.status(201).json({success: true})
+	res.status(201).json({success: true, users})
 
   } catch (error) {
 	res.status(500).json({error})
