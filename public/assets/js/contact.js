@@ -54,12 +54,21 @@ function CopiarPhone(){
 
 //parte de FAQ
 function toggleFAQ(element) {
-    // Pega o elemento de resposta (próximo elemento)
-    const answer = element.nextElementSibling;
-    
-    // Adiciona/remove a classe 'active' na pergunta
-    element.classList.toggle('active');
-    
-    // Adiciona/remove a classe 'show' na resposta
-    answer.classList.toggle('show');
+    const answer = element.nextElementSibling
+    const isActive = element.classList.contains('active')
+
+    if(!isActive){
+        //abrir
+        answer.classList.toggle('show')
+        answer.style.maxHeight = answer.scrollheight + 'px'
+
+    } else{
+        //fechar
+        answer.style.maxHeight = '0'
+
+        setTimeout(() => {
+           answer.classList.remove('show') 
+        }, 100);
+    }
+
 }

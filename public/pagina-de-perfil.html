@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hubit - Perfil</title>
+        <link rel="stylesheet" href="./assets/styles/pg-perfil.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    </head>
+    <body>
+    <header>
+          <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a href="login.html" class="logo">
+                    <img src="./assets/img/svg/Hubit_svg_logo.svg" alt="">
+                </a>
+                <a href="" class="d-lg-none ms-auto">
+                    <div class="login-btn">
+                        Login
+                    </div>
+                </a>
+                
+                <div class="navigation collapse navbar-collapse ms-auto mb-2 mb-lg-0" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <!--ícone do indicador da pg-->
+                        <div class="indicator" id="indicator"></div>
+                        <!--outros ícones-->
+                        <li class="nav-item" data-page="feed-port" onclick="navigateTo(this, 'principal.html')">
+                            
+                        </li>
+                        </li>
+                         <li class="nav-item" onclick="navigateTo(this, 'pagina-de-trabalhos.html')">
+                            <img src="" alt="trabalho">
+                        </li>
+                        <li class="nav-item active" data-page="perfil" onclick="navigateTo(this, 'pagina-de-perfil.html')">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+          </nav>
+        </header>
+        <main>
+
+        </main>
+    </body>
+    <script src="./assets/js/pg-perfil.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>

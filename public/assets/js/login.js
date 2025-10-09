@@ -26,6 +26,16 @@ function registrarNovoUsuario() {
 	})
 	.then(res => res.json())
 	.then(data => {
+
+		const modal = bootstrap.Modal.getInstance(
+                document.getElementById('exampleModal')
+            );
+
+        modal.hide();
+            
+        document.getElementById('emailNewUser').value = '';
+        document.getElementById('passwdNewUser').value = '';
+
 		if (data.success) {
 			alert('Usuário registrado com sucesso!');
 		} else {
@@ -37,3 +47,38 @@ function registrarNovoUsuario() {
 		alert('Erro de comunicação com o servidor');
 	});
 }
+
+function fazerLogin() {
+	const email = document.getElementById('email').value;
+	const passwd = document.getElementById('passwd').value;
+	
+	if (!email || !passwd) {
+		alert('Preencha todos os campos!');
+		return;
+	};
+
+	fetch('/api/login', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({email, passwd})
+	})
+	.then(res => res.json())
+	.then(data =>{
+		if(data.success){
+
+			localStorage.setItem('userID', data.usuario.id);
+			localStorage.setItem('userEmail', data.usuario.email);
+			localStorage.setItem('userTipo', data.usuario.tipoConta);
+
+			alert('Usuario logado com sucesso!');
+		} else {
+			alert('Erro ao logar o usuário: ' + (data.error || 'erro desconhecido'));
+		}
+	})
+	.catch(error =>{
+		console.error(error);
+        alert('Erro ao carregar perfil');
+	})
+};

@@ -10,5 +10,11 @@
     "passwd": "654321",
     "tipoConta": "empresa",
     "userID": 1759968679341
+  },
+  {
+    "email": "qwert@gmail",
+    "passwd": "123",
+    "tipoConta": "usuario",
+    "userID": 1760039264463
   }
 ]

@@ -3,11 +3,15 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const registrarRoute = require('./middlewares/registrarUsuario');
+const loginRoute = require('./middlewares/logarUsuario');
+const auth = require('./middlewares/auth')
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 app.use('/api/registrar', registrarRoute);
+app.use('/api/login', loginRoute);
+app.use('/api/auth', auth);
 
 app.get('/', (req, res)=>{
 	res.status(200).sendFile(path.join(__dirname, 'public', 'login.html'));

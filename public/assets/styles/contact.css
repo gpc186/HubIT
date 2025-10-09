@@ -13,7 +13,7 @@ body{
 main{
     background-color: #f8f7f2;
     width: 100%;
-    height: auto;
+    height: 170dvh;
 }
 
 
@@ -116,26 +116,32 @@ h3 {
 
 /*main*/
 .container{
-    gap: 200px;
-    width: 100dvw;
+   width: 100dvw;
     height: 100dvh;
     display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 250px; 
+    margin: auto;
+    box-sizing: border-box;
 }
 
 .img-phone{
-    width: 700px !important;
-    height: 700px !important;
+    margin-left: 10%;
+    width: 100%; 
+    height: 100%; 
+    border-radius: 20px;
+    object-fit: cover; 
 }
 .img-phone img{
-    border-radius: 20px;
-    width: 100%;
-    height: 100%;
-
+    width: 700px ;
+    height: 700px;
 }
 
 .container-right{
+    margin-right: 30%;
+    margin-bottom: 20%;
     align-items: center;
-    margin-top: 5%;
     width: 450px;
     height: auto;
     display: flex;
@@ -243,14 +249,9 @@ textarea:focus, input:focus, select:focus{
     max-width: 800px;
     margin: 0 auto;
     padding: 20px
-    border-radius: 20px;
 }
-.border-d{
-    width: 100%;
-    height: 100%;
-    border: 2px solid #ffff;
-    border-bottom: 0px;
-    border-radius: 20px;
+.container-FAQ .texto2{
+    margin-bottom: 50px;
 }
 .faq-item{
     background-color: #ffff;
@@ -284,12 +285,72 @@ textarea:focus, input:focus, select:focus{
     background-color: #ffff;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
     padding: 0 20px;
+    will-change: max-height;
+
 }
 
 .faq-answer.show {
     background-color: #ffff;
     max-height: 500px;
     padding: 20px;
+}
+
+
+/*footer*/
+footer{
+    width: auto;
+    height: auto;
+    background-color: #2F6D88;
+}
+
+.footer-main{
+    padding: 40px;
+    height: 100%;
+}
+
+.footer-main-content-svg{
+    height: auto;
+    width: 400px;
+
+    background-color: #70707000;
+}
+
+.footer-social-svg{
+    display: flex;
+    width: auto;
+    height: 30px;
+
+    margin-top: 80px !important;
+    margin-bottom: 10px;
+}
+
+.footer-social-svg ul{
+    padding: 0;
+    gap: 13px;
+}
+
+.footer-social-svg li{
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-social-svg img{
+    width: 100%;
+    height: 100%;
+
+    filter: invert();
+
+    opacity: 50%;
+}
+
+.footer-social-svg img:hover{
+    opacity: 100%;
+}
+
+.authors{
+    color: white;
+    opacity: 50%;
 }
