@@ -1,5 +1,4 @@
 const express = require('express');
-const fs = require('fs').promises;
 const path = require('path');
 const app = express();
 const port = 3000;
@@ -10,12 +9,12 @@ app.use(express.json());
 
 app.use('/api/registrar', registrarRoute);
 
-app.get('/', (req, asw)=>{
-	asw.status(200).sendFile(path.join(__dirname, 'public', 'login.html'));
+app.get('/', (req, res)=>{
+	res.status(200).sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-app.get('/contact', (req, asw)=>{
-	asw.status(200).sendFile(path.join(__dirname, 'public', 'contact.html'));
+app.get('/contact', (req, res)=>{
+	res.status(200).sendFile(path.join(__dirname, 'public', 'contact.html'));
 });
 
 app.listen(port, ()=>{

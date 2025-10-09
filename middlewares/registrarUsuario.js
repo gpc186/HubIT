@@ -5,26 +5,40 @@ const path = require('path');
 
 const dataPath = path.join(__dirname, '..', 'data', 'users.json');
 
-router.post('/', async (req, asw) => {
+router.post('/', async (req, res) => {
   try {
 	const { email, passwd, tipoConta } = req.body;
 
 	if (!email || !passwd || !tipoConta){
-		return asw.status(400).json({error: "Campos obrigatórios faltando!"});
+		return res.status(400).json({error: "Campos obrigatórios faltando!"});
 	};
 
 	const data = await fs.readFile(dataPath, 'utf8');
     const users = JSON.parse(data);
 
-    const novoUsuario = { email, passwd, tipoConta };
+	const emailExistente = users.find(user => user.email === email);
+	
+	if (emailExistente) {
+		return res.status(400).json({error: "Email já cadastrado!"})
+	}
+
+	const userID = Date.now();
+
+    const novoUsuario = { 
+		email: email, 
+		passwd: passwd, 
+		tipoConta: tipoConta,
+		userID: userID
+	 };
+
     users.push(novoUsuario);
 
     await fs.writeFile(dataPath, JSON.stringify(users, null, 2));
 
-	asw.status(200).json({success: true})
+	res.status(201).json({success: true})
 
   } catch (error) {
-	asw.status(500).json({error})
+	res.status(500).json({error})
   }
 });
 

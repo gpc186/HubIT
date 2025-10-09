@@ -2,41 +2,13 @@
   {
     "email": "guguinha@gmail.com",
     "passwd": "123456",
-    "tipoConta": "usuario"
+    "tipoConta": "usuario",
+    "userID": 1759967977156
   },
   {
     "email": "henri@gmail.com",
     "passwd": "654321",
-    "tipoConta": "empresa"
-  },
-  {
-    "email": "Fernandinho@gmail.com",
-    "passwd": "456123",
-    "tipoConta": "usuario"
-  },
-  {
-    "email": "guguinha@gmail.com",
-    "passwd": "guga",
-    "tipoConta": "usuario"
-  },
-  {
-    "email": "fernandinho123@gmail.com",
-    "passwd": "pitu",
-    "tipoConta": "usuario"
-  },
-  {
-    "email": "ggggggg@gmail.com",
-    "passwd": "12345",
-    "tipoConta": "usuario"
-  },
-  {
-    "email": "teste@teste",
-    "passwd": "1234567",
-    "tipoConta": "empresa"
-  },
-  {
-    "email": "gcaua8531@gmail.com",
-    "passwd": "porataria",
-    "tipoConta": "empresa"
+    "tipoConta": "empresa",
+    "userID": 1759968679341
   }
 ]
