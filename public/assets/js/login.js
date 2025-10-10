@@ -67,10 +67,13 @@ function fazerLogin() {
 	.then(res => res.json())
 	.then(data =>{
 		if(data.success){
+			const userID = data.usuario.userID;
 
-			localStorage.setItem('userID', data.usuario.id);
+			localStorage.setItem('userID', userID);
 			localStorage.setItem('userEmail', data.usuario.email);
 			localStorage.setItem('userTipo', data.usuario.tipoConta);
+
+			window.location.href = `/perfil/${userID}`;
 
 			alert('Usuario logado com sucesso!');
 		} else {

@@ -4,10 +4,10 @@ window.onload = async function() {
 
 async function carregarPerfil() {
     
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlId = urlParams.get('id');
+    const pathParts = window.location.pathname.split('/');
+    const perfilID = pathParts[pathParts.length - 1];
     
-    const idLogado = localStorage.getItem('userId');
+    const idLogado = localStorage.getItem('userID');
     
     if (!idLogado) {
         alert('Você precisa fazer login!');
@@ -15,11 +15,11 @@ async function carregarPerfil() {
         return;
     }
     
-    const userId = urlId || idLogado;
+    const userID = perfilID || idLogado;
     
     try {
         
-        const resposta = await fetch(`/api/usuario/${userId}`, {
+        const resposta = await fetch(`/api/usuario/${userID}`, {
             method: 'GET',
             headers: {
                 'user-id': idLogado
@@ -29,10 +29,9 @@ async function carregarPerfil() {
         const dados = await resposta.json();
         
         if (resposta.ok) {
-            alert('Deu certo!');
+            alert(JSON.stringify(dados.usuario));
         } else {
             alert('Erro: ' + dados.error);            
-            window.location.href = '/login.html';
         }
         
     } catch (error) {

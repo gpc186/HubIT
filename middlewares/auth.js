@@ -8,7 +8,7 @@ router.get('/:id', async (req, res)=>{
 	try {
 		const urlID = req.params.id;
 
-		const data = await fs.writeFile(dataPath, 'utf8')
+		const data = await fs.readFileFile(dataPath, 'utf8')
 		const users = JSON.parse(data);
 
 		const usuario = users.find(user => user.userID === urlID);
@@ -21,7 +21,7 @@ router.get('/:id', async (req, res)=>{
 		
 	} catch (error) {
 		console.error(error);
-        alert('Erro ao carregar perfil');
+        res.status(500).json({error: "Erro ao carregar o perfil"});
 	}
 })
 
