@@ -16,7 +16,6 @@ app.use(express.json());
 // Ativa a utilização das rotas dadas
 app.use('/api/registrar', registrarRoute);
 app.use('/api/login', loginRoute);
-app.use('/api/auth', auth);
 app.use('/api/usuario', userData)
 
 // Página Inicial que pega login.html
