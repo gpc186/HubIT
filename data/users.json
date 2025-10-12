@@ -7,7 +7,12 @@
     "dados": {
       "nome": "guguinha gameplays",
       "telefone": "1140028922",
-      "dataNasc": "2000-01-01"
+      "dataNasc": "2000-01-01",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Backend",
+      "nivelExperiencia": "Estudante",
+      "github": "https://github.com/gpc186",
+      "biografia": "Sou o guguinha gameplays"
     }
   },
   {

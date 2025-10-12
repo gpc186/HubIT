@@ -6,7 +6,6 @@ const app = express();
 const port = 3000;
 const registrarRoute = require('./middlewares/registrarUsuario');
 const loginRoute = require('./middlewares/logarUsuario');
-const auth = require('./middlewares/auth');
 const userData = require('./middlewares/usuario');
 
 // Ativa requisitos para funcionamento de json e path
