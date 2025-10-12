@@ -98,9 +98,9 @@ router.put('/:id', async (req, res)=>{
             ...usuario.dados,
             ...dadosNovos
         };
-
+		// Aqui pegamos os dados novos juntos com os antigos e escrevemos no JSON
 		await fs.writeFile(dataPath, JSON.stringify(users, null, 2))
-
+		// Aqui mandamos umas informações para o front
 		res.status(200).json({ok: true, usuario: { userID: usuario.userID, email: usuario.email, tipoConta: usuario.tipoConta, dados: usuario.dados }})
 
 	} catch (error) {

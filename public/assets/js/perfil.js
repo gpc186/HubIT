@@ -73,7 +73,7 @@ async function salvarDados(event) {
     event.preventDefault();
     // Pega o usuário que está no URL (Sendo o mesmo ID do usuário logado, já que esta opção só aparece para quem é proprietário do perfil)
     const userID = localStorage.getItem('userID');
-
+    // Aqui, ao invés de ser um object dados para todos os usuários, ele será feito de acordo com o seu tipo de conta
     let dados = {};
     
     // Monta dados baseado no tipo de conta
@@ -171,8 +171,10 @@ async function salvarDados(event) {
 
         if(resultado.ok) { //Caso de certo
             alert(JSON.stringify(resultado.usuario, null, 2));
+            // Aqui fechamos o modal para que demonstre que os dados foram processados
             const modal = bootstrap.Modal.getInstance(document.getElementById('modalCompletarPerfil'));
             modal.hide();
+            
             location.reload(); //Reiniciamos o site
         } else {
             console.log(resultado.error);
