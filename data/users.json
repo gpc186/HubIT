@@ -3,7 +3,12 @@
     "email": "guguinha@gmail.com",
     "passwd": "123456",
     "tipoConta": "usuario",
-    "userID": 1759967977156
+    "userID": 1759967977156,
+    "dados": {
+      "nome": "guguinha gameplays",
+      "telefone": "1140028922",
+      "dataNasc": "2000-01-01"
+    }
   },
   {
     "email": "henri@gmail.com",

@@ -32,8 +32,14 @@ async function carregarPerfil() {
         const dados = await resposta.json();
         
         // Verifica condição de sucesso e tratamento de erro
-        if (resposta.ok) {
-            alert(JSON.stringify(dados.usuario));
+        if (dados.ok) {
+            const usuario = dados.usuario;
+
+            // if(!usuario.perfilCompleto){
+                // const modal = new bootstrap.Modal(document.getElementById('modalCompletarPerfil'));
+                // modal.show();
+            // }
+
         } else {
             alert('Erro: ' + dados.error);            
         }
@@ -42,6 +48,45 @@ async function carregarPerfil() {
     } catch (error) {
         console.error(error);
         alert('Erro ao carregar perfil');
+    }
+};
+
+async function salvarDados(event) {
+    // Previne ele reiniciar o site sozinho automaticamente
+    event.preventDefault();
+    // Pega o usuário que está no URL (Sendo o mesmo ID do usuário logado, já que esta opção só aparece para quem é proprietário do perfil)
+    const userID = localStorage.getItem('userID');
+    // Aqui pegamos os dados e nomeamos ele dentro de um object
+    const dados = {
+        nome: document.getElementById('alterarNome').value,
+        telefone: document.getElementById('alterarTelefone').value,
+        dataNasc: document.getElementById('alterarDataNasc').value
+    };
+
+    try {
+        // fazemos o fetch com o user-id e com os dados a ser colocados
+        const resposta = await fetch(`/api/usuario/${userID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'user-id': userID
+            },
+            body: JSON.stringify(dados)
+        })
+        // Resposta
+        const resultado = await resposta.json()
+
+        if(resultado.ok) { //Caso de certo
+            alert(JSON.stringify(resultado.usuario, null, 2));
+            // const modal = bootstrap.Modal.getInstance(document.getElementById('modalCompletarPerfil'));
+            // modal.hide();
+            location.reload(); //Reiniciamos o site
+        } else {
+            console.log(resultado.error);
+            alert(resultado.error);
+        };
+    } catch (error) {
+        alert(error.message + error);
     }
 }
 

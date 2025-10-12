@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 		return res.status(400).json({error: "Email já cadastrado!"})
 	}
 
-	// Constante que pega data UTC atual
+	// Constante que gera um id para o usuário com base no tempo
 	const userID = Date.now();
 
 	// Constante com valores para o novo Usuário
@@ -36,7 +36,8 @@ router.post('/', async (req, res) => {
 		email: email, 
 		passwd: passwd, 
 		tipoConta: tipoConta,
-		userID: userID
+		userID: userID,
+		dados: {}
 	};
 
 	// Envia os valores do novo Usuário para o object users
