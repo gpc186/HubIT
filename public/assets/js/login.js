@@ -23,11 +23,11 @@ function registrarNovoUsuario() {
 	};
 
 	// Verifica regras de senha
-	let temNumeroSenha = /^[0-9]+$/.test(passwd);
+	const senhaForte = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
-	if (passwd.length() < 2 || temNumeroSenha === true) {
-		alert('[Senha fraca] Sua senha precisa ter pelo menos 3 caracteres com letras e números')
-		return
+	if (!senhaForte.test(passwd)) {
+		alert('[Senha fraca] Sua senha precisa ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais.');
+		return;
 	}
 
 	// 'fetch' é uma forma de fazer 'curl' direto no código
