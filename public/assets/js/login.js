@@ -22,6 +22,14 @@ function registrarNovoUsuario() {
 		return;
 	};
 
+	// Verifica regras de senha
+	let temNumeroSenha = /^[0-9]+$/.test(passwd);
+
+	if (passwd.length() < 2 || temNumeroSenha === true) {
+		alert('[Senha fraca] Sua senha precisa ter pelo menos 3 caracteres com letras e números')
+		return
+	}
+
 	// 'fetch' é uma forma de fazer 'curl' direto no código
 	fetch('/api/registrar', {
 		// Parametros que seriam inseridos no 'curl' já são inseridos aqui
