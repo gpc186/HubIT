@@ -13,7 +13,7 @@ body{
 main{
     background-color: #f8f7f2;
     width: 100%;
-    height: 170dvh;
+    height: auto;
 }
 
 
@@ -116,31 +116,32 @@ h3 {
 
 /*main*/
 .container{
-   width: 100dvw;
-    height: 100dvh;
+   width: auto;
+    height: auto;
     display: flex;
     justify-content: center; 
     align-items: center;
     gap: 250px; 
     margin: auto;
     box-sizing: border-box;
+
+    padding-top: 125px;
 }
 
 .img-phone{
-    margin-left: 10%;
     width: 100%; 
     height: 100%; 
     border-radius: 20px;
     object-fit: cover; 
 }
 .img-phone img{
-    width: 700px ;
-    height: 700px;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
 }
 
 .container-right{
-    margin-right: 30%;
-    margin-bottom: 20%;
     align-items: center;
     width: 450px;
     height: auto;
@@ -246,9 +247,10 @@ textarea:focus, input:focus, select:focus{
 /*FAQ*/
 .container-FAQ{
     
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 20px
+    padding: 40px;
+    height: auto;
 }
 .container-FAQ .texto2{
     margin-bottom: 50px;
@@ -262,6 +264,7 @@ textarea:focus, input:focus, select:focus{
 }
 .faq-question{
     background-color: #ffff;
+    width: auto;
     padding: 20px;
     cursor:pointer;
     display: flex;
@@ -273,7 +276,7 @@ textarea:focus, input:focus, select:focus{
 }
 
 .arrow{
-    transition: transform 0.3 ease;
+    transition: transform 0.3 ease-in;
     font-size: 14px;
 }
 
@@ -353,4 +356,14 @@ footer{
 .authors{
     color: white;
     opacity: 50%;
+}
+
+.block-tester{
+    display: flex;
+    width: auto;
+    height: auto;
+    background-color: #348bb000;
+
+    justify-content: center;
+    align-items: center;
 }
