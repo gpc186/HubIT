@@ -290,7 +290,7 @@
                 charIndex++;
                 if (charIndex === palavraAtual.length) {
                     apagando = true;
-                    setTimeout(typeWriter, 1200); // Espera antes de apagar
+                    setTimeout(typeWriter, 1300); // Espera antes de apagar
                     return;
                 }
             } else {
@@ -301,7 +301,7 @@
                     palavraIndex = (palavraIndex + 1) % palavrasAlt.length;
                 }
             }
-            setTimeout(typeWriter, apagando ? 50 : 100); // Velocidade de apagar/escrever
+            setTimeout(typeWriter, apagando ? 40 : 100); // Velocidade de apagar/escrever
         }
 
         typeWriter();
