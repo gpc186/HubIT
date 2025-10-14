@@ -787,10 +787,10 @@ footer{
             max-width: auto;
 
             display: grid;
-            grid-template-columns: 225px 1fr 300px;
+            grid-template-columns: 320px 1fr 300px;
             gap: 24px;
 
-            padding: 120px 50px 50px 50px;
+            padding: 120px 20% 0% 17%;
             
         }
 
@@ -799,6 +799,7 @@ footer{
             display: flex;
             flex-direction: column;
             gap: 8px;
+            position: sticky;
         }
 
         .profile-card {
@@ -806,6 +807,8 @@ footer{
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             overflow: hidden;
+            position: sticky !important;
+            top: 120px !important;
         }
 
         .profile-header {
@@ -945,7 +948,16 @@ footer{
             color: #00000099;
             background: transparent;
             text-align: left;
-            cursor: pointer;
+        }
+
+        .create-post-button input{
+            width: 100%;
+            outline: 0;
+            border: 0;
+        }
+        
+        [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled){
+            cursor: auto !important;
         }
 
         .create-post-actions {
@@ -1081,6 +1093,7 @@ footer{
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             padding: 12px 16px;
+
         }
 
         .footer-links {
@@ -1104,6 +1117,20 @@ footer{
             margin-top: 12px;
             font-size: 12px;
             color: #00000099;
+        }
+
+        #jobBtn{
+            background-color: #1e80aa;
+            color: white;
+
+            cursor: pointer !important;
+            transition: background-color 0.3s;
+
+            border-radius: 10px;
+        }
+
+        #jobBtn:hover{
+            background-color: #106083 !important;
         }
 
         @media (max-width: 1024px) {

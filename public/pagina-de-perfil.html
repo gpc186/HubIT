@@ -11,15 +11,14 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a href="login.html" class="logo">
-                    <img src="/assets/img/svg/Hubit_svg_logo.svg" alt="">
+                <a href="/" class="logo">
+                    <img src="/assets/img/svg/Hubit_svg_logo.svg" alt="logo">
                 </a>
                 <a href="" class="d-lg-none ms-auto">
                     <div class="login-btn">Login</div>
@@ -37,24 +36,75 @@
 
                         <!-- Ícone Trabalho -->
                         <li class="nav-item" data-page="trabalho"
-                            onclick="navigateTo(this, 'pagina-de-trabalhos.html')">
+                            onclick="navigateTo(this, '')">
                             <ion-icon name="briefcase-outline"></ion-icon>
                         </li>
 
-                        <!-- Ícone Perfil -->
-                        <li class="nav-item active" data-page="perfil"
-                            onclick="navigateTo(this, 'pagina-de-perfil.html')">
-                            <ion-icon name="person-circle-outline"></ion-icon>
-                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <main>
-        <button data-bs-toggle="modal" style="margin-top: 20%;" onclick="abrirModalEdicao()">Mudar informações</button>
+    <main >
+         <br><br><br><br><br><br><br><br>
+        <button data-bs-toggle="modal"  onclick="abrirModalEdicao()">Mudar informações</button>
         
-        <div class="modal fade" id="modalCompletarPerfil" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+       
+
+        <!--front-->
+             <div class="container-banner">
+                <div class="img-banner">
+                 <img src="./assets/img/ryan-klaus-YPcwPGfX0yM-unsplash.jpg" alt="banner img">
+
+                </div>
+                <div class="img-perfiç">
+                    
+                </div>
+                <div class="container-info">
+                    <div class="ladoEsquerdo">
+                            <!--NOME+OQ FAZ + LOCALIDADE-->
+                        <span id="nomePrincipal"></span>
+                    </div>
+                    <div class="ladoDierito">
+                        <!--links+-->
+                    </div>
+                </div>
+                <div class="hr">
+
+                </div>
+            </div>
+            <div class="container-Analise">
+                <div class="title">
+                    <p>Analise</p>
+                </div>
+                <div class="views">
+                    <div class="visuPerfil">
+
+                    </div>
+                    <div class="impressaoPubli">
+
+                    </div>
+                </div>
+            </div>
+            <div class="container-curriculos">
+                <div class="title">
+                    <h1>Currículos</h1>
+                </div>
+                <div class="curriculos">
+                    <div class="curriculo">
+
+                    </div>
+                    
+                    <div class="curriculo">
+
+                    </div>
+                    
+                    <div class="curriculo">
+
+                    </div>
+                </div>
+            </div>
+             <div class="modal fade" id="modalCompletarPerfil" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -281,8 +331,37 @@
 
                 </div>
             </div>
-        </div>
+        
+
+
+        
+        
     </main>
+    
+    <footer>
+        <div class="footer-main">
+            <div class="footer-main-content-svg">
+                <img src="assets/img/svg/Hubit_svg_logo_footer.svg" alt="">
+                <div class="footer-social-svg">
+                    <ul>
+                        <a href="" target="_blank">
+                            <li><img src="./assets/img/svg/facebook-svgrepo-com.svg" alt=""></li>
+                        </a>
+                        <a href="" target="_blank">
+                            <li><img src="./assets/img/svg/instagram-167-svgrepo-com.svg" alt=""></li>
+                        </a>
+                        <a href="https://github.com/gpc186/HubIT" target="_blank">
+                            <li><img src="./assets/img/svg/github-142-svgrepo-com.svg" alt=""></li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="authors">
+                    <span>By Henrique Fiorotti; Gustavo <br> Cagega; Fernando Sanches</span>
+                </div>
+            </div>
+        </div>
+        
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

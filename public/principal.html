@@ -12,7 +12,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body>
@@ -61,13 +60,15 @@
                     <div class="profile-photo"></div>
                 </div>
                 <div class="profile-info">
-                    <div class="profile-name">Seu Nome</div>
-                    <div class="profile-headline">Cargo | Empresa</div>
+                    <div class="profile-name" id="nomePrincipal">Seu Nome</div>
+                    <div id="areaAtuacao" class="profile-headline">Cargo | Empresa</div>
+                    <div id="nivelExperiencia" class="profile-headline">Nivel Experiencia</div>
+                    <div class="profile-location" id="nomeLocal"> São Paulo</div>
                 </div>
                 <div class="profile-stats">
                     <div class="stat-item">
-                        <span class="stat-label">Conexões</span>
-                        <span class="stat-value">500+</span>
+                        <span class="stat-label">Networks</span>
+                        <span class="stat-value">50+</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Visualizações do perfil</span>
@@ -76,7 +77,7 @@
                 </div>
                 <div class="profile-premium">
                     <a href="#" class="premium-link">
-                        ⭐ Experimente o 64 bits!
+                        Experimente o 64 bits!
                     </a>
                 </div>
             </div>
@@ -85,13 +86,13 @@
         <!-- Coluna Centro - Feed -->
         <section class="feed">
             <div class="greeting-card">
-                <div class="greeting-text">Boa noite, <span class="greeting-name">Seu Nome</span></div>
+                <div id="mensagemGreeting" class="greeting-text" >Boa noite, <span style="color: #2F6D88;" class="greeting-name" id="nomeSaudacao">Seu Nome</span></div>
             </div>
 
             <div class="create-post">
                 <div class="create-post-input">
                     <div class="create-post-avatar"></div>
-                    <button class="create-post-button">Começar uma publicação</button>
+                    <button class="create-post-button"><input type="text" name="" id="" placeholder="Insira uma ideia"></button>
                 </div>
                 <div class="create-post-actions">
                     <button class="action-button">📷 Foto</button>
@@ -119,7 +120,7 @@
                 <div class="post-actions">
                     <button class="action-button">👍 Gostei</button>
                     <button class="action-button">💬 Comentar</button>
-                    <button class="action-button">🔄 Compartilhar</button>
+                    <button id="jobBtn" class="action-button">Saber mais</button>
                 </div>
             </div>
 
@@ -142,7 +143,76 @@
                 <div class="post-actions">
                     <button class="action-button">👍 Gostei</button>
                     <button class="action-button">💬 Comentar</button>
-                    <button class="action-button">🔄 Compartilhar</button>
+                    <button id="jobBtn" class="action-button"> Saber mais</button>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar"></div>
+                    <div class="post-user-info">
+                        <div class="post-user-name">Outro Usuário</div>
+                        <div class="post-user-headline">Designer UX/UI</div>
+                        <div class="post-time">5h • 🌎</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    Compartilhando insights sobre design de interfaces e experiência do usuário. O que vocês acham das novas tendências?
+                </div>
+                <div class="post-engagement">
+                    <span>👍 78 pessoas</span>
+                    <span>23 comentários</span>
+                </div>
+                <div class="post-actions">
+                    <button class="action-button">👍 Gostei</button>
+                    <button class="action-button">💬 Comentar</button>
+                    <button id="jobBtn" class="action-button"> Saber mais</button>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar"></div>
+                    <div class="post-user-info">
+                        <div class="post-user-name">Outro Usuário</div>
+                        <div class="post-user-headline">Designer UX/UI</div>
+                        <div class="post-time">5h • 🌎</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    Compartilhando insights sobre design de interfaces e experiência do usuário. O que vocês acham das novas tendências?
+                </div>
+                <div class="post-engagement">
+                    <span>👍 78 pessoas</span>
+                    <span>23 comentários</span>
+                </div>
+                <div class="post-actions">
+                    <button class="action-button">👍 Gostei</button>
+                    <button class="action-button">💬 Comentar</button>
+                    <button id="jobBtn" class="action-button"> Saber mais</button>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar"></div>
+                    <div class="post-user-info">
+                        <div class="post-user-name">Outro Usuário</div>
+                        <div class="post-user-headline">Designer UX/UI</div>
+                        <div class="post-time">5h • 🌎</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    Compartilhando insights sobre design de interfaces e experiência do usuário. O que vocês acham das novas tendências?
+                </div>
+                <div class="post-engagement">
+                    <span>👍 78 pessoas</span>
+                    <span>23 comentários</span>
+                </div>
+                <div class="post-actions">
+                    <button class="action-button">👍 Gostei</button>
+                    <button class="action-button">💬 Comentar</button>
+                    <button id="jobBtn" class="action-button"> Saber mais</button>
                 </div>
             </div>
         </section>
@@ -181,5 +251,8 @@
         </aside>
     </main>
 </body>
+
+<script src="assets/js/perfil.js"></script>
+<script src="assets/js/home.js"></script>
 
 </html>
