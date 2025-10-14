@@ -3,6 +3,11 @@
     src: url(../fonts/codec-pro.regular.ttf);
 }
 
+html{
+    margin: 0;
+    overflow-x: hidden;
+}
+
 body {
     background-color: #F8F7F2;
 
@@ -70,6 +75,8 @@ a{
     }
 
     .section-block-1{
+        width: 100% !important;
+        height: 350px !important;
         justify-content: center !important;
     }
 
@@ -92,6 +99,25 @@ a{
         margin-right: 0 !important;
     }
 
+}
+
+@media (max-width: 622px) {
+    .remember-forgot{
+        flex-direction: column;
+
+        justify-content: start !important;
+        align-items: start !important;
+    }
+
+    .forgot{
+        margin: 0 !important;
+    }
+}
+
+@media (max-width: 472px){
+    .login-block{
+        width: 90% !important;
+    }
 }
 
 
