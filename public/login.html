@@ -63,7 +63,7 @@
             <div class="row">
                 <div class="col-md-6 col-12 main-block-1">
                     <div class="text-login-block">
-                        <h1><span style="color: #2F6D88; font-family: Codec;">Expanda</span> suas <br> oportunidades</h1>
+                        <h1><span id="text-alt" style="color: #2F6D88; font-family: Codec;">Expanda</span> suas <br> oportunidades</h1>
                         <h2>Vagas de TI</h2>
                     </div>
                     <div class="login-block">
@@ -276,6 +276,35 @@
         function focar() {
             document.getElementById('email').focus();
         }
+
+        const textAlt = document.getElementById('text-alt');
+        const palavrasAlt = ["Teste", "Garanta", "Expanda", "Aproveite", "Construa", "Explore", "Descubra"];
+        let palavraIndex = 0;
+        let charIndex = 0;
+        let apagando = false;
+
+        function typeWriter() {
+            const palavraAtual = palavrasAlt[palavraIndex];
+            if (!apagando) {
+                textAlt.textContent = palavraAtual.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === palavraAtual.length) {
+                    apagando = true;
+                    setTimeout(typeWriter, 1200); // Espera antes de apagar
+                    return;
+                }
+            } else {
+                textAlt.textContent = palavraAtual.substring(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    apagando = false;
+                    palavraIndex = (palavraIndex + 1) % palavrasAlt.length;
+                }
+            }
+            setTimeout(typeWriter, apagando ? 50 : 100); // Velocidade de apagar/escrever
+        }
+
+        typeWriter();
     </script>
 </body>
 
