@@ -38,7 +38,7 @@ function moveIndicator(element) {
 }
 
 // Reposiciona o indicador ao redimensionar a janela
-window.addEventListener('resize', () => {
+window.addEventListener('load', () => {
     const activeItem = document.querySelector('.nav-item.active');
     if (activeItem) {
         moveIndicator(activeItem);

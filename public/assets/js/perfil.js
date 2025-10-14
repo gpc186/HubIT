@@ -7,6 +7,18 @@ window.onload = async function() {
     await carregarPerfil();
 };
 
+function verificarTelefone(telefone){
+    const numeros = telefone.replace(/\D/g, '');
+    return numeros.length >= 10 && numeros.length <= 11;
+}
+
+function verificarDataNasc(dataNasc){
+    const nascimento = new Date(dataNasc);
+    const hoje = new Date();
+    const idade = hoje.getFullYear() - nascimento.getFullYear();
+    return idade >= 14 && idade <= 120
+}
+
 async function carregarPerfil() {
     
     const pathParts = window.location.pathname.split('/');
@@ -20,7 +32,7 @@ async function carregarPerfil() {
         return;
     }
     
-    const userID = perfilID || idLogado;
+    const userID = idLogado;
     
     try {
         
@@ -36,7 +48,8 @@ async function carregarPerfil() {
         
         // Verifica condição de sucesso e tratamento de erro
         if (dados.ok) {
-            usuarioAtual = dados.usuario; // 👈 guarda os dados globalmente
+            // Aqui é para verificar e preencher dados
+            usuarioAtual = dados.usuario;
             tipoContaAtual = usuarioAtual.tipoConta;
             perfilEraIncompleto = !usuarioAtual.perfilCompleto;
 
@@ -45,10 +58,10 @@ async function carregarPerfil() {
                 
                 if(mensagem) mensagem.style.display = 'block';
 
-                if(usuario.tipoConta === 'usuario') {
+                if(usuarioAtual.tipoConta === 'usuario') {
                     document.getElementById('formUsuario').style.display = 'block';
                     document.getElementById('formEmpresa').style.display = 'none';
-                } else if(usuario.tipoConta === 'empresa') {
+                } else if(usuarioAtual.tipoConta === 'empresa') {
                     document.getElementById('formUsuario').style.display = 'none';
                     document.getElementById('formEmpresa').style.display = 'block';
                 }
@@ -99,9 +112,16 @@ async function salvarDados(event) {
             alert('Telefone é obrigatório!');
             return;
         }
+        if(!verificarTelefone(dados.telefone)){
+            alert('Telefone inválido!');
+            return;
+        };
         if(!dados.dataNasc) {
             alert('Data de nascimento é obrigatória!');
             return;
+        }
+        if(!verificarDataNasc(dados.dataNasc)){
+            alert('Data de nascimento Inválida')
         }
         if(!dados.localizacao) {
             alert('Localização é obrigatória!');
@@ -133,27 +153,27 @@ async function salvarDados(event) {
         if(!dados.nomeEmpresa || dados.nomeEmpresa.length < 3) {
             alert('Nome da empresa deve ter pelo menos 3 caracteres!');
             return;
-        }
+        };
         if(!dados.cnpj) {
             alert('CNPJ é obrigatório!');
             return;
-        }
+        };
         if(!dados.telefone) {
             alert('Telefone é obrigatório!');
             return;
-        }
+        };
         if(!dados.localizacao) {
             alert('Localização é obrigatória!');
             return;
-        }
+        };
         if(!dados.setor) {
             alert('Setor de atuação é obrigatório!');
             return;
-        }
+        };
         if(!dados.numeroFuncionarios) {
             alert('Número de funcionários é obrigatório!');
             return;
-        }
+        };
     }
 
     try {

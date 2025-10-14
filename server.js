@@ -29,8 +29,12 @@ app.get('/contact', (req, res)=>{
 
 // Página Perfil que pega pagina-de-perfil.html
 app.get('/perfil/:id', (req, res)=>{
-	res.status(200).sendFile(path.join(__dirname, 'public', 'pagina-de-perfil.html'))
-})
+	res.status(200).sendFile(path.join(__dirname, 'public', 'pagina-de-perfil.html'));
+});
+
+app.get('/home', (req, res) =>{
+	res.status(200).sendFile(path.join(__dirname, 'public', 'principal.html'));
+});
 
 // Servidor rodando
 app.listen(port, ()=>{

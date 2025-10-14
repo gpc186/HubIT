@@ -5,26 +5,75 @@
     "tipoConta": "usuario",
     "userID": 1759967977156,
     "dados": {
-      "nome": "guguinha gameplays",
+      "nome": "Gustavo Cagega",
       "telefone": "1140028922",
-      "dataNasc": "2000-01-01",
+      "dataNasc": "2006-08-01",
       "localizacao": "São Paulo",
-      "areaAtuacao": "Backend",
-      "nivelExperiencia": "Estudante",
-      "github": "https://github.com/gpc186",
-      "biografia": "Sou o guguinha gameplays"
+      "areaAtuacao": "Frontend",
+      "nivelExperiencia": "Estudante"
     }
   },
   {
     "email": "henri@gmail.com",
     "passwd": "654321",
     "tipoConta": "empresa",
-    "userID": 1759968679341
+    "userID": 1759968679341,
+    "dados": {}
   },
   {
     "email": "qwert@gmail",
     "passwd": "123",
     "tipoConta": "usuario",
-    "userID": 1760039264463
+    "userID": 1760039264463,
+    "dados": {}
+  },
+  {
+    "email": "o@gmail.com",
+    "passwd": "123",
+    "tipoConta": "usuario",
+    "userID": 1760460641944,
+    "dados": {
+      "nome": "562",
+      "telefone": "1112222623323232323223",
+      "dataNasc": "0001-01-01",
+      "localizacao": "sy6",
+      "areaAtuacao": "Outro",
+      "nivelExperiencia": "Especialista"
+    }
+  },
+  {
+    "email": "miguelguedeslarios@gmail.com",
+    "passwd": "miguelrkk123A@",
+    "tipoConta": "empresa",
+    "userID": 1760466609594,
+    "dados": {}
+  },
+  {
+    "email": "dadadadada@gmail.com",
+    "passwd": "PapaiteMO1@3",
+    "tipoConta": "empresa",
+    "userID": 1760467493808,
+    "dados": {}
+  },
+  {
+    "email": "caioferrer4@gmail.com",
+    "passwd": "Sol03_kk08",
+    "tipoConta": "usuario",
+    "userID": 1760471130916,
+    "dados": {}
+  },
+  {
+    "email": "aria.mendes@alunosenai.com",
+    "passwd": "Ari456.@",
+    "tipoConta": "empresa",
+    "userID": 1760471651509,
+    "dados": {
+      "nomeEmpresa": "aaaaaaaa",
+      "cnpj": "1111111111111111111",
+      "telefone": "11999999999",
+      "localizacao": "São Paulo",
+      "setor": "Consultoria",
+      "numeroFuncionarios": "11-50"
+    }
   }
 ]

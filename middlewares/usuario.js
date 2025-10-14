@@ -1,5 +1,4 @@
 // Importa express e path
-const { error } = require('console');
 const express = require('express');
 const router = express.Router();
 const fs = require('fs').promises;
