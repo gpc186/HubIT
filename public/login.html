@@ -277,33 +277,55 @@
             document.getElementById('email').focus();
         }
 
+        // Seleciona o elemento de texto que será animado
         const textAlt = document.getElementById('text-alt');
+
+        // Lista de palavras que serão exibidas no efeito máquina de escrever
         const palavrasAlt = ["Teste", "Garanta", "Expanda", "Aproveite", "Construa", "Explore", "Descubra"];
+
+        // Índice da palavra atual no array
         let palavraIndex = 0;
+
+        // Índice do caractere atual da palavra
         let charIndex = 0;
+
+        // Flag para indicar se está apagando (true) ou escrevendo (false)
         let apagando = false;
 
+        /**
+         * Função principal do efeito máquina de escrever.
+         * Escreve e apaga as palavras do array 'palavrasAlt' no elemento 'textAlt'.
+         */
         function typeWriter() {
+            // Palavra atual a ser exibida
             const palavraAtual = palavrasAlt[palavraIndex];
-            if (!apagando) {
-                textAlt.textContent = palavraAtual.substring(0, charIndex + 1);
-                charIndex++;
+
+            if (!apagando) { // Se não estiver apagando, escreve letra por letra
+                textAlt.textContent = palavraAtual.substring(0, charIndex + 1); // Atualiza o texto exibido
+                charIndex++; // Avança para o próximo caractere
+
+                // Se terminou de escrever a palavra inteira
                 if (charIndex === palavraAtual.length) {
-                    apagando = true;
-                    setTimeout(typeWriter, 1300); // Espera antes de apagar
+                    apagando = true; // Muda para modo de apagar
+                    setTimeout(typeWriter, 1300); // Espera 1.3s antes de começar a apagar
                     return;
                 }
-            } else {
-                textAlt.textContent = palavraAtual.substring(0, charIndex - 1);
-                charIndex--;
+            } else { // Se estiver apagando, remove letra por letra
+                textAlt.textContent = palavraAtual.substring(0, charIndex - 1); // Atualiza o texto exibido
+                charIndex--; // Volta para o caractere anterior
+
+                // Se terminou de apagar toda a palavra
                 if (charIndex === 0) {
-                    apagando = false;
-                    palavraIndex = (palavraIndex + 1) % palavrasAlt.length;
+                    apagando = false; // Muda para modo de escrever
+                    palavraIndex = (palavraIndex + 1) % palavrasAlt.length; // Vai para a próxima palavra (loop)
                 }
             }
-            setTimeout(typeWriter, apagando ? 40 : 100); // Velocidade de apagar/escrever
+
+            // Define a velocidade de digitação e de apagar
+            setTimeout(typeWriter, apagando ? 50 : 100); // 50ms para apagar, 100ms para escrever
         }
 
+        // Inicia o efeito ao carregar a página
         typeWriter();
     </script>
 </body>
