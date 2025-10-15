@@ -1413,3 +1413,22 @@ footer{
             width: 100% !important;
             margin: 0 !important;
         }
+
+        .modal{
+            --bs-modal-width: 100% !important;
+            overflow-x: hidden;
+        }
+
+        .list-unstyled{
+            text-align: start;
+            display: flex;
+            flex-direction: column !important;
+        }
+
+        .modal-dialog{
+            height: 100% !important;
+        }
+
+        .modal-content{
+            padding: 0px;
+        }
