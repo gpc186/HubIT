@@ -1432,3 +1432,11 @@ footer{
         .modal-content{
             padding: 0px;
         }
+
+        .modal-body{
+            text-align: start;
+        }
+
+        .greeting-text{
+            text-align: center;
+        }
