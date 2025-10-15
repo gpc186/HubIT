@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
+const { criarIDUsuario } = require('./utils/geradorID');
 
 const dataPath = path.join(__dirname, '..', 'data', 'users.json');
 
@@ -29,7 +30,7 @@ router.post('/', async (req, res) => {
 	}
 
 	// Constante que gera um id para o usuário com base no tempo
-	const userID = Date.now();
+	let userID = criarIDUsuario()
 
 	// Constante com valores para o novo Usuário
     const novoUsuario = { 

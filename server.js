@@ -7,6 +7,7 @@ const port = 3000;
 const registrarRoute = require('./middlewares/registrarUsuario');
 const loginRoute = require('./middlewares/logarUsuario');
 const userData = require('./middlewares/usuario');
+const empregosRoute = require('./middlewares/emprego');
 
 // Ativa requisitos para funcionamento de json e path
 app.use(express.static(path.join(__dirname, 'public')));
@@ -15,7 +16,8 @@ app.use(express.json());
 // Ativa a utilização das rotas dadas
 app.use('/api/registrar', registrarRoute);
 app.use('/api/login', loginRoute);
-app.use('/api/usuario', userData)
+app.use('/api/usuario', userData);
+app.use('/api/emprego', empregosRoute);
 
 // Página Inicial que pega login.html
 app.get('/', (req, res)=>{

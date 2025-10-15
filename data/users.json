@@ -63,17 +63,20 @@
     "dados": {}
   },
   {
-    "email": "aria.mendes@alunosenai.com",
-    "passwd": "Ari456.@",
-    "tipoConta": "empresa",
-    "userID": 1760471651509,
+    "email": "fernando.sanches.rodrigues@outlook.com",
+    "passwd": "Fer2901!",
+    "tipoConta": "usuario",
+    "userID": 1760554646358,
     "dados": {
-      "nomeEmpresa": "aaaaaaaa",
-      "cnpj": "1111111111111111111",
-      "telefone": "11999999999",
+      "nome": "Fernando Sanches",
+      "telefone": "11 99999-9999",
+      "dataNasc": "2009-01-29",
       "localizacao": "São Paulo",
-      "setor": "Consultoria",
-      "numeroFuncionarios": "11-50"
+      "areaAtuacao": "Fullstack",
+      "nivelExperiencia": "Especialista",
+      "linkedin": "https://www.linkedin.com/in/fernando-sanches-0b0947349/",
+      "github": "https://github.com/FernandoSnchs",
+      "biografia": "Para Usuário/Desenvolvedor:\nDesenvolvedor Full Stack apaixonado por criar soluções inovadoras. Experiência com React, Node.js e banco de dados. Busco sempre aprender novas tecnologias e contribuir em projetos desafiadores que gerem impacto real."
     }
   }
 ]
