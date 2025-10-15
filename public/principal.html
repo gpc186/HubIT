@@ -105,7 +105,7 @@
                 <div class="post-header">
                     <div class="post-avatar"></div>
                     <div class="post-user-info">
-                        <div class="post-user-name">Empresa</div>
+                        <div class="post-user-name">Nome do Usuário</div>
                         <div class="post-user-headline">Desenvolvedor | Empresa Tech</div>
                         <div class="post-time">2h</div>
                     </div>
@@ -120,18 +120,102 @@
                 <div class="post-actions">
                     <button class="action-button">👍 Gostei</button>
                     <button class="action-button">💬 Comentar</button>
-                    <button type="button" id="jobBtn" class="btn action-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Saber mais</button>
+                    <button type="button" id="jobBtn" class=" btn action-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Saber mais</button>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-dialog">
                         <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <div class="mb-4">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="bg-secondary bg-opacity-25 rounded d-flex align-items-center justify-content-center" style="width: 56px; height: 56px; font-size: 24px;">
+              🏢
+            </div>
+            <div>
+              <h6 class="mb-1 fw-semibold">Tech Solutions LTDA</h6>
+              <p class="mb-0 text-muted small">São Paulo, SP • 500+ funcionários</p>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+
+        <!-- Especificações da Vaga -->
+        <div class="mb-4">
+          <h6 class="fw-semibold mb-3">Sobre a Vaga</h6>
+          
+          <h5 class="mb-3">Desenvolvedor Full Stack Sênior</h5>
+          
+          <div class="d-flex flex-wrap gap-3 mb-3">
+            <span class="text-muted small">
+              <span class="me-1">💼</span>Tempo Integral
+            </span>
+            <span class="text-muted small">
+              <span class="me-1">📍</span>Híbrido
+            </span>
+            <span class="text-muted small">
+              <span class="me-1">⏰</span>Publicada há 2 dias
+            </span>
+          </div>
+
+          <p class="mb-3">
+            Estamos buscando um Desenvolvedor Full Stack Sênior para integrar nosso time de tecnologia. O profissional será responsável por desenvolver e manter aplicações web robustas e escaláveis.
+          </p>
+
+          <h6 class="fw-semibold mb-2" style="font-size: 14px;">Requisitos:</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2">
+              <span class="text-primary fw-bold me-2">•</span>
+              Experiência com React, Node.js e TypeScript
+            </li>
+            <li class="mb-2">
+              <span class="text-primary fw-bold me-2">•</span>
+              Conhecimento em bancos de dados SQL e NoSQL
+            </li>
+            <li class="mb-2">
+              <span class="text-primary fw-bold me-2">•</span>
+              Vivência com metodologias ágeis
+            </li>
+            <li class="mb-2">
+              <span class="text-primary fw-bold me-2">•</span>
+              Inglês intermediário ou avançado
+            </li>
+            <li class="mb-2">
+              <span class="text-primary fw-bold me-2">•</span>
+              Experiência mínima de 5 anos na área
+            </li>
+          </ul>
+        </div>
+
+        <hr>
+
+        <!-- Seleção de Currículo -->
+        <div>
+          <h6 class="fw-semibold mb-3">Candidatura</h6>
+          
+          <div class="mb-3">
+            <label for="curriculoSelect" class="form-label fw-semibold">
+              Selecione o currículo para esta vaga <span class="text-danger">*</span>
+            </label>
+            <select class="form-select" id="curriculoSelect" required>
+              <option value="" selected>Escolha um currículo</option>
+              <option value="principal">Currículo Principal - Atualizado em 10/10/2025</option>
+              <option value="tech">Currículo Tech - Atualizado em 05/10/2025</option>
+              <option value="gerencial">Currículo Gerencial - Atualizado em 01/09/2025</option>
+            </select>
+            <div class="form-text">Você pode gerenciar seus currículos nas configurações do perfil</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Enviar</button>
+      </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -148,7 +232,7 @@
                 <div class="post-header">
                     <div class="post-avatar"></div>
                     <div class="post-user-info">
-                        <div class="post-user-name">Empresa</div>
+                        <div class="post-user-name">Outro Usuário</div>
                         <div class="post-user-headline">Designer UX/UI</div>
                         <div class="post-time">5h</div>
                     </div>
@@ -171,7 +255,7 @@
                 <div class="post-header">
                     <div class="post-avatar"></div>
                     <div class="post-user-info">
-                        <div class="post-user-name">Empresa</div>
+                        <div class="post-user-name">Outro Usuário</div>
                         <div class="post-user-headline">Designer UX/UI</div>
                         <div class="post-time">5h</div>
                     </div>
@@ -194,7 +278,7 @@
                 <div class="post-header">
                     <div class="post-avatar"></div>
                     <div class="post-user-info">
-                        <div class="post-user-name">Empresa</div>
+                        <div class="post-user-name">Outro Usuário</div>
                         <div class="post-user-headline">Designer UX/UI</div>
                         <div class="post-time">5h</div>
                     </div>
@@ -217,7 +301,7 @@
                 <div class="post-header">
                     <div class="post-avatar"></div>
                     <div class="post-user-info">
-                        <div class="post-user-name">Empresa</div>
+                        <div class="post-user-name">Outro Usuário</div>
                         <div class="post-user-headline">Designer UX/UI</div>
                         <div class="post-time">5h</div>
                     </div>
@@ -277,7 +361,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-
 <script src="assets/js/perfil.js"></script>
 <script src="assets/js/home.js"></script>
 
