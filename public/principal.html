@@ -63,7 +63,7 @@
                     <div class="profile-name" id="nomePrincipal">Seu Nome</div>
                     <div id="areaAtuacao" class="profile-headline">Cargo | Empresa</div>
                     <div id="nivelExperiencia" class="profile-headline">Nivel Experiencia</div>
-                    <div class="profile-location" id="nomeLocal"> São Paulo</div>
+                    <div id="nomeLocal" class="profile-headline">Estado</div>
                 </div>
                 <div class="profile-stats">
                     <div class="stat-item">
@@ -86,7 +86,7 @@
         <!-- Coluna Centro - Feed -->
         <section class="feed">
             <div class="greeting-card">
-                <div id="mensagemGreeting" class="greeting-text" >Boa noite, <span style="color: #2F6D88;" class="greeting-name" id="nomeSaudacao">Seu Nome</span></div>
+                <div id="mensagemGreeting" class="greeting-text" >Boa noite, <span style="color: #2F6D88;" class="greeting-name" id="nomeSaudacao">Seu Nome.</span><br> <span>Suas <span style="color: #2F6D88; font-family: Codec;">oportunidades</span> de hoje!</span></div>
             </div>
 
             <div class="create-post">
@@ -105,9 +105,9 @@
                 <div class="post-header">
                     <div class="post-avatar"></div>
                     <div class="post-user-info">
-                        <div class="post-user-name">Nome do Usuário</div>
+                        <div class="post-user-name">Empresa</div>
                         <div class="post-user-headline">Desenvolvedor | Empresa Tech</div>
-                        <div class="post-time">2h • 🌎</div>
+                        <div class="post-time">2h</div>
                     </div>
                 </div>
                 <div class="post-content">
@@ -120,7 +120,27 @@
                 <div class="post-actions">
                     <button class="action-button">👍 Gostei</button>
                     <button class="action-button">💬 Comentar</button>
-                    <button id="jobBtn" class="action-button">Saber mais</button>
+                    <button type="button" id="jobBtn" class="btn action-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Saber mais</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -128,9 +148,9 @@
                 <div class="post-header">
                     <div class="post-avatar"></div>
                     <div class="post-user-info">
-                        <div class="post-user-name">Outro Usuário</div>
+                        <div class="post-user-name">Empresa</div>
                         <div class="post-user-headline">Designer UX/UI</div>
-                        <div class="post-time">5h • 🌎</div>
+                        <div class="post-time">5h</div>
                     </div>
                 </div>
                 <div class="post-content">
@@ -151,9 +171,9 @@
                 <div class="post-header">
                     <div class="post-avatar"></div>
                     <div class="post-user-info">
-                        <div class="post-user-name">Outro Usuário</div>
+                        <div class="post-user-name">Empresa</div>
                         <div class="post-user-headline">Designer UX/UI</div>
-                        <div class="post-time">5h • 🌎</div>
+                        <div class="post-time">5h</div>
                     </div>
                 </div>
                 <div class="post-content">
@@ -174,9 +194,9 @@
                 <div class="post-header">
                     <div class="post-avatar"></div>
                     <div class="post-user-info">
-                        <div class="post-user-name">Outro Usuário</div>
+                        <div class="post-user-name">Empresa</div>
                         <div class="post-user-headline">Designer UX/UI</div>
-                        <div class="post-time">5h • 🌎</div>
+                        <div class="post-time">5h</div>
                     </div>
                 </div>
                 <div class="post-content">
@@ -197,9 +217,9 @@
                 <div class="post-header">
                     <div class="post-avatar"></div>
                     <div class="post-user-info">
-                        <div class="post-user-name">Outro Usuário</div>
+                        <div class="post-user-name">Empresa</div>
                         <div class="post-user-headline">Designer UX/UI</div>
-                        <div class="post-time">5h • 🌎</div>
+                        <div class="post-time">5h</div>
                     </div>
                 </div>
                 <div class="post-content">
@@ -219,8 +239,10 @@
 
         <!-- Coluna Direita - Info Adicional -->
         <aside class="sidebar-right">
+            <div class="color-bar"></div>
             <div class="news-card">
                 <div class="card-title">Hubit Notícias</div>
+                <hr>
                 <div class="news-item">
                     <div class="news-title">Tendências em tecnologia</div>
                     <div class="news-meta">5.234 leitores</div>
@@ -251,6 +273,10 @@
         </aside>
     </main>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 
 <script src="assets/js/perfil.js"></script>
 <script src="assets/js/home.js"></script>

@@ -106,7 +106,7 @@ a{
 nav {
     display: flex;
     width: auto;
-    height: 100px;
+    height: 70px;
 
     background-color: hsla(50, 30%, 96%, 0.384);
 
@@ -786,11 +786,15 @@ footer{
         main {
             max-width: auto;
 
-            display: grid;
+            display: flex;
             grid-template-columns: 320px 1fr 300px;
             gap: 24px;
 
-            padding: 120px 20% 0% 17%;
+            padding-top: 90px;
+
+            flex-direction: row;
+            justify-content: center;
+            align-items: start;
             
         }
 
@@ -800,6 +804,9 @@ footer{
             flex-direction: column;
             gap: 8px;
             position: sticky;
+            top: 90px;
+
+            width: 18%;
         }
 
         .profile-card {
@@ -892,6 +899,7 @@ footer{
 
         /* Coluna Centro - Feed */
         .feed {
+            width: 40%;
             display: flex;
             flex-direction: column;
             gap: 8px;
@@ -1056,6 +1064,7 @@ footer{
         /* Coluna Direita - Info Adicional */
         .sidebar-right {
             display: flex;
+            width: 20%;
             flex-direction: column;
             gap: 8px;
         }
@@ -1067,6 +1076,15 @@ footer{
             padding: 12px 16px;
         }
 
+        .color-bar{
+            width: auto;
+            height: 10px;
+
+            background-color: #106083;
+
+            border-radius: 15px;
+        }
+
         .card-title {
             font-size: 16px;
             font-weight: 600;
@@ -1075,6 +1093,15 @@ footer{
 
         .news-item {
             margin-bottom: 12px;
+            transition: background-color 0.3s, padding 0.3s;
+        }
+
+        .news-item:hover{
+            background-color: #70707011;
+            padding: 6px;
+
+            border-radius: 7px;
+            cursor: pointer;
         }
 
         .news-title {
