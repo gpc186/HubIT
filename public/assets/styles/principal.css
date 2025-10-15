@@ -963,10 +963,6 @@ footer{
             outline: 0;
             border: 0;
         }
-        
-        [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled){
-            cursor: auto !important;
-        }
 
         .create-post-actions {
             display: flex;
@@ -1080,7 +1076,7 @@ footer{
             width: auto;
             height: 10px;
 
-            background-color: #106083;
+            background-color: #1e80aa;
 
             border-radius: 15px;
         }
@@ -1173,270 +1169,31 @@ footer{
 
 /* MODAL Content */
 
-.modal {
-            background: #fff;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 600px;
-            max-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
+.modal.show {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 24px;
-            border-bottom: 1px solid #e0e0e0;
-        }
+.modal-dialog {
+    width: auto !important;
+    max-width: 600px !important;
+    margin: 0 !important;
+}
 
-        .modal-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #000000e6;
-        }
+.modal-content {
+    padding: 0px;
+}
 
-        .btn-close {
-            background: transparent;
-            border: none;
-            font-size: 24px;
-            color: #666;
-            cursor: pointer;
-            padding: 0;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.2s;
-        }
+.list-unstyled{
+    display: flex;
+    flex-direction: column;
+}
 
-        .btn-close:hover {
-            background: #f3f2ef;
-        }
+.mb-4{
+    text-align: start;
+}
 
-        .modal-content {
-            padding: 24px;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        .section {
-            margin-bottom: 24px;
-        }
-
-        .section-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #000000e6;
-            margin-bottom: 12px;
-        }
-
-        .company-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .company-logo {
-            width: 56px;
-            height: 56px;
-            border-radius: 4px;
-            background: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .company-details {
-            flex: 1;
-        }
-
-        .company-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: #000000e6;
-            margin-bottom: 4px;
-        }
-
-        .company-location {
-            font-size: 14px;
-            color: #00000099;
-        }
-
-        .job-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #000000e6;
-            margin-bottom: 12px;
-        }
-
-        .job-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        .job-detail-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            color: #00000099;
-        }
-
-        .job-description {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #000000e6;
-            margin-bottom: 12px;
-        }
-
-        .job-requirements {
-            list-style: none;
-            padding: 0;
-        }
-
-        .job-requirements li {
-            font-size: 14px;
-            color: #000000e6;
-            padding: 6px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .job-requirements li:before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #0a66c2;
-            font-weight: bold;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #000000e6;
-            margin-bottom: 8px;
-        }
-
-        .form-select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #00000099;
-            border-radius: 4px;
-            font-size: 14px;
-            color: #000000e6;
-            background: #fff;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-
-        .form-select:focus {
-            outline: none;
-            border-color: #0a66c2;
-            box-shadow: 0 0 0 2px rgba(10, 102, 194, 0.1);
-        }
-
-        .form-select:hover {
-            border-color: #000000e6;
-        }
-
-        .helper-text {
-            font-size: 12px;
-            color: #00000099;
-            margin-top: 6px;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            padding: 16px 24px;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 24px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #0a66c2;
-            border: 1px solid #0a66c2;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(10, 102, 194, 0.08);
-            border-color: #004182;
-            color: #004182;
-        }
-
-        .btn-primary {
-            background: #0a66c2;
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            background: #004182;
-        }
-
-        .btn-primary:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .divider {
-            height: 1px;
-            background: #e0e0e0;
-            margin: 20px 0;
-        }
-
-        .modal-dialog{
-            width: 100% !important;
-            margin: 0 !important;
-        }
-
-        .modal{
-            --bs-modal-width: 100% !important;
-            overflow-x: hidden;
-        }
-
-        .list-unstyled{
-            text-align: start;
-            display: flex;
-            flex-direction: column !important;
-        }
-
-        .modal-dialog{
-            height: 100% !important;
-        }
-
-        .modal-content{
-            padding: 0px;
-        }
-
-        .modal-body{
-            text-align: start;
-        }
-
-        .greeting-text{
-            text-align: center;
-        }
+.modal-footer button{
+    cursor: pointer !important;
+}

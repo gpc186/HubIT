@@ -717,7 +717,11 @@ footer{
 
 .selection-modal{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
 }
 
 .select-radio{
@@ -734,6 +738,7 @@ footer{
     row-gap: 10px;
 
     margin-bottom: 10px;
+    align-items: center;
 }
 
 /*principal */
@@ -764,4 +769,8 @@ footer{
 .search-content img{
     width: 100%;
     height: 100%;
+}
+
+.modal-body{
+    text-align: center;
 }

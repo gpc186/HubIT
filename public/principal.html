@@ -86,7 +86,7 @@
         <!-- Coluna Centro - Feed -->
         <section class="feed">
             <div class="greeting-card">
-                <div id="mensagemGreeting" class="greeting-text" >Boa noite, <span style="color: #2F6D88;" class="greeting-name" id="nomeSaudacao">Seu Nome.</span><br> <span>Suas <span style="color: #2F6D88; font-family: Codec;">oportunidades</span> de hoje!</span></div>
+                <div id="mensagemGreeting" class="greeting-text" >Boa noite, <span id="nomeSaudacao">Seu Nome.</span><br> <span>Suas <span style="color: #2F6D88; font-family: Codec;">oportunidades</span> de hoje!</span></div>
             </div>
 
             <div class="create-post">
@@ -106,12 +106,12 @@
                     <div class="post-avatar"></div>
                     <div class="post-user-info">
                         <div class="post-user-name">Empresa</div>
-                        <div class="post-user-headline">Desenvolvedor | Empresa Tech</div>
+                        <div id="empregoVagaNome" class="post-user-headline">Vaga</div>
                         <div class="post-time">2h</div>
                     </div>
                 </div>
-                <div class="post-content">
-                    Este é um exemplo de publicação no feed. Aqui vai o conteúdo compartilhado pelo usuário, que pode incluir texto, imagens, vídeos e muito mais.
+                <div id="empregosContainer">
+                    
                 </div>
                 <div class="post-engagement">
                     <span>👍 45 pessoas</span>
@@ -124,7 +124,7 @@
 
                     <!-- Modal -->
                     <div class="modal fade" id="modalVagaEmprego" tabindex="-1" aria-labelledby="modalVagaEmpregoLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                    <div class="modal-dialog modal-dialog-scrollable-centered">
                         <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="modalVagaEmpregoLabel">Empresa</h1>
@@ -205,9 +205,9 @@
                                 </label>
                                 <select class="form-select" id="curriculoSelect" required>
                                 <option value="" selected>Escolha um currículo</option>
-                                <option value="principal">Currículo Principal - Atualizado em 10/10/2025</option>
-                                <option value="tech">Currículo Tech - Atualizado em 05/10/2025</option>
-                                <option value="gerencial">Currículo Gerencial - Atualizado em 01/09/2025</option>
+                                <option value="principal">Currículo Principal</option>
+                                <option value="tech">Currículo Tech</option>
+                                <option value="gerencial">Currículo Gerencial</option>
                                 </select>
                                 <div class="form-text">Você pode gerenciar seus currículos nas configurações do perfil</div>
                             </div>
@@ -233,8 +233,8 @@
                         <div class="post-time">5h</div>
                     </div>
                 </div>
-                <div class="post-content">
-                    Compartilhando insights sobre design de interfaces e experiência do usuário. O que vocês acham das novas tendências?
+                <div id="empregosContainer">
+
                 </div>
                 <div class="post-engagement">
                     <span>👍 78 pessoas</span>
@@ -256,8 +256,8 @@
                         <div class="post-time">5h</div>
                     </div>
                 </div>
-                <div class="post-content">
-                    Compartilhando insights sobre design de interfaces e experiência do usuário. O que vocês acham das novas tendências?
+                <div id="empregosContainer">
+                    ?
                 </div>
                 <div class="post-engagement">
                     <span>👍 78 pessoas</span>
@@ -279,8 +279,8 @@
                         <div class="post-time">5h</div>
                     </div>
                 </div>
-                <div class="post-content">
-                    Compartilhando insights sobre design de interfaces e experiência do usuário. O que vocês acham das novas tendências?
+                <div id="empregosContainer">
+                    
                 </div>
                 <div class="post-engagement">
                     <span>👍 78 pessoas</span>
@@ -302,8 +302,8 @@
                         <div class="post-time">5h</div>
                     </div>
                 </div>
-                <div class="post-content">
-                    Compartilhando insights sobre design de interfaces e experiência do usuário. O que vocês acham das novas tendências?
+                <div id="empregosContainer">
+                    ?
                 </div>
                 <div class="post-engagement">
                     <span>👍 78 pessoas</span>

@@ -44,3 +44,57 @@ window.addEventListener('load', () => {
         moveIndicator(activeItem);
     }
 });
+const dataNow = new Date();
+const dataHours = dataNow.getHours();
+
+const mensagemGreeting = document.getElementById('mensagemGreeting');
+
+window.onload = async function () {
+    await carregarPagina();
+};
+
+async function carregarPagina() {
+    const userID = localStorage.getItem('userID');
+    
+    // Verifica se o usuário já está logado
+    if (!userID) {
+        alert('Você precisa fazer login!');
+        window.location.href = '/';
+        return;
+    }
+
+    const resposta = await fetch(`/api/usuario/${userID}`, {
+        method: 'GET',
+        headers: {
+            'user-id': userID
+        }
+    });
+
+
+    const dados = await resposta.json()
+	const usuarioAtual = dados.usuario;
+
+    if(!usuarioAtual.dados){
+        alert('Por favor cadastre')
+    }
+
+    const nomePrincipal = document.getElementById('nomePrincipal')
+    const localizacao = document.getElementById('localizacao')
+
+    console.log(usuarioAtual)
+    console.log(nomePrincipal)
+    nomePrincipal.innerHTML = usuarioAtual.dados.nome
+    localizacao.innerText = usuarioAtual.dados.localizacao
+
+    console.log(usuarioAtual.userID);           // Ex: 1759967977156
+            console.log(usuarioAtual.email);            // Ex: "guguinha@gmail.com"
+            console.log(usuarioAtual.tipoConta);        // Ex: "usuario"
+            console.log(usuarioAtual.perfilCompleto);   // Ex: true/false
+            console.log(usuarioAtual.podeEditar);       // Ex: true/false
+            console.log(usuarioAtual.dados);            // Ex: { nome: "...", telefone: "..." }
+
+            // Acessar dados específicos dentro de "dados":
+            console.log(usuarioAtual.dados.nome);       // Ex: "Gustavo"
+            console.log(usuarioAtual.dados.telefone);   // Ex: "1140028922"
+            console.log(usuarioAtual.dados.dataNasc);   // Ex: "2000-01-01"
+}
