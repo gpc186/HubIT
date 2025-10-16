@@ -774,3 +774,49 @@ footer{
 .modal-body{
     text-align: center;
 }
+
+.section-block-1-steps{
+    display: flex;
+    height: 200px;
+    width: 100%;
+
+    background-color: rgba(250, 235, 215, 0);
+
+    justify-content: center;
+    align-items: center;
+}
+
+.section-block-img-1-steps {
+    width: 85%;
+    height: auto;
+
+    margin-right: 40px;
+}
+
+.section-block-img-1-steps img {
+    width: 55%;
+}
+
+.section-steps{
+    height: auto;
+}
+
+.about-steps{
+    height: auto;
+}
+
+.about-content-steps{
+    display: flex;
+    width: 100dvw;
+    height: auto;
+
+    background-color: #2f6d8800;
+
+    border-top: 60px;
+}
+
+hr{
+    margin: 0.7rem 0 !important;
+    border: 2px #4e646d solid !important;
+    border-radius: 100px !important;
+}
