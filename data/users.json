@@ -76,7 +76,21 @@
       "nivelExperiencia": "Especialista",
       "linkedin": "https://www.linkedin.com/in/fernando-sanches-0b0947349/",
       "github": "https://github.com/FernandoSnchs",
-      "biografia": "Para Usuário/Desenvolvedor:\nDesenvolvedor Full Stack apaixonado por criar soluções inovadoras. Experiência com React, Node.js e banco de dados. Busco sempre aprender novas tecnologias e contribuir em projetos desafiadores que gerem impacto real."
+      "biografia": "Desenvolvedor Full Stack apaixonado por criar soluções inovadoras. Experiência com React, Node.js e banco de dados. Busco sempre aprender novas tecnologias e contribuir em projetos desafiadores que gerem impacto real."
     }
+  },
+  {
+    "email": "gabriel@gmail.com",
+    "passwd": "De@123456",
+    "tipoConta": "usuario",
+    "userID": 1760640240633,
+    "dados": {}
+  },
+  {
+    "email": "teste@gmail.com",
+    "passwd": "Ab123!@#",
+    "tipoConta": "usuario",
+    "userID": 1760640562430,
+    "dados": {}
   }
 ]

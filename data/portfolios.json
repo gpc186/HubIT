@@ -1,0 +1,21 @@
+[
+	{
+		"portfolioID": 1729000000000,
+		"usuarioID": 1759967977156,
+		"usuarioNome": "Gustavo Cagega",
+		"titulo": "E-commerce Full Stack",
+		"descricao": "Sistema completo de e-commerce...",
+		"tecnologias": [
+			"React",
+			"Node.js",
+			"Express",
+			"MongoDB"
+		],
+		"categoria": "Web Development",
+		"linkDemo": "https://projeto.vercel.app",
+		"linkGithub": "https://github.com/user/projeto",
+		"linkOutros": [],
+		"dataCriacao": "2025-10-14T18:30:00Z",
+		"curtidas": 0
+	}
+]

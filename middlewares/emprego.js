@@ -47,7 +47,6 @@ router.post('/', async (req, res) => {
 		
 		const users = JSON.parse(userData);
 		
-		
 		const empresa = users.find(u => Number(u.userID) === Number(empresaID));
 		
 		if (!empresa) {
@@ -122,9 +121,7 @@ router.get('/', async (req, res)=>{
 	const userID = req.headers['user-id'];
 
 	if (!userID) {
-		alert('Por favor logue primeiro!');
-		window.location.href = '/';
-		return;
+		return res.status(401).json({error: "Você precisa logar primeiro!"});
 	};
 
 	try {

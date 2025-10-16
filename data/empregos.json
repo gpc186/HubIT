@@ -2,8 +2,8 @@
   {
     "empregoID": 21760557376155,
     "empresaID": "1760466609594",
-	"empresaNome": "Bradesco",
-    "titulo": "Desenvolvedor Backend",
+	  "empresaNome": "Bradesco",
+    "titulo": "Mexedor de banco de dados",
     "descricao": "Buscamos desenvolvedor backend experiente",
     "area": "Backend",
     "tipoContrato": "CLT",
@@ -25,13 +25,13 @@
   {
     "empregoID": 21760557856155,
     "empresaID": "1760463309594",
-	"empresaNome": "Itau",
+	  "empresaNome": "Itau",
     "titulo": "Desenvolvedor Backend",
-    "descricao": "Buscamos desenvolvedor backend experiente",
+    "descricao": "Buscamos desenvolvedor Junior",
     "area": "Backend",
     "tipoContrato": "CLT",
-    "tipoTrabalho": "Remoto",
-    "mediaSalario": 5000,
+    "tipoTrabalho": "Presencial",
+    "mediaSalario": 7000,
     "localizacao": "São Paulo, SP",
     "requisitos": [
       "Node.js",
@@ -48,13 +48,59 @@
   {
     "empregoID": 217652557376155,
     "empresaID": "1760466229594",
-	"empresaNome": "Amazon",
-    "titulo": "Desenvolvedor Backend",
+	  "empresaNome": "Amazon",
+    "titulo": "Analista de dados",
     "descricao": "Buscamos desenvolvedor backend experiente",
     "area": "Backend",
     "tipoContrato": "CLT",
     "tipoTrabalho": "Remoto",
-    "mediaSalario": 5000,
+    "mediaSalario": 3000,
+    "localizacao": "São Paulo, SP",
+    "requisitos": [
+      "Node.js",
+      "Express",
+      "MySQL"
+    ],
+    "beneficios": [
+      "Vale Refeição",
+      "Plano de Saúde"
+    ],
+    "dataCriacao": "2025-10-15T19:42:56.155Z",
+    "status": "ativo"
+  },
+  {
+    "empregoID": 217652557376155,
+    "empresaID": "1760466229594",
+	  "empresaNome": "Amazon",
+    "titulo": "Analista de dados",
+    "descricao": "Buscamos desenvolvedor backend experiente",
+    "area": "Backend",
+    "tipoContrato": "CLT",
+    "tipoTrabalho": "Remoto",
+    "mediaSalario": 3000,
+    "localizacao": "São Paulo, SP",
+    "requisitos": [
+      "Node.js",
+      "Express",
+      "MySQL"
+    ],
+    "beneficios": [
+      "Vale Refeição",
+      "Plano de Saúde"
+    ],
+    "dataCriacao": "2025-10-15T19:42:56.155Z",
+    "status": "ativo"
+  },
+  {
+    "empregoID": 217652557376155,
+    "empresaID": "1760466229594",
+	  "empresaNome": "Amazon",
+    "titulo": "Analista de dados",
+    "descricao": "Buscamos desenvolvedor backend experiente",
+    "area": "Backend",
+    "tipoContrato": "CLT",
+    "tipoTrabalho": "Remoto",
+    "mediaSalario": 3000,
     "localizacao": "São Paulo, SP",
     "requisitos": [
       "Node.js",
