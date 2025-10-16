@@ -2,10 +2,6 @@ let perfilEraIncompleto = false;
 let tipoContaAtual = null;
 let usuarioAtual = null; 
 
-// Quando a página carregar: Rodar função carregarPerfil()
-window.onload = async function() {
-    await carregarPerfil();
-};
 
 function verificarTelefone(telefone){
     const numeros = telefone.replace(/\D/g, '');
@@ -18,6 +14,11 @@ function verificarDataNasc(dataNasc){
     const idade = hoje.getFullYear() - nascimento.getFullYear();
     return idade >= 14 && idade <= 120
 }
+
+// Quando a página carregar: Rodar função carregarPerfil()
+window.onload = async function() {
+    await carregarPerfil();
+};
 
 async function carregarPerfil() {
     
@@ -50,24 +51,36 @@ async function carregarPerfil() {
         if (dados.ok) {
             // Aqui é para verificar e preencher dados
             usuarioAtual = dados.usuario;
+            console.log(usuarioAtual)
             tipoContaAtual = usuarioAtual.tipoConta;
+            console.log(tipoContaAtual);
+            
             perfilEraIncompleto = !usuarioAtual.perfilCompleto;
+            console.log(perfilEraIncompleto);
+            
 
-            if(!usuarioAtual.perfilCompleto){
+            if(perfilEraIncompleto){
+                console.log('Usuario verificado')
                 const mensagem = document.getElementById('mensagemBoasVindas');
                 
                 if(mensagem) mensagem.style.display = 'block';
+                console.log("Mensagem criada");
+                
 
                 if(usuarioAtual.tipoConta === 'usuario') {
                     document.getElementById('formUsuario').style.display = 'block';
                     document.getElementById('formEmpresa').style.display = 'none';
+                    console.log("usuario tipo usuario");
+                    
                 } else if(usuarioAtual.tipoConta === 'empresa') {
                     document.getElementById('formUsuario').style.display = 'none';
                     document.getElementById('formEmpresa').style.display = 'block';
+                    console.log("usuario tipo empresa")
                 }
                 
                 const modal = new bootstrap.Modal(document.getElementById('modalCompletarPerfil'));
                 modal.show();
+                console.log("Modal mostrado")
             }
 
         } else {

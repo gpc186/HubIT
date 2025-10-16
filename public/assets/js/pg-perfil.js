@@ -80,11 +80,36 @@ async function carregarPagina() {
 
     const nomePrincipal = document.getElementById('nomePrincipal')
     const localizacao = document.getElementById('localizacao')
+    const trabalho = document.getElementById('trabalho')
+    const bio = document.getElementById('bio')
+    //links
+    const linkedin = document.getElementById('lkdn')
+    const github = document.getElementById('gthb')
+    
+   
 
-    console.log(usuarioAtual)
-    console.log(nomePrincipal)
-    nomePrincipal.innerHTML = usuarioAtual.dados.nome
+
+    nomePrincipal.innerText = usuarioAtual.dados.nome
     localizacao.innerText = usuarioAtual.dados.localizacao
+    trabalho.innerText = usuarioAtual.dados.areaAtuacao
+    //links
+    if(usuarioAtual.dados.linkedin){
+        linkedin.href = usuarioAtual.dados.linkedin
+        linkedin.textContent = 'Linkedin'
+        linkedin.target = '_blank'
+        linkedin.parentElement.style.display = 'block'
+    } else{
+        linkedin.parentElement.style.display = 'none'
+    }
+
+    if(usuarioAtual.dados.github){
+        github.href = usuarioAtual.dados.github        
+        github.textContent = 'github'
+        github.target = '_blank'
+        gitLink.parentElement.style.display = 'block'
+    } else{
+        gitLink.parentElement.style.display = 'none'
+    }
 
     console.log(usuarioAtual.userID);           // Ex: 1759967977156
             console.log(usuarioAtual.email);            // Ex: "guguinha@gmail.com"

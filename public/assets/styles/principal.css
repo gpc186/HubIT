@@ -164,7 +164,7 @@ li a {
 
     margin-right: 80px;
 
-    column-gap: 50px;
+    column-gap: 20px;
 }
 
 .login-btn {
@@ -728,7 +728,7 @@ footer{
     border-radius: 15px;
     border: #70707079 solid 2px;
 
-    padding: 13px;
+    padding: 7px;
     justify-content: center;
     align-items: center;
 }
@@ -988,6 +988,19 @@ footer{
             background: #f3f2ef;
         }
 
+        .new-button{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            color: rgb(98, 136, 207);
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+
         .post-card {
             width: 100%;
             background: #fff;
@@ -1054,7 +1067,7 @@ footer{
 
         .post-actions {
             display: flex;
-            justify-content: space-around;
+            justify-content: end;
         }
 
         /* Coluna Direita - Info Adicional */
@@ -1194,6 +1207,14 @@ footer{
     text-align: start;
 }
 
+.modal-dialog-scrollable .modal-body{
+    padding: 50px !important;
+}
+
 .modal-footer button{
     cursor: pointer !important;
+}
+
+#empregosContainer{
+    width: 100%;
 }

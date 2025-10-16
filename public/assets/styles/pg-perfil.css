@@ -273,7 +273,7 @@ h3 {
     margin-top: 100px;
     margin-left: 130px;
     background-color:#f8f7f2;
-    z-index: 5;
+    z-index: 6;
     position: absolute;
     border-radius: 100%;
 }
@@ -285,6 +285,18 @@ h3 {
     border-radius: 100%;
    
 }
+.blur{
+    width: 59.7dvw;
+    height: 6%;
+    backdrop-filter: blur(2px);
+    z-index: 5;
+    margin-top: 10%;
+    border-radius: 0px;
+    position: absolute;
+    justify-content: end;
+    align-items: end;
+    display: flex;
+    }
 .container-info{
     display: flex;
     width: 100%;
@@ -294,17 +306,36 @@ h3 {
     background-color: #f8f7f2;
 }
     .container-info .ladoEsquerdo{
-        width: 50%;
-        height: 100%;
-        align-items: center;
+        width: 38%;
+        height: 60%;
+        align-items: left;
+        justify-content: left;
         display: flex;
         flex-direction: column;
+        margin-left: 5dvw;
+        margin-top: 2dvh;
+    }
+    .container-info .ladoEsquerdo h1{
+        height: 35px;
+        margin: 0;
+    }
+    .container-info .ladoEsquerdo h2{
+        height: 25px;
+        margin: 0;
+    }
+    .container-info .ladoEsquerdo h3{
+        margin-left: 0.1%;
     }
     .container-info .ladoDireito{
         width: 50%;
         height: 100%;
     }
-
+        .container-info .ladoDireito .links{
+            margin-top: 4dvh;
+            width: 30dvw;
+            height: 10dvh;
+            border: 1px solid black;
+        }
 
 
 

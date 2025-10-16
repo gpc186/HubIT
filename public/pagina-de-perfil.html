@@ -47,7 +47,7 @@
     </header>
     <main >
          <br><br><br><br><br><br><br><br>
-        <button data-bs-toggle="modal"  onclick="abrirModalEdicao()">Mudar informações</button>
+        <button class="mudarInfo-B" data-bs-toggle="modal"  onclick="abrirModalEdicao()">Mudar informações</button>
         
        
 
@@ -55,21 +55,35 @@
              <div class="container-banner">
                 <div class="img-banner">
                  <img src="/assets/img/imagem-perfil.jpg" alt="banner img">
-
+                 
                 </div>
+                <div class="blur"></div>
+                
                 <div class="img-perfil">
                     <img src="/assets/img/contact_hero_img.png" alt="img perfil">
                 </div>
+                
                 <div class="container-info">
                     <div class="ladoEsquerdo">
                             <!--NOME+OQ FAZ + LOCALIDADE-->
-                        <span id='nomePrincipal'>nomePrincipal</span>
-                        <span id="localizacao">Localização</span>
+                        <h1 id='nomePrincipal'></h1>
+                        <h2 id="trabalho"></h2>
+                        <h3 id="localizacao"><h3>
                         
                         
                     </div>
-                    <div class="ladoDierito">
-                        <!--links+-->
+                    <div class="ladoDireito">
+                        <!--Links+ Bio-->
+                        <div class="links">
+                            <ul>
+                                <li><a id="lkdn" href=""></a></li>
+                                <li><a id="gthb" href="" ></a></li>
+                                
+                            </ul>
+                        </div>
+                        <div class="bio">
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -365,7 +379,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="/assets/js/perfil.js"></script>
+    <script async src="/assets/js/perfil.js"></script>
     <script src="/assets/js/pg-perfil.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
