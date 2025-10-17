@@ -1,3 +1,6 @@
+// Aqui geramos IDs como Date.now() e para haver ao menos uma pequena diferenciação
+// Pegamos os IDs gerados e colocamos um prefixo para o emprego e portfolio
+
 function criarIDUsuario(){
 	return Date.now();
 };

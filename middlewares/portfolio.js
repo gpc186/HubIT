@@ -11,14 +11,14 @@ const { criarIDPortfolio } = require('./utils/geradorID');
 router.post('/', async (req, res)=>{
 
 	const userID = req.headers['user-id'];
-	
+	// Verificação de usuario logado
 	if (!userID){
 		return res.status(401).json({error: "Por favor logue antes!"});
 	};
 
 	try {
+		// Aqui ele pega todas as informações do body
 		const {
-			portfolioID,
 			usuarioID,
 			usuarioNome,
 			titulo,
@@ -31,7 +31,7 @@ router.post('/', async (req, res)=>{
 			dataCriacao,
 			curtidas
 		} = req.body;
-
+		// Verificação simples dos dados
 		if(!portfolioID){
 			res.status(400).json({error: "Faltando informações"})
 		}
@@ -41,22 +41,22 @@ router.post('/', async (req, res)=>{
 		if(!usuarioNome){
 			res.status(400).json({error: "Faltando informações"})
 		}
-		if(!titulo){
+		if(!titulo || titulo.trim() === ''){
 			res.status(400).json({error: "Faltando informações"})
 		}
-		if(!descricao){
+		if(!descricao || descricao.trim() === ''){
 			res.status(400).json({error: "Faltando informações"})
 		}
-		if(!tecnologias){
+		if(!tecnologias || tecnologias.trim() === ''){
 			res.status(400).json({error: "Faltando informações"})
 		}
-		if(!categoria){
+		if(!categoria  || categoria.trim() === ''){
 			res.status(400).json({error: "Faltando informações"})
 		}
-		if(!linkDemo){
+		if(!linkDemo || linkDemo.trim() === ''){
 			res.status(400).json({error: "Faltando informações"})
 		}
-		if(!linkGithub){
+		if(!linkGithub || linkGithub.trim() === ''){
 			res.status(400).json({error: "Faltando informações"})
 		}
 		if(!dataCriacao){

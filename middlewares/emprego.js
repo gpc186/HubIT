@@ -1,29 +1,3 @@
-// {
-// "empregoID": 1729000000000,
-// "empresaID": 1759968679341,
-// "empresaNome": "Tech Solutions",
-// "titulo": "Desenvolvedor Backend Pleno",
-// "descricao": "Buscamos desenvolvedor...",
-// "area": "Backend",
-// "tipoContrato": "CLT",
-// "tipoTrabalho": "Remoto",
-// "mediaSalário": 6000,
-// "ocultarSalario": false,
-// "localizacao": "São Paulo, SP",
-// "requisitos": [
-// "3+ anos de experiência",
-// "Node.js",
-// "MySQL/PostgreSQL",
-// "Docker"
-// ],
-// "beneficios": [
-// "Vale Refeição",
-// "Vale Transporte",
-// "Plano de Saúde",
-// "Home Office"
-// ],
-// "dataCriacao": "2025-10-14T18:30:00Z"
-//}
 const express = require('express');
 const router = express.Router();
 const fs = require('fs').promises;
@@ -35,7 +9,7 @@ const usersPath = path.join(__dirname, '..', 'data', 'users.json');
 const { criarIDEmprego } = require('./utils/geradorID');
 
 router.post('/', async (req, res) => {
-	
+	// Verificação de usuário logado
 	const empresaID = req.headers['user-id'];
 
 	if (!empresaID) {
@@ -43,16 +17,16 @@ router.post('/', async (req, res) => {
 	};
 	
 	try {
+		// Processamento de usuário para encontrar a empresa que está postando
 		const userData = await fs.readFile(usersPath, 'utf8');
-		
 		const users = JSON.parse(userData);
 		
 		const empresa = users.find(u => Number(u.userID) === Number(empresaID));
-		
+		// Verificação do tipoConta do user, se tiver lá como empresa, pode postar
 		if (!empresa) {
 			return res.status(401).json({error: "Você não pode postar empregos!"});
 		};
-		
+		// Pegamos a requisição e colocamos como variável
 		const {
 		titulo,
 		descricao,
@@ -81,13 +55,12 @@ router.post('/', async (req, res) => {
         if (!localizacao || localizacao.trim() === '') {
             return res.status(400).json({ error: "Localização é obrigatória!" });
         }
-
+		// Pegamos os empregos para processamento
 		const empregosData = await fs.readFile(empregosPath, 'utf8')
-		
 		const empregos = JSON.parse(empregosData);		
-
+		// Criamos um id pelo /utils
 		let empregoID = criarIDEmprego()
-		
+		// Aqui criamos um objeto com todas as informações
 		const novoEmprego = {
             empregoID: empregoID,
             empresaID: empresaID,
@@ -106,7 +79,7 @@ router.post('/', async (req, res) => {
         };
 
 		empregos.push(novoEmprego)
-
+		// Colocamos dentro da array e sobescrevemos o arquivo JSON
 		await fs.writeFile(empregosPath, JSON.stringify(empregos, null, 2))
 
 		res.status(200).json({ok: true, mensagem: "Emprego criado com sucesso!", emprego: novoEmprego})
@@ -116,8 +89,9 @@ router.post('/', async (req, res) => {
 		return res.status(500).json({error: error.message});
 	};
 });
-
+// Rota GET
 router.get('/', async (req, res)=>{
+	// Verificação de login
 	const userID = req.headers['user-id'];
 
 	if (!userID) {
@@ -125,15 +99,16 @@ router.get('/', async (req, res)=>{
 	};
 
 	try {
+		// Pegando dados para processamento
 		const data = await fs.readFile(empregosPath, 'utf8')
 		const empregos = JSON.parse(data);
-
+		// Filtramos por empregos ativos
 		const empregosAtivos = empregos.filter(e => e.status === 'ativo');
-
+		// Aqui nós sorteamos os empregos por data de criação
 		empregosAtivos.sort((a, b) => 
             new Date(b.dataCriacao) - new Date(a.dataCriacao)
         );
-
+		// Enviamos a resposta para o front
 		res.status(200).json({ok: true, empregos: empregosAtivos});
 
 	} catch (error) {
