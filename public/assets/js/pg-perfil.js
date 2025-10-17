@@ -38,12 +38,20 @@ function moveIndicator(element) {
 }
 
 // Reposiciona o indicador ao redimensionar a janela
+window.addEventListener('resize', () => {
+    const activeItem = document.querySelector('.nav-item.active');
+    if (activeItem) {
+        moveIndicator(activeItem);
+    }
+});
+
 window.addEventListener('load', () => {
     const activeItem = document.querySelector('.nav-item.active');
     if (activeItem) {
         moveIndicator(activeItem);
     }
 });
+
 const dataNow = new Date();
 const dataHours = dataNow.getHours();
 
@@ -63,63 +71,102 @@ async function carregarPagina() {
         return;
     }
 
-    const resposta = await fetch(`/api/usuario/${userID}`, {
-        method: 'GET',
-        headers: {
-            'user-id': userID
+    try {
+        const resposta = await fetch(`/api/usuario/${userID}`, {
+            method: 'GET',
+            headers: {
+                'user-id': userID
+            }
+        });
+
+        if (!resposta.ok) {
+            throw new Error('Erro ao carregar dados do usuário');
         }
-    });
 
+        const dados = await resposta.json();
+        const usuarioAtual = dados.usuario;
 
-    const dados = await resposta.json()
-	const usuarioAtual = dados.usuario;
+        // Verifica se o usuário tem dados cadastrados
+        if (!usuarioAtual.dados) {
+            alert('Por favor, complete seu cadastro');
+            return;
+        }
 
-    if(!usuarioAtual.dados){
-        alert('Por favor cadastre')
+        // Seleciona os elementos do DOM
+        const nomePrincipal = document.getElementById('nomePrincipal');
+        const localizacao = document.getElementById('localizacao');
+        const trabalho = document.getElementById('trabalho');
+        const bio = document.querySelector('.bio');
+        
+        // Links
+        const linkedin = document.getElementById('lkdn');
+        const github = document.getElementById('gthb');
+
+        // Preenche os dados principais
+        if (nomePrincipal) {
+            nomePrincipal.innerText = usuarioAtual.dados.nome || 'Nome não informado';
+        }
+
+        if (localizacao) {
+            localizacao.innerText = usuarioAtual.dados.localizacao || 'Localização não informada';
+        }
+
+        if (trabalho) {
+            trabalho.innerText = usuarioAtual.dados.areaAtuacao || 'Área não informada';
+        }
+
+        // Preenche biografia se existir
+        if (bio && usuarioAtual.dados.biografia) {
+            bio.innerText = usuarioAtual.dados.biografia;
+        }
+
+        // Configura links do LinkedIn
+        if (linkedin) {
+            if (usuarioAtual.dados.linkedin) {
+                linkedin.href = usuarioAtual.dados.linkedin;
+                linkedin.textContent = 'LinkedIn';
+                linkedin.target = '_blank';
+                linkedin.style.display = 'inline-block';
+                linkedin.parentElement.style.display = 'list-item';
+            } else {
+                linkedin.parentElement.style.display = 'none';
+            }
+        }
+
+        // Configura links do GitHub (CORRIGIDO: era 'gitLink' e deveria ser 'github')
+        if (github) {
+            if (usuarioAtual.dados.github) {
+                github.href = usuarioAtual.dados.github;
+                github.textContent = 'GitHub';
+                github.target = '_blank';
+                github.style.display = 'inline-block';
+                github.parentElement.style.display = 'list-item';
+            } else {
+                github.parentElement.style.display = 'none';
+            }
+        }
+
+        // Log para debug (pode remover em produção)
+        console.log('Dados do usuário carregados:', {
+            userID: usuarioAtual.userID,
+            email: usuarioAtual.email,
+            tipoConta: usuarioAtual.tipoConta,
+            perfilCompleto: usuarioAtual.perfilCompleto,
+            podeEditar: usuarioAtual.podeEditar,
+            dados: usuarioAtual.dados
+        });
+
+    } catch (error) {
+        console.error('Erro ao carregar perfil:', error);
+        alert('Erro ao carregar os dados do perfil. Tente novamente.');
     }
+}
 
-    const nomePrincipal = document.getElementById('nomePrincipal')
-    const localizacao = document.getElementById('localizacao')
-    const trabalho = document.getElementById('trabalho')
-    const bio = document.getElementById('bio')
-    //links
-    const linkedin = document.getElementById('lkdn')
-    const github = document.getElementById('gthb')
-    
-   
-
-
-    nomePrincipal.innerText = usuarioAtual.dados.nome
-    localizacao.innerText = usuarioAtual.dados.localizacao
-    trabalho.innerText = usuarioAtual.dados.areaAtuacao
-    //links
-    if(usuarioAtual.dados.linkedin){
-        linkedin.href = usuarioAtual.dados.linkedin
-        linkedin.textContent = 'Linkedin'
-        linkedin.target = '_blank'
-        linkedin.parentElement.style.display = 'block'
-    } else{
-        linkedin.parentElement.style.display = 'none'
+// Função para abrir modal de edição (se necessário)
+function abrirModalEdicao() {
+    const modal = document.getElementById('modalCompletarPerfil');
+    if (modal) {
+        const bsModal = new bootstrap.Modal(modal);
+        bsModal.show();
     }
-
-    if(usuarioAtual.dados.github){
-        github.href = usuarioAtual.dados.github        
-        github.textContent = 'github'
-        github.target = '_blank'
-        gitLink.parentElement.style.display = 'block'
-    } else{
-        gitLink.parentElement.style.display = 'none'
-    }
-
-    console.log(usuarioAtual.userID);           // Ex: 1759967977156
-            console.log(usuarioAtual.email);            // Ex: "guguinha@gmail.com"
-            console.log(usuarioAtual.tipoConta);        // Ex: "usuario"
-            console.log(usuarioAtual.perfilCompleto);   // Ex: true/false
-            console.log(usuarioAtual.podeEditar);       // Ex: true/false
-            console.log(usuarioAtual.dados);            // Ex: { nome: "...", telefone: "..." }
-
-            // Acessar dados específicos dentro de "dados":
-            console.log(usuarioAtual.dados.nome);       // Ex: "Gustavo"
-            console.log(usuarioAtual.dados.telefone);   // Ex: "1140028922"
-            console.log(usuarioAtual.dados.dataNasc);   // Ex: "2000-01-01"
 }
