@@ -24,20 +24,24 @@ router.post('/', async (req, res) => {
 		const empresa = users.find(u => Number(u.userID) === Number(empresaID));
 		// Verificação do tipoConta do user, se tiver lá como empresa, pode postar
 		if (!empresa) {
-			return res.status(401).json({error: "Você não pode postar empregos!"});
+			return res.status(404).json({error: "Empresa não encontrada!"});
 		};
+
+		if (empresa.tipoConta !== "empresa"){
+			return res.status(403).json({error: "Você não pode postar empregos!"})
+		}
 		// Pegamos a requisição e colocamos como variável
 		const {
-		titulo,
-		descricao,
-		area,
-		tipoContrato,
-		tipoTrabalho,
-		mediaSalario,
-		localizacao,
-		requisitos,
-		beneficios
-	} = req.body;
+			titulo,
+			descricao,
+			area,
+			tipoContrato,
+			tipoTrabalho,
+			mediaSalario,
+			localizacao,
+			requisitos,
+			beneficios
+		} = req.body;
 		
 		// Validações básicas
         if (!titulo || titulo.trim() === '') {
