@@ -1,21 +1,76 @@
 [
-	{
-		"portfolioID": 1729000000000,
-		"usuarioID": 1759967977156,
-		"usuarioNome": "Gustavo Cagega",
-		"titulo": "E-commerce Full Stack",
-		"descricao": "Sistema completo de e-commerce...",
-		"tecnologias": [
-			"React",
-			"Node.js",
-			"Express",
-			"MongoDB"
-		],
-		"categoria": "Web Development",
-		"linkDemo": "https://projeto.vercel.app",
-		"linkGithub": "https://github.com/user/projeto",
-		"linkOutros": [],
-		"dataCriacao": "2025-10-14T18:30:00Z",
-		"curtidas": 0
-	}
+  {
+    "portfolioID": 31760829508337,
+    "usuarioID": 1759967977156,
+    "usuarioNome": "Gustavo Cagega",
+    "titulo": "E-commerce Full Stack",
+    "descricao": "Sistema completo de e-commerce",
+    "tecnologias": [
+      "React",
+      "Node.js"
+    ],
+    "categoria": "Web Development",
+    "linkGithub": "https://github.com/gpc186/ecommerce",
+    "linkDemo": null,
+    "linkOutros": [],
+    "dataCriacao": "2025-10-18T23:18:28.337Z",
+    "curtidas": 0
+  },
+  {
+    "portfolioID": 31760829911514,
+    "usuarioID": 1759967977156,
+    "usuarioNome": "Gustavo Cagega",
+    "titulo": "API REST para Gest�o de Tarefas",
+    "descricao": "API completa com autentica��o JWT e CRUD de tarefas",
+    "tecnologias": [
+      "Node.js",
+      "Express",
+      "PostgreSQL"
+    ],
+    "categoria": "Backend",
+    "linkGithub": "https://github.com/gpc186/task-api",
+    "linkDemo": null,
+    "linkOutros": [],
+    "dataCriacao": "2025-10-18T23:25:11.514Z",
+    "curtidas": 0
+  },
+  {
+    "portfolioID": 31760829918571,
+    "usuarioID": 1759967977156,
+    "usuarioNome": "Gustavo Cagega",
+    "titulo": "App de Delivery",
+    "descricao": "Aplicativo mobile para delivery de comida com rastreamento em tempo real",
+    "tecnologias": [
+      "React Native",
+      "Firebase",
+      "Google Maps API"
+    ],
+    "categoria": "Mobile Development",
+    "linkGithub": "https://github.com/gpc186/delivery-app",
+    "linkDemo": "https://expo.dev/@usuario/delivery-app",
+    "linkOutros": [],
+    "dataCriacao": "2025-10-18T23:25:18.571Z",
+    "curtidas": 0
+  },
+  {
+    "portfolioID": 31760832207741,
+    "usuarioID": 1759967977156,
+    "usuarioNome": "Gustavo Cagega",
+    "titulo": "An�lise de Dados de Vendas",
+    "descricao": "Dashboard interativo com an�lise preditiva de vendas usando machine learning",
+    "tecnologias": [
+      "Python",
+      "Pandas",
+      "Scikit-learn",
+      "Plotly"
+    ],
+    "categoria": "Data Science",
+    "linkGithub": "https://github.com/gpc186/sales-analysis",
+    "linkDemo": null,
+    "linkOutros": [
+      "https://medium.com/@usuario/artigo-sobre-o-projeto"
+    ],
+    "dataCriacao": "2025-10-19T00:03:27.741Z",
+    "curtidas": 0
+  }
 ]

@@ -3,7 +3,7 @@ const router = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
 
-const portfolioPath = path.join(__dirname, '..', 'data', 'portfolio.json');
+const portfolioPath = path.join(__dirname, '..', 'data', 'portfolios.json');
 const usersPath = path.join(__dirname, '..', 'data', 'users.json');
 
 const { criarIDPortfolio } = require('./utils/geradorID');
@@ -21,64 +21,43 @@ router.post('/', async (req, res) => {
 		const userData = await fs.readFile(usersPath, 'utf8')
 		const users = JSON.parse(userData);
 
-		const userLogado = users.find(u => u.userID === userID);
+		const userLogado = users.find(u => Number(u.userID) === userID);
 
 		if(!userLogado){
 			return res.status(404).json({error: "usuário não encontrado!"});
 		};
+
 		if(userLogado.tipoConta !== "usuario"){
 			return res.status(403).json({error: "Você não pode postar portfólios!"});
 		};
 		// Aqui ele pega todas as informações do body
 		const {
-			usuarioID,
-			usuarioNome,
 			titulo,
 			descricao,
 			tecnologias,
 			categoria,
 			linkDemo,
 			linkGithub,
-			linkOutros,
-			dataCriacao,
-			curtidas
+			linkOutros
 		} = req.body;
 		// Verificação simples dos dados
-		if (!portfolioID) {
-			res.status(400).json({ error: "Faltando informações" });
-		};
-		if (!usuarioID) {
-			res.status(400).json({ error: "Faltando informações" });
-		};
-		if (!usuarioNome) {
-			res.status(400).json({ error: "Faltando informações" });
-		};
 		if (!titulo || titulo.trim() === '') {
-			res.status(400).json({ error: "Faltando informações" });
+			return res.status(400).json({ error: "Faltando titulo!" });
 		};
 		if (!descricao || descricao.trim() === '') {
-			res.status(400).json({ error: "Faltando informações" });
+			return res.status(400).json({ error: "Faltando Descrição!" });
 		};
-		if (!tecnologias || tecnologias.trim() === '') {
-			res.status(400).json({ error: "Faltando informações" });
+		if (!tecnologias) {
+			return res.status(400).json({ error: "Faltando tecnologias!" });
 		};
-		if (!categoria || categoria.trim() === '') {
-			res.status(400).json({ error: "Faltando informações" });
+		if (!categoria) {
+			return res.status(400).json({ error: "Faltando Categoria!" });
 		};
-		if (!linkDemo || linkDemo.trim() === '') {
-			res.status(400).json({ error: "Faltando informações" });
-		};
-		if (!linkGithub || linkGithub.trim() === '') {
-			res.status(400).json({ error: "Faltando informações" });
+		if (!linkGithub) {
+			return res.status(400).json({ error: "Faltando link para o github!" });
 		};
 		if (!linkGithub.includes('github.com')) {
 			return res.status(400).json({ error: "Link precisa ser do GitHub!" });
-		}
-		if (!dataCriacao) {
-			res.status(400).json({ error: "Faltando informações" });
-		};
-		if (!curtidas) {
-			res.status(400).json({ error: "Faltando informações" });
 		};
 
 		const data = await fs.readFile(portfolioPath, 'utf8');
@@ -88,23 +67,90 @@ router.post('/', async (req, res) => {
 
 		const novoPortfolio = {
 			portfolioID,
-			usuarioID,
-			usuarioNome,
-			titulo,
-			descricao,
+			usuarioID: userID,
+			usuarioNome: userLogado.dados.nome,
+			titulo: titulo.trim(),
+			descricao: descricao.trim(),
 			tecnologias,
-			categoria,
-			linkDemo,
-			linkGithub,
-			linkOutros,
-			dataCriacao,
-			curtidas
+			categoria: categoria.trim(),
+			linkGithub: linkGithub.trim(),
+			linkDemo: linkDemo ? linkDemo.trim() : null,
+			linkOutros: linkOutros || [],
+			dataCriacao: new Date().toISOString(),
+			curtidas: 0
 		};
 
 		portfolios.push(novoPortfolio);
 
+		await fs.writeFile(portfolioPath, JSON.stringify(portfolios, null, 2));
+
+		res.status(200).json({ok: true, portfolio: novoPortfolio});
 
 	} catch (error) {
+		console.error(error);
+		return res.status(500).json({error: error.message});
+	};
+});
 
+router.get('/', async (req, res)=>{
+
+	const userID = Number(req.headers['user-id']);
+
+	if(!userID){
+		return res.status(401).json({error: "Você precisa estar logado primeiro"});
+	};
+
+	try {
+		const data = await fs.readFile(portfolioPath, 'utf8');
+		const portfolios = JSON.parse(data);
+
+		portfolios.sort((a, b) =>
+			new Date(a.dataCriacao) - new Date(b.dataCriacao)
+		);
+
+		res.status(200).json({
+			ok: true,
+			total: portfolios.length,
+			portfolios: portfolios
+		});
+
+	} catch (error) {
+		return res.status(500).json({error: error.message})
 	}
 })
+
+router.delete('/:id', async (req, res)=>{
+	const userID = Number(req.headers['user-id']);
+	const portfolioID = req.params.id
+
+	if(!userID){
+		return res.status(401).json({error: "Por favor logue antes!"})
+	}
+	 try {
+		const data = await fs.readFile(portfolioPath, 'utf8')
+		const portfolios = JSON.parse(data)
+
+		const portfolioIndex = portfolios.findIndex(p => Number(p.portfolioID) === Number(portfolioID))
+
+		if(portfolioIndex === -1){
+			return res.status(404).json({error: "Portfolio não encontrado!"})
+		}
+
+		const portfolio = portfolios[portfolioIndex];
+
+		if (Number(portfolio.usuarioID) !== userID){
+			return res.status(403).json({error: "Você não pode deletar esse portfiolio!"})
+		}
+		
+		portfolios.splice(portfolioIndex, 1);
+
+		await fs.writeFile(portfolioPath, JSON.stringify(portfolios, null, 2))
+
+		res.status(200).json({ok: true, mensagem: `Portfolio com id: ${portfolio.portfolioID} deletado com sucesso!`})
+
+	 } catch (error) {
+		return res.status(500).json({error: error.message})
+	 }
+})
+
+module.exports = router

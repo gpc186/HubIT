@@ -121,4 +121,42 @@ router.get('/', async (req, res)=>{
 
 });
 
+// DELETE /api/emprego/:id
+router.delete('/:id', async (req, res) => {
+    const empregoID = Number(req.params.id);
+    const empresaID = Number(req.headers['user-id']);
+    
+    if (!empresaID) {
+        return res.status(401).json({error: "Faça login primeiro!"});
+    }
+    
+    try {
+        const data = await fs.readFile(empregosPath, 'utf8');
+        const empregos = JSON.parse(data);
+        
+        const empregoIndex = empregos.findIndex(e => Number(e.empregoID) === Number(empregoID));
+        console.log(empregoIndex);
+		
+        if (empregoIndex === -1) {
+            return res.status(404).json({error: "Emprego não encontrado"});
+        }
+        
+        const emprego = empregos[empregoIndex];
+        
+        if (Number(emprego.empresaID) !== empresaID) {
+            return res.status(403).json({error: "Você não pode deletar esta vaga!"});
+        }
+        
+        empregos.splice(empregoIndex, 1);
+
+        await fs.writeFile(empregosPath, JSON.stringify(empregos, null, 2));
+        
+        res.status(200).json({ok: true, mensagem: `Vaga ${empregoID} deletada com sucesso!`});
+        
+    } catch (error) {
+        console.error('Erro no DELETE emprego:', error);
+        return res.status(500).json({error: error.message});
+    }
+});
+
 module.exports = router;

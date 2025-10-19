@@ -8,6 +8,7 @@ const registrarRoute = require('./middlewares/registrarUsuario');
 const loginRoute = require('./middlewares/logarUsuario');
 const userData = require('./middlewares/usuario');
 const empregosRoute = require('./middlewares/emprego');
+const portfoliosRoute = require('./middlewares/portfolio');
 
 // Ativa requisitos para funcionamento de json e path
 app.use(express.static(path.join(__dirname, 'public')));
@@ -18,6 +19,7 @@ app.use('/api/registrar', registrarRoute);
 app.use('/api/login', loginRoute);
 app.use('/api/usuario', userData);
 app.use('/api/emprego', empregosRoute);
+app.use('/api/portfolio', portfoliosRoute);
 
 // Página Inicial que pega login.html
 app.get('/', (req, res)=>{
