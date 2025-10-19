@@ -23,12 +23,12 @@ router.post('/', async (req, res) => {
 
 		const userLogado = users.find(u => Number(u.userID) === userID);
 
-		if(!userLogado){
-			return res.status(404).json({error: "usuário não encontrado!"});
+		if (!userLogado) {
+			return res.status(404).json({ error: "usuário não encontrado!" });
 		};
 
-		if(userLogado.tipoConta !== "usuario"){
-			return res.status(403).json({error: "Você não pode postar portfólios!"});
+		if (userLogado.tipoConta !== "usuario") {
+			return res.status(403).json({ error: "Você não pode postar portfólios!" });
 		};
 		// Aqui ele pega todas as informações do body
 		const {
@@ -84,20 +84,20 @@ router.post('/', async (req, res) => {
 
 		await fs.writeFile(portfolioPath, JSON.stringify(portfolios, null, 2));
 
-		res.status(200).json({ok: true, portfolio: novoPortfolio});
+		res.status(200).json({ ok: true, portfolio: novoPortfolio });
 
 	} catch (error) {
 		console.error(error);
-		return res.status(500).json({error: error.message});
+		return res.status(500).json({ error: error.message });
 	};
 });
 
-router.get('/', async (req, res)=>{
+router.get('/', async (req, res) => {
 
 	const userID = Number(req.headers['user-id']);
 
-	if(!userID){
-		return res.status(401).json({error: "Você precisa estar logado primeiro"});
+	if (!userID) {
+		return res.status(401).json({ error: "Você precisa estar logado primeiro" });
 	};
 
 	try {
@@ -115,42 +115,72 @@ router.get('/', async (req, res)=>{
 		});
 
 	} catch (error) {
-		return res.status(500).json({error: error.message})
+		return res.status(500).json({ error: error.message })
 	}
 })
 
-router.delete('/:id', async (req, res)=>{
+router.delete('/:id', async (req, res) => {
 	const userID = Number(req.headers['user-id']);
 	const portfolioID = req.params.id
 
-	if(!userID){
-		return res.status(401).json({error: "Por favor logue antes!"})
+	if (!userID) {
+		return res.status(401).json({ error: "Por favor logue antes!" })
 	}
-	 try {
+	try {
 		const data = await fs.readFile(portfolioPath, 'utf8')
 		const portfolios = JSON.parse(data)
 
 		const portfolioIndex = portfolios.findIndex(p => Number(p.portfolioID) === Number(portfolioID))
 
-		if(portfolioIndex === -1){
-			return res.status(404).json({error: "Portfolio não encontrado!"})
+		if (portfolioIndex === -1) {
+			return res.status(404).json({ error: "Portfolio não encontrado!" })
 		}
 
 		const portfolio = portfolios[portfolioIndex];
 
-		if (Number(portfolio.usuarioID) !== userID){
-			return res.status(403).json({error: "Você não pode deletar esse portfiolio!"})
+		if (Number(portfolio.usuarioID) !== userID) {
+			return res.status(403).json({ error: "Você não pode deletar esse portfolio!" })
 		}
-		
+
 		portfolios.splice(portfolioIndex, 1);
 
 		await fs.writeFile(portfolioPath, JSON.stringify(portfolios, null, 2))
 
-		res.status(200).json({ok: true, mensagem: `Portfolio com id: ${portfolio.portfolioID} deletado com sucesso!`})
+		res.status(200).json({ ok: true, mensagem: `Portfolio com id: ${portfolio.portfolioID} deletado com sucesso!` })
 
-	 } catch (error) {
-		return res.status(500).json({error: error.message})
-	 }
+	} catch (error) {
+		return res.status(500).json({ error: error.message })
+	}
+})
+
+router.post('/:id/curtir', async (req, res) => {
+	const userID = req.headers['user-id'];
+	const portfolioPost = Number(req.params.id);
+
+	if (!userID) {
+		return res.status(401).json({ error: "Por favor logue antes!" })
+	}
+
+	try {
+		const data = await fs.readFile(portfolioPath, 'utf8')
+		const portfolios = JSON.parse(data);
+
+		const portfolioIndex = portfolios.findIndex(p => Number(p.portfolioID) === portfolioPost)
+
+		if (portfolioIndex === -1) {
+			return res.status(404).json({ error: "Portfólio não encontrado!" })
+		}
+
+		portfolios[portfolioIndex].curtidas += 1;
+
+		await fs.writeFile(portfolioPath, JSON.stringify(portfolios, null, 2))
+
+		res.status(200).json({ ok: true, portfolio: { portfolioID: portfolios[portfolioIndex].portfolioID, curtidas: portfolios[portfolioIndex].curtidas } });
+
+	} catch (error) {
+		console.error(error);
+		return res.status(500).json({ error: error.message })
+	}
 })
 
 module.exports = router
