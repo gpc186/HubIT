@@ -70,7 +70,7 @@ function renderizarPropostas(propostas) {
                                 </div>
                                 <div>
                                     <h6 class="mb-1 fw-semibold">${proposta.empresa}</h6>
-                                    <p class="mb-0 text-muted small">${proposta.localizacao} • 500+ funcionários</p>
+                                    <p class="mb-0 text-muted small">${proposta.localizacao} • ${proposta.qtdFuncionario} funcionários</p>
                                     <p class="mb-0 text-muted small">${proposta.area} </p>
                                 </div>
                             </div>
@@ -117,6 +117,14 @@ function renderizarPropostas(propostas) {
                                 </li>
                             </ul>
 
+                            <h6 class="fw-semibold mb-2" style="font-size: 14px;">Diferenciais:</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <span class="text-primary fw-bold me-2">•</span>
+                                    ${proposta.diferenciais}  
+                                </li>
+                            </ul>
+
                             <h6 class="fw-semibold mb-2" style="font-size: 14px;">Beneficios:</h6>
                             <ul class="list-unstyled">
                                 <li class="mb-2">
@@ -124,6 +132,7 @@ function renderizarPropostas(propostas) {
                                     ${proposta.beneficios}  
                                 </li>
                             </ul>
+
                         </div>
 
                         <hr>
@@ -230,7 +239,9 @@ async function carregarPagina() {
             beneficios: emprego.beneficios || "Sem beneficios",
             tipoTrabalho: emprego.tipoTrabalho || "O contratador não definiu o tipo de trabalho",
             tipoContrato: emprego.tipoContrato || "O contratador não definiu o tipo de contrato",
-            area: emprego.area || ""
+            area: emprego.area || "",
+            diferenciais: emprego.diferenciais || "",
+            qtdFuncionario: `${emprego.qtdFuncionario}+` || "Nenhum funcionário"
         }));
 
         // Renderizar as propostas
