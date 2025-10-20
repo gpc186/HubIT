@@ -65,8 +65,8 @@ function renderizarPropostas(propostas) {
                         <!-- Informações da Empresa -->
                         <div class="mb-4">
                             <div class="d-flex align-items-center gap-3 mb-3">
-                                <div class="bg-secondary bg-opacity-25 rounded d-flex align-items-center justify-content-center" style="width: 56px; height: 56px; font-size: 24px;">
-                                    🏢
+                                <div class="modal-icon bg-secondary bg-opacity-25 rounded d-flex align-items-center justify-content-center" style="width: 56px; height: 56px; font-size: 24px;">
+                                    <img src="${proposta.imgEmpresa}"> </img>
                                 </div>
                                 <div>
                                     <h6 class="mb-1 fw-semibold">${proposta.empresa}</h6>

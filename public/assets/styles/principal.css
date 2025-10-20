@@ -1255,3 +1255,14 @@ footer{
 
     border-radius: 100%;
 }
+
+.modal-icon{
+    object-fit: cover;
+}
+
+.modal-icon img{
+    width: 100%;
+    height: 100%;
+
+    border-radius: 100%;
+}
