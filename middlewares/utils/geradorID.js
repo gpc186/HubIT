@@ -13,16 +13,22 @@ function criarIDPortfolio(){
 	return parseInt('3' + Date.now());
 };
 
+function criarIDCurriculo() {
+	return parseInt('4' + Date.now());
+};
+
 function verficarTipoID(ID) {
 	const idString = ID.toString();
 
 	if(idString.startsWith('21')) return 'emprego';
-	if(idString.startsWith('31')) return 'portfolio'
+	if(idString.startsWith('31')) return 'portfolio';
+	if(idString.startsWith('41')) return 'curriculo';
 }
 
 module.exports = {
     criarIDUsuario,
     criarIDEmprego,
     criarIDPortfolio,
+	criarIDCurriculo,
     verficarTipoID
 };
