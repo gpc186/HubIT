@@ -2,22 +2,35 @@
   {
     "empregoID": 21760557376155,
     "empresaID": "1760466609594",
-	  "empresaNome": "Bradesco",
-    "titulo": "Mexedor de banco de dados",
-    "descricao": "Buscamos desenvolvedor backend experiente",
+    "empresaNome": "Bradesco",
+    "titulo": "Engenheiro de Software Backend",
+    "descricao": "Estamos em busca de um desenvolvedor backend experiente para integrar nosso time de tecnologia. Atuará no desenvolvimento e manutenção de APIs e microsserviços, com foco em performance e escalabilidade.",
     "area": "Backend",
+    "nivel": "Pleno",
     "tipoContrato": "CLT",
     "tipoTrabalho": "Remoto",
+    "cargaHoraria": "40h semanais",
     "mediaSalario": 5000,
     "localizacao": "São Paulo, SP",
     "requisitos": [
       "Node.js",
-      "Express",
-      "MySQL"
+      "Express.js",
+      "MySQL",
+      "Docker",
+      "Git",
+      "Arquitetura de Microsserviços"
+    ],
+    "diferenciais": [
+      "Experiência com AWS",
+      "Conhecimento em mensageria (RabbitMQ, Kafka)"
     ],
     "beneficios": [
       "Vale Refeição",
-      "Plano de Saúde"
+      "Vale Alimentação",
+      "Plano de Saúde",
+      "Plano Odontológico",
+      "Seguro de Vida",
+      "Auxílio Home Office"
     ],
     "dataCriacao": "2025-10-15T19:42:56.155Z",
     "status": "ativo"
@@ -25,22 +38,33 @@
   {
     "empregoID": 21760557856155,
     "empresaID": "1760463309594",
-	  "empresaNome": "Itau",
-    "titulo": "Desenvolvedor Backend",
-    "descricao": "Buscamos desenvolvedor Junior",
+    "empresaNome": "Itaú",
+    "titulo": "Desenvolvedor Backend Júnior",
+    "descricao": "Procuramos um desenvolvedor backend júnior para atuar em projetos internos. O profissional participará da construção de serviços REST, integração com APIs e suporte à equipe de desenvolvimento.",
     "area": "Backend",
+    "nivel": "Júnior",
     "tipoContrato": "CLT",
     "tipoTrabalho": "Presencial",
+    "cargaHoraria": "40h semanais",
     "mediaSalario": 7000,
     "localizacao": "São Paulo, SP",
     "requisitos": [
       "Node.js",
       "Express",
-      "MySQL"
+      "MySQL",
+      "Noções de Git",
+      "Conhecimento básico de Docker"
+    ],
+    "diferenciais": [
+      "Projetos pessoais no GitHub",
+      "Participação em hackathons"
     ],
     "beneficios": [
       "Vale Refeição",
-      "Plano de Saúde"
+      "Vale Transporte",
+      "Plano de Saúde",
+      "Programa de Mentoria",
+      "Day Off no Aniversário"
     ],
     "dataCriacao": "2025-10-15T19:42:56.155Z",
     "status": "ativo"
@@ -48,68 +72,35 @@
   {
     "empregoID": 217652557376155,
     "empresaID": "1760466229594",
-	  "empresaNome": "Amazon",
-    "titulo": "Analista de dados",
-    "descricao": "Buscamos desenvolvedor backend experiente",
-    "area": "Backend",
+    "empresaNome": "Amazon",
+    "titulo": "Analista de Dados",
+    "descricao": "Estamos contratando um Analista de Dados para atuar com análise de grandes volumes de dados, construção de dashboards e apoio à tomada de decisão baseada em dados.",
+    "area": "Data / Backend",
+    "nivel": "Pleno",
     "tipoContrato": "CLT",
     "tipoTrabalho": "Remoto",
-    "mediaSalario": 3000,
+    "cargaHoraria": "40h semanais",
+    "mediaSalario": 9000,
     "localizacao": "São Paulo, SP",
     "requisitos": [
+      "SQL avançado",
+      "Python",
       "Node.js",
-      "Express",
-      "MySQL"
+      "MySQL",
+      "Power BI ou Tableau",
+      "Git"
+    ],
+    "diferenciais": [
+      "Experiência com AWS (Redshift, Athena)",
+      "Conhecimento em Big Data"
     ],
     "beneficios": [
       "Vale Refeição",
-      "Plano de Saúde"
-    ],
-    "dataCriacao": "2025-10-15T19:42:56.155Z",
-    "status": "ativo"
-  },
-  {
-    "empregoID": 217652557376155,
-    "empresaID": "1760466229594",
-	  "empresaNome": "Amazon",
-    "titulo": "Analista de dados",
-    "descricao": "Buscamos desenvolvedor backend experiente",
-    "area": "Backend",
-    "tipoContrato": "CLT",
-    "tipoTrabalho": "Remoto",
-    "mediaSalario": 3000,
-    "localizacao": "São Paulo, SP",
-    "requisitos": [
-      "Node.js",
-      "Express",
-      "MySQL"
-    ],
-    "beneficios": [
-      "Vale Refeição",
-      "Plano de Saúde"
-    ],
-    "dataCriacao": "2025-10-15T19:42:56.155Z",
-    "status": "ativo"
-  },
-  {
-    "empregoID": 217652557376155,
-    "empresaID": "1760466229594",
-	  "empresaNome": "Amazon",
-    "titulo": "Analista de dados",
-    "descricao": "Buscamos desenvolvedor backend experiente",
-    "area": "Backend",
-    "tipoContrato": "CLT",
-    "tipoTrabalho": "Remoto",
-    "mediaSalario": 3000,
-    "localizacao": "São Paulo, SP",
-    "requisitos": [
-      "Node.js",
-      "Express",
-      "MySQL"
-    ],
-    "beneficios": [
-      "Vale Refeição",
-      "Plano de Saúde"
+      "Vale Alimentação",
+      "Plano de Saúde",
+      "Plano Odontológico",
+      "Gympass",
+      "Auxílio Educação"
     ],
     "dataCriacao": "2025-10-15T19:42:56.155Z",
     "status": "ativo"
