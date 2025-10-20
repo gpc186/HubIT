@@ -2,6 +2,7 @@
   {
     "empregoID": 21760557376155,
     "empresaID": "1760466609594",
+    "imgEmpresa": "https://miro.medium.com/max/2400/1*fVjiPN2BfTEulmJaVhq6kA.png",
     "empresaNome": "Bradesco",
     "qtdFuncionario": 4000,
     "titulo": "Engenheiro de Software Backend",
@@ -39,6 +40,7 @@
   {
     "empregoID": 21760557856155,
     "empresaID": "1760463309594",
+    "imgEmpresa": "https://cdn.brandfetch.io/idAciuyyPp/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1743656995134",
     "empresaNome": "Itaú",
     "qtdFuncionario": 6000,
     "titulo": "Desenvolvedor Backend Júnior",
@@ -74,6 +76,7 @@
   {
     "empregoID": 217652557376155,
     "empresaID": "1760466229594",
+    "imgEmpresa": "https://tse1.mm.bing.net/th/id/OIP.dLl9UyA6y1GTydI-npnoygHaHv?rs=1&pid=ImgDetMain&o=7&rm=3",
     "empresaNome": "Amazon",
     "qtdFuncionario": 18000,
     "titulo": "Analista de Dados",

@@ -25,7 +25,7 @@ function renderizarPropostas(propostas) {
         
         postCard.innerHTML = `
             <div class="post-header">
-                <div class="post-avatar"></div>
+                <div class="post-avatar"><img src="${proposta.imgEmpresa}"> </img></div>
                 <div class="post-user-info">
                     <div class="post-user-name">${proposta.empresa}</div>
                     <div class="post-user-headline">${proposta.vaga}</div>
@@ -241,7 +241,8 @@ async function carregarPagina() {
             tipoContrato: emprego.tipoContrato || "O contratador não definiu o tipo de contrato",
             area: emprego.area || "",
             diferenciais: emprego.diferenciais || "",
-            qtdFuncionario: `${emprego.qtdFuncionario}+` || "Nenhum funcionário"
+            qtdFuncionario: `${emprego.qtdFuncionario}+` || "Nenhum funcionário",
+            imgEmpresa: emprego.imgEmpresa || ""
         }));
 
         // Renderizar as propostas
