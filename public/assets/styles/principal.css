@@ -1174,7 +1174,10 @@ footer{
 
         @media (max-width: 1024px) {
             main {
-                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column !important;
+                justify-content: center;
+                align-items: center;
             }
 
             .sidebar-left,
@@ -1265,4 +1268,37 @@ footer{
     height: 100%;
 
     border-radius: 100%;
+}
+
+@media (max-width: 1024px) {
+    .main{
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    .feed{
+        width: 80%;
+    }
+    
+    .sidebar-left{
+        width: 80% !important;
+        display: block;
+        position: static !important;
+    }
+
+    .profile-card{
+        position: static !important;
+    }
+}
+
+@media (max-width: 313px) {
+    .post-header{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .post-actions{
+        display: flex;
+        flex-direction: column;
+    }
 }

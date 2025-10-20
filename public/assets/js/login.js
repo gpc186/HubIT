@@ -1,3 +1,16 @@
+
+window.onload = async function () {
+    await loginAuto();
+};
+
+function loginAuto(){
+	const userID = localStorage.getItem('userID');
+
+	if (userID){
+		location.href = "/home"
+	}
+}
+
 function registrarNovoUsuario() {
 	// Criação de constantes de input e radio
 	const email = document.getElementById('emailNewUser').value;
@@ -115,3 +128,6 @@ function fazerLogin() {
         alert('Erro ao carregar perfil');
 	})
 };
+
+
+

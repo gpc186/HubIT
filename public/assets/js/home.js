@@ -256,3 +256,12 @@ async function carregarPagina() {
     console.log(usuarioAtual.email);
     console.log(usuarioAtual.tipoConta);
 }
+
+function sair() {
+    // Faz logout
+    localStorage.clear();
+    alert('Você saiu da conta');
+
+    // Volta para página inicial (root)
+    window.location.href = '/';
+}

@@ -19,7 +19,7 @@
             <div class="container-fluid">
                 <a href="login.html" target="_self">
                     <div class="logo">
-                        <img src="./assets/img/svg/Hubit_svg_logo.svg" alt="">
+                        <img id="logo-animation" src="./assets/img/svg/Hubit_svg_logo.svg" alt="">
                     </div>
                 </a>
                 <a href="" class="d-lg-none ms-auto">
@@ -28,8 +28,8 @@
                     </div>
                 </a>
                 <button class="navbar-toggler ms-4 me-4" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navigation collapse navbar-collapse ms-auto mb-2 mb-lg-0" id="navbarSupportedContent">
@@ -62,7 +62,8 @@
             <div class="row">
                 <div class="col-md-6 col-12 main-block-1">
                     <div class="text-login-block">
-                        <h1><span id="text-alt" style="color: #2F6D88; font-family: Codec;">Expanda</span> suas <br> oportunidades</h1>
+                        <h1><span id="text-alt" style="color: #2F6D88; font-family: Codec;">Expanda</span> suas <br>
+                            oportunidades</h1>
                         <h2>Vagas de TI</h2>
                     </div>
                     <div class="login-block">
@@ -73,11 +74,11 @@
                                 <input class="checkbox" type="checkbox" name="checkbox" id="checkbox">
                                 <label for="checkbox"> Lembrar de mim</label>
                             </div>
-                
+
                             <a type="button" class="forgot" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Primeira vez aqui?
                             </a>
-                
+
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -89,27 +90,32 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="register-modal">
-                                                <h1 style="margin: 0; font-size: 17pt;"><span style="color:#30729e">Crie</span> sua conta Hubit</h1>
+                                                <h1 style="margin: 0; font-size: 17pt;"><span
+                                                        style="color:#30729e">Crie</span> sua conta Hubit</h1>
                                                 <h2>Insira seus dados</h2>
                                                 <input type="email" name="email" id="emailNewUser" placeholder="E-mail">
-                                                <input type="password" name="passwd" id="passwdNewUser" placeholder="Senha">
+                                                <input type="password" name="passwd" id="passwdNewUser"
+                                                    placeholder="Senha">
                                             </div>
                                             <h3>Qual é o tipo da sua conta?</h2>
-                                            <div class="selection-modal">
-                                                <div class="select-radio">
-                                                    <input class="radio-modal" type="radio" name="option" id="usuario">
-                                                    <label for="funcionarioUser">Funcionário</label>
+                                                <div class="selection-modal">
+                                                    <div class="select-radio">
+                                                        <input class="radio-modal" type="radio" name="option"
+                                                            id="usuario">
+                                                        <label for="funcionarioUser">Funcionário</label>
+                                                    </div>
+                                                    <div class="select-radio">
+                                                        <input class="radio-modal" type="radio" name="option"
+                                                            id="empresa">
+                                                        <label for="empresa">Empresa</label>
+                                                    </div>
                                                 </div>
-                                                <div class="select-radio">
-                                                    <input class="radio-modal" type="radio" name="option" id="empresa">
-                                                    <label for="empresa">Empresa</label>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Fechar</button>
-                                            <button type="button" class="login-block-enter" onclick="registrarNovoUsuario()"
+                                            <button type="button" class="login-block-enter"
+                                                onclick="registrarNovoUsuario()"
                                                 style="width: 30%; height: 40px;">Registrar</button>
                                         </div>
                                     </div>
@@ -121,9 +127,10 @@
                                 Entrar
                             </div>
                         </a>
-                        <h3>Ao continuar, você reconhece a <br> <a style="color: #30729e; text-decoration: none;" href="">
-                        Política de Privacidade
-                        </a>da Hubit</h3>
+                        <h3>Ao continuar, você reconhece a <br> <a style="color: #30729e; text-decoration: none;"
+                                href="">
+                                Política de Privacidade
+                            </a>da Hubit</h3>
                     </div>
                 </div>
                 <div class="col-md-6 col-12 main-block-2">
@@ -149,12 +156,13 @@
                         <div class="section-block-content-2">
                             <h1>Currículo</h1>
                             <hr>
-                            <p>Crie o seu currículo na hubit e use para <span style="color: #2F6D88;">candidatar-se</span>
+                            <p>Crie o seu currículo na hubit e use para <span
+                                    style="color: #2F6D88;">candidatar-se</span>
                                 para vagas de empresas </p>
-                                <br>
+                            <br>
                             <h1>Feed de vagas</h1>
                             <hr>
-                            <p>Explore por um feed de vagas,  com inúmeras <span style="color: #2F6D88;">oportunidades de 
+                            <p>Explore por um feed de vagas, com inúmeras <span style="color: #2F6D88;">oportunidades de
                                     trabalho</span>, entre elas, Estágios, CLT ou PJ</p>
                         </div>
                     </div>
@@ -165,7 +173,8 @@
         <section class="section-steps">
             <div class="about-steps">
                 <h1>Hubit em 3 etapas</h1>
-                <h2>Poucos passos do seu próximo emprego. <br>Em 3 passos o seu currículo estará no mercado de trabalho</h2>
+                <h2>Poucos passos do seu próximo emprego. <br>Em 3 passos o seu currículo estará no mercado de trabalho
+                </h2>
 
                 <div class="about-content-steps">
                     <div class="section-block-1-steps">
@@ -189,8 +198,9 @@
                         <div class="section-block-content-2">
                             <h1>O que são os <span style="color: #30729e;">Slots</span>?</h1>
                             <hr>
-                            <p>Slots são espaços de currículos configurados por você, onde podem ser utilizados para se candidatar para vagas especificas.</p>
-                                <br>
+                            <p>Slots são espaços de currículos configurados por você, onde podem ser utilizados para se
+                                candidatar para vagas especificas.</p>
+                            <br>
                             <h1><span style="color: #30729e;">Formato desejado</span> pelas empresas</h1>
                             <hr>
                             <p>Aqui seu currículo já sai do jeitinho que as grandes empresas querem.</p>
@@ -219,11 +229,11 @@
                             <hr>
                             <h2>Standard <span style="color: #2F6D88;">bits</span></h2>
                             <h3>Grátis</h3>
-                            
+
                             <div class="plan-a-btn">
                                 Começar hoje
                             </div>
-                            
+
                             <br>
                             <div class="plan-content">
                                 <ul>
@@ -286,7 +296,7 @@
                 </div>
             </div>
         </div>
-        
+
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -294,6 +304,31 @@
         crossorigin="anonymous"></script>
     <script src="/assets/js/login.js"></script>
     <script>
+        const logoImg = document.getElementById('logo-animation');
+        let animating = false;
+
+        logoImg.addEventListener('mouseover', function () {
+            if (!animating) {
+                animating = true;
+                // Adiciona timestamp para forçar o navegador a recarregar o GIF do início
+                logoImg.src = './assets/img/video/hubit_animated.gif?' + new Date().getTime();
+
+                // Volta para SVG após a duração do GIF
+                setTimeout(function () {
+                    // Primeiro esconde a imagem
+                    logoImg.style.opacity = '0';
+
+                    // Troca para SVG após um pequeno fade
+                    setTimeout(function () {
+                        logoImg.src = './assets/img/svg/Hubit_svg_logo.svg';
+                        logoImg.style.opacity = '1';
+                        animating = false;
+                    }, 100); // 100ms de delay para suavizar a transição
+
+                }, 2500); // Ajuste esse tempo para corresponder exatamente à duração do seu GIF
+            }
+        });
+
         function focar() {
             document.getElementById('email').focus();
         }

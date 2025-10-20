@@ -820,3 +820,7 @@ hr{
     border: 2px #4e646d solid !important;
     border-radius: 100px !important;
 }
+
+#logo-animation {
+    transition: opacity 0.2s ease-in-out;
+}
