@@ -92,5 +92,20 @@
     "tipoConta": "usuario",
     "userID": 1760640562430,
     "dados": {}
+  },
+  {
+    "email": "sissaklarosk@gmail.com",
+    "passwd": "Abc123!!",
+    "tipoConta": "usuario",
+    "userID": 1760980124702,
+    "dados": {
+      "nome": "Larissa Otomo Klarosk",
+      "telefone": "11963694967",
+      "dataNasc": "2008-12-09",
+      "localizacao": "SBC, SP",
+      "areaAtuacao": "UI/UX Design",
+      "nivelExperiencia": "Estudante",
+      "biografia": "sou eu "
+    }
   }
 ]
