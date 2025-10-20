@@ -107,5 +107,26 @@
       "nivelExperiencia": "Estudante",
       "biografia": "sou eu "
     }
+  },
+  {
+    "email": "guigui@gmail.com",
+    "passwd": "Barney1234?",
+    "tipoConta": "usuario",
+    "userID": 1760990264526,
+    "dados": {
+      "nome": "tbhhbhuj jiujyh",
+      "telefone": "1122233341",
+      "dataNasc": "2007-07-18",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Fullstack",
+      "nivelExperiencia": "Estudante"
+    }
+  },
+  {
+    "email": ",.",
+    "passwd": "Q12345678q_",
+    "tipoConta": "usuario",
+    "userID": 1760991261190,
+    "dados": {}
   }
 ]
