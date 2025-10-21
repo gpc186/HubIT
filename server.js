@@ -42,7 +42,7 @@ app.get('/home', (req, res) =>{
 	res.status(200).sendFile(path.join(__dirname, 'public', 'principal.html'));
 });
 
-app.get('*', (req, res) => {
+app.use((req, res) => {
 	res.status(404).sendFile(path.join(__dirname, 'public', '404.html'))
 })
 
