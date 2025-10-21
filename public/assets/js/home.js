@@ -36,8 +36,8 @@ function renderizarPropostas(propostas) {
                 ${proposta.descricao}
             </div>
             <div class="post-engagement">
-                <span>👍 ${proposta.curtidas} pessoas</span>
-                <span>${proposta.comentarios} comentários</span>
+                <span> Criado em ${proposta.dataCriacao}</span>
+                <span>Status: ${proposta.status}</span>
             </div>
             <div class="post-actions">
                 <div class="new-button">Oportunidade nova!</div>
@@ -242,7 +242,9 @@ async function carregarPagina() {
             area: emprego.area || "",
             diferenciais: emprego.diferenciais || "",
             qtdFuncionario: `${emprego.qtdFuncionario}+` || "Nenhum funcionário",
-            imgEmpresa: emprego.imgEmpresa || ""
+            imgEmpresa: emprego.imgEmpresa || "",
+            dataCriacao: emprego.dataCriacao || "",
+            status: emprego.status || ""
         }));
 
         // Renderizar as propostas

@@ -64,6 +64,9 @@ router.post('/', async (req, res) => {
 		const empregos = JSON.parse(empregosData);
 		// Criamos um id pelo /utils
 		let empregoID = criarIDEmprego()
+		const ano = data.getUTCFullYear()
+		const dia = data.getUTCDate()
+		const mes = data.getMonth()
 		// Aqui criamos um objeto com todas as informações
 		const novoEmprego = {
 			empregoID: empregoID,
@@ -78,7 +81,7 @@ router.post('/', async (req, res) => {
 			localizacao: localizacao.trim(),
 			requisitos: requisitos,
 			beneficios: beneficios,
-			dataCriacao: new Date().toISOString(),
+			dataCriacao: `${dia}/${mes}/${ano}`,
 			status: 'ativo'
 		};
 
