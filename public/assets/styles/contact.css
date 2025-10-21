@@ -462,3 +462,16 @@ input{
         justify-content: center;
     }
 }
+
+.block-404{
+    display: flex;
+    height: 84dvh;
+    width: auto;
+
+    background-color: #2f6d8800;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}

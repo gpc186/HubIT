@@ -42,6 +42,10 @@ app.get('/home', (req, res) =>{
 	res.status(200).sendFile(path.join(__dirname, 'public', 'principal.html'));
 });
 
+app.get('*', (req, res) => {
+	res.status(404).sendFile(path.join(__dirname, 'public', '404.html'))
+})
+
 // Servidor rodando
 app.listen(port, ()=>{
 	console.log(`Server is up and listening on port: http://localhost:${port}.`);
