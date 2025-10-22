@@ -74,5 +74,33 @@
     },
     "dataCriacao": "2025-10-21T21:23:08.717Z",
     "dataAtualizacao": "2025-10-21T21:53:44.233Z"
+  },
+  {
+    "curriculoID": 41761162191498,
+    "userID": 1759967977156,
+    "nome": "Fernando Sanches",
+    "email": "guguinha@gmail.com",
+    "telefone": "11 99999-9999",
+    "localizacao": "São Paulo",
+    "titulo": "asdasd",
+    "resumoProfissional": "asdasd",
+    "habilidades": [
+      "Mongo Db",
+      "estuda",
+      "port"
+    ],
+    "experiencias": [],
+    "educacao": [],
+    "softSkills": [],
+    "certificados": [],
+    "idiomas": [],
+    "links": {
+      "linkedin": null,
+      "github": null,
+      "portfolio": null,
+      "outros": []
+    },
+    "dataCriacao": "2025-10-22T19:43:11.498Z",
+    "dataAtualizacao": "2025-10-22T19:46:33.796Z"
   }
 ]

@@ -17,36 +17,56 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a href="/" class="logo">
-                    <img src="/assets/img/svg/Hubit_svg_logo.svg" alt="logo">
+                <a href="login.html" target="_self">
+                    <div class="logo">
+                        <img src="/assets/img/svg/Hubit_svg_logo.svg" alt="">
+                    </div>
                 </a>
-                <a href="" class="d-lg-none ms-auto">
-                    <div class="login-btn">Login</div>
-                </a>
-
-                <div class="navigation collapse navbar-collapse ms-auto mb-2 mb-lg-0" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <!-- Indicador da página -->
-                        <div class="indicator" id="indicator"></div>
-
-                        <!-- Ícone Feed -->
-                        <li class="nav-item" data-page="feed-port" onclick="navigateTo(this, 'principal.html')">
-                            <ion-icon name="newspaper-outline"></ion-icon>
-                        </li>
-
-                        <!-- Ícone Trabalho -->
-                        <li class="nav-item" data-page="trabalho"
-                            onclick="navigateTo(this, '')">
-                            <ion-icon name="briefcase-outline"></ion-icon>
-                        </li>
-
-                    </ul>
+                <div class="navbar-search">
+                    <div class="search-content">
+                        <div class="search"> <input type="search"> <img
+                                src="/assets/img/svg/search-alt-1-svgrepo-com.svg" alt=""> </div>
+                    </div>
+                    <button class="navbar-toggler ms-4 me-4" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navigation collapse navbar-collapse mb-2 mb-lg-0" id="navbarSupportedContent">
+                        <a href="/home" class="d-none d-lg-block">
+                            <div class="login-btn">
+                                <img src="/assets/img/svg/home-02-svgrepo-com.svg" alt="">
+                            </div>
+                        </a>
+                        <a href="#" class="d-none d-lg-block">
+                            <div class="login-btn">
+                                <img src="/assets/img/svg/briefcase-02-svgrepo-com.svg" alt="">
+                            </div>
+                        </a>
+                        <a href="#" class="d-none d-lg-block">
+                            <div class="login-btn">
+                                <img src="/assets/img/svg/notification-bell-svgrepo-com.svg" alt="">
+                            </div>
+                        </a>
+                        <a class="d-none d-lg-block">
+                            <div class="dropdown dropstart">
+                                <a class="login-btn dropdown-toggle dropstart" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <img src="/assets/img/svg/user-circle-svgrepo-com.svg" alt="">
+                                </a>
+                              
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="./pagina-de-perfil.html">Perfil</a></li>
+                                  <li><a class="dropdown-item" onclick="sair()">Hubit site</a></li>
+                                  <li><a class="dropdown-item" onclick="sair()">Sair</a></li>
+                                </ul>
+                              </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
         </nav>
     </header>
     <main >
-         <br><br><br><br><br><br><br><br>
+         <br><br><br>
         <button class="mudarInfo-B" data-bs-toggle="modal"  onclick="abrirModalEdicao()">Mudar informações</button>
         
        
@@ -57,7 +77,6 @@
                  <img src="/assets/img/imagem-perfil.jpg" alt="banner img">
                  
                 </div>
-                <div class="blur"></div>
                 
                 <div class="img-perfil">
                     <img src="/assets/img/contact_hero_img.png" alt="img perfil">
@@ -88,36 +107,466 @@
                 </div>
             </div>
             <div class="container-Analise">
-                <div class="title">
-                    <p>Analise</p>
-                </div>
-                <div class="views">
-                    <div class="visuPerfil">
-
-                    </div>
-                    <div class="impressaoPubli">
-
-                    </div>
+    <div class="title">
+        <p>Candidaturas</p>
+    </div>
+    <div class="views">
+        <!-- Container para o carrossel -->
+        <div id="candidaturasCarousel" class="candidaturas-carousel">
+            <!-- Mensagem de carregamento -->
+            <div class="loading-candidaturas" id="loadingCandidaturas">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Carregando...</span>
                 </div>
             </div>
+            
+            <!-- Mensagem quando não há candidaturas -->
+            <div class="sem-candidaturas" id="semCandidaturas" style="display: none;">
+                <ion-icon name="briefcase-outline" style="font-size: 48px; color: #ccc;"></ion-icon>
+                <p>Você ainda não se candidatou a nenhuma vaga</p>
+                <a href="/principal.html" class="btn btn-primary mt-3">Ver Vagas Disponíveis</a>
+            </div>
+            
+            <!-- Container dos cards de candidatura -->
+            <div class="candidaturas-wrapper" id="candidaturasWrapper" style="display: none;">
+                <button class="carousel-btn prev" id="prevBtn" onclick="moverCarrossel(-1)">
+                    <ion-icon name="chevron-back-outline"></ion-icon>
+                </button>
+                
+                <div class="candidaturas-track" id="candidaturasTrack">
+                    <!-- Cards serão inseridos aqui via JS -->
+                </div>
+                
+                <button class="carousel-btn next" id="nextBtn" onclick="moverCarrossel(1)">
+                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                </button>
+            </div>
+            
+            <!-- Indicadores de página -->
+            <div class="carousel-indicators" id="carouselIndicators"></div>
+        </div>
+    </div>
+</div>
             <div class="container-curriculos">
-                <div class="title">
-                    <h1>Currículos</h1>
-                </div>
-                <div class="curriculos">
-                    <div class="curriculo">
-
-                    </div>
-                    
-                    <div class="curriculo">
-
-                    </div>
-                    
-                    <div class="curriculo">
-
-                    </div>
-                </div>
+    <div class="title">
+        <h1>Currículos</h1>
+        <p style="color: #a6a6a6; font-size: 14px; margin-top: 5px;">Crie até 3 currículos diferentes para vagas específicas</p>
+    </div>
+    <div class="curriculos">
+        <!-- Currículo 1 -->
+        <div class="curriculo" id="curriculo-1">
+            <div class="curriculo-header">
+                <h3>Currículo 1</h3>
+                <span class="status-curriculo" id="status-curriculo-1">Não criado</span>
             </div>
+            <div class="curriculo-preview" id="preview-curriculo-1">
+                <p class="sem-curriculo">Nenhum currículo criado ainda</p>
+            </div>
+            <button class="btn-criar-curriculo" onclick="abrirModalCurriculo(1)">
+                <ion-icon name="add-circle-outline"></ion-icon>
+                Criar Currículo
+            </button>
+        </div>
+
+        <!-- Currículo 2 -->
+        <div class="curriculo" id="curriculo-2">
+            <div class="curriculo-header">
+                <h3>Currículo 2</h3>
+                <span class="status-curriculo" id="status-curriculo-2">Não criado</span>
+            </div>
+            <div class="curriculo-preview" id="preview-curriculo-2">
+                <p class="sem-curriculo">Nenhum currículo criado ainda</p>
+            </div>
+            <button class="btn-criar-curriculo" onclick="abrirModalCurriculo(2)">
+                <ion-icon name="add-circle-outline"></ion-icon>
+                Criar Currículo
+            </button>
+        </div>
+
+        <!-- Currículo 3 -->
+        <div class="curriculo" id="curriculo-3">
+            <div class="curriculo-header">
+                <h3>Currículo 3</h3>
+                <span class="status-curriculo" id="status-curriculo-3">Não criado</span>
+            </div>
+            <div class="curriculo-preview" id="preview-curriculo-3">
+                <p class="sem-curriculo">Nenhum currículo criado ainda</p>
+            </div>
+            <button class="btn-criar-curriculo" onclick="abrirModalCurriculo(3)">
+                <ion-icon name="add-circle-outline"></ion-icon>
+                Criar Currículo
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CURRÍCULO 1 -->
+<div class="modal fade" id="modalCurriculo1" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Currículo 1</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formCurriculo1">
+                    <!-- Informações Básicas -->
+                    <h6 class="mb-3">Informações Básicas</h6>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Título do Currículo <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="titulo-1" placeholder="Ex: Desenvolvedor Full Stack" required>
+                        </div>
+                    </div>
+
+                    <!-- Objetivo Profissional -->
+                    <div class="mb-3">
+                        <label class="form-label">Objetivo Profissional <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="objetivo-1" rows="3" placeholder="Descreva seu objetivo profissional..." required></textarea>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Experiências -->
+                    <h6 class="mb-3">Experiências Profissionais</h6>
+                    <div id="experiencias-container-1">
+                        <div class="experiencia-item mb-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Cargo">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Empresa">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Início">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Fim">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="atual-1-0">
+                                        <label class="form-check-label" for="atual-1-0">Trabalho atual</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <textarea class="form-control" rows="2" placeholder="Descrição das atividades"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarExperiencia(1)">
+                        <ion-icon name="add-outline"></ion-icon> Adicionar Experiência
+                    </button>
+
+                    <hr class="my-4">
+
+                    <!-- Formação Acadêmica -->
+                    <h6 class="mb-3">Formação Acadêmica</h6>
+                    <div id="formacao-container-1">
+                        <div class="formacao-item mb-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Curso">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Instituição">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Início">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Conclusão">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarFormacao(1)">
+                        <ion-icon name="add-outline"></ion-icon> Adicionar Formação
+                    </button>
+
+                    <hr class="my-4">
+
+                    <!-- Habilidades -->
+                    <h6 class="mb-3">Habilidades</h6>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="habilidades-1" placeholder="Ex: JavaScript, React, Node.js (separadas por vírgula)">
+                    </div>
+
+                    <!-- Idiomas -->
+                    <h6 class="mb-3">Idiomas</h6>
+                    <div id="idiomas-container-1">
+                        <div class="idioma-item mb-2 row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Idioma">
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-select">
+                                    <option value="">Nível</option>
+                                    <option value="Básico">Básico</option>
+                                    <option value="Intermediário">Intermediário</option>
+                                    <option value="Avançado">Avançado</option>
+                                    <option value="Fluente">Fluente</option>
+                                    <option value="Nativo">Nativo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarIdioma(1)">
+                        <ion-icon name="add-outline"></ion-icon> Adicionar Idioma
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="salvarCurriculo(1)">Salvar Currículo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CURRÍCULO 2 -->
+<div class="modal fade" id="modalCurriculo2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Currículo 2</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formCurriculo2">
+                    <!-- Informações Básicas -->
+                    <h6 class="mb-3">Informações Básicas</h6>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Título do Currículo <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="titulo-2" placeholder="Ex: Desenvolvedor Frontend" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Objetivo Profissional <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="objetivo-2" rows="3" placeholder="Descreva seu objetivo profissional..." required></textarea>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h6 class="mb-3">Experiências Profissionais</h6>
+                    <div id="experiencias-container-2">
+                        <div class="experiencia-item mb-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Cargo">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Empresa">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Início">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Fim">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="atual-2-0">
+                                        <label class="form-check-label" for="atual-2-0">Trabalho atual</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <textarea class="form-control" rows="2" placeholder="Descrição das atividades"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarExperiencia(2)">
+                        <ion-icon name="add-outline"></ion-icon> Adicionar Experiência
+                    </button>
+
+                    <hr class="my-4">
+
+                    <h6 class="mb-3">Formação Acadêmica</h6>
+                    <div id="formacao-container-2">
+                        <div class="formacao-item mb-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Curso">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Instituição">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Início">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Conclusão">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarFormacao(2)">
+                        <ion-icon name="add-outline"></ion-icon> Adicionar Formação
+                    </button>
+
+                    <hr class="my-4">
+
+                    <h6 class="mb-3">Habilidades</h6>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="habilidades-2" placeholder="Ex: HTML, CSS, JavaScript (separadas por vírgula)">
+                    </div>
+
+                    <h6 class="mb-3">Idiomas</h6>
+                    <div id="idiomas-container-2">
+                        <div class="idioma-item mb-2 row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Idioma">
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-select">
+                                    <option value="">Nível</option>
+                                    <option value="Básico">Básico</option>
+                                    <option value="Intermediário">Intermediário</option>
+                                    <option value="Avançado">Avançado</option>
+                                    <option value="Fluente">Fluente</option>
+                                    <option value="Nativo">Nativo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarIdioma(2)">
+                        <ion-icon name="add-outline"></ion-icon> Adicionar Idioma
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="salvarCurriculo(2)">Salvar Currículo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CURRÍCULO 3 -->
+<div class="modal fade" id="modalCurriculo3" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Currículo 3</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formCurriculo3">
+                    <!-- Informações Básicas -->
+                    <h6 class="mb-3">Informações Básicas</h6>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Título do Currículo <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="titulo-3" placeholder="Ex: Desenvolvedor Backend" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Objetivo Profissional <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="objetivo-3" rows="3" placeholder="Descreva seu objetivo profissional..." required></textarea>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h6 class="mb-3">Experiências Profissionais</h6>
+                    <div id="experiencias-container-3">
+                        <div class="experiencia-item mb-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Cargo">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Empresa">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Início">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Fim">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="atual-3-0">
+                                        <label class="form-check-label" for="atual-3-0">Trabalho atual</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <textarea class="form-control" rows="2" placeholder="Descrição das atividades"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarExperiencia(3)">
+                        <ion-icon name="add-outline"></ion-icon> Adicionar Experiência
+                    </button>
+
+                    <hr class="my-4">
+
+                    <h6 class="mb-3">Formação Acadêmica</h6>
+                    <div id="formacao-container-3">
+                        <div class="formacao-item mb-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Curso">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" placeholder="Instituição">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Início">
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="month" class="form-control" placeholder="Data Conclusão">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarFormacao(3)">
+                        <ion-icon name="add-outline"></ion-icon> Adicionar Formação
+                    </button>
+
+                    <hr class="my-4">
+
+                    <h6 class="mb-3">Habilidades</h6>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="habilidades-3" placeholder="Ex: Python, Django, PostgreSQL (separadas por vírgula)">
+                    </div>
+
+                    <h6 class="mb-3">Idiomas</h6>
+                    <div id="idiomas-container-3">
+                        <div class="idioma-item mb-2 row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Idioma">
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-select">
+                                    <option value="">Nível</option>
+                                    <option value="Básico">Básico</option>
+                                    <option value="Intermediário">Intermediário</option>
+                                    <option value="Avançado">Avançado</option>
+                                    <option value="Fluente">Fluente</option>
+                                    <option value="Nativo">Nativo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarIdioma(3)">
+                        <ion-icon name="add-outline"></ion-icon> Adicionar Idioma
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="salvarCurriculo(3)">Salvar Currículo</button>
+            </div>
+        </div>
+    </div>
+</div>
              <div class="modal fade" id="modalCompletarPerfil" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
@@ -379,6 +828,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <script src="/assets/js/curriculos.js"></script>    
     <script async src="/assets/js/perfil.js"></script>
     <script src="/assets/js/pg-perfil.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

@@ -11,6 +11,10 @@ router.get('/:id', async (req, res) => {
 	const userIDHeader = Number(req.headers['user-id']);
 	const userIDParam = Number(req.params.id);
 
+	if(!userIDHeader){
+		return res.status(401).json({error: "Você precisa logar antes!"})
+	}
+
 	try {
 		// Constante que recebe a leitura do arquivo e transforma em constante users em formato de object {}
 		const data = await fs.readFile(dataPath, 'utf8');
