@@ -110,5 +110,160 @@
     ],
     "dataCriacao": "2025-10-15T19:42:56.155Z",
     "status": "ativo"
+  },
+  {
+    "empregoID": 21760557376156,
+    "empresaID": "1760467809594",
+    "imgEmpresa": "https://tse2.mm.bing.net/th/id/OIP.dNWQdPTkI4M9ccV3jZpZKwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "empresaNome": "Banco do Brasil",
+    "qtdFuncionario": 11000,
+    "titulo": "Desenvolvedor Full Stack",
+    "descricao": "O Banco do Brasil está contratando um desenvolvedor Full Stack para atuar em sistemas de alta complexidade, com foco em soluções escaláveis e seguras.",
+    "area": "Full Stack",
+    "nivel": "Sênior",
+    "tipoContrato": "CLT",
+    "tipoTrabalho": "Híbrido",
+    "cargaHoraria": "40h semanais",
+    "mediaSalario": 12000,
+    "localizacao": "Brasília, DF",
+    "requisitos": [
+      "Node.js",
+      "React",
+      "MongoDB",
+      "Docker",
+      "Git",
+      "APIs RESTful"
+    ],
+    "diferenciais": [
+      "Experiência com microservices",
+      "Conhecimento em Cloud (AWS, Google Cloud)"
+    ],
+    "beneficios": [
+      "Vale Refeição",
+      "Vale Alimentação",
+      "Plano de Saúde",
+      "Plano Odontológico",
+      "Seguro de Vida",
+      "Auxílio Educação"
+    ],
+    "dataCriacao": "2025-10-22T12:00:00.000Z",
+    "candidatos": 2000,
+    "status": "ativo"
+  },
+  {
+    "empregoID": 21760557376157,
+    "empresaID": "1760463409594",
+    "imgEmpresa": "https://discovertemplate.com/wp-content/uploads/2024/01/Caixa-768x768.jpg",
+    "empresaNome": "Caixa Econômica Federal",
+    "qtdFuncionario": 9000,
+    "titulo": "Desenvolvedor Mobile",
+    "descricao": "A Caixa Econômica Federal está em busca de um desenvolvedor mobile para trabalhar em projetos de aplicativos bancários, focando em inovação e experiência do usuário.",
+    "area": "Mobile",
+    "nivel": "Pleno",
+    "tipoContrato": "CLT",
+    "tipoTrabalho": "Remoto",
+    "cargaHoraria": "40h semanais",
+    "mediaSalario": 8000,
+    "localizacao": "Rio de Janeiro, RJ",
+    "requisitos": [
+      "React Native",
+      "JavaScript",
+      "API REST",
+      "Git",
+      "Firebase"
+    ],
+    "diferenciais": [
+      "Experiência com CI/CD",
+      "Conhecimento em UX/UI"
+    ],
+    "beneficios": [
+      "Vale Refeição",
+      "Vale Transporte",
+      "Plano de Saúde",
+      "Plano Odontológico",
+      "Auxílio Creche",
+      "Seguro de Vida"
+    ],
+    "dataCriacao": "2025-10-22T12:15:00.000Z",
+    "candidatos": 2000,
+    "status": "ativo"
+  },
+  {
+    "empregoID": 21760557376159,
+    "empresaID": "1760468809594",
+    "imgEmpresa": "https://www.abcdacomunicacao.com.br/wp-content/uploads/Nubank-Logo.png",
+    "empresaNome": "Nubank",
+    "qtdFuncionario": 7000,
+    "titulo": "Engenheiro de Software Backend",
+    "descricao": "Buscamos um engenheiro de software backend apaixonado por tecnologia e inovação. Você irá desenvolver sistemas escaláveis, seguros e resilientes que impactam milhões de clientes.",
+    "area": "Backend",
+    "nivel": "Sênior",
+    "tipoContrato": "CLT",
+    "tipoTrabalho": "Remoto",
+    "cargaHoraria": "40h semanais",
+    "mediaSalario": 15000,
+    "localizacao": "São Paulo, SP",
+    "requisitos": [
+      "Node.js",
+      "Go",
+      "Kubernetes",
+      "PostgreSQL",
+      "Microservices",
+      "Git"
+    ],
+    "diferenciais": [
+      "Experiência com sistemas de alta disponibilidade",
+      "Conhecimento em segurança da informação"
+    ],
+    "beneficios": [
+      "Vale Refeição",
+      "Vale Alimentação",
+      "Plano de Saúde Premium",
+      "Licença parental estendida",
+      "Auxílio Home Office",
+      "Stock Options"
+    ],
+    "dataCriacao": "2025-10-22T13:00:00.000Z",
+    "candidatos": 2000,
+    "status": "ativo"
+  },
+  {
+    "empregoID": 21760557376160,
+    "empresaID": "1760469909594",
+    "imgEmpresa": "https://www.ideianoar.com.br/wp-content/uploads/2021/05/magalu-marketplace-1-1024x682.png",
+    "empresaNome": "Magazine Luiza",
+    "qtdFuncionario": 12000,
+    "titulo": "Analista de Suporte Técnico",
+    "descricao": "Estamos contratando um Analista de Suporte Técnico para atuar na resolução de problemas de software e hardware, além de dar suporte aos sistemas internos da companhia.",
+    "area": "Infraestrutura / Suporte",
+    "nivel": "Pleno",
+    "tipoContrato": "CLT",
+    "tipoTrabalho": "Híbrido",
+    "cargaHoraria": "44h semanais",
+    "mediaSalario": 5500,
+    "localizacao": "Franca, SP",
+    "requisitos": [
+      "Windows Server",
+      "Linux",
+      "Redes",
+      "Pacote Office 365",
+      "Suporte remoto",
+      "Documentação técnica"
+    ],
+    "diferenciais": [
+      "Certificações ITIL ou CompTIA",
+      "Experiência com Active Directory"
+    ],
+    "beneficios": [
+      "Vale Refeição",
+      "Vale Transporte",
+      "Plano de Saúde",
+      "Plano Odontológico",
+      "Descontos em produtos",
+      "Participação nos Lucros"
+    ],
+    "dataCriacao": "2025-10-22T13:10:00.000Z",
+    "candidatos": 2000,
+    "status": "ativo"
   }
 ]

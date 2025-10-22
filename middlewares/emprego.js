@@ -162,4 +162,8 @@ router.delete('/:id', async (req, res) => {
 	}
 });
 
+router.get('/filtrar', async (req, res) => {
+
+});
+
 module.exports = router;

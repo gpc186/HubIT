@@ -29,7 +29,7 @@ function renderizarPropostas(propostas) {
                 <div class="post-user-info">
                     <div class="post-user-name">${proposta.empresa}</div>
                     <div class="post-user-headline">${proposta.vaga}</div>
-                    <div class="post-time">${proposta.tempo}</div>
+                    <div class="post-time">${proposta.candidatos} Candidatos</div>
                 </div>
             </div>
             <div class="post-content">
@@ -244,7 +244,8 @@ async function carregarPagina() {
             qtdFuncionario: `${emprego.qtdFuncionario}+` || "Nenhum funcionário",
             imgEmpresa: emprego.imgEmpresa || "",
             dataCriacao: emprego.dataCriacao || "",
-            status: emprego.status || ""
+            status: emprego.status || "",
+            candidatos: emprego.candidatos || "",
         }));
 
         // Renderizar as propostas
