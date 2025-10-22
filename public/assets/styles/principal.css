@@ -1304,3 +1304,241 @@ footer{
         flex-direction: column;
     }
 }
+
+/* === SISTEMA DE FILTROS === */
+
+.filters-container {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.filters-header h3 {
+    color: #2F6D88;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.filter-group {
+    margin-bottom: 15px;
+}
+
+.filter-group label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.filter-group select,
+.filter-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+    outline: none;
+    border-color: #2F6D88;
+}
+
+.salary-range {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.btn-filter {
+    display: flex;
+    width: 60% !important;
+    background-color: #2F6D88;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+
+    align-items: center;
+}
+
+.btn-filter:hover {
+    background-color: #245563;
+}
+
+.btn-clear {
+    display: flex;
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    align-items: center;
+}
+
+.btn-clear:hover {
+    background-color: #f8f8f8;
+    border-color: #999;
+}
+
+.active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.filter-tag {
+    background-color: #e8f4f8;
+    color: #2F6D88;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-tag button {
+    background: none;
+    border: none;
+    color: #2F6D88;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
+.buttons-filter {
+    display: flex;
+    height: 45px;
+
+    justify-content: space-between;
+
+    column-gap: 20px;
+}
+
+/* === CARDS DE EMPREGOS === */
+
+.results-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.job-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.job-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.job-header {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.company-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.job-info h4 {
+    color: #2F6D88;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.company-name {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.job-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 15px 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.job-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.job-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.job-tag {
+    background-color: #f0f0f0;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+/* === RESPONSIVIDADE === */
+
+@media (max-width: 768px) {
+    .salary-range {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .btn-clear {
+        width: 100%;
+    }
+}

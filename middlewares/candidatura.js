@@ -105,13 +105,13 @@ router.post('/', async (req, res)=>{
 				area: emprego.area
 			},
 
-			dataCandidatura: new Date.toISOString(),
+			dataCandidatura: new Date().toISOString(),
 			status: "pendente"
 		}
 
 		candidaturas.push(novaCandidatura)
 
-		await fs.writeFile(candidaturasData, JSON.stringify(candidaturas, null, 2))
+		await fs.writeFile(candidaturasPath, JSON.stringify(candidaturas, null, 2))
 
 		res.status(200).json({ok: true, mensagem: "Candidatura enviada com sucesso!", candidatura: novaCandidatura})
 	} catch (error) {
@@ -180,3 +180,5 @@ router.get('/vaga/:empregoID', async (req, res)=>{
 		return res.status(500).json({error: error.message})
 	}
 })
+
+module.exports = router

@@ -110,6 +110,65 @@
                 </div>
             </div>
 
+            <div class="filters-container">
+
+                <div class="row">
+                    <div class="col-md-4 filter-group">
+                        <label for="filtroArea">Área</label>
+                        <select id="filtroArea">
+                            <option value="">Todas as áreas</option>
+                            <option value="Backend">Backend</option>
+                            <option value="Frontend">Frontend</option>
+                            <option value="Full Stack">Full Stack</option>
+                            <option value="Mobile">Mobile</option>
+                            <option value="Data / Backend">Data / Backend</option>
+                            <option value="Infraestrutura / Suporte">Infraestrutura / Suporte</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 filter-group">
+                        <label for="filtroLocalizacao">Localização</label>
+                        <input type="text" id="filtroLocalizacao" placeholder="Ex: São Paulo">
+                    </div>
+
+                    <div class="col-md-4 filter-group">
+                        <label for="filtroContrato">Tipo de Contrato</label>
+                        <select id="filtroContrato">
+                            <option value="">Todos</option>
+                            <option value="CLT">CLT</option>
+                            <option value="PJ">PJ</option>
+                            <option value="Estágio">Estágio</option>
+                            <option value="Temporário">Temporário</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 filter-group">
+                        <label for="filtroTrabalho">Tipo de Trabalho</label>
+                        <select id="filtroTrabalho">
+                            <option value="">Todos</option>
+                            <option value="Remoto">Remoto</option>
+                            <option value="Presencial">Presencial</option>
+                            <option value="Híbrido">Híbrido</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-8 filter-group">
+                        <label>Faixa Salarial (R$)</label>
+                        <div class="salary-range">
+                            <input type="number" id="salarioMin" placeholder="Salário mínimo">
+                            <input type="number" id="salarioMax" placeholder="Salário máximo">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttons-filter">
+                    <button class="btn-clear" onclick="limparFiltros()">Limpar Filtros</button>
+                    <button class="btn-filter" onclick="aplicarFiltros()">Aplicar Filtros</button>
+                </div>
+
+                <div class="active-filters" id="activeFiltros"></div>
+            </div>
+
             <!--
             <div class="create-post">
                 <div class="create-post-input">

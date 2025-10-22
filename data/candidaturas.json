@@ -1,3 +1,26 @@
 [
-	
+  {
+    "candidaturaID": 51761157961862,
+    "empregoID": 21760557376155,
+    "userID": 1759967977156,
+    "curriculoID": 41761081788717,
+    "candidato": {
+      "nome": "Gustavo Cagega",
+      "email": "guguinha@gmail.com",
+      "telefone": "1140028922",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Frontend",
+      "nivelExperiencia": "Estudante",
+      "linkedin": null,
+      "github": null
+    },
+    "vaga": {
+      "titulo": "Engenheiro de Software Backend",
+      "empresaNome": "Bradesco",
+      "localizacao": "São Paulo, SP",
+      "area": "Backend"
+    },
+    "dataCandidatura": "2025-10-22T18:32:41.862Z",
+    "status": "pendente"
+  }
 ]
