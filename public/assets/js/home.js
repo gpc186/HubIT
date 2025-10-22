@@ -22,13 +22,13 @@ function renderizarPropostas(propostas) {
         const postCard = document.createElement('div');
         postCard.className = 'post-card';
         console.log(proposta)
-        
+        // Aqui é oque aparece no HTML
         postCard.innerHTML = `
             <div class="post-header">
                 <div class="post-avatar"><img src="${proposta.imgEmpresa}"> </img></div>
                 <div class="post-user-info">
                     <div class="post-user-name">${proposta.empresa}</div>
-                    <div class="post-user-headline">${proposta.vaga}</div>
+                    <div class="post-user-headline">${proposta.vaga} | ${proposta.nivel}</div>
                     <div class="post-time">${proposta.candidatos} Candidatos</div>
                 </div>
             </div>
@@ -44,7 +44,7 @@ function renderizarPropostas(propostas) {
                 <button type="button" id="jobBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVagaEmprego${proposta.id}">Saber mais</button>
             </div>
         `;
-        
+        //----------------------------------------------------------------------------------
         container.appendChild(postCard);
 
         // Criar Modal para cada proposta
@@ -54,6 +54,7 @@ function renderizarPropostas(propostas) {
         modal.setAttribute('tabindex', '-1');
         modal.setAttribute('aria-hidden', 'true');
         
+        // Aqui é oque aparece no HTML
         modal.innerHTML = `
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
@@ -162,7 +163,7 @@ function renderizarPropostas(propostas) {
                 </div>
             </div>
         `;
-        
+        // -----------------------------------------------------------------------------------
         document.body.appendChild(modal);
     });
 }
@@ -246,6 +247,7 @@ async function carregarPagina() {
             dataCriacao: emprego.dataCriacao || "",
             status: emprego.status || "",
             candidatos: emprego.candidatos || "",
+            nivel: emprego.nivel || ""
         }));
 
         // Renderizar as propostas
@@ -258,6 +260,10 @@ async function carregarPagina() {
     console.log(usuarioAtual.userID);
     console.log(usuarioAtual.email);
     console.log(usuarioAtual.tipoConta);
+}
+
+function filtrar(){
+
 }
 
 function sair() {

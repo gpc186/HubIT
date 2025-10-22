@@ -100,6 +100,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
 	// Verificação de login
 	const userID = req.headers['user-id'];
+	const { area, localizacao, tipoContrato, tipoTrabalho, salarioMin, salarioMax } = req.query;
 
 	if (!userID) {
 		return res.status(401).json({ error: "Você precisa logar primeiro!" });
@@ -111,6 +112,20 @@ router.get('/', async (req, res) => {
 		const empregos = JSON.parse(data);
 		// Filtramos por empregos ativos
 		const empregosAtivos = empregos.filter(e => e.status === 'ativo');
+
+		//Aqui
+		let resultado = empregos.filter(e => e.status === 'ativo');
+		if (area) { resultado = resultado.filter(e => e.area === area); }
+		if (localizacao) { resultado = resultado.filter(e => e.localizacao.toLowerCase().includes(localizacao.toLowerCase())); }
+		if (tipoContrato) { resultado = resultado.filter(e => e.tipoContrato === tipoContrato); }
+		if (tipoTrabalho) { resultado = resultado.filter(e => e.tipoTrabalho === tipoTrabalho); }
+		if (salarioMin) { resultado = resultado.filter(e => e.mediaSalario >= Number(salarioMin)); }
+		if (salarioMax) { resultado = resultado.filter(e => e.mediaSalario <= Number(salarioMax)); }
+		
+		resultado.sort((a, b) => new Date(b.dataCriacao) - new Date(a.dataCriacao));
+		res.json({ ok: true, empregos: resultado });
+		//
+
 		// Aqui nós sorteamos os empregos por data de criação
 		empregosAtivos.sort((a, b) =>
 			new Date(b.dataCriacao) - new Date(a.dataCriacao)
@@ -123,6 +138,31 @@ router.get('/', async (req, res) => {
 	};
 
 });
+
+router.get('/meus', async (req, res) => {
+	const empresaID = Number(req.headers['user-id']);
+
+	if (!empresaID) {
+		return res.status(401).json({ error: "Faça login primeiro!" });
+	}
+
+	try {
+		const data = await fs.readFile(empregosPath, 'utf8');
+		const empregos = JSON.parse(data);
+		const empregosMeus = empregos.filter(e => Number(e.empresaID) === empresaID);
+
+		if (empregosMeus === -1) {
+			return res.status(404).json({ error: "Nenhum emprego encontrado!" })
+		}
+
+		empregosMeus.sort((a, b) => new Date(b.dataCriacao) - new Date(a.dataCriacao));
+
+		res.status(200).json({ ok: true, mensagem: "Empregos carregados com sucesso!", empregos: empregosMeus })
+
+	} catch (error) {
+
+	}
+})
 
 // DELETE /api/emprego/:id
 router.delete('/:id', async (req, res) => {
@@ -160,10 +200,6 @@ router.delete('/:id', async (req, res) => {
 		console.error('Erro no DELETE emprego:', error);
 		return res.status(500).json({ error: error.message });
 	}
-});
-
-router.get('/filtrar', async (req, res) => {
-
 });
 
 module.exports = router;

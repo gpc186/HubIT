@@ -285,7 +285,7 @@ router.get('/', async (req, res)=>{
         const curriculosMeus = curriculos.filter(c => Number(c.userID) === userID);
         
         if(curriculosMeus.length === 0){
-            return res.status(404).json({error: "Você não pode visualizar esses currículos!"})
+            return res.status(404).json({error: "Currículos não encontrados!"})
         }
 
         curriculosMeus.sort((a, b) => new Date(b.dataAtualizacao) - new Date(a.dataAtualizacao))
