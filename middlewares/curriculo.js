@@ -29,7 +29,7 @@ router.post('/', async (req, res)=>{
 			return res.status(403).json({error: "Você não pode postar currículos!"})
 		}
 
-		if (!usuario.dados || !usuario.dados.nome) {
+		if (!user.dados || !user.dados.nome) {
             return res.status(400).json({error: "Complete seu perfil antes de criar um currículo!"});
         }
 
@@ -118,11 +118,11 @@ router.post('/', async (req, res)=>{
         
         const novoCurriculo = {
             curriculoID: criarIDCurriculo(),
-            usuarioID: usuarioID,
-            nome: usuario.dados.nome,
-            email: usuario.email,
-            telefone: usuario.dados.telefone || null,
-            localizacao: usuario.dados.localizacao || null,
+            userID: userID,
+            nome: user.dados.nome,
+            email: user.email,
+            telefone: user.dados.telefone || null,
+            localizacao: user.dados.localizacao || null,
             titulo: titulo.trim(),
             resumoProfissional: resumoProfissional.trim(),
             habilidades: habilidades,
@@ -151,6 +151,184 @@ router.post('/', async (req, res)=>{
 		console.error(error);
 		return res.status(500).json({error: error.message})
 	}
+})
+
+router.put('/:id', async (req, res)=>{
+    const userID = Number(req.headers['user-id']);
+    const curriculoIDUrl = Number(req.params.id);
+
+	if(!userID){
+		return res.status(401).json({error: "Você deve logar antes!"})
+	}
+    try {
+        const data = await fs.readFile(curriculosPath, 'utf8')
+        const curriculos = JSON.parse(data)
+
+        const curriculoIndex = curriculos.findIndex(c => Number(c.curriculoID) === curriculoIDUrl)
+
+        if (curriculoIndex === -1){
+            return res.status(404).json({error: "Currículo não encontrado!"})
+        }
+
+        const curriculoAtual = curriculos[curriculoIndex]
+
+        if (Number(curriculoAtual.userID) !== userID){
+            return res.status(403).json({error: "Você não pode editar esse currículo!"})
+        }
+
+        const {
+            titulo,
+            resumoProfissional,
+            experiencias,
+            educacao,
+            habilidades,
+            softSkills,
+            certificados,
+            idiomas,
+            links
+        } = req.body;
+        
+        if (titulo !== undefined) {
+            if (!titulo || titulo.trim() === '') {
+                return res.status(400).json({error: "Título não pode estar vazio!"});
+            }
+        }
+        
+        if (resumoProfissional !== undefined) {
+            if (!resumoProfissional || resumoProfissional.trim() === '') {
+                return res.status(400).json({error: "Resumo profissional não pode estar vazio!"});
+            }
+        }
+        
+        if (habilidades !== undefined) {
+            if (!Array.isArray(habilidades) || habilidades.length === 0) {
+                return res.status(400).json({error: "Adicione pelo menos 1 habilidade!"});
+            }
+        }
+        
+        if (experiencias !== undefined) {
+            if (experiencias.length > 0) {
+                for (let exp of experiencias) {
+                    if (!exp.cargo || !exp.empresa || !exp.dataInicio) {
+                        return res.status(400).json({error: "Cada experiência precisa ter: cargo, empresa e dataInicio"});
+                    }
+                }
+            }
+        }
+        
+        if (educacao !== undefined) {
+            if (educacao.length > 0) {
+                for (let edu of educacao) {
+                    if (!edu.curso || !edu.instituicao || !edu.dataInicio) {
+                        return res.status(400).json({error: "Cada educação precisa ter: curso, instituição e dataInicio"});
+                    }
+                }
+            }
+        }
+        
+        if (softSkills !== undefined && !Array.isArray(softSkills)) {
+            return res.status(400).json({error: "Soft skills deve ser um array!"});
+        }
+        
+        if (certificados !== undefined) {
+            if (certificados.length > 0) {
+                for (let cert of certificados) {
+                    if (!cert.nome || !cert.instituicao || !cert.dataEmissao) {
+                        return res.status(400).json({error: "Cada certificado precisa ter: nome, instituição e dataEmissao"});
+                    }
+                }
+            }
+        }
+        
+        if (idiomas !== undefined) {
+            if (idiomas.length > 0) {
+                for (let idioma of idiomas) {
+                    if (!idioma.idioma || !idioma.nivel) {
+                        return res.status(400).json({error: "Cada idioma precisa ter: idioma e nível"});
+                    }
+                }
+            }
+        }
+        
+        if (titulo !== undefined) curriculoAtual.titulo = titulo.trim();
+        if (resumoProfissional !== undefined) curriculoAtual.resumoProfissional = resumoProfissional.trim();
+        if (habilidades !== undefined) curriculoAtual.habilidades = habilidades;
+        if (experiencias !== undefined) curriculoAtual.experiencias = experiencias;
+        if (educacao !== undefined) curriculoAtual.educacao = educacao;
+        if (softSkills !== undefined) curriculoAtual.softSkills = softSkills;
+        if (certificados !== undefined) curriculoAtual.certificados = certificados;
+        if (idiomas !== undefined) curriculoAtual.idiomas = idiomas;
+        if (links !== undefined) curriculoAtual.links = links;
+
+        curriculoAtual.dataAtualizacao = new Date().toISOString();
+
+        await fs.writeFile(curriculosPath, JSON.stringify(curriculos, null, 2))
+
+        res.status(200).json({ok: true, mensagem: "Currículo atualizado com sucesso!", curriculo: curriculoAtual})
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({error: error.message})
+    }
+})
+
+router.get('/', async (req, res)=>{
+    const userID = Number(req.headers['user-id']);
+
+    if(!userID){
+        return res.status(401).json({error: "Você deve logar antes!"})
+    }
+
+    try {
+        const data = await fs.readFile(curriculosPath, 'utf8')
+        const curriculos = JSON.parse(data)
+        const curriculosMeus = curriculos.filter(c => Number(c.userID) === userID);
+        
+        if(curriculosMeus.length === 0){
+            return res.status(404).json({error: "Você não pode visualizar esses currículos!"})
+        }
+
+        curriculosMeus.sort((a, b) => new Date(b.dataAtualizacao) - new Date(a.dataAtualizacao))
+
+        res.status(200).json({ok: true, mensagem: "Currículo carregado com sucesso!", curriculos: curriculosMeus})
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({error: error.message})
+    }
+})
+
+router.delete('/:id', async (req, res)=>{
+    const userID = Number(req.headers['user-id']);
+    const curriculoIDUrl = Number(req.params.id);
+
+	if(!userID){
+		return res.status(401).json({error: "Você deve logar antes!"})
+	}
+    try {
+        const data = await fs.readFile(curriculosPath, 'utf8');
+        const curriculos = JSON.parse(data)
+
+        const curriculoIndex = curriculos.findIndex(c => Number(c.curriculoID) === curriculoIDUrl);
+
+        if (curriculoIndex === -1){
+            return res.status(404).json({error: "Currículo não encontrado!"})
+        }
+
+        const curriculo = curriculos[curriculoIndex];
+        
+        if (Number(curriculo.userID) !== userID) {
+            return res.status(403).json({error: "Você não pode deletar este currículo!"});
+        }
+
+        curriculos.splice(curriculoIndex, 1)
+
+        await fs.writeFile(curriculosPath, JSON.stringify(curriculos, null, 2))
+
+        res.status(200).json({ok: true, mensagem: "Currículo deletado com sucesso!", curriculo: curriculoIDUrl})
+    } catch (error) {
+        console.error('Erro ao deletar currículo:', error);
+        return res.status(500).json({error: error.message});
+    }
 })
 
 module.exports = router

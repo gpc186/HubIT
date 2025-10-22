@@ -17,12 +17,17 @@ function criarIDCurriculo() {
 	return parseInt('4' + Date.now());
 };
 
+function criarIDCandidaturas(){
+	return parseInt('5' + Date.now());
+};
+
 function verficarTipoID(ID) {
 	const idString = ID.toString();
 
 	if(idString.startsWith('21')) return 'emprego';
 	if(idString.startsWith('31')) return 'portfolio';
 	if(idString.startsWith('41')) return 'curriculo';
+	if(idString.startsWith('51')) return 'candidatura'
 }
 
 module.exports = {
@@ -30,5 +35,6 @@ module.exports = {
     criarIDEmprego,
     criarIDPortfolio,
 	criarIDCurriculo,
+	criarIDCandidaturas,
     verficarTipoID
 };

@@ -1,3 +1,78 @@
 [
-	
+  {
+    "curriculoID": 41761081788717,
+    "userID": 1759967977156,
+    "nome": "Gustavo Cagega",
+    "email": "guguinha@gmail.com",
+    "telefone": "1140028922",
+    "localizacao": "São Paulo",
+    "titulo": "Desenvolvedor Full Stack Pleno",
+    "resumoProfissional": "Desenvolvedor com 4 anos de experi�ncia",
+    "habilidades": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB"
+    ],
+    "experiencias": [
+      {
+        "cargo": "Desenvolvedor Full Stack",
+        "empresa": "Tech Solutions",
+        "dataInicio": "2023-01",
+        "dataFim": null,
+        "descricao": "Desenvolvimento de aplica��es web",
+        "atual": true
+      },
+      {
+        "cargo": "Estagi�rio",
+        "empresa": "Startup XYZ",
+        "dataInicio": "2021-06",
+        "dataFim": "2022-12",
+        "descricao": "Aux�lio no desenvolvimento",
+        "atual": false
+      }
+    ],
+    "educacao": [
+      {
+        "curso": "An�lise e Desenvolvimento de Sistemas",
+        "instituicao": "FATEC",
+        "dataInicio": "2021",
+        "dataFim": "2023",
+        "status": "concluido"
+      }
+    ],
+    "softSkills": [
+      "Trabalho em equipe",
+      "Comunica��o",
+      "Resolu��o de problemas"
+    ],
+    "certificados": [
+      {
+        "nome": "JavaScript Algorithms",
+        "instituicao": "freeCodeCamp",
+        "dataEmissao": "2023-06",
+        "dataValidade": null,
+        "linkCredencial": "https://freecodecamp.org/cert"
+      }
+    ],
+    "idiomas": [
+      {
+        "idioma": "Portugu�s",
+        "nivel": "Nativo"
+      },
+      {
+        "idioma": "Ingl�s",
+        "nivel": "Intermedi�rio"
+      }
+    ],
+    "links": {
+      "linkedin": "https://linkedin.com/in/gustavocagega",
+      "github": "https://github.com/gpc186",
+      "portfolio": "https://gustavocagega.dev",
+      "outros": []
+    },
+    "dataCriacao": "2025-10-21T21:23:08.717Z",
+    "dataAtualizacao": "2025-10-21T21:53:44.233Z"
+  }
 ]
