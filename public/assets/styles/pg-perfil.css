@@ -16,7 +16,7 @@ body {
 main {
     background-color: #f8f7f2;
     width: 100%;
-    min-height: 200vh;
+    min-height: 200dvh;
     padding: 0 20px;
 }
 
@@ -79,69 +79,238 @@ footer {
 }
 
 /* ===== HEADER ===== */
-header {
+header{
     backdrop-filter: blur(14px);
     width: 100%;
     z-index: 999;
     position: fixed;
-    top: 0;
 }
 
-a {
-    font-style: normal !important;
+a{
     text-decoration: none !important;
+    font-style: none !important;
 }
+
+.main-content-1 {
+    /* display: flex; */
+
+    width: auto;
+    height: auto;
+    background-color: #F8F7F2;
+}
+@media (max-width: 768px) {
+    .row{
+        flex-wrap: nowrap !important;
+    }
+    
+    .login-block{
+        width: 60% !important;
+    }
+
+    .plans-content{
+        width: auto !important;
+        height: auto !important;
+        flex-direction: column;
+
+        row-gap: 30px;
+    }
+}
+
+@media (max-width: 734px) {
+    .about-content{
+        display: flex;
+        height: auto;
+        width: auto;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    .section-block-1{
+        justify-content: center !important;
+    }
+
+    .section-block-2{
+        width: 80% !important;
+        height: 100% !important;
+    }
+
+    .section-block-content-2{
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .section-block-content-2 a{
+        width: auto !important;
+        height: auto !important;
+    }
+
+    .section-block-img-1{
+        margin-right: 0 !important;
+    }
+
+}
+
+
+    .slot-btn{
+        height: 50px;
+        
+        
+}
+
+
 
 nav {
     display: flex;
-    width: 100%;
-    height: 80px;
+    width: auto;
+    height: 70px;
+
     background-color: hsla(50, 30%, 96%, 0.384);
+
     align-items: center;
-    padding: 0 20px;
 }
+
+
 
 ul {
     display: flex;
-    column-gap: 30px;
+
+    column-gap: 50px;
+
     list-style: none;
+
     font-family: Codec;
-    margin-bottom: 0 !important;
-    padding: 0;
+
+    margin-bottom: 0px !important;
 }
 
 li a {
     text-decoration: none;
     font-style: none;
-    font-family: Codec;
+
     font-size: 14pt;
+
     color: #707070;
 }
 
 .logo {
     display: flex;
-    width: 120px;
+
+    width: 170px;
     height: 100%;
-    background-color: transparent;
+    background-color: rgba(0, 255, 255, 0);
+
     align-items: center;
     justify-content: center;
-    margin-left: 0;
+
+    margin-left: 40px;
 }
 
 .logo img {
-    width: 100%;
-    height: auto;
-    max-height: 60px;
+    width: 70%;
+    height: 80%;
 }
 
 .navigation {
     height: auto;
     flex-grow: 0 !important;
     align-items: center;
-    background-color: transparent;
-    margin-left: auto !important;
-    margin-right: 20px;
-    column-gap: 30px;
+    background-color: rgba(245, 245, 220, 0);
+    margin-right: 80px;
+    column-gap: 20px;
+    overflow: visible !important;
+}
+
+.login-btn {
+    display: flex;
+    width: auto;
+    height: 23px;
+    background-color: #2f6d8800;
+    color: #F8F7F2;
+    font-family: Codec;
+    font-size: 13pt;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    opacity: 60%;
+    position: relative; /* ← ADICIONE ISTO */
+    transition: transform 0.2s ease-out; 
+}
+
+.login-btn:hover{
+    transform: translateY(-7px);
+    opacity: 100%;
+}
+
+.login-btn a {
+    color: #F8F7F2;
+}
+
+.login-btn img {
+    width: 100%;
+    height: 100%;
+
+    transition: all 0.3s;
+}
+.navbar-search{
+    display: flex;
+    width: auto;
+    height: 100%;
+
+    margin-left: auto; 
+
+    transition: all 0.3s !important;
+}
+
+.search{
+    display: flex;
+    width: 100% !important;
+    height: 65% !important;
+
+    border-radius: 15px;
+    border: #70707079 solid 2px;
+
+    padding: 7px;
+    justify-content: center;
+    align-items: center;
+}
+
+.search input{
+    border: none;
+    background-color: #fcfcfa00;
+}
+
+.search input:focus{
+    border: rgba(0, 0, 0, 0);
+    outline: none;
+}
+
+.ms-auto{
+    margin-left: 0px !important;
+}
+
+.search-content{
+    display: flex;
+    width: auto;
+    height: 100%;
+
+    align-items: center;
+
+    margin-right: 30px;
+}
+
+.search-content img{
+    width: auto;
+    height: 100%;
+    
+    opacity: 60%;
+}
+
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl{
+    width: 100%;
+    height: 50%;
 }
 
 /* ===== BOTÃO MUDAR INFO ===== */
@@ -198,7 +367,51 @@ h3 {
     transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     z-index: 1;
     box-shadow: 0 4px 15px rgba(74, 124, 143, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: 
+        left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+        opacity 0.3s ease-out,
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+.navbar-nav:has(.nav-item.active) .indicator {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+.nav-item.active {
+    animation: activePulse 0.4s ease-out;
+}
+
+@keyframes activePulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Efeito hover mais suave */
+.nav-item:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+/* Ícone ativo com transição suave */
+.nav-item.active ion-icon {
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
+.nav-item ion-icon {
+    font-size: 32px;
+    color: #2f6d88;
+    transition: all 0.3s ease;
+}
+
 
 .navbar-nav {
     display: flex;
@@ -322,7 +535,7 @@ h3 {
 }
 
 .container-info .ladoDireito .links {
-    width: 100%;
+    width: 50%;
     min-height: 50px;
     border: 1px solid #70707079;
     border-radius: 10px;
@@ -333,6 +546,8 @@ h3 {
 .container-info .ladoDireito .bio {
     width: 100%;
     padding: 10px;
+    border: 1px solid #70707079;
+    border-radius: 10px;
 }
 
 /* ===== CONTAINER ANÁLISE ===== */
@@ -406,13 +621,7 @@ h3 {
     width: 100%;
 }
 
-.curriculo {
-    width: 100%;
-    min-height: 150px;
-    border: 1px solid #70707079;
-    border-radius: 10px;
-    padding: 15px;
-}
+
 
 /* ===== MEDIA QUERIES ===== */
 
@@ -644,6 +853,257 @@ h3 {
         font-size: 12px;
     }
 }
+/* ===== CARROSSEL DE CANDIDATURAS ===== */
+.candidaturas-carousel {
+    width: 100%;
+    position: relative;
+    min-height: 300px;
+}
+
+.loading-candidaturas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+.sem-candidaturas {
+    width: 100%;
+    padding: 60px 20px;
+    text-align: center;
+    color: #a6a6a6;
+    font-family: Codec;
+}
+
+.sem-candidaturas ion-icon {
+    margin-bottom: 20px;
+}
+
+.sem-candidaturas p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.candidaturas-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 0 50px;
+}
+
+.candidaturas-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 10px 0;
+}
+
+.candidatura-card {
+    min-width: 100%;
+    background: white;
+    border: 2px solid #70707079;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.candidatura-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(47, 109, 136, 0.15);
+}
+
+.candidatura-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    gap: 15px;
+}
+
+.candidatura-titulo {
+    flex: 1;
+}
+
+.candidatura-titulo h3 {
+    font-family: Codec;
+    font-size: 20px !important;
+    color: #2f6d88 !important;
+    margin: 0 0 5px 0;
+    font-weight: bold;
+}
+
+.candidatura-empresa {
+    font-family: Codec;
+    font-size: 14px;
+    color: #707070;
+    margin: 0;
+}
+
+.status-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Codec;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.status-pendente {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-aceito {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-rejeitado {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.candidatura-info {
+    margin: 20px 0;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-family: Codec;
+    font-size: 14px;
+    color: #707070;
+}
+
+.info-item ion-icon {
+    font-size: 20px;
+    color: #2f6d88;
+}
+
+.candidatura-footer {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.candidatura-data {
+    font-family: Codec;
+    font-size: 12px;
+    color: #a6a6a6;
+}
+
+
+
+/* Botões do carrossel */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #2f6d88;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn:hover {
+    background-color: #1e4d5f;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.carousel-btn.prev {
+    left: 0;
+}
+
+.carousel-btn.next {
+    right: 0;
+}
+
+.carousel-btn ion-icon {
+    font-size: 24px;
+}
+
+/* Indicadores */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #d0d0d0;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.indicator-dot.active {
+    background-color: #2f6d88;
+    width: 24px;
+    border-radius: 5px;
+}
+
+/* Responsivo */
+@media (min-width: 768px) {
+    .candidatura-card {
+        min-width: calc(50% - 10px);
+    }
+    
+    .candidaturas-wrapper {
+        padding: 0 60px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .candidatura-card {
+        min-width: calc(33.333% - 14px);
+    }
+}
+
+@media (max-width: 576px) {
+    .candidaturas-wrapper {
+        padding: 0 40px;
+    }
+    
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .carousel-btn ion-icon {
+        font-size: 20px;
+    }
+    
+    .candidatura-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
 
 /* Ajustes para landscape em mobile */
 @media (max-height: 500px) and (orientation: landscape) {
@@ -659,5 +1119,215 @@ h3 {
 
     .container-info {
         padding-top: 50px;
+    }
+}
+/* ===== ESTILOS DOS CURRÍCULOS ===== */
+
+.curriculo {
+    width: 100%;
+    min-height: 250px;
+    border: 2px solid #70707079;
+    border-radius: 15px;
+    padding: 20px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.curriculo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(47, 109, 136, 0.15);
+    border-color: #2f6d88;
+}
+
+.curriculo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.curriculo-header h3 {
+    font-family: Codec;
+    font-size: 20px !important;
+    color: #2f6d88 !important;
+    margin: 0;
+    font-weight: bold;
+}
+
+.status-curriculo {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: Codec;
+    text-transform: uppercase;
+    background-color: #e0e0e0;
+    color: #707070;
+}
+
+.status-curriculo.criado {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.curriculo-preview {
+    flex: 1;
+    margin-bottom: 15px;
+    font-family: Codec;
+}
+
+.sem-curriculo {
+    color: #a6a6a6;
+    font-style: italic;
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 14px;
+}
+
+.curriculo-preview.preenchido {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.curriculo-info-item {
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #555;
+}
+
+.curriculo-info-item strong {
+    color: #2f6d88;
+    font-weight: 600;
+}
+
+.btn-criar-curriculo {
+    width: 100%;
+    padding: 12px;
+    background-color: #2f6d88;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: Codec;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.btn-criar-curriculo:hover {
+    background-color: #1e4d5f;
+    transform: scale(1.02);
+}
+
+.btn-criar-curriculo ion-icon {
+    font-size: 20px;
+}
+
+.btn-criar-curriculo.editar {
+    background-color: #6c757d;
+}
+
+.btn-criar-curriculo.editar:hover {
+    background-color: #5a6268;
+}
+
+/* Botões de ação no preview */
+.curriculo-acoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-acao {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    font-family: Codec;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.btn-editar {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.btn-editar:hover {
+    background-color: #e0a800;
+}
+
+.btn-excluir {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-excluir:hover {
+    background-color: #c82333;
+}
+
+/* Estilos dos modais de currículo */
+.experiencia-item,
+.formacao-item,
+.idioma-item {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    position: relative;
+}
+
+.btn-remover-item {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.btn-remover-item:hover {
+    background: #c82333;
+    transform: scale(1.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container-curriculos .curriculos {
+        grid-template-columns: 1fr;
+    }
+    
+    .curriculo {
+        min-height: 220px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container-curriculos .curriculos {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

@@ -19,7 +19,7 @@ main {
     height: auto;
     background-color: #F8F7F2;
 }
-
+/* =======HEADER INICIO======= */
 header{
 
     backdrop-filter: blur(14px);
@@ -196,6 +196,8 @@ li a {
 
     transition: all 0.3s;
 }
+
+/*===== FIM DO HEADER====== */
 
 .login-block {
     display: flex;
@@ -1160,6 +1162,10 @@ footer{
             opacity: 48%;
         }
 
+        .btn-primary{
+            --bs-btn-border-color: none;
+        }
+
         #jobBtn{
             background-color: #1e80aa;
             color: white;
@@ -1167,7 +1173,7 @@ footer{
             cursor: pointer !important;
             transition: background-color 0.3s;
 
-            border-radius: 10px;
+            border-radius: 7px;
         }
 
         #jobBtn:hover{
@@ -1307,13 +1313,25 @@ footer{
 
 /* === SISTEMA DE FILTROS === */
 
+.accordion{
+    width: 100% !important;
+    --bs-accordion-active-bg: #1e80aa;
+}
+
+.accordion-button:focus{
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+label{
+    text-align: start;
+}
+
 .filters-container {
     background: white;
     border-radius: 8px;
-    padding: 20px;
     margin: 20px auto;
     max-width: 1200px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
 .filters-header {
@@ -1367,8 +1385,8 @@ footer{
 
 .btn-filter {
     display: flex;
-    width: 60% !important;
-    background-color: #2F6D88;
+    width: 40% !important;
+    background-color: #1e80aa;
     color: white;
     border: none;
     padding: 12px 24px;

@@ -128,6 +128,7 @@ async function carregarEmpregos(filtros = {}) {
         if (filtros.tipoTrabalho) params.append('tipoTrabalho', filtros.tipoTrabalho);
         if (filtros.salarioMin) params.append('salarioMin', filtros.salarioMin);
         if (filtros.salarioMax) params.append('salarioMax', filtros.salarioMax);
+        if (filtros.nivel) params.append('nivelEx', filtros.nivelEx)
 
         const url = params.toString() ? `${API_URL}?${params.toString()}` : API_URL;
 
@@ -321,9 +322,11 @@ function aplicarFiltros() {
     const trabalho = document.getElementById('filtroTrabalho');
     const salMin = document.getElementById('salarioMin');
     const salMax = document.getElementById('salarioMax');
+    const nivel = document.getElementById('filtroNivelEx');
 
     if (area && area.value) filtros.area = area.value;
     if (localizacao && localizacao.value.trim()) filtros.localizacao = localizacao.value.trim();
+    if (nivel && nivel.value) filtros.nivelEx = nivel.value;
     if (contrato && contrato.value) filtros.tipoContrato = contrato.value;
     if (trabalho && trabalho.value) filtros.tipoTrabalho = trabalho.value;
     if (salMin && salMin.value) filtros.salarioMin = salMin.value;
@@ -343,9 +346,11 @@ function limparFiltros() {
     const trabalho = document.getElementById('filtroTrabalho');
     const salMin = document.getElementById('salarioMin');
     const salMax = document.getElementById('salarioMax');
+    const nivel = document.getElementById('filtroNivelEx');
 
     if (area) area.value = '';
     if (localizacao) localizacao.value = '';
+    if (nivel) nivel.value = '';
     if (contrato) contrato.value = '';
     if (trabalho) trabalho.value = '';
     if (salMin) salMin.value = '';
@@ -370,6 +375,7 @@ function atualizarFiltrosAtivos(filtros) {
     const labels = {
         area: 'Área',
         localizacao: 'Localização',
+        nivelEx: 'Nível',
         tipoContrato: 'Contrato',
         tipoTrabalho: 'Trabalho',
         salarioMin: 'Salário mín',
@@ -391,6 +397,7 @@ function removerFiltro(key) {
     const inputs = {
         area: 'filtroArea',
         localizacao: 'filtroLocalizacao',
+        nivelEx: 'Nível',
         tipoContrato: 'filtroContrato',
         tipoTrabalho: 'filtroTrabalho',
         salarioMin: 'salarioMin',
