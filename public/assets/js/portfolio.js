@@ -1,9 +1,20 @@
+// ===== CONFIGURAÇÕES =====
+const dataNow = new Date();
+const dataHours = dataNow.getHours();
+
+// Armazena os portfólios já curtidos pelo usuário
+const portfoliosCurtidos = new Set();
+
+// ===== INICIALIZAÇÃO =====
 window.onload = async function () {
-    await carregarPortfolio();
+    console.log('🔄 Página carregando...');
+    await carregarPagina();
 };
 
-async function carregarPortfolio(){
+// ===== FUNÇÃO PRINCIPAL DE CARREGAMENTO =====
+async function carregarPagina() {
     const userID = localStorage.getItem('userID');
+    console.log('📋 UserID:', userID);
 
     if (!userID) {
         alert('Você precisa fazer login!');
@@ -12,13 +23,16 @@ async function carregarPortfolio(){
     }
 
     try {
-        // Buscar dados de portfólio do usuário
+        // Buscar dados do usuário
+        console.log('🔍 Buscando dados do usuário...');
         const resposta = await fetch(`/api/usuario/${userID}`, {
             method: 'GET',
             headers: { 'user-id': userID }
         });
 
         const dados = await resposta.json();
+        console.log('✅ Dados do usuário:', dados);
+        
         const usuarioAtual = dados.usuario;
 
         if (!usuarioAtual.dados) {
@@ -26,185 +40,137 @@ async function carregarPortfolio(){
             return;
         }
 
-        atualizarPerfil(usuarioAtual)
+        // Atualizar informações do perfil
+        atualizarPerfil(usuarioAtual);
 
-        const respostaPortfolio = await fetch(`/api/portfolio`, {
-            method: 'GET',
-            headers: { 'user-id': userID }
-        });
-
-        const dadosPortfolio = await respostaPortfolio.json();
-        console.log(dadosPortfolio.portfolios)
-        
-        if (dadosPortfolio.ok && dadosPortfolio.portfolios && dadosPortfolio.portfolios.length > 0) {
-            const portfolios = dadosPortfolio.portfolios.map((portfolio, index) => ({
-                id: portfolio.portfolioID || index + 1,
-                userID: portfolio.userID || "",
-                usuarioNome: portfolio.usuarioNome || "Usuário não encontrado",
-                titulo: portfolio.titulo || '',
-                descricao: portfolio.descricao || '',
-                tecnologias: Array.isArray(portfolio.tecnologias) ? portfolio.tecnologias.join(', ') : portfolio.tecnologias || '',
-                categoria: portfolio.categoria || '',
-                linkGithub: portfolio.linkGithub || '',
-                linkDemo: portfolio.linkDemo || '',
-                linkOutros: portfolio.linkOutros || '',
-                dataCriacao: portfolio.dataCriacao || '',
-                curtidas: portfolio.curtidas
-            }));
-
-            renderizarPortfolios(portfolios);
-            console.log(`${portfolios.length} vagas carregadas`);
-        } else {
-            container.innerHTML = '<div class="loading">:( Nenhum portfólio disponível.</div>';
-        }
-        atualizarFiltrosAtivos(filtros);
-
-        console.log(dadosPortfolio)
+        // Carregar portfólios
+        console.log('🔍 Iniciando carregamento de portfólios...');
+        await carregarPortfolios();
 
     } catch (error) {
-        console.error(' Erro ao carregar página:', error);
+        console.error('❌ Erro ao carregar página:', error);
     }
 }
 
-/*============= INTEGRAR DADOS DE USUARIO =============== */
-
+// ===== ATUALIZAR PERFIL DO USUÁRIO =====
 function atualizarPerfil(usuarioAtual) {
+    console.log('👤 Atualizando perfil com dados:', usuarioAtual.dados);
+    
     const mensagemGreeting = document.getElementById('mensagemGreeting');
     const nomePrincipal = document.getElementById('nomePrincipal');
     const nomeGreeting = document.getElementById('nomeSaudacao');
     const nomeLocal = document.getElementById('nomeLocal');
     const areaAtuacao = document.getElementById('areaAtuacao');
     const nivelExperiencia = document.getElementById('nivelExperiencia');
-
-    if (nomePrincipal) nomePrincipal.innerText = usuarioAtual.dados.nome;
-    if (nomeGreeting) nomeGreeting.innerText = usuarioAtual.dados.nome;
-    if (nomeLocal) nomeLocal.innerText = usuarioAtual.dados.localizacao;
-    if (areaAtuacao) areaAtuacao.innerText = usuarioAtual.dados.areaAtuacao;
-    if (nivelExperiencia) nivelExperiencia.innerText = usuarioAtual.dados.nivelExperiencia;
-
     const weatherIconImg = document.getElementById('weatherIconImg');
-    // Atualizar mensagem de greeting
-    if (mensagemGreeting) {
-        const nome = usuarioAtual.dados.nome;
+
+    // Atualizar nome e informações
+    if (nomePrincipal) {
+        nomePrincipal.innerText = usuarioAtual.dados.nome || 'Seu Nome';
+        console.log('✅ Nome principal atualizado');
+    }
+    if (nomeGreeting) nomeGreeting.innerText = usuarioAtual.dados.nome || 'Seu Nome';
+    if (nomeLocal) nomeLocal.innerText = usuarioAtual.dados.localizacao || 'Localização';
+    if (areaAtuacao) areaAtuacao.innerText = usuarioAtual.dados.areaAtuacao || 'Área';
+    if (nivelExperiencia) nivelExperiencia.innerText = usuarioAtual.dados.nivelExperiencia || 'Nível';
+
+    // Atualizar mensagem de greeting com base na hora
+    if (mensagemGreeting && weatherIconImg) {
+        const nome = usuarioAtual.dados.nome || 'Usuário';
+        
         if (dataHours < 13) {
-            weatherIconImg.src = ("assets/img/svg/sun-svgrepo-com.svg")
-            mensagemGreeting.innerHTML = `Bom dia, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
+            weatherIconImg.src = "assets/img/svg/sun-svgrepo-com.svg";
+            mensagemGreeting.innerHTML = `Bom dia, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
         } else if (dataHours < 18) {
-            weatherIconImg.src = ("assets/img/svg/partly-cloudy-svgrepo-com.svg") 
-            mensagemGreeting.innerHTML = `Boa tarde, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
+            weatherIconImg.src = "assets/img/svg/partly-cloudy-svgrepo-com.svg";
+            mensagemGreeting.innerHTML = `Boa tarde, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
         } else {
-            weatherIconImg.src = ("assets/img/svg/moon-svgrepo-com.svg") 
-            mensagemGreeting.innerHTML = `Boa noite, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
+            weatherIconImg.src = "assets/img/svg/moon-svgrepo-com.svg";
+            mensagemGreeting.innerHTML = `Boa noite, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
         }
     }
 
-    console.log('Perfil carregado com sucesso!');
+    console.log('✅ Perfil carregado com sucesso!');
 }
 
-/* ======= CARREGAR INTEGRAÇÃO DE PORTFOLIOS ======== */
-
+// ===== CARREGAR PORTFÓLIOS =====
 async function carregarPortfolios() {
-    const container = document.getElementById('empregosContainer');
+    const container = document.getElementById('portfoliosContainer');
+    const userID = localStorage.getItem('userID');
+    
+    console.log('📦 Container:', container);
+    console.log('🆔 UserID para portfolios:', userID);
     
     if (!container) {
-        console.error('Container empregosContainer não encontrado!');
+        console.error('❌ Container portfoliosContainer não encontrado!');
+        return;
+    }
+    
+    if (!userID) {
+        container.innerHTML = '<div class="loading">Por favor, faça login primeiro.</div>';
         return;
     }
 
-    container.innerHTML = '<div class="loading">Carregando vagas...</div>';
+    container.innerHTML = '<div class="loading">Carregando portfólios...</div>';
 
     try {
-        const userID = localStorage.getItem('userID');
-        
-        if (!userID) {
-            container.innerHTML = '<div class="loading">Por favor, faça login primeiro.</div>';
-            window.location.href = "/"
-            return;
+        console.log('🌐 Fazendo requisição para /api/portfolio');
+        const response = await fetch('/api/portfolio', {
+            method: 'GET',
+            headers: { 'user-id': userID }
+        });
+
+        console.log('📡 Status da resposta:', response.status);
+        console.log('📡 Response OK?:', response.ok);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Erro na resposta:', errorText);
+            throw new Error(`Erro ${response.status}: ${errorText}`);
         }
 
-        const dadosPortfolio = await response.json();
-        console.log(dadosPortfolio.portfolios)
+        const dados = await response.json();
+        console.log('📊 Dados recebidos:', dados);
+        console.log('📊 Portfolios:', dados.portfolios);
+        console.log('📊 Quantidade:', dados.portfolios ? dados.portfolios.length : 0);
         
-        if (dadosPortfolio.ok && dadosPortfolio.portfolios && dadosPortfolio.portfolios.length > 0) {
-            const portfolios = dadosPortfolio.portfolios.map((portfolio, index) => ({
-                id: portfolio.portfolioID || index + 1,
-                titulo: portfolio.titulo || '',
-                descricao: portfolio.descricao || '',
-                tecnologias: Array.isArray(portfolio.tecnologias) ? portfolio.tecnologias.join(', ') : portfolio.tecnologias || '',
-                categoria: portfolio.categoria || '',
-                linkGithub: portfolio.linkGithub || '',
-                linkDemo: portfolio.linkDemo || '',
-                linkOutros: portfolio.linkOutros || '',
-                dataCriacao: portfolio.dataCriacao || '',
-                curtidas: portfolio.curtidas
-            }));
-
-            renderizarPortfolios(portfolios);
-            console.log(`${portfolios.length} vagas carregadas`);
+        if (dados.ok && dados.portfolios && dados.portfolios.length > 0) {
+            console.log('✅ Renderizando', dados.portfolios.length, 'portfólios');
+            renderizarPortfolios(dados.portfolios);
+            console.log(`✅ ${dados.portfolios.length} portfólios carregados`);
         } else {
-            container.innerHTML = '<div class="loading">:( Nenhum portfólio disponível.</div>';
+            console.log('⚠️ Nenhum portfólio encontrado');
+            container.innerHTML = '<div class="loading">🔍 Nenhum portfólio encontrado.</div>';
         }
-        atualizarFiltrosAtivos(filtros);
 
     } catch (error) {
-        console.error(' Erro completo ao carregar portfólios:', error);
-        container.innerHTML = `<div class="loading"> Erro ao carregar portfólios: ${error.message}</div>`;
+        console.error('❌ Erro ao carregar portfólios:', error);
+        console.error('❌ Stack:', error.stack);
+        container.innerHTML = `<div class="loading">❌ Erro ao carregar portfólios: ${error.message}</div>`;
     }
 }
 
-/**
- * Armazena os portfólios já curtidos pelo usuário
- */
-const portfoliosCurtidos = new Set();
-
-/**
- * Verifica se o usuário já curtiu um portfólio
- */
-function jaCurtiu(portfolioID) {
-    const userID = localStorage.getItem('userID');
-    const key = `curtiu_${userID}_${portfolioID}`;
-    return localStorage.getItem(key) === 'true' || portfoliosCurtidos.has(portfolioID);
-}
-
-/**
- * Marca um portfólio como curtido
- */
-function marcarComoCurtido(portfolioID) {
-    const userID = localStorage.getItem('userID');
-    const key = `curtiu_${userID}_${portfolioID}`;
-    localStorage.setItem(key, 'true');
-    portfoliosCurtidos.add(portfolioID);
-}
-
-/**
- * Remove a curtida de um portfólio
- */
-function removerCurtida(portfolioID) {
-    const userID = localStorage.getItem('userID');
-    const key = `curtiu_${userID}_${portfolioID}`;
-    localStorage.removeItem(key);
-    portfoliosCurtidos.delete(portfolioID);
-}
-
-/**
- * Renderiza os cards de portfólios na página
- */
+// ===== RENDERIZAR PORTFÓLIOS =====
 function renderizarPortfolios(portfolios) {
+    console.log('🎨 Iniciando renderização de', portfolios.length, 'portfólios');
     const container = document.getElementById('portfoliosContainer');
     
     if (!container) {
-        console.error('Container portfoliosContainer não encontrado!');
+        console.error('❌ Container portfoliosContainer não encontrado!');
         return;
     }
     
     container.innerHTML = '';
 
     if (!portfolios || portfolios.length === 0) {
+        console.log('⚠️ Array de portfólios vazio');
         container.innerHTML = '<div class="loading">🔍 Nenhum portfólio encontrado.</div>';
         return;
     }
 
-    portfolios.forEach((portfolio) => {
+    portfolios.forEach((portfolio, index) => {
+        console.log(`🎨 Renderizando portfólio ${index + 1}:`, portfolio);
+        
         const postCard = document.createElement('div');
         postCard.className = 'post-card';
         
@@ -256,119 +222,142 @@ function renderizarPortfolios(portfolios) {
         `;
         
         container.appendChild(postCard);
+        console.log(`✅ Card ${index + 1} adicionado ao container`);
 
         // Criar Modal para cada portfólio
-        const modal = document.createElement('div');
-        modal.className = 'modal fade';
-        modal.id = `modalPortfolio${portfolio.portfolioID}`;
-        modal.setAttribute('tabindex', '-1');
-        modal.setAttribute('aria-hidden', 'true');
-        
-        // Processar tecnologias para lista
-        const tecnologiasLista = Array.isArray(portfolio.tecnologias)
-            ? portfolio.tecnologias.map(tec => `<li class="mb-2"><span class="text-primary fw-bold me-2">•</span>${tec}</li>`).join('')
-            : `<li class="mb-2"><span class="text-primary fw-bold me-2">•</span>${portfolio.tecnologias}</li>`;
-        
-        // Processar links adicionais
-        const linksOutros = Array.isArray(portfolio.linkOutros) && portfolio.linkOutros.length > 0
-            ? portfolio.linkOutros.map(link => `
-                <a href="${link}" target="_blank" class="btn btn-sm btn-outline-secondary mb-2">
-                    🔗 Link Adicional
-                </a>
-            `).join('')
-            : '';
-        
-        modal.innerHTML = `
-            <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5">${portfolio.titulo}</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Informações do Autor -->
-                        <div class="mb-4">
-                            <div class="d-flex align-items-center gap-3 mb-3">
-                                <div class="modal-icon bg-secondary bg-opacity-25 rounded d-flex align-items-center justify-content-center" style="width: 56px; height: 56px;">
-                                    <img src="assets/img/svg/Hubit_icon_profile.svg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-                                </div>
-                                <div>
-                                    <h6 class="mb-1 fw-semibold">${portfolio.usuarioNome || 'Usuário'}</h6>
-                                    <p class="mb-0 text-muted small">Desenvolvedor</p>
-                                    <p class="mb-0 text-muted small">Postado em ${dataCriacao}</p>
-                                </div>
+        criarModalPortfolio(portfolio, dataCriacao, jaCurtiuEste, botaoCurtirClass, botaoCurtirTexto);
+    });
+    
+    console.log('✅ Renderização completa!');
+}
+
+// ===== CRIAR MODAL DO PORTFÓLIO =====
+function criarModalPortfolio(portfolio, dataCriacao, jaCurtiuEste, botaoCurtirClass, botaoCurtirTexto) {
+    const modal = document.createElement('div');
+    modal.className = 'modal fade';
+    modal.id = `modalPortfolio${portfolio.portfolioID}`;
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('aria-hidden', 'true');
+    
+    // Processar tecnologias para lista
+    const tecnologiasLista = Array.isArray(portfolio.tecnologias)
+        ? portfolio.tecnologias.map(tec => `<li class="mb-2"><span class="text-primary fw-bold me-2">•</span>${tec}</li>`).join('')
+        : `<li class="mb-2"><span class="text-primary fw-bold me-2">•</span>${portfolio.tecnologias}</li>`;
+    
+    // Processar links adicionais
+    const linksOutros = Array.isArray(portfolio.linkOutros) && portfolio.linkOutros.length > 0
+        ? portfolio.linkOutros.map(link => `
+            <a href="${link}" target="_blank" class="btn btn-sm btn-outline-secondary mb-2">
+                🔗 Link Adicional
+            </a>
+        `).join('')
+        : '';
+    
+    modal.innerHTML = `
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">${portfolio.titulo}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="modal-icon bg-secondary bg-opacity-25 rounded d-flex align-items-center justify-content-center" style="width: 56px; height: 56px;">
+                                <img src="assets/img/svg/Hubit_icon_profile.svg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
                             </div>
-                        </div>
-                        
-                        <hr>
-                        
-                        <!-- Detalhes do Projeto -->
-                        <div class="mb-4">
-                            <h6 class="fw-semibold mb-3">Sobre o Projeto</h6>
-                            
-                            <div class="d-flex flex-wrap gap-3 mb-3">
-                                <span class="text-muted small"><span class="me-1">📁</span>${portfolio.categoria || 'Sem categoria'}</span>
-                                <span class="text-muted small"><span class="me-1">❤️</span>${portfolio.curtidas || 0} curtidas</span>
-                                <span class="text-muted small"><span class="me-1">📅</span>${dataCriacao}</span>
+                            <div>
+                                <h6 class="mb-1 fw-semibold">${portfolio.usuarioNome || 'Usuário'}</h6>
+                                <p class="mb-0 text-muted small">Desenvolvedor</p>
+                                <p class="mb-0 text-muted small">Postado em ${dataCriacao}</p>
                             </div>
-                            
-                            <h6 class="fw-semibold mb-2">Descrição:</h6>
-                            <p class="mb-3">${portfolio.descricao || 'Sem descrição disponível'}</p>
-                            
-                            <h6 class="fw-semibold mb-2">Tecnologias Utilizadas:</h6>
-                            <ul class="list-unstyled mb-3">
-                                ${tecnologiasLista}
-                            </ul>
-                        </div>
-                        
-                        <hr>
-                        
-                        <!-- Links do Projeto -->
-                        <div class="mb-3">
-                            <h6 class="fw-semibold mb-3">Links do Projeto</h6>
-                            
-                            <div class="d-flex flex-wrap gap-2">
-                                ${portfolio.linkGithub ? `
-                                    <a href="${portfolio.linkGithub}" target="_blank" class="btn btn-dark">
-                                        <svg width="16" height="16" fill="currentColor" class="me-1" viewBox="0 0 16 16">
-                                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                                        </svg>
-                                        GitHub
-                                    </a>
-                                ` : ''}
-                                
-                                ${portfolio.linkDemo ? `
-                                    <a href="${portfolio.linkDemo}" target="_blank" class="btn btn-primary">
-                                        🚀 Ver Demo
-                                    </a>
-                                ` : ''}
-                                
-                                ${linksOutros}
-                            </div>
-                            
-                            ${!portfolio.linkGithub && !portfolio.linkDemo && (!portfolio.linkOutros || portfolio.linkOutros.length === 0) ? `
-                                <p class="text-muted small mb-0">Nenhum link disponível</p>
-                            ` : ''}
                         </div>
                     </div>
                     
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn ${botaoCurtirClass}" onclick="curtirPortfolio(${portfolio.portfolioID})">
-                            ${jaCurtiuEste ? '✓ Curtido' : '❤️ Projeto'}
-                        </button>
+                    <hr>
+                    
+                    <div class="mb-4">
+                        <h6 class="fw-semibold mb-3">Sobre o Projeto</h6>
+                        
+                        <div class="d-flex flex-wrap gap-3 mb-3">
+                            <span class="text-muted small"><span class="me-1">📁</span>${portfolio.categoria || 'Sem categoria'}</span>
+                            <span class="text-muted small"><span class="me-1">❤️</span>${portfolio.curtidas || 0} curtidas</span>
+                            <span class="text-muted small"><span class="me-1">📅</span>${dataCriacao}</span>
+                        </div>
+                        
+                        <h6 class="fw-semibold mb-2">Descrição:</h6>
+                        <p class="mb-3">${portfolio.descricao || 'Sem descrição disponível'}</p>
+                        
+                        <h6 class="fw-semibold mb-2">Tecnologias Utilizadas:</h6>
+                        <ul class="list-unstyled mb-3">
+                            ${tecnologiasLista}
+                        </ul>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="mb-3">
+                        <h6 class="fw-semibold mb-3">Links do Projeto</h6>
+                        
+                        <div class="d-flex flex-wrap gap-2">
+                            ${portfolio.linkGithub ? `
+                                <a href="${portfolio.linkGithub}" target="_blank" class="btn btn-dark">
+                                    <svg width="16" height="16" fill="currentColor" class="me-1" viewBox="0 0 16 16">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            ` : ''}
+                            
+                            ${portfolio.linkDemo ? `
+                                <a href="${portfolio.linkDemo}" target="_blank" class="btn btn-primary">
+                                    🚀 Ver Demo
+                                </a>
+                            ` : ''}
+                            
+                            ${linksOutros}
+                        </div>
+                        
+                        ${!portfolio.linkGithub && !portfolio.linkDemo && (!portfolio.linkOutros || portfolio.linkOutros.length === 0) ? `
+                            <p class="text-muted small mb-0">Nenhum link disponível</p>
+                        ` : ''}
                     </div>
                 </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn ${botaoCurtirClass}" onclick="curtirPortfolio(${portfolio.portfolioID})">
+                        ${jaCurtiuEste ? '✓ Curtido' : '❤️ Projeto'}
+                    </button>
+                </div>
             </div>
-        `;
-        
-        document.body.appendChild(modal);
-    });
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
 }
 
-/**
- * Alterna curtida de um portfólio (curtir/descurtir)
- */
+// ===== SISTEMA DE CURTIDAS =====
+function jaCurtiu(portfolioID) {
+    const userID = localStorage.getItem('userID');
+    const key = `curtiu_${userID}_${portfolioID}`;
+    return localStorage.getItem(key) === 'true' || portfoliosCurtidos.has(portfolioID);
+}
+
+function marcarComoCurtido(portfolioID) {
+    const userID = localStorage.getItem('userID');
+    const key = `curtiu_${userID}_${portfolioID}`;
+    localStorage.setItem(key, 'true');
+    portfoliosCurtidos.add(portfolioID);
+}
+
+function removerCurtida(portfolioID) {
+    const userID = localStorage.getItem('userID');
+    const key = `curtiu_${userID}_${portfolioID}`;
+    localStorage.removeItem(key);
+    portfoliosCurtidos.delete(portfolioID);
+}
+
 async function curtirPortfolio(portfolioID) {
     const userID = localStorage.getItem('userID');
     
@@ -380,7 +369,6 @@ async function curtirPortfolio(portfolioID) {
     const jaCurtiuEste = jaCurtiu(portfolioID);
 
     try {
-        // Se já curtiu, remove a curtida
         if (jaCurtiuEste) {
             const response = await fetch(`/api/portfolio/${portfolioID}/descurtir`, {
                 method: 'DELETE',
@@ -390,32 +378,12 @@ async function curtirPortfolio(portfolioID) {
             const dados = await response.json();
 
             if (dados.ok) {
-                // Remover da lista de curtidos
                 removerCurtida(portfolioID);
-                
-                // Atualizar o contador de curtidas na interface
-                const engagementSpans = document.querySelectorAll('.post-engagement span');
-                engagementSpans.forEach(span => {
-                    if (span.textContent.includes('curtidas')) {
-                        const currentLikes = parseInt(span.textContent.match(/\d+/)[0]);
-                        span.innerHTML = `❤️ ${Math.max(0, currentLikes - 1)} curtidas`;
-                    }
-                });
-                
-                // Reabilitar o botão de curtir
-                const botoesCurtir = document.querySelectorAll(`button[onclick*="curtirPortfolio(${portfolioID})"]`);
-                botoesCurtir.forEach(btn => {
-                    btn.classList.remove('btn-secondary');
-                    btn.classList.add('btn-outline-danger');
-                    btn.innerHTML = btn.innerHTML.includes('Projeto') ? '❤️ Projeto' : '❤️';
-                });
-                
+                atualizarUIAposDescurtir(portfolioID);
             } else {
                 alert('Erro: ' + dados.error);
             }
-        } 
-        // Se não curtiu ainda, adiciona a curtida
-        else {
+        } else {
             const response = await fetch(`/api/portfolio/${portfolioID}/curtir`, {
                 method: 'POST',
                 headers: { 'user-id': userID }
@@ -424,26 +392,8 @@ async function curtirPortfolio(portfolioID) {
             const dados = await response.json();
 
             if (dados.ok) {
-                // Marcar como curtido
                 marcarComoCurtido(portfolioID);
-                
-                // Atualizar o contador de curtidas na interface
-                const engagementSpans = document.querySelectorAll('.post-engagement span');
-                engagementSpans.forEach(span => {
-                    if (span.textContent.includes('curtidas')) {
-                        const currentLikes = parseInt(span.textContent.match(/\d+/)[0]);
-                        span.innerHTML = `❤️ ${currentLikes + 1} curtidas`;
-                    }
-                });
-                
-                // Atualizar visual do botão de curtir
-                const botoesCurtir = document.querySelectorAll(`button[onclick*="curtirPortfolio(${portfolioID})"]`);
-                botoesCurtir.forEach(btn => {
-                    btn.classList.remove('btn-outline-danger');
-                    btn.classList.add('btn-secondary');
-                    btn.innerHTML = btn.innerHTML.includes('Projeto') ? '✓ Curtido' : '✓ Curtido';
-                });
-                
+                atualizarUIAposCurtir(portfolioID);
             } else {
                 alert('Erro: ' + dados.error);
             }
@@ -454,51 +404,43 @@ async function curtirPortfolio(portfolioID) {
     }
 }
 
-/**
- * Carrega todos os portfólios da API
- */
-async function carregarPortfolios() {
-    const container = document.getElementById('portfoliosContainer');
-    const userID = localStorage.getItem('userID');
-    
-    if (!container) {
-        console.error('Container portfoliosContainer não encontrado!');
-        return;
-    }
-    
-    if (!userID) {
-        container.innerHTML = '<div class="loading">Por favor, faça login primeiro.</div>';
-        return;
-    }
-
-    container.innerHTML = '<div class="loading">Carregando portfólios...</div>';
-
-    try {
-        const response = await fetch('/api/portfolio', {
-            method: 'GET',
-            headers: { 'user-id': userID }
-        });
-
-        if (!response.ok) {
-            throw new Error(`Erro ${response.status}: ${await response.text()}`);
+function atualizarUIAposCurtir(portfolioID) {
+    const engagementSpans = document.querySelectorAll('.post-engagement span');
+    engagementSpans.forEach(span => {
+        if (span.textContent.includes('curtidas')) {
+            const currentLikes = parseInt(span.textContent.match(/\d+/)[0]);
+            span.innerHTML = `❤️ ${currentLikes + 1} curtidas`;
         }
-
-        const dados = await response.json();
-        
-        if (dados.ok && dados.portfolios && dados.portfolios.length > 0) {
-            renderizarPortfolios(dados.portfolios);
-            console.log(`✅ ${dados.portfolios.length} portfólios carregados`);
-        } else {
-            container.innerHTML = '<div class="loading">🔍 Nenhum portfólio encontrado.</div>';
-        }
-
-    } catch (error) {
-        console.error('❌ Erro ao carregar portfólios:', error);
-        container.innerHTML = `<div class="loading">❌ Erro ao carregar portfólios: ${error.message}</div>`;
-    }
+    });
+    
+    const botoesCurtir = document.querySelectorAll(`button[onclick*="curtirPortfolio(${portfolioID})"]`);
+    botoesCurtir.forEach(btn => {
+        btn.classList.remove('btn-outline-danger');
+        btn.classList.add('btn-secondary');
+        btn.innerHTML = btn.innerHTML.includes('Projeto') ? '✓ Curtido' : '✓ Curtido';
+    });
 }
 
-// Carregar portfólios quando a página carregar
-window.onload = function() {
-    carregarPortfolios();
-};
+function atualizarUIAposDescurtir(portfolioID) {
+    const engagementSpans = document.querySelectorAll('.post-engagement span');
+    engagementSpans.forEach(span => {
+        if (span.textContent.includes('curtidas')) {
+            const currentLikes = parseInt(span.textContent.match(/\d+/)[0]);
+            span.innerHTML = `❤️ ${Math.max(0, currentLikes - 1)} curtidas`;
+        }
+    });
+    
+    const botoesCurtir = document.querySelectorAll(`button[onclick*="curtirPortfolio(${portfolioID})"]`);
+    botoesCurtir.forEach(btn => {
+        btn.classList.remove('btn-secondary');
+        btn.classList.add('btn-outline-danger');
+        btn.innerHTML = btn.innerHTML.includes('Projeto') ? '❤️ Projeto' : '❤️';
+    });
+}
+
+// ===== FUNÇÃO DE SAIR =====
+function sair() {
+    localStorage.clear();
+    alert('Você saiu da conta');
+    window.location.href = '/';
+}
