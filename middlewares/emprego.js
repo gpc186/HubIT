@@ -8,6 +8,7 @@ const usersPath = path.join(__dirname, '..', 'data', 'users.json');
 
 const { criarIDEmprego } = require('./utils/geradorID');
 
+// POST - Criar novo emprego
 router.post('/', async (req, res) => {
 	// Verificação de usuário logado
 	const empresaID = req.headers['user-id'];
@@ -64,9 +65,13 @@ router.post('/', async (req, res) => {
 		const empregos = JSON.parse(empregosData);
 		// Criamos um id pelo /utils
 		let empregoID = criarIDEmprego()
+		
+		// CORREÇÃO: Criar a variável data
+		const data = new Date();
 		const ano = data.getUTCFullYear()
 		const dia = data.getUTCDate()
-		const mes = data.getMonth()
+		const mes = data.getUTCMonth() + 1 // +1 porque getUTCMonth() retorna 0-11
+		
 		// Aqui criamos um objeto com todas as informações
 		const novoEmprego = {
 			empregoID: empregoID,
@@ -92,53 +97,68 @@ router.post('/', async (req, res) => {
 		res.status(200).json({ ok: true, mensagem: "Emprego criado com sucesso!", emprego: novoEmprego })
 
 	} catch (error) {
-		console.error(error);
+		console.error('Erro no POST emprego:', error);
 		return res.status(500).json({ error: error.message });
 	};
 });
-// Rota GET
+
+// GET - Listar empregos com filtros
 router.get('/', async (req, res) => {
 	// Verificação de login
 	const userID = req.headers['user-id'];
-	const { area, localizacao, tipoContrato, tipoTrabalho, salarioMin, salarioMax } = req.query;
+	const { area, localizacao, tipoContrato, tipoTrabalho, salarioMin, salarioMax, nivel } = req.query;
 
 	if (!userID) {
 		return res.status(401).json({ error: "Você precisa logar primeiro!" });
-	};
+	}
 
 	try {
 		// Pegando dados para processamento
-		const data = await fs.readFile(empregosPath, 'utf8')
+		const data = await fs.readFile(empregosPath, 'utf8');
 		const empregos = JSON.parse(data);
+
 		// Filtramos por empregos ativos
-		const empregosAtivos = empregos.filter(e => e.status === 'ativo');
-
-		//Aqui
 		let resultado = empregos.filter(e => e.status === 'ativo');
-		if (area) { resultado = resultado.filter(e => e.area === area); }
-		if (localizacao) { resultado = resultado.filter(e => e.localizacao.toLowerCase().includes(localizacao.toLowerCase())); }
-		if (tipoContrato) { resultado = resultado.filter(e => e.tipoContrato === tipoContrato); }
-		if (tipoTrabalho) { resultado = resultado.filter(e => e.tipoTrabalho === tipoTrabalho); }
-		if (salarioMin) { resultado = resultado.filter(e => e.mediaSalario >= Number(salarioMin)); }
-		if (salarioMax) { resultado = resultado.filter(e => e.mediaSalario <= Number(salarioMax)); }
-		
-		resultado.sort((a, b) => new Date(b.dataCriacao) - new Date(a.dataCriacao));
-		res.json({ ok: true, empregos: resultado });
-		//
 
-		// Aqui nós sorteamos os empregos por data de criação
-		empregosAtivos.sort((a, b) =>
-			new Date(b.dataCriacao) - new Date(a.dataCriacao)
-		);
-		// Enviamos a resposta para o front
-		res.status(200).json({ ok: true, empregos: empregosAtivos });
+		// Aplicar filtros
+		if (area) {
+			resultado = resultado.filter(e => e.area === area);
+		}
+		if (localizacao) {
+			resultado = resultado.filter(e => 
+				e.localizacao && e.localizacao.toLowerCase().includes(localizacao.toLowerCase())
+			);
+		}
+		if (tipoContrato) {
+			resultado = resultado.filter(e => e.tipoContrato === tipoContrato);
+		}
+		if (tipoTrabalho) {
+			resultado = resultado.filter(e => e.tipoTrabalho === tipoTrabalho);
+		}
+		if (salarioMin) {
+			resultado = resultado.filter(e => e.mediaSalario >= Number(salarioMin));
+		}
+		if (salarioMax) {
+			resultado = resultado.filter(e => e.mediaSalario <= Number(salarioMax));
+		}
+		if (nivel) {
+			resultado = resultado.filter(e => 
+				e.nivel && e.nivel.toLowerCase() === nivel.toLowerCase()
+			);
+		}
+		
+		// Ordenar por data de criação (mais recente primeiro)
+		resultado.sort((a, b) => new Date(b.dataCriacao) - new Date(a.dataCriacao));
+		
+		res.status(200).json({ ok: true, empregos: resultado });
 
 	} catch (error) {
-		return res.status(500).json({ error: error.messsage });
-	};
-
+		console.error('Erro no GET emprego:', error);
+		return res.status(500).json({ error: error.message });
+	}
 });
 
+// GET /meus - Listar empregos da empresa
 router.get('/meus', async (req, res) => {
 	const empresaID = Number(req.headers['user-id']);
 
@@ -151,7 +171,7 @@ router.get('/meus', async (req, res) => {
 		const empregos = JSON.parse(data);
 		const empregosMeus = empregos.filter(e => Number(e.empresaID) === empresaID);
 
-		if (empregosMeus === -1) {
+		if (empregosMeus.length === 0) {
 			return res.status(404).json({ error: "Nenhum emprego encontrado!" })
 		}
 
@@ -160,7 +180,8 @@ router.get('/meus', async (req, res) => {
 		res.status(200).json({ ok: true, mensagem: "Empregos carregados com sucesso!", empregos: empregosMeus })
 
 	} catch (error) {
-
+		console.error('Erro no GET /meus:', error);
+		return res.status(500).json({ error: error.message });
 	}
 })
 
@@ -178,7 +199,6 @@ router.delete('/:id', async (req, res) => {
 		const empregos = JSON.parse(data);
 
 		const empregoIndex = empregos.findIndex(e => Number(e.empregoID) === Number(empregoID));
-		console.log(empregoIndex);
 
 		if (empregoIndex === -1) {
 			return res.status(404).json({ error: "Emprego não encontrado" });

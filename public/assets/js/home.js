@@ -87,7 +87,7 @@ function atualizarPerfil(usuarioAtual) {
  * Inicializa os event listeners dos filtros
  */
 function inicializarFiltros() {
-    const filtroInputs = document.querySelectorAll('#filtroArea, #filtroLocalizacao, #filtroContrato, #filtroTrabalho, #salarioMin, #salarioMax');
+    const filtroInputs = document.querySelectorAll('#filtroArea, #filtroLocalizacao, #filtroContrato, #filtroTrabalho, #salarioMin, #salarioMax, #filtroNivelEx');
     
     filtroInputs.forEach(element => {
         if (element) {
@@ -115,6 +115,8 @@ async function carregarEmpregos(filtros = {}) {
 
     try {
         const userID = localStorage.getItem('userID');
+        console.log('🔍 UserID:', userID);
+        
         if (!userID) {
             container.innerHTML = '<div class="loading">Por favor, faça login primeiro.</div>';
             return;
@@ -128,19 +130,25 @@ async function carregarEmpregos(filtros = {}) {
         if (filtros.tipoTrabalho) params.append('tipoTrabalho', filtros.tipoTrabalho);
         if (filtros.salarioMin) params.append('salarioMin', filtros.salarioMin);
         if (filtros.salarioMax) params.append('salarioMax', filtros.salarioMax);
-        if (filtros.nivel) params.append('nivelEx', filtros.nivelEx)
+        if (filtros.nivel) params.append('nivel', filtros.nivel);
 
         const url = params.toString() ? `${API_URL}?${params.toString()}` : API_URL;
+        console.log('🌐 URL da requisição:', url);
 
         const response = await fetch(url, {
             headers: { 'user-id': userID }
         });
 
+        console.log('📡 Status da resposta:', response.status);
+
         if (!response.ok) {
-            throw new Error('Erro ao carregar empregos');
+            const errorText = await response.text();
+            console.error('❌ Erro na resposta:', errorText);
+            throw new Error(`Erro ${response.status}: ${errorText}`);
         }
 
         const dadosEmprego = await response.json();
+        console.log('📦 Dados recebidos:', dadosEmprego);
         
         if (dadosEmprego.ok && dadosEmprego.empregos && dadosEmprego.empregos.length > 0) {
             // Mapear dados da API para o formato esperado
@@ -151,7 +159,7 @@ async function carregarEmpregos(filtros = {}) {
                 tempo: emprego.tempo || "Recente",
                 descricao: emprego.descricao || "Descrição não disponível",
                 requisitos: Array.isArray(emprego.requisitos) ? emprego.requisitos.join(', ') : emprego.requisitos || "Sem requisitos",
-                salario: emprego.mediaSalario ? `R$${emprego.mediaSalario}/Mês` : "Sem proposta de salário",
+                salario: emprego.mediaSalario ? `R${emprego.mediaSalario}/Mês` : "Sem proposta de salário",
                 localizacao: emprego.localizacao || "Sem localização",
                 beneficios: Array.isArray(emprego.beneficios) ? emprego.beneficios.join(', ') : emprego.beneficios || "Sem beneficios",
                 tipoTrabalho: emprego.tipoTrabalho || "O contratador não definiu o tipo de trabalho",
@@ -175,8 +183,9 @@ async function carregarEmpregos(filtros = {}) {
         atualizarFiltrosAtivos(filtros);
 
     } catch (error) {
-        console.error('❌ Erro ao carregar empregos:', error);
-        container.innerHTML = '<div class="loading">❌ Erro ao carregar vagas. Tente novamente.</div>';
+        console.error('❌ Erro completo ao carregar empregos:', error);
+        console.error('❌ Stack trace:', error.stack);
+        container.innerHTML = `<div class="loading">❌ Erro ao carregar vagas: ${error.message}<br>Verifique o console para mais detalhes.</div>`;
     }
 }
 
@@ -259,6 +268,7 @@ function renderizarPropostas(propostas) {
                             <h5 class="mb-3">${proposta.vaga}</h5>
                             <div class="d-flex flex-wrap gap-3 mb-3">
                                 <span class="text-muted small"><span class="me-1">💼</span>Tempo Integral</span>
+                                <span class="text-muted small"><span class="me-1">📊</span>${proposta.nivel}</span>
                                 <span class="text-muted small"><span class="me-1">📍</span>${proposta.tipoTrabalho}</span>
                                 <span class="text-muted small"><span class="me-1">📝</span>${proposta.tipoContrato}</span>
                                 <span class="text-muted small"><span class="me-1">⏰</span>Publicada há ${proposta.tempo}</span>
@@ -326,11 +336,11 @@ function aplicarFiltros() {
 
     if (area && area.value) filtros.area = area.value;
     if (localizacao && localizacao.value.trim()) filtros.localizacao = localizacao.value.trim();
-    if (nivel && nivel.value) filtros.nivelEx = nivel.value;
     if (contrato && contrato.value) filtros.tipoContrato = contrato.value;
     if (trabalho && trabalho.value) filtros.tipoTrabalho = trabalho.value;
     if (salMin && salMin.value) filtros.salarioMin = salMin.value;
     if (salMax && salMax.value) filtros.salarioMax = salMax.value;
+    if (nivel && nivel.value) filtros.nivel = nivel.value;
 
     console.log('Filtros aplicados:', filtros);
     carregarEmpregos(filtros);
@@ -350,11 +360,11 @@ function limparFiltros() {
 
     if (area) area.value = '';
     if (localizacao) localizacao.value = '';
-    if (nivel) nivel.value = '';
     if (contrato) contrato.value = '';
     if (trabalho) trabalho.value = '';
     if (salMin) salMin.value = '';
     if (salMax) salMax.value = '';
+    if (nivel) nivel.value = '';
     
     carregarEmpregos();
 }
@@ -375,7 +385,7 @@ function atualizarFiltrosAtivos(filtros) {
     const labels = {
         area: 'Área',
         localizacao: 'Localização',
-        nivelEx: 'Nível',
+        nivel: 'Nível',
         tipoContrato: 'Contrato',
         tipoTrabalho: 'Trabalho',
         salarioMin: 'Salário mín',
@@ -397,7 +407,7 @@ function removerFiltro(key) {
     const inputs = {
         area: 'filtroArea',
         localizacao: 'filtroLocalizacao',
-        nivelEx: 'Nível',
+        nivel: 'filtroNivelEx',
         tipoContrato: 'filtroContrato',
         tipoTrabalho: 'filtroTrabalho',
         salarioMin: 'salarioMin',
