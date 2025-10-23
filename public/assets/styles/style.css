@@ -824,3 +824,29 @@ hr{
 #logo-animation {
     transition: opacity 0.2s ease-in-out;
 }
+
+.passtip{
+    display: none;
+    width: 80%;
+    background-color: #70707000;
+    height: auto;
+
+    border-radius: 15px;
+    border: 2px solid #70707080;
+
+    text-align: start;
+
+    padding: 20px;
+}
+
+.passtip h3{
+    font-size: 13pt !important;
+}
+
+.passtip ul{
+    display: flex;
+    flex-direction: column;
+
+    list-style: circle;
+    padding-left: 15px;
+}

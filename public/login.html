@@ -94,8 +94,27 @@
                                                         style="color:#30729e">Crie</span> sua conta Hubit</h1>
                                                 <h2>Insira seus dados</h2>
                                                 <input type="email" name="email" id="emailNewUser" placeholder="E-mail">
-                                                <input type="password" name="passwd" id="passwdNewUser"
-                                                    placeholder="Senha">
+                                                <input type="password" name="passwd" id="passwdNewUser" placeholder="Senha">
+                                                <div class="passtip" id="passtip">
+                                                    <h3>A senha precisa ter pelo menos:</h3>
+                                                    <ul>
+                                                        <li>
+                                                            8 Caracteres
+                                                        </li>
+                                                        <li>
+                                                            1 número
+                                                        </li>
+                                                        <li>
+                                                            1 Letra maiuscula
+                                                        </li>
+                                                        <li>
+                                                            1 Letra minuscula
+                                                        </li>
+                                                        <li>
+                                                            1 Caractere especial
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                             <h3>Qual é o tipo da sua conta?</h2>
                                                 <div class="selection-modal">
@@ -380,6 +399,14 @@
             // Define a velocidade de digitação e de apagar
             setTimeout(typeWriter, apagando ? 50 : 100); // 50ms para apagar, 100ms para escrever
         }
+
+        const passwdNewUser = document.getElementById('passwdNewUser');
+        const passtip = document.getElementById('passtip');
+
+        passwdNewUser.addEventListener('click', () =>{
+            console.log("clicou")
+            passtip.style.display = 'block'
+        })
 
         // Inicia o efeito ao carregar a página
         typeWriter();
