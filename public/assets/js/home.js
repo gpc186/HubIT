@@ -72,14 +72,18 @@ function atualizarPerfil(usuarioAtual) {
     if (areaAtuacao) areaAtuacao.innerText = usuarioAtual.dados.areaAtuacao;
     if (nivelExperiencia) nivelExperiencia.innerText = usuarioAtual.dados.nivelExperiencia;
 
+    const weatherIconImg = document.getElementById('weatherIconImg');
     // Atualizar mensagem de greeting
     if (mensagemGreeting) {
         const nome = usuarioAtual.dados.nome;
         if (dataHours < 13) {
+            weatherIconImg.src = "../img/svg/sun-svgrepo-com.svg" 
             mensagemGreeting.innerHTML = `Bom dia, <span style="color:#106083">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
         } else if (dataHours < 18) {
+            weatherIconImg.src = "../img/svg/partly-cloudy-svgrepo-com.svg" 
             mensagemGreeting.innerHTML = `Boa tarde, <span style="color:#106083">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
         } else {
+            weatherIconImg.src = "../img/svg/moon-svgrepo-com.svg" 
             mensagemGreeting.innerHTML = `Boa noite, <span style="color:#106083">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
         }
     }
