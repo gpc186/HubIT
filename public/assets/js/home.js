@@ -3,6 +3,9 @@ const API_URL = 'http://localhost:3000/api/emprego';
 const dataNow = new Date();
 const dataHours = dataNow.getHours();
 
+// Variável global para armazenar currículos
+let curriculosUsuario = [];
+
 // === INICIALIZAÇÃO ===
 window.onload = async function () {
     await carregarPagina();
@@ -12,7 +15,7 @@ window.onload = async function () {
 // === FUNÇÕES DE PERFIL ===
 
 /**
- * Carrega a página completa (perfil + empregos)
+ * Carrega a página completa (perfil + empregos + currículos)
  */
 async function carregarPagina() {
     const userID = localStorage.getItem('userID');
@@ -40,6 +43,9 @@ async function carregarPagina() {
 
         // Atualizar informações do perfil
         atualizarPerfil(usuarioAtual);
+
+        // Carregar currículos do usuário
+        await carregarCurriculosUsuario();
 
         // Carregar empregos
         await carregarEmpregos();
@@ -81,6 +87,152 @@ function atualizarPerfil(usuarioAtual) {
     console.log('✅ Perfil carregado com sucesso!');
 }
 
+// === FUNÇÕES DE CURRÍCULOS ===
+
+/**
+ * Carrega os currículos do usuário
+ */
+async function carregarCurriculosUsuario() {
+    const userID = localStorage.getItem('userID');
+    
+    if (!userID) return;
+
+    try {
+        const resposta = await fetch('/api/curriculo', {
+            method: 'GET',
+            headers: { 'user-id': userID }
+        });
+
+        if (resposta.ok) {
+            const dados = await resposta.json();
+            
+            if (dados.ok && dados.curriculos) {
+                curriculosUsuario = dados.curriculos;
+                console.log(`${curriculosUsuario.length} currículos carregados`);
+            } else {
+                curriculosUsuario = [];
+                console.log('Nenhum currículo encontrado');
+            }
+        } else {
+            curriculosUsuario = [];
+            console.log('Erro ao carregar currículos');
+        }
+    } catch (error) {
+        console.error('Erro ao carregar currículos:', error);
+        curriculosUsuario = [];
+    }
+}
+
+/**
+ * Preenche o select de currículos no modal
+ */
+function preencherSelectCurriculos(empregoID) {
+    const select = document.getElementById(`curriculoSelect${empregoID}`);
+    
+    if (!select) {
+        console.error('Select não encontrado para emprego:', empregoID);
+        return;
+    }
+
+    // Limpa opções existentes, deixando apenas a opção padrão 
+    select.innerHTML = '<option value="" selected>Escolha um currículo</option>';
+
+    // Verifica se há currículos
+    if (!curriculosUsuario || curriculosUsuario.length === 0) {
+        select.innerHTML = '<option value="" selected disabled>Você não possui currículos cadastrados</option>';
+        
+        // Adiciona mensagem informativa no modal
+        const selectContainer = select.parentElement;
+        let avisoDiv = selectContainer.querySelector('.aviso-sem-curriculo');
+        
+        if (!avisoDiv) {
+            avisoDiv = document.createElement('div');
+            avisoDiv.className = 'aviso-sem-curriculo alert alert-warning mt-2';
+            avisoDiv.innerHTML = `
+                <small>
+                    <strong>Você precisa criar um currículo primeiro!</strong><br>
+                    Vá para <a href="/configuracoes-perfil.html" class="alert-link">Configurações de Perfil</a> 
+                    para criar seu currículo.
+                </small>
+            `;
+            selectContainer.appendChild(avisoDiv);
+        }
+        
+        return;
+    }
+
+    // Adiciona os currículos como opções
+    curriculosUsuario.forEach(curriculo => {
+        const option = document.createElement('option');
+        option.value = curriculo.curriculoID;
+        
+        // Monta descrição da opção
+        let descricao = curriculo.titulo;
+        
+        if (curriculo.experiencias && curriculo.experiencias.length > 0) {
+            descricao += ` (${curriculo.experiencias.length} exp.)`;
+        }
+        
+        option.textContent = descricao;
+        select.appendChild(option);
+    });
+
+    console.log(`Select preenchido com ${curriculosUsuario.length} currículos`);
+}
+
+/**
+ * Envia candidatura para a vaga
+ */
+async function enviarCandidatura(empregoID) {
+    const userID = localStorage.getItem('userID');
+    const select = document.getElementById(`curriculoSelect${empregoID}`);
+    const curriculoID = select ? select.value : null;
+
+    if (!curriculoID) {
+        alert('Por favor, selecione um currículo!');
+        return;
+    }
+
+    try {
+        const resposta = await fetch('/api/candidatura', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'user-id': userID
+            },
+            body: JSON.stringify({
+                empregoID: empregoID,
+                curriculoID: curriculoID
+            })
+        });
+
+        const dados = await resposta.json();
+
+        if (dados.ok) {
+            // Fecha o modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById(`modalVagaEmprego${empregoID}`));
+            if (modal) modal.hide();
+
+            // Mostra mensagem de sucesso
+            alert('✅ Candidatura enviada com sucesso!');
+            
+            // Confete de celebração após enviar curriculo
+            if (typeof confetti !== 'undefined') {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+        } else {
+            alert('Erro: ' + dados.error);
+        }
+    } catch (error) {
+        console.error('Erro ao enviar candidatura:', error);
+        alert('Erro ao enviar candidatura. Tente novamente.');
+    }
+}
+
 // === FUNÇÕES DE FILTROS ===
 
 /**
@@ -115,7 +267,6 @@ async function carregarEmpregos(filtros = {}) {
 
     try {
         const userID = localStorage.getItem('userID');
-        console.log('🔍 UserID:', userID);
         
         if (!userID) {
             container.innerHTML = '<div class="loading">Por favor, faça login primeiro.</div>';
@@ -133,25 +284,19 @@ async function carregarEmpregos(filtros = {}) {
         if (filtros.nivel) params.append('nivel', filtros.nivel);
 
         const url = params.toString() ? `${API_URL}?${params.toString()}` : API_URL;
-        console.log('🌐 URL da requisição:', url);
 
         const response = await fetch(url, {
             headers: { 'user-id': userID }
         });
 
-        console.log('📡 Status da resposta:', response.status);
-
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('❌ Erro na resposta:', errorText);
             throw new Error(`Erro ${response.status}: ${errorText}`);
         }
 
         const dadosEmprego = await response.json();
-        console.log('📦 Dados recebidos:', dadosEmprego);
         
         if (dadosEmprego.ok && dadosEmprego.empregos && dadosEmprego.empregos.length > 0) {
-            // Mapear dados da API para o formato esperado
             const propostas = dadosEmprego.empregos.map((emprego, index) => ({
                 id: emprego.empregoID || index + 1,
                 empresa: emprego.empresaNome || "Empresa",
@@ -159,7 +304,7 @@ async function carregarEmpregos(filtros = {}) {
                 tempo: emprego.tempo || "Recente",
                 descricao: emprego.descricao || "Descrição não disponível",
                 requisitos: Array.isArray(emprego.requisitos) ? emprego.requisitos.join(', ') : emprego.requisitos || "Sem requisitos",
-                salario: emprego.mediaSalario ? `R${emprego.mediaSalario}/Mês` : "Sem proposta de salário",
+                salario: emprego.mediaSalario ? `R$ ${emprego.mediaSalario}/Mês` : "Sem proposta de salário",
                 localizacao: emprego.localizacao || "Sem localização",
                 beneficios: Array.isArray(emprego.beneficios) ? emprego.beneficios.join(', ') : emprego.beneficios || "Sem beneficios",
                 tipoTrabalho: emprego.tipoTrabalho || "O contratador não definiu o tipo de trabalho",
@@ -177,15 +322,14 @@ async function carregarEmpregos(filtros = {}) {
             renderizarPropostas(propostas);
             console.log(`✅ ${propostas.length} vagas carregadas`);
         } else {
-            container.innerHTML = '<div class="loading">🔍 Nenhuma vaga encontrada.</div>';
+            container.innerHTML = '<div class="loading">:( Nenhuma vaga encontrada.</div>';
         }
         
         atualizarFiltrosAtivos(filtros);
 
     } catch (error) {
         console.error('❌ Erro completo ao carregar empregos:', error);
-        console.error('❌ Stack trace:', error.stack);
-        container.innerHTML = `<div class="loading">❌ Erro ao carregar vagas: ${error.message}<br>Verifique o console para mais detalhes.</div>`;
+        container.innerHTML = `<div class="loading">❌ Erro ao carregar vagas: ${error.message}</div>`;
     }
 }
 
@@ -200,7 +344,7 @@ function renderizarPropostas(propostas) {
         return;
     }
     
-    container.innerHTML = ''; // Limpa o container
+    container.innerHTML = '';
 
     if (!propostas || propostas.length === 0) {
         container.innerHTML = '<div class="loading">🔍 Nenhuma vaga encontrada com esses filtros.</div>';
@@ -229,7 +373,7 @@ function renderizarPropostas(propostas) {
             </div>
             <div class="post-actions">
                 <div class="new-button">Oportunidade nova!</div>
-                <button type="button" id="jobBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVagaEmprego${proposta.id}">Saber mais</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVagaEmprego${proposta.id}" onclick="preencherSelectCurriculos(${proposta.id})">Saber mais</button>
             </div>
         `;
         
@@ -246,13 +390,13 @@ function renderizarPropostas(propostas) {
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalVagaEmpregoLabel${proposta.id}">${proposta.empresa}</h1>
+                        <h1 class="modal-title fs-5">${proposta.empresa}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-4">
                             <div class="d-flex align-items-center gap-3 mb-3">
-                                <div class="modal-icon bg-secondary bg-opacity-25 rounded d-flex align-items-center justify-content-center" style="width: 56px; height: 56px; font-size: 24px;">
+                                <div class="modal-icon bg-secondary bg-opacity-25 rounded d-flex align-items-center justify-content-center" style="width: 56px; height: 56px;">
                                     <img src="${proposta.imgEmpresa}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" onerror="this.src='https://via.placeholder.com/56'">
                                 </div>
                                 <div>
@@ -271,22 +415,21 @@ function renderizarPropostas(propostas) {
                                 <span class="text-muted small"><span class="me-1">📊</span>${proposta.nivel}</span>
                                 <span class="text-muted small"><span class="me-1">📍</span>${proposta.tipoTrabalho}</span>
                                 <span class="text-muted small"><span class="me-1">📝</span>${proposta.tipoContrato}</span>
-                                <span class="text-muted small"><span class="me-1">⏰</span>Publicada há ${proposta.tempo}</span>
                             </div>
                             <div class="d-flex flex-wrap gap-3 mb-3">
                                 <h6 class="fw-semibold mb-3">Pretensão salarial: ${proposta.salario}</h6>
                             </div>
                             <h6>Descrição:</h6>
                             <p class="mb-3">${proposta.descricao}</p>
-                            <h6 class="fw-semibold mb-2" style="font-size: 14px;">Requisitos:</h6>
+                            <h6 class="fw-semibold mb-2">Requisitos:</h6>
                             <ul class="list-unstyled">
                                 <li class="mb-2"><span class="text-primary fw-bold me-2">•</span>${proposta.requisitos}</li>
                             </ul>
-                            <h6 class="fw-semibold mb-2" style="font-size: 14px;">Diferenciais:</h6>
+                            <h6 class="fw-semibold mb-2">Diferenciais:</h6>
                             <ul class="list-unstyled">
                                 <li class="mb-2"><span class="text-primary fw-bold me-2">•</span>${proposta.diferenciais}</li>
                             </ul>
-                            <h6 class="fw-semibold mb-2" style="font-size: 14px;">Benefícios:</h6>
+                            <h6 class="fw-semibold mb-2">Benefícios:</h6>
                             <ul class="list-unstyled">
                                 <li class="mb-2"><span class="text-primary fw-bold me-2">•</span>${proposta.beneficios}</li>
                             </ul>
@@ -299,18 +442,15 @@ function renderizarPropostas(propostas) {
                                     Selecione o currículo para esta vaga <span class="text-danger">*</span>
                                 </label>
                                 <select class="form-select" id="curriculoSelect${proposta.id}" required>
-                                    <option value="" selected>Escolha um currículo</option>
-                                    <option value="principal">Currículo Principal</option>
-                                    <option value="tech">Currículo Tech</option>
-                                    <option value="gerencial">Currículo Gerencial</option>
+                                    <option value="" selected>Carregando currículos...</option>
                                 </select>
-                                <div class="form-text">Você pode gerenciar seus currículos nas configurações do perfil</div>
+                                <div class="form-text">Você pode gerenciar seus currículos em Configurações de Perfil</div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" style="background-color: #2F6D88;" class="btn btn-primary">Enviar</button>
+                        <button type="button" style="background-color: #2F6D88;" class="btn btn-primary" onclick="enviarCandidatura(${proposta.id})">Enviar Candidatura</button>
                     </div>
                 </div>
             </div>

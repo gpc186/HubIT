@@ -22,5 +22,29 @@
     },
     "dataCandidatura": "2025-10-22T18:32:41.862Z",
     "status": "pendente"
+  },
+  {
+    "candidaturaID": 51761218466624,
+    "empregoID": 21760557376160,
+    "userID": 1759967977156,
+    "curriculoID": 41761162191498,
+    "candidato": {
+      "nome": "Fernando Sanches",
+      "email": "guguinha@gmail.com",
+      "telefone": "11 99999-9999",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Frontend",
+      "nivelExperiencia": "Especialista",
+      "linkedin": "https://www.linkedin.com/in/fernando-sanches-0b0947349/",
+      "github": "https://github.com/FernandoSnchs"
+    },
+    "vaga": {
+      "titulo": "Analista de Suporte Técnico",
+      "empresaNome": "Magazine Luiza",
+      "localizacao": "Franca, SP",
+      "area": "Infraestrutura / Suporte"
+    },
+    "dataCandidatura": "2025-10-23T11:21:06.624Z",
+    "status": "pendente"
   }
 ]
