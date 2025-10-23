@@ -438,6 +438,111 @@ function atualizarUIAposDescurtir(portfolioID) {
     });
 }
 
+// ===== PUBLICAR NOVO PORTFÓLIO =====
+async function publicarPortfolio() {
+    const userID = localStorage.getItem('userID');
+    
+    if (!userID) {
+        alert('Você precisa estar logado!');
+        return;
+    }
+
+    // Coletar dados do formulário
+    const titulo = document.getElementById('portfolioTitulo').value.trim();
+    const descricao = document.getElementById('portfolioDescricao').value.trim();
+    const categoria = document.getElementById('portfolioCategoria').value;
+    const tecnologiasText = document.getElementById('portfolioTecnologias').value.trim();
+    const linkGithub = document.getElementById('portfolioGithub').value.trim();
+    const linkDemo = document.getElementById('portfolioDemo').value.trim();
+    const linkOutrosText = document.getElementById('portfolioOutros').value.trim();
+
+    // Validações
+    if (!titulo) {
+        alert('Por favor, preencha o título do projeto!');
+        return;
+    }
+
+    if (!descricao) {
+        alert('Por favor, descreva seu projeto!');
+        return;
+    }
+
+    if (!categoria) {
+        alert('Por favor, selecione uma categoria!');
+        return;
+    }
+
+    if (!tecnologiasText) {
+        alert('Por favor, informe as tecnologias utilizadas!');
+        return;
+    }
+
+    if (!linkGithub) {
+        alert('Por favor, informe o link do GitHub!');
+        return;
+    }
+
+    if (!linkGithub.includes('github.com')) {
+        alert('O link precisa ser do GitHub!');
+        return;
+    }
+
+    // Processar tecnologias (separar por vírgula)
+    const tecnologias = tecnologiasText.split(',').map(t => t.trim()).filter(t => t);
+
+    // Processar links adicionais (separar por vírgula)
+    const linkOutros = linkOutrosText 
+        ? linkOutrosText.split(',').map(l => l.trim()).filter(l => l)
+        : [];
+
+    // Montar objeto do portfólio
+    const novoPortfolio = {
+        titulo,
+        descricao,
+        categoria,
+        tecnologias,
+        linkGithub,
+        linkDemo: linkDemo || null,
+        linkOutros
+    };
+
+    console.log('📤 Enviando portfólio:', novoPortfolio);
+
+    try {
+        const response = await fetch('/api/portfolio', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'user-id': userID
+            },
+            body: JSON.stringify(novoPortfolio)
+        });
+
+        const dados = await response.json();
+        console.log('📥 Resposta da API:', dados);
+
+        if (dados.ok) {
+            // Fechar o modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('modalNovoPortfolio'));
+            if (modal) modal.hide();
+
+            // Limpar o formulário
+            document.getElementById('formNovoPortfolio').reset();
+
+            // Mostrar mensagem de sucesso
+            alert('🎉 Portfólio publicado com sucesso!');
+
+            // Recarregar os portfólios
+            await carregarPortfolios();
+        } else {
+            alert('Erro ao publicar portfólio: ' + dados.error);
+        }
+    } catch (error) {
+        console.error('❌ Erro ao publicar portfólio:', error);
+        alert('Erro ao publicar portfólio. Tente novamente.');
+    }
+}
+
 // ===== FUNÇÃO DE SAIR =====
 function sair() {
     localStorage.clear();

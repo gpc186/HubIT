@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hubit - Inicio</title>
+    <title>Hubit - Portfólios</title>
     <link rel="stylesheet" href="./assets/styles/principal.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -12,8 +12,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-    <link rel="stylesheet" href="./assets/styles/principal.css">
 </head>
 
 <body>
@@ -41,7 +39,7 @@
                                 <img src="assets/img/svg/home-02-svgrepo-com.svg" alt="">
                             </div>
                         </a>
-                        <a href="#" class="d-none d-lg-block">
+                        <a href="/portfolio" class="d-none d-lg-block">
                             <div class="login-btn">
                                 <img src="assets/img/svg/briefcase-02-svgrepo-com.svg" alt="">
                             </div>
@@ -59,7 +57,7 @@
                               
                                 <ul class="dropdown-menu">
                                   <li><a class="dropdown-item" href="./pagina-de-perfil.html">Perfil</a></li>
-                                  <li><a class="dropdown-item" onclick="sair()">Hubit site</a></li>
+                                  <li><a class="dropdown-item" href="/">Hubit site</a></li>
                                   <li><a class="dropdown-item" onclick="sair()">Sair</a></li>
                                 </ul>
                               </div>
@@ -109,7 +107,7 @@
                     <img id="weatherIconImg" src="assets/img/svg/moon-svgrepo-com.svg" alt="">
                 </div>
                 <div id="mensagemGreeting" class="greeting-text">Boa noite, <span id="nomeSaudacao">Seu Nome.</span><br>
-                    <span>Suas <span style="color: #2F6D88; font-family: Codec;">oportunidades</span> de hoje!</span>
+                    <span>Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!</span>
                 </div>
             </div>
             
@@ -118,17 +116,19 @@
                     <div class="create-post-avatar">
                         <img src="assets/img/svg/Hubit_icon_profile.svg" alt="">
                     </div>
-                    <a href="#" class="create-post-button"><span>Postar</span></a>
+                    <button class="create-post-button" data-bs-toggle="modal" data-bs-target="#modalNovoPortfolio">
+                        <span>Postar</span>
+                    </button>
                 </div>
                 <div class="create-post-actions">
-                    <button class="action-button">📷 Foto</button>
-                    <button class="action-button">🎥 Vídeo</button>
-                    <button class="action-button">📄 Artigo</button>
+                    <button class="action-button" data-bs-toggle="modal" data-bs-target="#modalNovoPortfolio">📁 Projeto</button>
+                    <button class="action-button" data-bs-toggle="modal" data-bs-target="#modalNovoPortfolio">💻 Código</button>
+                    <button class="action-button" data-bs-toggle="modal" data-bs-target="#modalNovoPortfolio">🎨 Design</button>
                 </div>
             </div>
 
             <div id="portfoliosContainer">
-
+                <div class="loading">Carregando portfólios...</div>
             </div>
 
         </section>
@@ -168,11 +168,118 @@
             </div>
         </aside>
     </main>
-</body>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
-<script src="assets/js/portfolio.js"></script>
+    <!-- Modal Novo Portfólio -->
+    <div class="modal fade" id="modalNovoPortfolio" tabindex="-1" aria-labelledby="modalNovoPortfolioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalNovoPortfolioLabel">
+                        <ion-icon name="folder-open-outline"></ion-icon> Criar Novo Portfólio
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formNovoPortfolio">
+                        <!-- Título -->
+                        <div class="mb-3">
+                            <label for="portfolioTitulo" class="form-label fw-semibold">
+                                Título do Projeto <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="portfolioTitulo" 
+                                   placeholder="Ex: Sistema de E-commerce" required>
+                            <div class="form-text">Dê um nome atraente para seu projeto</div>
+                        </div>
+
+                        <!-- Descrição -->
+                        <div class="mb-3">
+                            <label for="portfolioDescricao" class="form-label fw-semibold">
+                                Descrição <span class="text-danger">*</span>
+                            </label>
+                            <textarea class="form-control" id="portfolioDescricao" rows="4" 
+                                      placeholder="Descreva seu projeto, os problemas que resolve e suas funcionalidades..." required></textarea>
+                            <div class="form-text">Seja claro e objetivo sobre o que seu projeto faz</div>
+                        </div>
+
+                        <!-- Categoria -->
+                        <div class="mb-3">
+                            <label for="portfolioCategoria" class="form-label fw-semibold">
+                                Categoria <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select" id="portfolioCategoria" required>
+                                <option value="" selected>Selecione uma categoria</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Mobile Development">Mobile Development</option>
+                                <option value="Backend">Backend</option>
+                                <option value="Frontend">Frontend</option>
+                                <option value="Full Stack">Full Stack</option>
+                                <option value="Data Science">Data Science</option>
+                                <option value="Machine Learning">Machine Learning</option>
+                                <option value="UI/UX Design">UI/UX Design</option>
+                                <option value="Game Development">Game Development</option>
+                                <option value="DevOps">DevOps</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <!-- Tecnologias -->
+                        <div class="mb-3">
+                            <label for="portfolioTecnologias" class="form-label fw-semibold">
+                                Tecnologias Utilizadas <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="portfolioTecnologias" 
+                                   placeholder="Ex: React, Node.js, MongoDB" required>
+                            <div class="form-text">Separe as tecnologias por vírgula</div>
+                        </div>
+
+                        <!-- Link GitHub -->
+                        <div class="mb-3">
+                            <label for="portfolioGithub" class="form-label fw-semibold">
+                                Link do GitHub <span class="text-danger">*</span>
+                            </label>
+                            <input type="url" class="form-control" id="portfolioGithub" 
+                                   placeholder="https://github.com/seu-usuario/projeto" required>
+                            <div class="form-text">O repositório deve estar no GitHub</div>
+                        </div>
+
+                        <!-- Link Demo (Opcional) -->
+                        <div class="mb-3">
+                            <label for="portfolioDemo" class="form-label fw-semibold">
+                                Link da Demo <span class="text-muted">(Opcional)</span>
+                            </label>
+                            <input type="url" class="form-control" id="portfolioDemo" 
+                                   placeholder="https://meu-projeto.com">
+                            <div class="form-text">Link para a aplicação online, se disponível</div>
+                        </div>
+
+                        <!-- Links Adicionais (Opcional) -->
+                        <div class="mb-3">
+                            <label for="portfolioOutros" class="form-label fw-semibold">
+                                Links Adicionais <span class="text-muted">(Opcional)</span>
+                            </label>
+                            <input type="text" class="form-control" id="portfolioOutros" 
+                                   placeholder="https://link1.com, https://link2.com">
+                            <div class="form-text">Outros links relevantes (artigos, vídeos, etc). Separe por vírgula</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" style="background-color: #2F6D88;" onclick="publicarPortfolio()">
+                        <ion-icon name="rocket-outline"></ion-icon> Publicar Portfólio
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="assets/js/portfolio.js"></script>
+</body>
 
 </html>
