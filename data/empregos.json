@@ -35,6 +35,7 @@
       "Auxílio Home Office"
     ],
     "dataCriacao": "2025-10-15T19:42:56.155Z",
+    "candidatos": 1222,
     "status": "ativo"
   },
   {
@@ -71,6 +72,7 @@
       "Day Off no Aniversário"
     ],
     "dataCriacao": "2025-10-15T19:42:56.155Z",
+    "candidatos": 5574,
     "status": "ativo"
   },
   {
@@ -109,6 +111,7 @@
       "Auxílio Educação"
     ],
     "dataCriacao": "2025-10-15T19:42:56.155Z",
+    "candidatos": 4837,
     "status": "ativo"
   },
   {
@@ -147,7 +150,7 @@
       "Auxílio Educação"
     ],
     "dataCriacao": "2025-10-22T12:00:00.000Z",
-    "candidatos": 2000,
+    "candidatos": 531,
     "status": "ativo"
   },
   {
@@ -185,7 +188,7 @@
       "Seguro de Vida"
     ],
     "dataCriacao": "2025-10-22T12:15:00.000Z",
-    "candidatos": 2000,
+    "candidatos": 4522,
     "status": "ativo"
   },
   {
@@ -224,7 +227,7 @@
       "Stock Options"
     ],
     "dataCriacao": "2025-10-22T13:00:00.000Z",
-    "candidatos": 2000,
+    "candidatos": 7202,
     "status": "ativo"
   },
   {
@@ -263,7 +266,7 @@
       "Participação nos Lucros"
     ],
     "dataCriacao": "2025-10-22T13:10:00.000Z",
-    "candidatos": 2000,
+    "candidatos": 2827,
     "status": "ativo"
   }
 ]

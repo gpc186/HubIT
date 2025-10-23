@@ -21,7 +21,17 @@
     "passwd": "654321",
     "tipoConta": "empresa",
     "userID": 1759968679341,
-    "dados": {}
+    "dados": {
+      "nomeEmpresa": "asdasdasdas",
+      "cnpj": "22222222222222",
+      "telefone": "11999999999",
+      "localizacao": "asdasdad",
+      "setor": "Tecnologia",
+      "numeroFuncionarios": "1-10",
+      "site": "aasdas",
+      "linkedin": "asdasdasdasdas",
+      "descricao": "asdasdasdasdasdas"
+    }
   },
   {
     "email": "qwert@gmail",
@@ -67,7 +77,7 @@
   },
   {
     "email": "fernando.sanches.rodrigues@outlook.com",
-    "passwd": "Fer2901!",
+    "passwd": "aaaa",
     "tipoConta": "usuario",
     "userID": 1760554646358,
     "dados": {
@@ -130,6 +140,13 @@
     "passwd": "Q12345678q_",
     "tipoConta": "usuario",
     "userID": 1760991261190,
+    "dados": {}
+  },
+  {
+    "email": "muriloprimeiro@yahoo.com",
+    "passwd": "senhasafada1234LETRAMAIUSCULA###",
+    "tipoConta": "usuario",
+    "userID": 1761249917836,
     "dados": {}
   }
 ]

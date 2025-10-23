@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
 
 		const novoPortfolio = {
 			portfolioID,
-			usuarioID: userID,
+			userID: userID,
 			usuarioNome: userLogado.dados.nome,
 			titulo: titulo.trim(),
 			descricao: descricao.trim(),
@@ -138,7 +138,7 @@ router.delete('/:id', async (req, res) => {
 
 		const portfolio = portfolios[portfolioIndex];
 
-		if (Number(portfolio.usuarioID) !== userID) {
+		if (Number(portfolio.userID) !== userID) {
 			return res.status(403).json({ error: "Você não pode deletar esse portfolio!" })
 		}
 
@@ -176,6 +176,45 @@ router.post('/:id/curtir', async (req, res) => {
 		await fs.writeFile(portfolioPath, JSON.stringify(portfolios, null, 2))
 
 		res.status(200).json({ ok: true, portfolio: { portfolioID: portfolios[portfolioIndex].portfolioID, curtidas: portfolios[portfolioIndex].curtidas } });
+
+	} catch (error) {
+		console.error(error);
+		return res.status(500).json({ error: error.message })
+	}
+})
+
+router.delete('/:id/descurtir', async (req, res) => {
+	const userID = req.headers['user-id'];
+	const portfolioPost = Number(req.params.id);
+
+	if (!userID) {
+		return res.status(401).json({ error: "Por favor logue antes!" })
+	}
+
+	try {
+		const data = await fs.readFile(portfolioPath, 'utf8')
+		const portfolios = JSON.parse(data);
+
+		const portfolioIndex = portfolios.findIndex(p => Number(p.portfolioID) === portfolioPost)
+
+		if (portfolioIndex === -1) {
+			return res.status(404).json({ error: "Portfólio não encontrado!" })
+		}
+
+		// Diminuir curtidas (não pode ser negativo)
+		if (portfolios[portfolioIndex].curtidas > 0) {
+			portfolios[portfolioIndex].curtidas -= 1;
+		}
+
+		await fs.writeFile(portfolioPath, JSON.stringify(portfolios, null, 2))
+
+		res.status(200).json({ 
+			ok: true, 
+			portfolio: { 
+				portfolioID: portfolios[portfolioIndex].portfolioID, 
+				curtidas: portfolios[portfolioIndex].curtidas 
+			} 
+		});
 
 	} catch (error) {
 		console.error(error);

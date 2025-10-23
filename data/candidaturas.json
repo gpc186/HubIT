@@ -46,5 +46,29 @@
     },
     "dataCandidatura": "2025-10-23T11:21:06.624Z",
     "status": "pendente"
+  },
+  {
+    "candidaturaID": 51761238150907,
+    "empregoID": 21760557376159,
+    "userID": 1759967977156,
+    "curriculoID": 41761162191498,
+    "candidato": {
+      "nome": "Fernando Sanches",
+      "email": "guguinha@gmail.com",
+      "telefone": "11 99999-9999",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Frontend",
+      "nivelExperiencia": "Especialista",
+      "linkedin": "https://www.linkedin.com/in/fernando-sanches-0b0947349/",
+      "github": "https://github.com/FernandoSnchs"
+    },
+    "vaga": {
+      "titulo": "Engenheiro de Software Backend",
+      "empresaNome": "Nubank",
+      "localizacao": "São Paulo, SP",
+      "area": "Backend"
+    },
+    "dataCandidatura": "2025-10-23T16:49:10.907Z",
+    "status": "pendente"
   }
 ]
