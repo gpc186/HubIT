@@ -1,4 +1,6 @@
-// Colocar o indicador no item ativo quando carregar a página
+// ============================================
+// NAVEGAÇÃO E INDICADORES
+// ============================================
 window.addEventListener('DOMContentLoaded', () => {
     const activeItem = document.querySelector('.nav-item.active');
     if (activeItem) {
@@ -7,18 +9,11 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function navigateTo(element, pageUrl) {
-    // Remove a classe active de todos os itens
     document.querySelectorAll('.nav-item').forEach(item => {
         item.classList.remove('active');
     });
-
-    // Adiciona a classe active no item clicado
     element.classList.add('active');
-    
-    // Move o indicador
     moveIndicator(element);
-
-    // Espera a animação terminar antes de redirecionar
     setTimeout(() => {
         window.location.href = pageUrl;
     }, 400);
@@ -27,17 +22,12 @@ function navigateTo(element, pageUrl) {
 function moveIndicator(element) {
     const indicator = document.getElementById('indicator');
     if (!indicator || !element) return;
-
     const elementRect = element.getBoundingClientRect();
     const navbarRect = document.querySelector('.navbar-nav').getBoundingClientRect();
-    
-    // Calcula a posição relativa
     const leftPosition = elementRect.left - navbarRect.left + (elementRect.width / 2) - (indicator.offsetWidth / 2);
-    
     indicator.style.left = leftPosition + 'px';
 }
 
-// Reposiciona o indicador ao redimensionar a janela
 window.addEventListener('resize', () => {
     const activeItem = document.querySelector('.nav-item.active');
     if (activeItem) {
@@ -52,19 +42,12 @@ window.addEventListener('load', () => {
     }
 });
 
-const dataNow = new Date();
-const dataHours = dataNow.getHours();
-
-const mensagemGreeting = document.getElementById('mensagemGreeting');
-
-document.addEventListener('DOMContentLoaded', async () => {
-    await carregarPagina();
-});
-
+// ============================================
+// CARREGAR DADOS DO PERFIL
+// ============================================
 async function carregarPagina() {
     const userID = localStorage.getItem('userID');
     
-    // Verifica se o usuário já está logado
     if (!userID) {
         alert('Você precisa fazer login!');
         window.location.href = '/';
@@ -86,75 +69,44 @@ async function carregarPagina() {
         const dados = await resposta.json();
         const usuarioAtual = dados.usuario;
 
-        // Verifica se o usuário tem dados cadastrados
         if (!usuarioAtual.dados) {
             alert('Por favor, complete seu cadastro');
             return;
         }
 
-        // Seleciona os elementos do DOM
-        const nomePrincipal = document.getElementById('nomePrincipal');
-        const localizacao = document.getElementById('localizacao');
-        const trabalho = document.getElementById('trabalho');
-        const bio = document.querySelector('.bio');
-        
-        // Links
-        const linkedin = document.getElementById('lkdn');
-        const github = document.getElementById('gthb');
+        // Pega os containers
+        const containerCurriculos = document.getElementById('container-curriculos');
+        const containerAnalise = document.getElementById('container-Analise');
+        const containerEmpregos = document.getElementById('container-empregos');
+        const containerCandidatos = document.getElementById('container-candidatos');
 
-        // Preenche os dados principais
-        if (nomePrincipal) {
-            nomePrincipal.innerText = usuarioAtual.dados.nome || 'Nome não informado';
+        if (usuarioAtual.tipoConta === 'usuario') {
+            // Mostrar containers de usuário
+            if (containerCurriculos) containerCurriculos.style.display = 'block';
+            if (containerAnalise) containerAnalise.style.display = 'block';
+            
+            // Esconder containers de empresa
+            if (containerEmpregos) containerEmpregos.style.display = 'none';
+            if (containerCandidatos) containerCandidatos.style.display = 'none';
+            
+            // Carregar dados de usuário
+            preencherDadosUsuario(usuarioAtual);
+            await carregarCandidaturas();
+            await carregarCurriculos();
+            
+        } else if (usuarioAtual.tipoConta === 'empresa') {
+            // Mostrar containers de empresa
+            if (containerEmpregos) containerEmpregos.style.display = 'block';
+            if (containerCandidatos) containerCandidatos.style.display = 'block';
+            
+            // Esconder containers de usuário
+            if (containerCurriculos) containerCurriculos.style.display = 'none';
+            if (containerAnalise) containerAnalise.style.display = 'none';
+            
+            // Carregar dados de empresa
+            preencherDadosEmpresa(usuarioAtual);
+            await carregarEmpregosEmpresa();
         }
-
-        if (localizacao) {
-            localizacao.innerText = usuarioAtual.dados.localizacao || 'Localização não informada';
-        }
-
-        if (trabalho) {
-            trabalho.innerText = usuarioAtual.dados.areaAtuacao || 'Área não informada';
-        }
-
-        // Preenche biografia se existir
-        if (bio && usuarioAtual.dados.biografia) {
-            bio.innerText = usuarioAtual.dados.biografia;
-        }
-
-        // Configura links do LinkedIn
-        if (linkedin) {
-            if (usuarioAtual.dados.linkedin) {
-                linkedin.href = usuarioAtual.dados.linkedin;
-                linkedin.textContent = 'LinkedIn';
-                linkedin.target = '_blank';
-                linkedin.style.display = 'inline-block';
-                linkedin.parentElement.style.display = 'list-item';
-            } else {
-                linkedin.parentElement.style.display = 'none';
-            }
-        }
-
-        // Configura links do GitHub (CORRIGIDO: era 'gitLink' e deveria ser 'github')
-        if (github) {
-            if (usuarioAtual.dados.github) {
-                github.href = usuarioAtual.dados.github;
-                github.textContent = 'GitHub';
-                github.target = '_blank';
-                github.style.display = 'inline-block';
-                github.parentElement.style.display = 'list-item';
-            } else {
-                github.parentElement.style.display = 'none';
-            }
-        }
-
-        // Log para debug (pode remover em produção)
-        console.log('Dados do usuário carregados:', {
-            userID: usuarioAtual.userID,
-            email: usuarioAtual.email,
-            tipoConta: usuarioAtual.tipoConta,
-            perfilCompleto: usuarioAtual.perfilCompleto,
-            podeEditar: usuarioAtual.podeEditar,
-            dados: usuarioAtual.dados
-        });
 
     } catch (error) {
         console.error('Erro ao carregar perfil:', error);
@@ -162,7 +114,76 @@ async function carregarPagina() {
     }
 }
 
-// Função para abrir modal de edição (se necessário)
+// Função para preencher dados de usuário
+function preencherDadosUsuario(usuario) {
+    const nomePrincipal = document.getElementById('nomePrincipal');
+    const localizacao = document.getElementById('localizacao');
+    const trabalho = document.getElementById('trabalho');
+    const bio = document.querySelector('.bio');
+    
+    if (nomePrincipal) {
+        nomePrincipal.innerText = usuario.dados.nome || 'Nome não informado';
+    }
+    if (localizacao) {
+        localizacao.innerText = usuario.dados.localizacao || 'Localização não informada';
+    }
+    if (trabalho) {
+        trabalho.innerText = usuario.dados.areaAtuacao || 'Área não informada';
+    }
+    if (bio && usuario.dados.biografia) {
+        bio.innerText = usuario.dados.biografia;
+    }
+    
+    // Links
+    const linkedin = document.getElementById('lkdn');
+    const github = document.getElementById('gthb');
+    
+    if (linkedin && usuario.dados.linkedin) {
+        linkedin.href = usuario.dados.linkedin;
+        linkedin.textContent = 'LinkedIn';
+        linkedin.style.display = 'inline-block';
+    }
+    if (github && usuario.dados.github) {
+        github.href = usuario.dados.github;
+        github.textContent = 'GitHub';
+        github.style.display = 'inline-block';
+    }
+}
+
+// Função para preencher dados de empresa
+function preencherDadosEmpresa(empresa) {
+    const nomePrincipal = document.getElementById('nomePrincipal');
+    const localizacao = document.getElementById('localizacao');
+    const trabalho = document.getElementById('trabalho');
+    const bio = document.querySelector('.bio');
+    
+    if (nomePrincipal) {
+        nomePrincipal.innerText = empresa.dados.nomeEmpresa || 'Nome não informado';
+    }
+    if (localizacao) {
+        localizacao.innerText = empresa.dados.localizacao || 'Localização não informada';
+    }
+    if (trabalho) {
+        trabalho.innerText = empresa.dados.setor || 'Setor não informado';
+    }
+    if (bio && empresa.dados.descricao) {
+        bio.innerText = empresa.dados.descricao;
+    }
+    
+    // Links
+    const linkedin = document.getElementById('lkdn');
+    const github = document.getElementById('gthb');
+    
+    if (linkedin && empresa.dados.linkedin) {
+        linkedin.href = empresa.dados.linkedin;
+        linkedin.textContent = 'LinkedIn';
+        linkedin.style.display = 'inline-block';
+    }
+    if (github) {
+        github.parentElement.style.display = 'none'; // Empresa não tem GitHub
+    }
+}
+
 function abrirModalEdicao() {
     const modal = document.getElementById('modalCompletarPerfil');
     if (modal) {
@@ -171,12 +192,13 @@ function abrirModalEdicao() {
     }
 }
 
-//candidaturass
+// ============================================
+// CARROSSEL DE CANDIDATURAS
+// ============================================
 let candidaturasAtual = 0;
 let totalCandidaturas = 0;
 let cardsVisiveis = 1;
 
-// Adicione esta função ao seu pg-perfil.js
 async function carregarCandidaturas() {
     const userID = localStorage.getItem('userID');
     
@@ -195,10 +217,16 @@ async function carregarCandidaturas() {
         const dados = await resposta.json();
         
         // Esconde loading
-        document.getElementById('loadingCandidaturas').style.display = 'none';
+        const loadingElement = document.getElementById('loadingCandidaturas');
+        if (loadingElement) {
+            loadingElement.style.display = 'none';
+        }
 
         if (!dados.ok || !dados.candidaturas || dados.candidaturas.length === 0) {
-            document.getElementById('semCandidaturas').style.display = 'flex';
+            const semCandidaturas = document.getElementById('semCandidaturas');
+            if (semCandidaturas) {
+                semCandidaturas.style.display = 'flex';
+            }
             return;
         }
 
@@ -206,33 +234,41 @@ async function carregarCandidaturas() {
         renderizarCandidaturas(dados.candidaturas);
         
         // Mostra o carrossel
-        document.getElementById('candidaturasWrapper').style.display = 'block';
+        const wrapper = document.getElementById('candidaturasWrapper');
+        if (wrapper) {
+            wrapper.style.display = 'block';
+        }
         
-        // Atualiza cards visíveis baseado no tamanho da tela
-        atualizarCardsVisiveis();
-        atualizarBotoes();
-        criarIndicadores();
+        // Aguarda um frame para garantir que o DOM foi atualizado
+        requestAnimationFrame(() => {
+            atualizarCardsVisiveis();
+            atualizarBotoes();
+            criarIndicadores();
+        });
 
     } catch (error) {
         console.error('Erro ao carregar candidaturas:', error);
-        document.getElementById('loadingCandidaturas').style.display = 'none';
-        document.getElementById('semCandidaturas').style.display = 'flex';
+        const loadingElement = document.getElementById('loadingCandidaturas');
+        const semCandidaturas = document.getElementById('semCandidaturas');
+        
+        if (loadingElement) loadingElement.style.display = 'none';
+        if (semCandidaturas) semCandidaturas.style.display = 'flex';
     }
 }
 
 function renderizarCandidaturas(candidaturas) {
     const track = document.getElementById('candidaturasTrack');
+    if (!track) return;
+    
     track.innerHTML = '';
 
     candidaturas.forEach((candidatura) => {
         const card = document.createElement('div');
         card.className = 'candidatura-card';
         
-        // Formatar data
         const data = new Date(candidatura.dataCandidatura);
         const dataFormatada = data.toLocaleDateString('pt-BR');
         
-        // Status traduzido
         const statusMap = {
             'pendente': { texto: 'Pendente', classe: 'status-pendente' },
             'aceito': { texto: 'Aceito', classe: 'status-aceito' },
@@ -274,7 +310,6 @@ function renderizarCandidaturas(candidaturas) {
     });
 }
 
-
 function atualizarCardsVisiveis() {
     const width = window.innerWidth;
     if (width >= 1024) {
@@ -287,9 +322,11 @@ function atualizarCardsVisiveis() {
 }
 
 function moverCarrossel(direcao) {
-    candidaturasAtual += direcao;
+    if (totalCandidaturas === 0) return;
     
     const maxIndex = Math.ceil(totalCandidaturas / cardsVisiveis) - 1;
+    
+    candidaturasAtual += direcao;
     
     if (candidaturasAtual < 0) {
         candidaturasAtual = 0;
@@ -298,11 +335,10 @@ function moverCarrossel(direcao) {
     }
     
     const track = document.getElementById('candidaturasTrack');
-    const cardWidth = track.firstElementChild.offsetWidth;
-    const gap = 20;
-    const deslocamento = -(candidaturasAtual * cardsVisiveis * (cardWidth + gap));
+    if (!track || !track.firstElementChild) return;
     
-    track.style.transform = `translateX(${deslocamento}px)`;
+    const deslocamento = -(candidaturasAtual * 100);
+    track.style.transform = `translateX(${deslocamento}%)`;
     
     atualizarBotoes();
     atualizarIndicadores();
@@ -311,17 +347,32 @@ function moverCarrossel(direcao) {
 function atualizarBotoes() {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    
+    if (!prevBtn || !nextBtn) return;
+    
     const maxIndex = Math.ceil(totalCandidaturas / cardsVisiveis) - 1;
     
     prevBtn.disabled = candidaturasAtual === 0;
     nextBtn.disabled = candidaturasAtual >= maxIndex;
+    
+    prevBtn.style.opacity = candidaturasAtual === 0 ? '0.5' : '1';
+    nextBtn.style.opacity = candidaturasAtual >= maxIndex ? '0.5' : '1';
 }
 
 function criarIndicadores() {
     const container = document.getElementById('carouselIndicators');
+    if (!container) return;
+    
     container.innerHTML = '';
     
     const totalPaginas = Math.ceil(totalCandidaturas / cardsVisiveis);
+    
+    if (totalPaginas <= 1) {
+        container.style.display = 'none';
+        return;
+    }
+    
+    container.style.display = 'flex';
     
     for (let i = 0; i < totalPaginas; i++) {
         const dot = document.createElement('div');
@@ -340,21 +391,160 @@ function atualizarIndicadores() {
 }
 
 function irParaPagina(index) {
-    candidaturasAtual = index;
+    const maxIndex = Math.ceil(totalCandidaturas / cardsVisiveis) - 1;
+    candidaturasAtual = Math.min(Math.max(0, index), maxIndex);
     moverCarrossel(0);
 }
 
-// Atualizar ao redimensionar a janela
+// ============================================
+// EVENT LISTENERS
+// ============================================
+let resizeTimeout;
 window.addEventListener('resize', () => {
-    atualizarCardsVisiveis();
-    candidaturasAtual = 0;
-    moverCarrossel(0);
-    criarIndicadores();
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        const antigoCardsVisiveis = cardsVisiveis;
+        atualizarCardsVisiveis();
+        
+        if (antigoCardsVisiveis !== cardsVisiveis && totalCandidaturas > 0) {
+            candidaturasAtual = 0;
+            moverCarrossel(0);
+            criarIndicadores();
+        }
+    }, 250);
 });
 
-// Chame esta função dentro do seu carregarDadosUsuario() existente
-// Adicione no final da função carregarPagina() ou carregarDadosUsuario():
-carregarCandidaturas();
+// Suporte a gestos touch
+let touchStartX = 0;
+let touchEndX = 0;
 
+function handleGesture() {
+    if (touchEndX < touchStartX - 50) {
+        moverCarrossel(1);
+    }
+    if (touchEndX > touchStartX + 50) {
+        moverCarrossel(-1);
+    }
+}
 
+// Inicialização
+document.addEventListener('DOMContentLoaded', async () => {
+    // Adiciona listeners de touch
+    const track = document.getElementById('candidaturasTrack');
+    if (track) {
+        track.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
 
+        track.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleGesture();
+        });
+    }
+    
+    // Carrega a página
+    await carregarPagina();
+});
+// Carregar empregos que a empresa postou
+async function carregarEmpregosEmpresa() {
+    const userID = localStorage.getItem('userID');
+    
+    try {
+        const resposta = await fetch(`/api/emprego/meus`, {
+            method: 'GET',
+            headers: {
+                'user-id': userID
+            }
+        });
+
+        const dados = await resposta.json();
+        
+        if (!dados.ok || !dados.empregos || dados.empregos.length === 0) {
+            document.getElementById('semEmpregos').style.display = 'flex';
+            return;
+        }
+
+        renderizarEmpregos(dados.empregos);
+        
+    } catch (error) {
+        console.error('Erro ao carregar empregos:', error);
+        document.getElementById('semEmpregos').style.display = 'flex';
+    }
+}
+
+function renderizarEmpregos(empregos) {
+    const container = document.getElementById('empregosLista');
+    container.innerHTML = '';
+
+    empregos.forEach((emprego) => {
+        const card = document.createElement('div');
+        card.className = 'emprego-card';
+        
+        card.innerHTML = `
+            <div class="emprego-header">
+                <h3>${emprego.titulo}</h3>
+                <span class="status-badge status-${emprego.status}">${emprego.status}</span>
+            </div>
+            
+            <div class="emprego-info">
+                <div class="info-item">
+                    <ion-icon name="location-outline"></ion-icon>
+                    <span>${emprego.localizacao}</span>
+                </div>
+                <div class="info-item">
+                    <ion-icon name="code-outline"></ion-icon>
+                    <span>${emprego.area}</span>
+                </div>
+                <div class="info-item">
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    <span>${emprego.dataCriacao}</span>
+                </div>
+            </div>
+            
+            <div class="emprego-footer">
+                <button class="btn btn-sm btn-primary" onclick="verCandidatos(${emprego.empregoID})">
+                    Ver Candidatos
+                </button>
+                <button class="btn btn-sm btn-danger" onclick="deletarEmprego(${emprego.empregoID})">
+                    Deletar
+                </button>
+            </div>
+        `;
+        
+        container.appendChild(card);
+    });
+}
+
+async function verCandidatos(empregoID) {
+    // Redirecionar para página de candidatos ou abrir modal
+    window.location.href = `/candidatos/${empregoID}`;
+}
+
+async function deletarEmprego(empregoID) {
+    if (!confirm('Tem certeza que deseja deletar esta vaga?')) {
+        return;
+    }
+    
+    const userID = localStorage.getItem('userID');
+    
+    try {
+        const resposta = await fetch(`/api/emprego/${empregoID}`, {
+            method: 'DELETE',
+            headers: {
+                'user-id': userID
+            }
+        });
+        
+        const dados = await resposta.json();
+        
+        if (dados.ok) {
+            alert('Vaga deletada com sucesso!');
+            await carregarEmpregosEmpresa();
+        } else {
+            alert(dados.error);
+        }
+    } catch (error) {
+        console.error('Erro ao deletar emprego:', error);
+        alert('Erro ao deletar vaga');
+    }
+}

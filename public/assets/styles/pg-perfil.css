@@ -512,7 +512,7 @@ h3 {
     min-height: 200px;
     z-index: 4;
     border-radius: 0 0 17px 17px;
-    background-color: #f8f7f2;
+    background-color: white;
     padding: 20px;
     padding-top: 70px;
 }
@@ -552,6 +552,7 @@ h3 {
 
 /* ===== CONTAINER ANÁLISE ===== */
 .container-Analise {
+    background-color: white;
     width: 100%;
     max-width: 90%;
     min-height: 200px;
@@ -602,6 +603,7 @@ h3 {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    background-color: #ffff;
 }
 
 .container-curriculos .title {
@@ -660,6 +662,7 @@ h3 {
     }
 
     .img-perfil {
+        background-color: #ffff;
         width: 140px;
         height: 140px;
         top: 180px;
@@ -1328,6 +1331,138 @@ h3 {
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .container-curriculos .curriculos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/*SUMIR*/
+.sumir{
+    display:none;
+}
+
+/* Estilos para empregos da empresa */
+.container-empregos {
+    background-color: white; /* ADICIONE ESTA LINHA */
+    width: 100%;
+    max-width: 90%;
+    min-height: 300px;
+    border: #70707079 solid 3px;
+    margin: 0 auto 50px;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.container-candidatos {
+    background-color: white; /* ADICIONE ESTA LINHA */
+    width: 100%;
+    max-width: 90%;
+    min-height: 300px;
+    border: #70707079 solid 3px;
+    margin: 0 auto 50px;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.empregos-lista {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.emprego-card {
+    background: white;
+    border: 2px solid #70707079;
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.emprego-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(47, 109, 136, 0.15);
+}
+
+.emprego-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.emprego-header h3 {
+    font-family: Codec;
+    font-size: 20px !important;
+    color: #2f6d88 !important;
+    margin: 0;
+}
+
+.emprego-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+/* Mensagem sem empregos */
+.sem-empregos {
+    width: 100%;
+    padding: 60px 20px;
+    text-align: center;
+    color: #a6a6a6;
+    font-family: Codec;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sem-empregos ion-icon {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.sem-empregos p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Container de candidatos */
+.container-candidatos {
+    background-color: white;
+    width: 100%;
+    max-width: 90%;
+    min-height: 300px;
+    border: #70707079 solid 3px;
+    margin: 0 auto 50px;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.container-candidatos .title {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.container-candidatos .title h1 {
+    font-size: clamp(20px, 4vw, 28px);
+    margin: 0;
+}
+
+/* Status badge para empregos */
+.status-ativo {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-inativo {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-pausado {
+    background-color: #fff3cd;
+    color: #856404;
+}
+@media (min-width: 768px) {
+    .empregos-lista {
         grid-template-columns: repeat(2, 1fr);
     }
 }

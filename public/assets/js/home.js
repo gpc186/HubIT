@@ -51,7 +51,7 @@ async function carregarPagina() {
         await carregarEmpregos();
 
     } catch (error) {
-        console.error('❌ Erro ao carregar página:', error);
+        console.error(' Erro ao carregar página:', error);
     }
 }
 
@@ -77,18 +77,18 @@ function atualizarPerfil(usuarioAtual) {
     if (mensagemGreeting) {
         const nome = usuarioAtual.dados.nome;
         if (dataHours < 13) {
-            weatherIconImg.src = "../img/svg/sun-svgrepo-com.svg" 
-            mensagemGreeting.innerHTML = `Bom dia, <span style="color:#106083">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
+            weatherIconImg.src = ("assets/img/svg/sun-svgrepo-com.svg")
+            mensagemGreeting.innerHTML = `Bom dia, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
         } else if (dataHours < 18) {
-            weatherIconImg.src = "../img/svg/partly-cloudy-svgrepo-com.svg" 
-            mensagemGreeting.innerHTML = `Boa tarde, <span style="color:#106083">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
+            weatherIconImg.src = ("assets/img/svg/partly-cloudy-svgrepo-com.svg") 
+            mensagemGreeting.innerHTML = `Boa tarde, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
         } else {
-            weatherIconImg.src = "../img/svg/moon-svgrepo-com.svg" 
-            mensagemGreeting.innerHTML = `Boa noite, <span style="color:#106083">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
+            weatherIconImg.src = ("assets/img/svg/moon-svgrepo-com.svg") 
+            mensagemGreeting.innerHTML = `Boa noite, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
         }
     }
 
-    console.log('✅ Perfil carregado com sucesso!');
+    console.log('Perfil carregado com sucesso!');
 }
 
 // === FUNÇÕES DE CURRÍCULOS ===
@@ -218,7 +218,7 @@ async function enviarCandidatura(empregoID) {
             if (modal) modal.hide();
 
             // Mostra mensagem de sucesso
-            alert('✅ Candidatura enviada com sucesso!');
+            alert('Candidatura enviada com sucesso!');
             
             // Confete de celebração após enviar curriculo
             if (typeof confetti !== 'undefined') {
@@ -323,8 +323,10 @@ async function carregarEmpregos(filtros = {}) {
                 nivel: emprego.nivel || ""
             }));
 
+            console.log(dadosEmprego)
+
             renderizarPropostas(propostas);
-            console.log(`✅ ${propostas.length} vagas carregadas`);
+            console.log(`${propostas.length} vagas carregadas`);
         } else {
             container.innerHTML = '<div class="loading">:( Nenhuma vaga encontrada.</div>';
         }
@@ -332,8 +334,8 @@ async function carregarEmpregos(filtros = {}) {
         atualizarFiltrosAtivos(filtros);
 
     } catch (error) {
-        console.error('❌ Erro completo ao carregar empregos:', error);
-        container.innerHTML = `<div class="loading">❌ Erro ao carregar vagas: ${error.message}</div>`;
+        console.error(' Erro completo ao carregar empregos:', error);
+        container.innerHTML = `<div class="loading"> Erro ao carregar vagas: ${error.message}</div>`;
     }
 }
 

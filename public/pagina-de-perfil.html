@@ -79,7 +79,7 @@
                 </div>
                 
                 <div class="img-perfil">
-                    <img src="/assets/img/contact_hero_img.png" alt="img perfil">
+                    <img src="/assets/img/svg/Hubit_icon_profile.svg" alt="img perfil">
                 </div>
                 
                 <div class="container-info">
@@ -106,9 +106,33 @@
                     </div>
                 </div>
             </div>
-            <div class="container-Analise">
+            
+            <!-- CONTAINER EMPREGOS (só para empresas) -->
+<div class="container-empregos" id="container-empregos" style="display: none;">
     <div class="title">
-        <p>Candidaturas</p>
+        <h1>Minhas Vagas</h1>
+        <p style="color: #a6a6a6; font-size: 14px; margin-top: 5px;">Gerencie as vagas que você publicou</p>
+    </div>
+    
+    <div class="sem-empregos" id="semEmpregos" style="display: none;">
+        <ion-icon name="briefcase-outline" style="font-size: 48px; color: #ccc;"></ion-icon>
+        <p>Você ainda não publicou nenhuma vaga</p>
+    </div>
+    
+    <div id="empregosLista" class="empregos-lista"></div>
+</div>
+
+<!-- CONTAINER CANDIDATOS (só para empresas) -->
+<div class="container-candidatos" id="container-candidatos" style="display: none;">
+    <div class="title">
+        <h1>Candidatos Recentes</h1>
+    </div>
+    <div id="candidatosRecentes"></div>
+</div>
+        
+<div class="container-Analise " id="container-Analise">
+    <div class="title">
+        <h1>Candidaturas</h1>
     </div>
     <div class="views">
         <!-- Container para o carrossel -->
@@ -147,7 +171,7 @@
         </div>
     </div>
 </div>
-            <div class="container-curriculos">
+<div class="container-curriculos " id="container-curriculos">
     <div class="title">
         <h1>Currículos</h1>
         <p style="color: #a6a6a6; font-size: 14px; margin-top: 5px;">Crie até 3 currículos diferentes para vagas específicas</p>
@@ -796,8 +820,6 @@
             </div>
         
 
-
-        
         
     </main>
     
@@ -825,14 +847,19 @@
         </div>
         
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    <script src="/assets/js/curriculos.js"></script>    
-    <script async src="/assets/js/perfil.js"></script>
-    <script src="/assets/js/pg-perfil.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+<!-- Carrega o pg-perfil.js PRIMEIRO (tem o carregarPagina) -->
+<script async src="/assets/js/pg-perfil.js"></script>
+
+<!-- Depois carrega os outros scripts -->
+<script src="/assets/js/curriculos.js"></script>
+<script async src="/assets/js/perfil.js"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

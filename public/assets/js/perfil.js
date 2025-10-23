@@ -274,3 +274,4 @@ function sair() {
     // Volta para página inicial (root)
     window.location.href = '/';
 }
+
