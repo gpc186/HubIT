@@ -614,6 +614,14 @@ section {
     align-items: center;
 }
 
+span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    column-gap: 5px;
+}
+
 .plan-content ul{
     list-style: circle;
     display: flex;
@@ -940,6 +948,7 @@ footer{
         .create-post-input {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
             margin-bottom: 12px;
         }
@@ -1076,6 +1085,30 @@ footer{
             margin-bottom: 8px;
         }
 
+        .post-engagement img{
+            width: 10px;
+            height: 10px;
+        }
+
+        button{
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+        }
+
+        button img{
+            width: 15px;
+            height: 13px;
+        }
+
+        #botaoLike{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        
         .post-actions {
             display: flex;
             justify-content: end;
@@ -1176,9 +1209,9 @@ footer{
         }
 
         .btn-primary{
-            --bs-btn-border-color: none;
-            --bs-btn-bg: #1D80AA;
-            --bs-btn-hover-bg: #245563;
+            --bs-btn-border-color: none !important;
+            --bs-btn-bg: #1D80AA !important;
+            --bs-btn-hover-bg: #245563 !important;
         }
 
         #jobBtn{
@@ -1594,3 +1627,10 @@ label{
     width: 100% !important;
 }
 
+.btn-outline-danger{
+    --bs-btn-border-color: #1D80AA !important;
+    --bs-btn-hover-bg: #1D80AA !important;
+    --bs-btn-hover-border-color: #1D80AA !important;
+}
+
+.btn-primary

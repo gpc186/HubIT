@@ -9,7 +9,21 @@ const portfoliosCurtidos = new Set();
 window.onload = async function () {
     console.log('🔄 Página carregando...');
     await carregarPagina();
+    await animaBotao();
 };
+
+function animaBotao(){
+    const botaoLike = document.getElementById('botaoLike')
+    const like = document.getElementById('like')
+
+    botaoLike.addEventListener("mouseover", ()=> {
+        like.src = "assets/img/svg/thumbup-hover-svgrepo-com.svg";
+    })
+
+    botaoLike.addEventListener("mouseout", ()=> {
+        like.src = "assets/img/svg/thumbup-svgrepo-com.svg";
+    })
+}
 
 // ===== FUNÇÃO PRINCIPAL DE CARREGAMENTO =====
 async function carregarPagina() {
@@ -187,7 +201,7 @@ function renderizarPortfolios(portfolios) {
         // Verificar se já curtiu este portfólio
         const jaCurtiuEste = jaCurtiu(portfolio.portfolioID);
         const botaoCurtirClass = jaCurtiuEste ? 'btn-secondary' : 'btn-outline-danger';
-        const botaoCurtirTexto = jaCurtiuEste ? '✓ Curtido' : '❤️';
+        const botaoCurtirTexto = jaCurtiuEste ? '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> Curtido' : '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg">';
         
         postCard.innerHTML = `
             <div class="post-header">
@@ -208,14 +222,14 @@ function renderizarPortfolios(portfolios) {
                 </div>
             </div>
             <div class="post-engagement">
-                <span>❤️ ${portfolio.curtidas || 0} curtidas</span>
-                <span>📁 ${portfolio.categoria}</span>
+                <span><img src="/assets/img/svg/thumbup-svgrepo-com.svg"> ${portfolio.curtidas || 0} curtidas</span>
+                <span><img src="/assets/img/svg/zip-svgrepo-com.svg"> ${portfolio.categoria}</span>
             </div>
             <div class="post-actions">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPortfolio${portfolio.portfolioID}">
                     Ver Detalhes
                 </button>
-                <button type="button" class="btn ${botaoCurtirClass}" onclick="curtirPortfolio(${portfolio.portfolioID})">
+                <button id="botaoLike" type="button" class="btn ${botaoCurtirClass}" onclick="curtirPortfolio(${portfolio.portfolioID})">
                     ${botaoCurtirTexto}
                 </button>
             </div>
@@ -281,7 +295,7 @@ function criarModalPortfolio(portfolio, dataCriacao, jaCurtiuEste, botaoCurtirCl
                         
                         <div class="d-flex flex-wrap gap-3 mb-3">
                             <span class="text-muted small"><span class="me-1">📁</span>${portfolio.categoria || 'Sem categoria'}</span>
-                            <span class="text-muted small"><span class="me-1">❤️</span>${portfolio.curtidas || 0} curtidas</span>
+                            <span class="text-muted small"><span class="me-1"><3</span>${portfolio.curtidas || 0} curtidas</span>
                             <span class="text-muted small"><span class="me-1">📅</span>${dataCriacao}</span>
                         </div>
                         
@@ -327,7 +341,7 @@ function criarModalPortfolio(portfolio, dataCriacao, jaCurtiuEste, botaoCurtirCl
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     <button type="button" class="btn ${botaoCurtirClass}" onclick="curtirPortfolio(${portfolio.portfolioID})">
-                        ${jaCurtiuEste ? '✓ Curtido' : '❤️ Projeto'}
+                        ${jaCurtiuEste ? '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> Curtido' : '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> Projeto'}
                     </button>
                 </div>
             </div>
@@ -409,7 +423,7 @@ function atualizarUIAposCurtir(portfolioID) {
     engagementSpans.forEach(span => {
         if (span.textContent.includes('curtidas')) {
             const currentLikes = parseInt(span.textContent.match(/\d+/)[0]);
-            span.innerHTML = `❤️ ${currentLikes + 1} curtidas`;
+            span.innerHTML = `<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> ${currentLikes + 1} curtidas`;
         }
     });
     
@@ -426,7 +440,7 @@ function atualizarUIAposDescurtir(portfolioID) {
     engagementSpans.forEach(span => {
         if (span.textContent.includes('curtidas')) {
             const currentLikes = parseInt(span.textContent.match(/\d+/)[0]);
-            span.innerHTML = `❤️ ${Math.max(0, currentLikes - 1)} curtidas`;
+            span.innerHTML = `<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> ${Math.max(0, currentLikes - 1)} curtidas`;
         }
     });
     
@@ -434,7 +448,7 @@ function atualizarUIAposDescurtir(portfolioID) {
     botoesCurtir.forEach(btn => {
         btn.classList.remove('btn-secondary');
         btn.classList.add('btn-outline-danger');
-        btn.innerHTML = btn.innerHTML.includes('Projeto') ? '❤️ Projeto' : '❤️';
+        btn.innerHTML = btn.innerHTML.includes('Projeto') ? '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> Projeto' : '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg">';
     });
 }
 
