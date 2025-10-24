@@ -9,21 +9,7 @@ const portfoliosCurtidos = new Set();
 window.onload = async function () {
     console.log('🔄 Página carregando...');
     await carregarPagina();
-    await animaBotao();
 };
-
-function animaBotao(){
-    const botaoLike = document.getElementById('botaoLike')
-    const like = document.getElementById('like')
-
-    botaoLike.addEventListener("mouseover", ()=> {
-        like.src = "assets/img/svg/thumbup-hover-svgrepo-com.svg";
-    })
-
-    botaoLike.addEventListener("mouseout", ()=> {
-        like.src = "assets/img/svg/thumbup-svgrepo-com.svg";
-    })
-}
 
 // ===== FUNÇÃO PRINCIPAL DE CARREGAMENTO =====
 async function carregarPagina() {
@@ -201,7 +187,7 @@ function renderizarPortfolios(portfolios) {
         // Verificar se já curtiu este portfólio
         const jaCurtiuEste = jaCurtiu(portfolio.portfolioID);
         const botaoCurtirClass = jaCurtiuEste ? 'btn-secondary' : 'btn-outline-danger';
-        const botaoCurtirTexto = jaCurtiuEste ? '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> Curtido' : '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg">';
+        const botaoCurtirTexto = jaCurtiuEste ? 'Curtido' : 'Curtir';
         
         postCard.innerHTML = `
             <div class="post-header">
@@ -222,15 +208,15 @@ function renderizarPortfolios(portfolios) {
                 </div>
             </div>
             <div class="post-engagement">
-                <span><img src="/assets/img/svg/thumbup-svgrepo-com.svg"> ${portfolio.curtidas || 0} curtidas</span>
+                <span><img src="/assets/img/svg/thumbup-svgrepo-com.svg"> <span id="curtidas-${portfolio.portfolioID}">${portfolio.curtidas || 0}</span> curtidas</span>
                 <span><img src="/assets/img/svg/zip-svgrepo-com.svg"> ${portfolio.categoria}</span>
             </div>
             <div class="post-actions">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPortfolio${portfolio.portfolioID}">
                     Ver Detalhes
                 </button>
-                <button id="botaoLike" type="button" class="btn ${botaoCurtirClass}" onclick="curtirPortfolio(${portfolio.portfolioID})">
-                    ${botaoCurtirTexto}
+                <button id="btnCurtir-${portfolio.portfolioID}" type="button" class="btn ${botaoCurtirClass}" onclick="curtirPortfolio(${portfolio.portfolioID})">
+                    <img src="/assets/img/svg/thumbup-svgrepo-com.svg"> ${botaoCurtirTexto}
                 </button>
             </div>
         `;
@@ -295,7 +281,7 @@ function criarModalPortfolio(portfolio, dataCriacao, jaCurtiuEste, botaoCurtirCl
                         
                         <div class="d-flex flex-wrap gap-3 mb-3">
                             <span class="text-muted small"><span class="me-1">📁</span>${portfolio.categoria || 'Sem categoria'}</span>
-                            <span class="text-muted small"><span class="me-1"><3</span>${portfolio.curtidas || 0} curtidas</span>
+                            <span class="text-muted small"><span class="me-1">❤️</span><span id="curtidas-modal-${portfolio.portfolioID}">${portfolio.curtidas || 0}</span> curtidas</span>
                             <span class="text-muted small"><span class="me-1">📅</span>${dataCriacao}</span>
                         </div>
                         
@@ -340,8 +326,8 @@ function criarModalPortfolio(portfolio, dataCriacao, jaCurtiuEste, botaoCurtirCl
                 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn ${botaoCurtirClass}" onclick="curtirPortfolio(${portfolio.portfolioID})">
-                        ${jaCurtiuEste ? '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> Curtido' : '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> Projeto'}
+                    <button id="btnCurtirModal-${portfolio.portfolioID}" type="button" class="btn ${botaoCurtirClass}" onclick="curtirPortfolio(${portfolio.portfolioID})">
+                        <img src="/assets/img/svg/thumbup-svgrepo-com.svg"> ${jaCurtiuEste ? 'Curtido' : 'Curtir Projeto'}
                     </button>
                 </div>
             </div>
@@ -384,6 +370,7 @@ async function curtirPortfolio(portfolioID) {
 
     try {
         if (jaCurtiuEste) {
+            // Descurtir
             const response = await fetch(`/api/portfolio/${portfolioID}/descurtir`, {
                 method: 'DELETE',
                 headers: { 'user-id': userID }
@@ -398,6 +385,7 @@ async function curtirPortfolio(portfolioID) {
                 alert('Erro: ' + dados.error);
             }
         } else {
+            // Curtir
             const response = await fetch(`/api/portfolio/${portfolioID}/curtir`, {
                 method: 'POST',
                 headers: { 'user-id': userID }
@@ -419,37 +407,67 @@ async function curtirPortfolio(portfolioID) {
 }
 
 function atualizarUIAposCurtir(portfolioID) {
-    const engagementSpans = document.querySelectorAll('.post-engagement span');
-    engagementSpans.forEach(span => {
-        if (span.textContent.includes('curtidas')) {
-            const currentLikes = parseInt(span.textContent.match(/\d+/)[0]);
-            span.innerHTML = `<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> ${currentLikes + 1} curtidas`;
-        }
-    });
+    // Atualizar contador no card
+    const contadorCard = document.getElementById(`curtidas-${portfolioID}`);
+    if (contadorCard) {
+        const currentLikes = parseInt(contadorCard.textContent);
+        contadorCard.textContent = currentLikes + 1;
+    }
     
-    const botoesCurtir = document.querySelectorAll(`button[onclick*="curtirPortfolio(${portfolioID})"]`);
-    botoesCurtir.forEach(btn => {
-        btn.classList.remove('btn-outline-danger');
-        btn.classList.add('btn-secondary');
-        btn.innerHTML = btn.innerHTML.includes('Projeto') ? '✓ Curtido' : '✓ Curtido';
-    });
+    // Atualizar contador no modal
+    const contadorModal = document.getElementById(`curtidas-modal-${portfolioID}`);
+    if (contadorModal) {
+        const currentLikes = parseInt(contadorModal.textContent);
+        contadorModal.textContent = currentLikes + 1;
+    }
+    
+    // Atualizar botão no card
+    const btnCard = document.getElementById(`btnCurtir-${portfolioID}`);
+    if (btnCard) {
+        btnCard.classList.remove('btn-outline-danger');
+        btnCard.classList.add('btn-secondary');
+        btnCard.innerHTML = '<img src="/assets/img/svg/thumbup-svgrepo-com.svg"> Curtido';
+    }
+    
+    // Atualizar botão no modal
+    const btnModal = document.getElementById(`btnCurtirModal-${portfolioID}`);
+    if (btnModal) {
+        btnModal.classList.remove('btn-outline-danger');
+        btnModal.classList.add('btn-secondary');
+        btnModal.innerHTML = '<img src="/assets/img/svg/thumbup-svgrepo-com.svg"> Curtido';
+    }
 }
 
 function atualizarUIAposDescurtir(portfolioID) {
-    const engagementSpans = document.querySelectorAll('.post-engagement span');
-    engagementSpans.forEach(span => {
-        if (span.textContent.includes('curtidas')) {
-            const currentLikes = parseInt(span.textContent.match(/\d+/)[0]);
-            span.innerHTML = `<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> ${Math.max(0, currentLikes - 1)} curtidas`;
-        }
-    });
+    // Atualizar contador no card
+    const contadorCard = document.getElementById(`curtidas-${portfolioID}`);
+    if (contadorCard) {
+        const currentLikes = parseInt(contadorCard.textContent);
+        contadorCard.textContent = Math.max(0, currentLikes - 1);
+    }
     
-    const botoesCurtir = document.querySelectorAll(`button[onclick*="curtirPortfolio(${portfolioID})"]`);
-    botoesCurtir.forEach(btn => {
-        btn.classList.remove('btn-secondary');
-        btn.classList.add('btn-outline-danger');
-        btn.innerHTML = btn.innerHTML.includes('Projeto') ? '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg"> Projeto' : '<img id="like" src="/assets/img/svg/thumbup-svgrepo-com.svg">';
-    });
+    // Atualizar contador no modal
+    const contadorModal = document.getElementById(`curtidas-modal-${portfolioID}`);
+    if (contadorModal) {
+        const currentLikes = parseInt(contadorModal.textContent);
+        contadorModal.textContent = Math.max(0, currentLikes - 1);
+    }
+    
+    // Atualizar botão no card
+    const btnCard = document.getElementById(`btnCurtir-${portfolioID}`);
+    if (btnCard) {
+        btnCard.classList.remove('btn-secondary');
+        btnCard.classList.add('btn-outline-danger');
+        btnCard.innerHTML = '<img src="/assets/img/svg/thumbup-svgrepo-com.svg"> Curtir';
+    }
+    
+    // Atualizar botão no modal
+    const btnModal = document.getElementById(`btnCurtirModal-${portfolioID}`);
+    if (btnModal) {
+        btnModal.classList.remove('btn-secondary');
+        btnModal.classList.add('btn-outline-danger');
+        btnModal.innerHTML = '<img src="/assets/img/svg/thumbup-svgrepo-com.svg"> Curtir Projeto';
+    }
 }
 
 // ===== PUBLICAR NOVO PORTFÓLIO =====
