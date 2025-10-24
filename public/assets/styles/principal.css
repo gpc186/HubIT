@@ -961,6 +961,7 @@ footer{
             color: white;
             background-color: #1D80AA;
             text-align: center;
+            border: none;
 
             font-family: Codec;
 
@@ -1592,3 +1593,4 @@ label{
 #portfoliosContainer{
     width: 100% !important;
 }
+
