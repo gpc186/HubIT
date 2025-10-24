@@ -59,7 +59,17 @@
     "passwd": "miguelrkk123A@",
     "tipoConta": "empresa",
     "userID": 1760466609594,
-    "dados": {}
+    "dados": {
+      "nomeEmpresa": "Tech sOlutions",
+      "cnpj": "11111111111111",
+      "telefone": "11111111",
+      "localizacao": "Sao Caetano",
+      "setor": "Tecnologia",
+      "numeroFuncionarios": "51-200",
+      "site": "asdasdasd",
+      "linkedin": "dasdasdasd",
+      "descricao": "asdasdasdasdasdasdasdasd"
+    }
   },
   {
     "email": "dadadadada@gmail.com",

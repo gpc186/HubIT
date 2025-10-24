@@ -71,7 +71,7 @@ router.post('/', async (req, res)=>{
         const candidaturas = JSON.parse(candidaturasData);
         
         const jaCandidatou = candidaturas.find(c => 
-            Number(c.userioID) === userID && 
+            Number(c.userID) === userID && 
             Number(c.empregoID) === Number(empregoID)
         );
         
@@ -145,27 +145,31 @@ router.get('/minhas', async (req, res)=>{
 	}
 })
 
-router.get('/vaga/:empregoID', async (req, res)=>{
-	const empresaID = Number(req.headers['user-id']);
+router.get('/vaga/:empregoID', async (req, res) => {
+    const empresaID = Number(req.headers['user-id']);
     const empregoID = Number(req.params.empregoID);
     
     if (!empresaID) {
         return res.status(401).json({error: "Faça login primeiro!"});
     }
-	try {
-		const empregosData = await fs.readFile(empregosPath, 'utf8')
-		const empregos = JSON.parse(empregosData)
-		const emprego = empregos.find(e => Number(e.userID) === empresaID)
+    
+    try {
+        const empregosData = await fs.readFile(empregosPath, 'utf8');
+        const empregos = JSON.parse(empregosData);
+        
+        // CORREÇÃO: Buscar emprego pelo empregoID, não pelo userID
+        const emprego = empregos.find(e => Number(e.empregoID) === empregoID);
 
-		if(!emprego){
-			return res.status(404).json({error: "Vaga não encontrada!"})
-		}
+        if (!emprego) {
+            return res.status(404).json({error: "Vaga não encontrada!"});
+        }
 
-		if (Number(emprego.empresaID) !== empresaID) {
+        // Verificar se a empresa é dona da vaga
+        if (Number(emprego.empresaID) !== empresaID) {
             return res.status(403).json({error: "Você não tem permissão para ver estes candidatos"});
         }
 
-		const candidaturasData = await fs.readFile(candidaturasPath, 'utf8');
+        const candidaturasData = await fs.readFile(candidaturasPath, 'utf8');
         const candidaturas = JSON.parse(candidaturasData);
         
         const candidatosDaVaga = candidaturas.filter(c => Number(c.empregoID) === empregoID);
@@ -174,11 +178,20 @@ router.get('/vaga/:empregoID', async (req, res)=>{
             new Date(b.dataCandidatura) - new Date(a.dataCandidatura)
         );
 
-		res.status(200).json({ok: true, mensagem: "Candidaturas carregadas com sucesso!", total: candidatosDaVaga.length, vaga:{ titulo: emprego.titulo, empresaNome: emprego.empresaNome }, candidaturas: candidatosDaVaga})
-	} catch (error) {
-		console.error(error);
-		return res.status(500).json({error: error.message})
-	}
-})
+        res.status(200).json({
+            ok: true, 
+            mensagem: "Candidaturas carregadas com sucesso!", 
+            total: candidatosDaVaga.length, 
+            vaga: { 
+                titulo: emprego.titulo, 
+                empresaNome: emprego.empresaNome 
+            }, 
+            candidaturas: candidatosDaVaga
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({error: error.message});
+    }
+});
 
 module.exports = router

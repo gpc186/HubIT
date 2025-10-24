@@ -99,6 +99,7 @@ async function carregarPagina() {
             if (containerEmpregos) containerEmpregos.style.display = 'block';
             if (containerCandidatos) containerCandidatos.style.display = 'block';
             
+            
             // Esconder containers de usuário
             if (containerCurriculos) containerCurriculos.style.display = 'none';
             if (containerAnalise) containerAnalise.style.display = 'none';
@@ -106,6 +107,7 @@ async function carregarPagina() {
             // Carregar dados de empresa
             preencherDadosEmpresa(usuarioAtual);
             await carregarEmpregosEmpresa();
+            await carregarCandidatosRecentes();
         }
 
     } catch (error) {
@@ -517,7 +519,7 @@ function renderizarEmpregos(empregos) {
 
 async function verCandidatos(empregoID) {
     // Redirecionar para página de candidatos ou abrir modal
-    window.location.href = `/candidatos/${empregoID}`;
+    window.location.href = ``;
 }
 
 async function deletarEmprego(empregoID) {
@@ -547,4 +549,433 @@ async function deletarEmprego(empregoID) {
         console.error('Erro ao deletar emprego:', error);
         alert('Erro ao deletar vaga');
     }
+
+}
+
+async function carregarCandidatosRecentes() {
+    const userID = localStorage.getItem('userID');
+    
+    try {
+        // Primeiro, buscar os empregos da empresa
+        const respostaEmpregos = await fetch(`/api/emprego/meus`, {
+            method: 'GET',
+            headers: {
+                'user-id': userID
+            }
+        });
+
+        const dadosEmpregos = await respostaEmpregos.json();
+        
+        if (!dadosEmpregos.ok || !dadosEmpregos.empregos || dadosEmpregos.empregos.length === 0) {
+            const container = document.getElementById('candidatosRecentes');
+            container.innerHTML = '<p class="text-muted text-center">Nenhuma vaga publicada ainda</p>';
+            return;
+        }
+
+        // Buscar candidaturas para cada emprego
+        let todasCandidaturas = [];
+        
+        for (const emprego of dadosEmpregos.empregos) {
+            try {
+                const respostaCandidatos = await fetch(`/api/candidatura/vaga/${emprego.empregoID}`, {
+                    method: 'GET',
+                    headers: {
+                        'user-id': userID
+                    }
+                });
+                
+                const dadosCandidatos = await respostaCandidatos.json();
+                
+                if (dadosCandidatos.ok && dadosCandidatos.candidaturas) {
+                    todasCandidaturas.push(...dadosCandidatos.candidaturas);
+                }
+            } catch (error) {
+                console.error(`Erro ao buscar candidatos para vaga ${emprego.empregoID}:`, error);
+            }
+        }
+
+        // Ordenar por data e pegar apenas as 5 mais recentes
+        todasCandidaturas.sort((a, b) => 
+            new Date(b.dataCandidatura) - new Date(a.dataCandidatura)
+        );
+        
+        const candidatosRecentes = todasCandidaturas.slice(0, 5);
+        
+        renderizarCandidatosRecentes(candidatosRecentes);
+
+    } catch (error) {
+        console.error('Erro ao carregar candidatos recentes:', error);
+        const container = document.getElementById('candidatosRecentes');
+        container.innerHTML = '<p class="text-danger text-center">Erro ao carregar candidatos</p>';
+    }
+}
+
+function renderizarCandidatosRecentes(candidatos) {
+    const container = document.getElementById('candidatosRecentes');
+    
+    if (candidatos.length === 0) {
+        container.innerHTML = '<p class="text-muted text-center">Nenhuma candidatura recente</p>';
+        return;
+    }
+    
+    container.innerHTML = candidatos.map(candidato => {
+        const data = new Date(candidato.dataCandidatura);
+        const dataFormatada = data.toLocaleDateString('pt-BR');
+        
+        return `
+            <div class="candidato-card mb-3">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h6 class="mb-1">${candidato.candidato.nome}</h6>
+                        <p class="text-muted mb-1 small">${candidato.vaga.titulo}</p>
+                        <p class="text-muted mb-0 small">
+                            <ion-icon name="mail-outline"></ion-icon> ${candidato.candidato.email}
+                        </p>
+                    </div>
+                    <div class="text-end">
+                        <small class="text-muted">${dataFormatada}</small>
+                        <br>
+                        <button class="btn btn-sm btn-outline-primary mt-2" 
+                                onclick="verDetalhesCandidato(${candidato.candidaturaID})">
+                            Ver Detalhes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+
+async function verDetalhesCandidato(candidaturaID) {
+    const userID = localStorage.getItem('userID');
+    
+    try {
+        // Buscar todos os empregos da empresa
+        const respostaEmpregos = await fetch(`/api/emprego/meus`, {
+            method: 'GET',
+            headers: {
+                'user-id': userID
+            }
+        });
+
+        const dadosEmpregos = await respostaEmpregos.json();
+        
+        if (!dadosEmpregos.ok) {
+            alert('Erro ao carregar dados');
+            return;
+        }
+
+        // Buscar em todas as vagas até encontrar a candidatura
+        let candidaturaEncontrada = null;
+        
+        for (const emprego of dadosEmpregos.empregos) {
+            const respostaCandidatos = await fetch(`/api/candidatura/vaga/${emprego.empregoID}`, {
+                method: 'GET',
+                headers: {
+                    'user-id': userID
+                }
+            });
+            
+            const dadosCandidatos = await respostaCandidatos.json();
+            
+            if (dadosCandidatos.ok && dadosCandidatos.candidaturas) {
+                candidaturaEncontrada = dadosCandidatos.candidaturas.find(
+                    c => Number(c.candidaturaID) === Number(candidaturaID)
+                );
+                
+                if (candidaturaEncontrada) break;
+            }
+        }
+
+        if (!candidaturaEncontrada) {
+            alert('Candidatura não encontrada');
+            return;
+        }
+
+        // Mostrar modal com detalhes
+        mostrarModalCandidato(candidaturaEncontrada);
+
+    } catch (error) {
+        console.error('Erro ao buscar detalhes do candidato:', error);
+        alert('Erro ao carregar detalhes');
+    }
+}
+
+function mostrarModalCandidato(candidatura) {
+    const modalHTML = `
+        <div class="modal fade" id="modalDetalhesCandidato" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detalhes da Candidatura</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6 class="mb-3">Informações do Candidato</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Nome:</strong><br>
+                                ${candidatura.candidato.nome}
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Email:</strong><br>
+                                ${candidatura.candidato.email}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Telefone:</strong><br>
+                                ${candidatura.candidato.telefone || 'Não informado'}
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Localização:</strong><br>
+                                ${candidatura.candidato.localizacao || 'Não informado'}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Área de Atuação:</strong><br>
+                                ${candidatura.candidato.areaAtuacao || 'Não informado'}
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Nível de Experiência:</strong><br>
+                                ${candidatura.candidato.nivelExperiencia || 'Não informado'}
+                            </div>
+                        </div>
+                        
+                        ${candidatura.candidato.linkedin ? `
+                        <div class="mb-3">
+                            <strong>LinkedIn:</strong><br>
+                            <a href="${candidatura.candidato.linkedin}" target="_blank">${candidatura.candidato.linkedin}</a>
+                        </div>
+                        ` : ''}
+                        
+                        ${candidatura.candidato.github ? `
+                        <div class="mb-3">
+                            <strong>GitHub:</strong><br>
+                            <a href="${candidatura.candidato.github}" target="_blank">${candidatura.candidato.github}</a>
+                        </div>
+                        ` : ''}
+                        
+                        <hr>
+                        
+                        <h6 class="mb-3">Informações da Vaga</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Vaga:</strong><br>
+                                ${candidatura.vaga.titulo}
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Data da Candidatura:</strong><br>
+                                ${new Date(candidatura.dataCandidatura).toLocaleDateString('pt-BR')}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Currículo ID:</strong> #${candidatura.curriculoID}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <a href="mailto:${candidatura.candidato.email}" class="btn btn-primary">
+                            Entrar em Contato
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Remove modal anterior se existir
+    const modalExistente = document.getElementById('modalDetalhesCandidato');
+    if (modalExistente) {
+        modalExistente.remove();
+    }
+    
+    // Adiciona novo modal
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Abre o modal
+    const modal = new bootstrap.Modal(document.getElementById('modalDetalhesCandidato'));
+    modal.show();
+}
+
+async function verCandidatos(empregoID) {
+    const userID = localStorage.getItem('userID');
+    
+    try {
+        const resposta = await fetch(`/api/candidatura/vaga/${empregoID}`, {
+            method: 'GET',
+            headers: {
+                'user-id': userID
+            }
+        });
+
+        const dados = await resposta.json();
+        
+        if (!dados.ok) {
+            alert(dados.error || 'Erro ao carregar candidatos');
+            return;
+        }
+
+        mostrarModalCandidatos(dados);
+
+    } catch (error) {
+        console.error('Erro ao buscar candidatos:', error);
+        alert('Erro ao carregar candidatos da vaga');
+    }
+}
+
+function mostrarModalCandidatos(dados) {
+    const { vaga, candidaturas, total } = dados;
+    
+    // Preencher título e informações da vaga
+    document.getElementById('tituloVagaModal').textContent = vaga.titulo;
+    document.getElementById('empresaNomeModal').textContent = vaga.empresaNome;
+    document.getElementById('totalCandidatos').textContent = `${total} candidato${total !== 1 ? 's' : ''}`;
+    
+    // Renderizar lista de candidatos
+    const listaCandidatos = document.getElementById('listaCandidatos');
+    
+    if (candidaturas.length === 0) {
+        listaCandidatos.innerHTML = `
+            <div class="text-center py-5">
+                <ion-icon name="people-outline" style="font-size: 64px; color: #ccc;"></ion-icon>
+                <p class="text-muted mt-3">Nenhum candidato ainda</p>
+            </div>
+        `;
+    } else {
+        listaCandidatos.innerHTML = candidaturas.map(candidato => {
+            const data = new Date(candidato.dataCandidatura);
+            const dataFormatada = data.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            });
+            
+            return `
+                <div class="candidato-item">
+                    <div class="candidato-avatar">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                    </div>
+                    <div class="candidato-info">
+                        <h6>${candidato.candidato.nome}</h6>
+                        <p class="mb-1">
+                            <ion-icon name="briefcase-outline"></ion-icon>
+                            ${candidato.candidato.areaAtuacao || 'Área não informada'} - 
+                            ${candidato.candidato.nivelExperiencia || 'Nível não informado'}
+                        </p>
+                        <p class="mb-1">
+                            <ion-icon name="location-outline"></ion-icon>
+                            ${candidato.candidato.localizacao || 'Não informado'}
+                        </p>
+                        <p class="mb-0 small text-muted">
+                            Candidatura em ${dataFormatada}
+                        </p>
+                    </div>
+                    <div class="candidato-actions">
+                        <button class="btn btn-sm btn-outline-primary mb-2" 
+                                onclick="verDetalhesCandidato(${candidato.candidaturaID}, ${candidato.empregoID})">
+                            <ion-icon name="eye-outline"></ion-icon>
+                            Ver Detalhes
+                        </button>
+                        <a href="mailto:${candidato.candidato.email}" 
+                           class="btn btn-sm btn-primary">
+                            <ion-icon name="mail-outline"></ion-icon>
+                            Contatar
+                        </a>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    // Abrir modal
+    const modal = new bootstrap.Modal(document.getElementById('modalCandidatos'));
+    modal.show();
+}
+
+
+async function verDetalhesCandidato(candidaturaID, empregoID) {
+    const userID = localStorage.getItem('userID');
+    
+    try {
+        const resposta = await fetch(`/api/candidatura/vaga/${empregoID}`, {
+            method: 'GET',
+            headers: {
+                'user-id': userID
+            }
+        });
+
+        const dados = await resposta.json();
+        
+        if (!dados.ok) {
+            alert('Erro ao carregar dados');
+            return;
+        }
+
+        const candidatura = dados.candidaturas.find(
+            c => Number(c.candidaturaID) === Number(candidaturaID)
+        );
+
+        if (!candidatura) {
+            alert('Candidatura não encontrada');
+            return;
+        }
+
+        mostrarModalDetalhesCandidato(candidatura);
+
+    } catch (error) {
+        console.error('Erro ao buscar detalhes:', error);
+        alert('Erro ao carregar detalhes do candidato');
+    }
+}
+
+function mostrarModalDetalhesCandidato(candidatura) {
+    // Preencher dados no modal
+    document.getElementById('detalhesNome').textContent = candidatura.candidato.nome;
+    document.getElementById('detalhesEmail').textContent = candidatura.candidato.email;
+    document.getElementById('detalhesTelefone').textContent = candidatura.candidato.telefone || 'Não informado';
+    document.getElementById('detalhesLocalizacao').textContent = candidatura.candidato.localizacao || 'Não informado';
+    document.getElementById('detalhesArea').textContent = candidatura.candidato.areaAtuacao || 'Não informado';
+    document.getElementById('detalhesNivel').textContent = candidatura.candidato.nivelExperiencia || 'Não informado';
+    
+    // Links sociais
+    const linkedinLink = document.getElementById('detalhesLinkedin');
+    const githubLink = document.getElementById('detalhesGithub');
+    const linksContainer = document.getElementById('detalhesLinks');
+    
+    if (candidatura.candidato.linkedin || candidatura.candidato.github) {
+        linksContainer.style.display = 'block';
+        
+        if (candidatura.candidato.linkedin) {
+            linkedinLink.href = candidatura.candidato.linkedin;
+            linkedinLink.parentElement.style.display = 'block';
+        } else {
+            linkedinLink.parentElement.style.display = 'none';
+        }
+        
+        if (candidatura.candidato.github) {
+            githubLink.href = candidatura.candidato.github;
+            githubLink.parentElement.style.display = 'block';
+        } else {
+            githubLink.parentElement.style.display = 'none';
+        }
+    } else {
+        linksContainer.style.display = 'none';
+    }
+    
+    // Informações da vaga
+    document.getElementById('detalhesVagaTitulo').textContent = candidatura.vaga.titulo;
+    document.getElementById('detalhesDataCandidatura').textContent = 
+        new Date(candidatura.dataCandidatura).toLocaleDateString('pt-BR');
+    document.getElementById('detalhesCurriculoID').textContent = candidatura.curriculoID;
+    
+    // Botão de contato
+    const btnContato = document.getElementById('btnContatarCandidato');
+    btnContato.href = `mailto:${candidatura.candidato.email}`;
+    
+    // Abrir modal de detalhes
+    const modalDetalhes = new bootstrap.Modal(document.getElementById('modalDetalhesCandidato'));
+    modalDetalhes.show();
 }

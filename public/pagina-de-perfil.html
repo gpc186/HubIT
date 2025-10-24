@@ -224,6 +224,154 @@
     </div>
 </div>
 
+<!-- MODAL: LISTA DE CANDIDATOS DE UMA VAGA -->
+<div class="modal fade" id="modalCandidatos" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title" id="tituloVagaModal">Candidatos da Vaga</h5>
+                    <p class="text-muted mb-0 small">
+                        <span id="empresaNomeModal"></span> • 
+                        <span id="totalCandidatos">0 candidatos</span>
+                    </p>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="listaCandidatos">
+                    <!-- Candidatos serão carregados via JS -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: DETALHES DE UM CANDIDATO -->
+<div class="modal fade" id="modalDetalhesCandidato" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalhes do Candidato</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Informações do Candidato -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h6 class="mb-0">
+                            <ion-icon name="person-outline"></ion-icon>
+                            Informações Pessoais
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="text-muted small mb-1">Nome Completo</label>
+                                <p class="mb-0 fw-bold" id="detalhesNome">-</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-muted small mb-1">Email</label>
+                                <p class="mb-0" id="detalhesEmail">-</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="text-muted small mb-1">Telefone</label>
+                                <p class="mb-0" id="detalhesTelefone">-</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-muted small mb-1">Localização</label>
+                                <p class="mb-0" id="detalhesLocalizacao">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações Profissionais -->
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h6 class="mb-0">
+                            <ion-icon name="briefcase-outline"></ion-icon>
+                            Informações Profissionais
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="text-muted small mb-1">Área de Atuação</label>
+                                <p class="mb-0" id="detalhesArea">-</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-muted small mb-1">Nível de Experiência</label>
+                                <p class="mb-0" id="detalhesNivel">-</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Links Profissionais -->
+                        <div id="detalhesLinks" style="display: none;">
+                            <label class="text-muted small mb-2 d-block">Links Profissionais</label>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a id="detalhesLinkedin" href="#" target="_blank" 
+                                   class="btn btn-sm btn-outline-primary">
+                                    <ion-icon name="logo-linkedin"></ion-icon>
+                                    LinkedIn
+                                </a>
+                                <a id="detalhesGithub" href="#" target="_blank" 
+                                   class="btn btn-sm btn-outline-dark">
+                                    <ion-icon name="logo-github"></ion-icon>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações da Candidatura -->
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0">
+                            <ion-icon name="document-text-outline"></ion-icon>
+                            Informações da Candidatura
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="text-muted small mb-1">Vaga</label>
+                                <p class="mb-0" id="detalhesVagaTitulo">-</p>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="text-muted small mb-1">Data da Candidatura</label>
+                                <p class="mb-0" id="detalhesDataCandidatura">-</p>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="text-muted small mb-1">Currículo</label>
+                                <p class="mb-0">
+                                    <span class="badge bg-secondary">
+                                        ID: <span id="detalhesCurriculoID">-</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <a id="btnContatarCandidato" href="#" class="btn btn-primary">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    Entrar em Contato
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- MODAL CURRÍCULO 1 -->
 <div class="modal fade" id="modalCurriculo1" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
