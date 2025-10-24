@@ -646,31 +646,15 @@ function renderizarCandidatosRecentes(candidatos) {
     }).join('');
 }
 
-
-async function verDetalhesCandidato(candidaturaID) {
+async function verDetalhesCandidato(candidaturaID, empregoID = null) {
     const userID = localStorage.getItem('userID');
     
     try {
-        // Buscar todos os empregos da empresa
-        const respostaEmpregos = await fetch(`/api/emprego/meus`, {
-            method: 'GET',
-            headers: {
-                'user-id': userID
-            }
-        });
-
-        const dadosEmpregos = await respostaEmpregos.json();
-        
-        if (!dadosEmpregos.ok) {
-            alert('Erro ao carregar dados');
-            return;
-        }
-
-        // Buscar em todas as vagas até encontrar a candidatura
         let candidaturaEncontrada = null;
         
-        for (const emprego of dadosEmpregos.empregos) {
-            const respostaCandidatos = await fetch(`/api/candidatura/vaga/${emprego.empregoID}`, {
+        // Se temos o empregoID, busca direto naquela vaga
+        if (empregoID) {
+            const respostaCandidatos = await fetch(`/api/candidatura/vaga/${empregoID}`, {
                 method: 'GET',
                 headers: {
                     'user-id': userID
@@ -683,8 +667,40 @@ async function verDetalhesCandidato(candidaturaID) {
                 candidaturaEncontrada = dadosCandidatos.candidaturas.find(
                     c => Number(c.candidaturaID) === Number(candidaturaID)
                 );
+            }
+        } else {
+            // Se não temos empregoID, busca em todos os empregos
+            const respostaEmpregos = await fetch(`/api/emprego/meus`, {
+                method: 'GET',
+                headers: {
+                    'user-id': userID
+                }
+            });
+
+            const dadosEmpregos = await respostaEmpregos.json();
+            
+            if (!dadosEmpregos.ok) {
+                alert('Erro ao carregar dados');
+                return;
+            }
+
+            for (const emprego of dadosEmpregos.empregos) {
+                const respostaCandidatos = await fetch(`/api/candidatura/vaga/${emprego.empregoID}`, {
+                    method: 'GET',
+                    headers: {
+                        'user-id': userID
+                    }
+                });
                 
-                if (candidaturaEncontrada) break;
+                const dadosCandidatos = await respostaCandidatos.json();
+                
+                if (dadosCandidatos.ok && dadosCandidatos.candidaturas) {
+                    candidaturaEncontrada = dadosCandidatos.candidaturas.find(
+                        c => Number(c.candidaturaID) === Number(candidaturaID)
+                    );
+                    
+                    if (candidaturaEncontrada) break;
+                }
             }
         }
 
@@ -693,8 +709,7 @@ async function verDetalhesCandidato(candidaturaID) {
             return;
         }
 
-        // Mostrar modal com detalhes
-        mostrarModalCandidato(candidaturaEncontrada);
+        mostrarModalDetalhesCandidato(candidaturaEncontrada);
 
     } catch (error) {
         console.error('Erro ao buscar detalhes do candidato:', error);
@@ -896,40 +911,7 @@ function mostrarModalCandidatos(dados) {
 }
 
 
-async function verDetalhesCandidato(candidaturaID, empregoID) {
-    const userID = localStorage.getItem('userID');
-    
-    try {
-        const resposta = await fetch(`/api/candidatura/vaga/${empregoID}`, {
-            method: 'GET',
-            headers: {
-                'user-id': userID
-            }
-        });
 
-        const dados = await resposta.json();
-        
-        if (!dados.ok) {
-            alert('Erro ao carregar dados');
-            return;
-        }
-
-        const candidatura = dados.candidaturas.find(
-            c => Number(c.candidaturaID) === Number(candidaturaID)
-        );
-
-        if (!candidatura) {
-            alert('Candidatura não encontrada');
-            return;
-        }
-
-        mostrarModalDetalhesCandidato(candidatura);
-
-    } catch (error) {
-        console.error('Erro ao buscar detalhes:', error);
-        alert('Erro ao carregar detalhes do candidato');
-    }
-}
 
 function mostrarModalDetalhesCandidato(candidatura) {
     // Preencher dados no modal
