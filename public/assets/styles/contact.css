@@ -20,12 +20,10 @@ main{
 
 /*header*/
 header{
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(7px);
     width: 100dvw;
     z-index: 999;
     position: fixed;
-    
-    
 }
 a {
     font-style: normal !important;

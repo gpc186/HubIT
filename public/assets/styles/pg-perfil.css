@@ -80,8 +80,8 @@ footer {
 
 /* ===== HEADER ===== */
 header{
-    backdrop-filter: blur(14px);
-    width: 100%;
+    backdrop-filter: blur(7px);
+    width: 100dvw;
     z-index: 999;
     position: fixed;
 }
