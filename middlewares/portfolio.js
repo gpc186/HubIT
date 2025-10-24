@@ -104,7 +104,7 @@ router.get('/', async (req, res) => {
 		const data = await fs.readFile(portfolioPath, 'utf8');
 		const portfolios = JSON.parse(data);
 
-		portfolios.sort((a, b) =>
+		portfolios.sort((b, a) =>
 			new Date(a.dataCriacao) - new Date(b.dataCriacao)
 		);
 
