@@ -7,7 +7,7 @@ const portfolioPath = path.join(__dirname, '..', 'data', 'portfolios.json');
 const usersPath = path.join(__dirname, '..', 'data', 'users.json');
 
 const { criarIDPortfolio } = require('./utils/geradorID');
-
+// Rota para criar portfolio
 router.post('/', async (req, res) => {
 
 	const userID = Number(req.headers['user-id']);
@@ -91,7 +91,7 @@ router.post('/', async (req, res) => {
 		return res.status(500).json({ error: error.message });
 	};
 });
-
+// Rota para exibir todos os portfolios
 router.get('/', async (req, res) => {
 
 	const userID = Number(req.headers['user-id']);
@@ -118,7 +118,7 @@ router.get('/', async (req, res) => {
 		return res.status(500).json({ error: error.message })
 	}
 })
-
+// Rota para deletar portfolio
 router.delete('/:id', async (req, res) => {
 	const userID = Number(req.headers['user-id']);
 	const portfolioID = req.params.id
@@ -152,7 +152,7 @@ router.delete('/:id', async (req, res) => {
 		return res.status(500).json({ error: error.message })
 	}
 })
-
+// Rota para curtir portfolios
 router.post('/:id/curtir', async (req, res) => {
 	const userID = req.headers['user-id'];
 	const portfolioPost = Number(req.params.id);
@@ -182,7 +182,7 @@ router.post('/:id/curtir', async (req, res) => {
 		return res.status(500).json({ error: error.message })
 	}
 })
-
+// Rota para tirar curtida de poertfolio
 router.delete('/:id/descurtir', async (req, res) => {
 	const userID = req.headers['user-id'];
 	const portfolioPost = Number(req.params.id);

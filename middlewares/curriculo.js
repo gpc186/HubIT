@@ -7,7 +7,7 @@ const curriculosPath = path.join(__dirname, '..', 'data', 'curriculos.json');
 const usersPath = path.join(__dirname, '..', 'data', 'users.json');
 
 const { criarIDCurriculo } = require('./utils/geradorID');
-
+// Rota para criar currículos
 router.post('/', async (req, res)=>{
 	const userID = Number(req.headers['user-id']);
 
@@ -20,7 +20,7 @@ router.post('/', async (req, res)=>{
 		const users = JSON.parse(userData);
 
 		const user = users.find(u => Number(u.userID) === userID);
-
+        // Verificações básicas antes de processar a requisição
 		if(!user){
 			return res.status(404).json({error: "Usuário não encontrado!"})
 		}
@@ -32,7 +32,7 @@ router.post('/', async (req, res)=>{
 		if (!user.dados || !user.dados.nome) {
             return res.status(400).json({error: "Complete seu perfil antes de criar um currículo!"});
         }
-
+        // Aqui pegamos tudo que pode vir da requisição
         const {
             titulo,
             resumoProfissional,
@@ -44,7 +44,7 @@ router.post('/', async (req, res)=>{
             idiomas,
             links
         } = req.body;
-        
+        // Série de verificações
         if (!titulo || titulo.trim() === '') {
             return res.status(400).json({error: "Título é obrigatório!"});
         }
@@ -60,7 +60,7 @@ router.post('/', async (req, res)=>{
         if (experiencias && !Array.isArray(experiencias)) {
             return res.status(400).json({error: "Experiências deve ser um array!"});
         }
-        
+        // Aqui temos que fazer verificação de cada item, pois ele pode vir com diversos objetos dentro de uma array
         if (experiencias && experiencias.length > 0) {
             for (let exp of experiencias) {
                 if (!exp.cargo || !exp.empresa || !exp.dataInicio) {
@@ -68,11 +68,11 @@ router.post('/', async (req, res)=>{
                 }
             }
         }
-        
+        // Verificação de array
         if (educacao && !Array.isArray(educacao)) {
             return res.status(400).json({error: "Educação deve ser um array!"});
         }
-        
+        // Verificação de array
         if (educacao && educacao.length > 0) {
             for (let edu of educacao) {
                 if (!edu.curso || !edu.instituicao || !edu.dataInicio) {
@@ -112,10 +112,10 @@ router.post('/', async (req, res)=>{
         if (links && typeof links !== 'object') {
             return res.status(400).json({error: "Links deve ser um objeto!"});
         }
-
+        // Aqui pegamos os dados do currículo para poder colocar o novo currículo no JSON
 		const curriculosData = await fs.readFile(curriculosPath, 'utf8');
         const curriculos = JSON.parse(curriculosData);
-        
+        // Objeto criado apartir dos dados recebidos
         const novoCurriculo = {
             curriculoID: criarIDCurriculo(),
             userID: userID,
@@ -142,7 +142,7 @@ router.post('/', async (req, res)=>{
         };
         
         curriculos.push(novoCurriculo);
-		
+		// Aqui só colocamos o currículo na array e damos write para escrever ele no JSON
         await fs.writeFile(curriculosPath, JSON.stringify(curriculos, null, 2));
         
         res.status(201).json({ok: true, mensagem: "Currículo criado com sucesso!", curriculo: novoCurriculo});
@@ -152,7 +152,7 @@ router.post('/', async (req, res)=>{
 		return res.status(500).json({error: error.message})
 	}
 })
-
+// Rota para alterar currículo já existente
 router.put('/:id', async (req, res)=>{
     const userID = Number(req.headers['user-id']);
     const curriculoIDUrl = Number(req.params.id);
@@ -165,7 +165,7 @@ router.put('/:id', async (req, res)=>{
         const curriculos = JSON.parse(data)
 
         const curriculoIndex = curriculos.findIndex(c => Number(c.curriculoID) === curriculoIDUrl)
-
+        // Verificações básicas antes da requisição
         if (curriculoIndex === -1){
             return res.status(404).json({error: "Currículo não encontrado!"})
         }
@@ -175,7 +175,7 @@ router.put('/:id', async (req, res)=>{
         if (Number(curriculoAtual.userID) !== userID){
             return res.status(403).json({error: "Você não pode editar esse currículo!"})
         }
-
+        // Pegamos os dados da requisição
         const {
             titulo,
             resumoProfissional,
@@ -187,7 +187,7 @@ router.put('/:id', async (req, res)=>{
             idiomas,
             links
         } = req.body;
-        
+        // Mesmas verificações de antes, mas agora para saber qual dessas informações veio ou não
         if (titulo !== undefined) {
             if (!titulo || titulo.trim() === '') {
                 return res.status(400).json({error: "Título não pode estar vazio!"});
@@ -261,7 +261,7 @@ router.put('/:id', async (req, res)=>{
         if (links !== undefined) curriculoAtual.links = links;
 
         curriculoAtual.dataAtualizacao = new Date().toISOString();
-
+        // Aqui pegamos os dados que foram atualizados e damos write para colocar no JSON
         await fs.writeFile(curriculosPath, JSON.stringify(curriculos, null, 2))
 
         res.status(200).json({ok: true, mensagem: "Currículo atualizado com sucesso!", curriculo: curriculoAtual})
@@ -271,7 +271,7 @@ router.put('/:id', async (req, res)=>{
         return res.status(500).json({error: error.message})
     }
 })
-
+// rota parar ver currículo, no caso, seria apenas do próprio usuário
 router.get('/', async (req, res)=>{
     const userID = Number(req.headers['user-id']);
 
@@ -296,7 +296,7 @@ router.get('/', async (req, res)=>{
         return res.status(500).json({error: error.message})
     }
 })
-
+// Rota para deletar
 router.delete('/:id', async (req, res)=>{
     const userID = Number(req.headers['user-id']);
     const curriculoIDUrl = Number(req.params.id);
@@ -315,13 +315,13 @@ router.delete('/:id', async (req, res)=>{
         }
 
         const curriculo = curriculos[curriculoIndex];
-        
+        // Verificação de credenciais
         if (Number(curriculo.userID) !== userID) {
             return res.status(403).json({error: "Você não pode deletar este currículo!"});
         }
 
         curriculos.splice(curriculoIndex, 1)
-
+        // Deletamos e colocamos no JSON
         await fs.writeFile(curriculosPath, JSON.stringify(curriculos, null, 2))
 
         res.status(200).json({ok: true, mensagem: "Currículo deletado com sucesso!", curriculo: curriculoIDUrl})
