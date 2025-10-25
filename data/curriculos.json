@@ -21,21 +21,21 @@
         "empresa": "Tech Solutions",
         "dataInicio": "2023-01",
         "dataFim": null,
-        "descricao": "Desenvolvimento de aplica��es web",
+        "descricao": "Desenvolvimento de aplicações web",
         "atual": true
       },
       {
-        "cargo": "Estagi�rio",
+        "cargo": "Estagiário",
         "empresa": "Startup XYZ",
         "dataInicio": "2021-06",
         "dataFim": "2022-12",
-        "descricao": "Aux�lio no desenvolvimento",
+        "descricao": "Auxílio no desenvolvimento",
         "atual": false
       }
     ],
     "educacao": [
       {
-        "curso": "An�lise e Desenvolvimento de Sistemas",
+        "curso": "Análise e Desenvolvimento de Sistemas",
         "instituicao": "FATEC",
         "dataInicio": "2021",
         "dataFim": "2023",
@@ -44,8 +44,8 @@
     ],
     "softSkills": [
       "Trabalho em equipe",
-      "Comunica��o",
-      "Resolu��o de problemas"
+      "Comunicação",
+      "Resolução de problemas"
     ],
     "certificados": [
       {
@@ -58,12 +58,12 @@
     ],
     "idiomas": [
       {
-        "idioma": "Portugu�s",
+        "idioma": "Português",
         "nivel": "Nativo"
       },
       {
-        "idioma": "Ingl�s",
-        "nivel": "Intermedi�rio"
+        "idioma": "Inglês",
+        "nivel": "Intermediário"
       }
     ],
     "links": {
