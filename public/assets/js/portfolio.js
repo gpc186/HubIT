@@ -575,6 +575,12 @@ async function publicarPortfolio() {
     }
 }
 
+function redirecionarPerfil() {
+    const userID = localStorage.getItem('userID');
+    window.location.href = `/perfil/${userID}`;
+    return;
+}
+
 // ===== FUNÇÃO DE SAIR =====
 function sair() {
     localStorage.clear();

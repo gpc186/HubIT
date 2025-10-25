@@ -568,6 +568,12 @@ function removerFiltro(key) {
     aplicarFiltros();
 }
 
+function redirecionarPerfil() {
+    const userID = localStorage.getItem('userID');
+    window.location.href = `/perfil/${userID}`;
+    return;
+}
+
 /**
  * Função de sair
  */
