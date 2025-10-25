@@ -201,7 +201,7 @@ li a {
     border-radius: 10px;
     cursor: pointer;
     opacity: 60%;
-    position: relative; /* ← ADICIONE ISTO */
+    position: relative;
     transition: transform 0.2s ease-out; 
 }
 
