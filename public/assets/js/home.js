@@ -6,6 +6,39 @@ const dataHours = dataNow.getHours();
 // Variável global para armazenar currículos
 let curriculosUsuario = [];
 
+function mostrarSkeletonsVagas(quantidade = 5) {
+    const container = document.getElementById('empregosContainer');
+    if (!container) return;
+    
+    let html = '';
+    for (let i = 0; i < quantidade; i++) {
+        html += `
+            <div class="card skeleton-card placeholder-glow">
+                <div class="d-flex gap-3 mb-3">
+                    <div class="placeholder rounded-circle bg-secondary" style="width: 50px; height: 50px;"></div>
+                    <div class="flex-grow-1">
+                        <div class="placeholder col-6 mb-2"></div>
+                        <div class="placeholder col-4"></div>
+                    </div>
+                </div>
+                <div class="placeholder col-12 mb-2"></div>
+                <div class="placeholder col-10 mb-2"></div>
+                <div class="placeholder col-8 mb-3"></div>
+                <div class="d-flex gap-2 mb-3">
+                    <span class="placeholder col-2 rounded-pill"></span>
+                    <span class="placeholder col-2 rounded-pill"></span>
+                    <span class="placeholder col-2 rounded-pill"></span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                    <div class="placeholder col-3"></div>
+                    <div class="placeholder col-3 rounded"></div>
+                </div>
+            </div>
+        `;
+    }
+    container.innerHTML = html;
+}
+
 // === INICIALIZAÇÃO ===
 window.onload = async function () {
     await carregarPagina();
@@ -267,7 +300,7 @@ async function carregarEmpregos(filtros = {}) {
         return;
     }
 
-    container.innerHTML = '<div class="loading">Carregando vagas...</div>';
+    mostrarSkeletonsVagas(5);
 
     try {
         const userID = localStorage.getItem('userID');
@@ -359,7 +392,7 @@ function renderizarPropostas(propostas) {
 
     propostas.forEach((proposta) => {
         const postCard = document.createElement('div');
-        postCard.className = 'post-card';
+        postCard.className = 'post-card fade-in-content';
         
         postCard.innerHTML = `
             <div class="post-header">

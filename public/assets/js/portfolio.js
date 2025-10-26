@@ -5,6 +5,43 @@ const dataHours = dataNow.getHours();
 // Armazena os portfólios já curtidos pelo usuário
 const portfoliosCurtidos = new Set();
 
+function mostrarSkeletonsPortfolios(quantidade = 4) {
+    const container = document.getElementById('portfoliosContainer');
+    if (!container) return;
+    
+    let html = '';
+    for (let i = 0; i < quantidade; i++) {
+        html += `
+            <div class="card skeleton-card placeholder-glow">
+                <div class="d-flex gap-3 mb-3">
+                    <div class="placeholder rounded-circle bg-secondary" style="width: 50px; height: 50px;"></div>
+                    <div class="flex-grow-1">
+                        <div class="placeholder col-7 mb-2"></div>
+                        <div class="placeholder col-5"></div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <div class="placeholder col-8 mb-2 fs-5"></div>
+                    <div class="placeholder col-12 mb-2"></div>
+                    <div class="placeholder col-11 mb-2"></div>
+                    <div class="placeholder col-9"></div>
+                </div>
+                <div class="d-flex gap-2 mb-3 flex-wrap">
+                    <span class="placeholder col-2 rounded-pill"></span>
+                    <span class="placeholder col-3 rounded-pill"></span>
+                    <span class="placeholder col-2 rounded-pill"></span>
+                    <span class="placeholder col-3 rounded-pill"></span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                    <div class="placeholder col-4"></div>
+                    <div class="placeholder col-2 rounded"></div>
+                </div>
+            </div>
+        `;
+    }
+    container.innerHTML = html;
+}
+
 // ===== INICIALIZAÇÃO =====
 window.onload = async function () {
     console.log('🔄 Página carregando...');
@@ -111,7 +148,7 @@ async function carregarPortfolios() {
         return;
     }
 
-    container.innerHTML = '<div class="loading">Carregando portfólios...</div>';
+    mostrarSkeletonsPortfolios(4);
 
     try {
         console.log('🌐 Fazendo requisição para /api/portfolio');
@@ -172,7 +209,7 @@ function renderizarPortfolios(portfolios) {
         console.log(`🎨 Renderizando portfólio ${index + 1}:`, portfolio);
         
         const postCard = document.createElement('div');
-        postCard.className = 'post-card';
+        postCard.className = 'post-card fade-in-content';
         
         // Formatar array de tecnologias para exibição
         const tecnologiasTexto = Array.isArray(portfolio.tecnologias) 
