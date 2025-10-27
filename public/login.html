@@ -242,8 +242,8 @@
                 <h2> Começe hoje mesmo! <br>Selecione um plano hubit</h2>
 
                 <div class="plans-options">
-                    <button id="btnInd">Individual</button>
-                    <button id="btnEmp">Empresarial</button>
+                    <button id="btnInd" onclick="aparecerPlanInd()">Individual</button>
+                    <button id="btnEmp" onclick="aparecerPlanEmp()">Empresarial</button>
                 </div>
 
                 <div class="plans-content">
@@ -271,7 +271,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="plansInd" class="plan1">
+                    <div id="plansInd2" class="plan1">
                         <div class="plan1-content">
                             <h1>64 bits</h1>
                             <hr>
@@ -356,20 +356,34 @@
             document.getElementById('email').focus();
         }
 
-        const btnInd = document.getElementById('btnInd');
-        const btnEmp = document.getElementById('btnEmp');
-        const plansInd = document.getElementById('plansInd');
-        const plansEmp = document.getElementById('plansEmp');
+        function aparecerPlanInd(){
+            const btnInd = document.getElementById('btnInd');
+            const btnEmp = document.getElementById('btnEmp');
+            const plansInd = document.getElementById('plansInd');
+            const plansInd2 = document.getElementById('plansInd2')
+            const plansEmp = document.getElementById('plansEmp');
 
-        btnInd.addEventListener('click', ()=>{
+            
             plansEmp.style.display = 'none';
             plansInd.style.display = 'block';
-        })
+            plansInd2.style.display = 'block';
+            
+        }
 
-        btnEmp.addEventListener('click', ()=>{
+        function aparecerPlanEmp(){
+            const btnInd = document.getElementById('btnInd');
+            const btnEmp = document.getElementById('btnEmp');
+            const plansInd = document.getElementById('plansInd');
+            const plansInd2 = document.getElementById('plansInd2')
+            const plansEmp = document.getElementById('plansEmp');
+
             plansEmp.style.display = 'block';
             plansInd.style.display = 'none';
-        })
+            plansInd2.style.display = 'none';
+            
+        }
+
+        
 
 
         // Seleciona o elemento de texto que será animado
