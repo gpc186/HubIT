@@ -267,6 +267,10 @@ li a {
     cursor: pointer;
 }
 
+.login-btn:hover{
+    transform: scale(1.006);
+}
+
 .login-btn a {
     color: #F8F7F2;
 }
