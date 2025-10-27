@@ -1047,6 +1047,14 @@ footer{
             border-radius: 8px;
             padding: 16px;
             margin-bottom: 8px;
+            
+            transition: transform 0.2s;
+        }
+
+        .post-card:hover{
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(47, 109, 136, 0.15);
+            border-color: #2f6d88;
         }
 
         .post-header {
