@@ -241,8 +241,13 @@
                 <h1>Planos</h1>
                 <h2> Começe hoje mesmo! <br>Selecione um plano hubit</h2>
 
+                <div class="plans-options">
+                    <button id="btnInd">Individual</button>
+                    <button id="btnEmp">Empresarial</button>
+                </div>
+
                 <div class="plans-content">
-                    <div class="plan1">
+                    <div id="plansInd" class="plan1">
                         <div class="plan1-content">
                             <h1>8 bits</h1>
                             <hr>
@@ -266,7 +271,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="plan1">
+                    <div id="plansInd" class="plan1">
                         <div class="plan1-content">
                             <h1>64 bits</h1>
                             <hr>
@@ -274,6 +279,29 @@
                             <h3>R$ 29.90 /Mês</h3>
                             <div class="plan-a-btn-2">
                                 Experimente agora
+                            </div>
+                            <br>
+                            <div class="plan-content">
+                                <ul>
+                                    <li>1 Slot de currículo</li>
+                                    <li>Navegar pelo feed</li>
+                                    <li>Candidatar-se
+                                    </li>
+                                    <li>Impulsionar o alcance do seu Currículo</li>
+                                    <li>Fique em destaque</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+<!--------------------------------------------------------------------------------------------------------------->
+                    <div id="plansEmp" class="plan1">
+                        <div class="plan1-content">
+                            <h1>128 bits</h1>
+                            <hr>
+                            <h2>Premium bits</span></h2>
+                            <h3>Preço a ser combinao</h3>
+                            <div class="plan-a-btn-2">
+                                Contatar vendas
                             </div>
                             <br>
                             <div class="plan-content">
@@ -327,6 +355,22 @@
         function focar() {
             document.getElementById('email').focus();
         }
+
+        const btnInd = document.getElementById('btnInd');
+        const btnEmp = document.getElementById('btnEmp');
+        const plansInd = document.getElementById('plansInd');
+        const plansEmp = document.getElementById('plansEmp');
+
+        btnInd.addEventListener('click', ()=>{
+            plansEmp.style.display = 'none';
+            plansInd.style.display = 'block';
+        })
+
+        btnEmp.addEventListener('click', ()=>{
+            plansEmp.style.display = 'block';
+            plansInd.style.display = 'none';
+        })
+
 
         // Seleciona o elemento de texto que será animado
         const textAlt = document.getElementById('text-alt');

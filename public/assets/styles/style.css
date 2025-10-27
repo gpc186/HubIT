@@ -946,3 +946,37 @@ hr{
     width: 30px;
     border-radius: 0px;
 }
+
+.plans-options{
+    display: flex;
+    width: auto;
+    justify-content: center;
+    column-gap: 20px;
+
+    margin-top: 20px;
+}
+
+.plans-options button{
+    width: 120px;
+    border: none;
+    background-color: #2F6D88;
+    padding: 10px;
+
+    color: white;
+    font-family: Codec;
+    border-radius: 10px;
+
+    transition: background-color 0.2s;
+}
+
+.plans-options button:hover{
+    background-color: #24596f
+}
+
+#plansInd{
+    display: block;
+}
+
+#plansEmp{
+    display: none;
+}
