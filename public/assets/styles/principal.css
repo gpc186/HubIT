@@ -16,7 +16,7 @@
 
 /* Parte que se move (thumb) */
 ::-webkit-scrollbar-thumb {
-  background-color: #1d80aac1;
+  background-color: #2F6D88;
   border-radius: 10px;
   border: 10px solid #e0e0e000; /* cria um "gap" visual */
 }

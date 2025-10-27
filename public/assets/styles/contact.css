@@ -3,6 +3,30 @@
     src: url(../fonts/codec-pro.regular.ttf);
 }
 
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 7px; /* largura da scrollbar */
+}
+
+/* Parte de trás (trilho) */
+::-webkit-scrollbar-track {
+  background: #F8F7F2;
+  border-radius: 10px;
+}
+
+/* Parte que se move (thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: #2F6D88;
+  border-radius: 10px;
+  border: 10px solid #e0e0e000; /* cria um "gap" visual */
+}
+
+/* Quando o usuário passa o mouse */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #357ab8;
+}
+
+
 body{
     background-color: #f8f7f2;
 
