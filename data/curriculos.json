@@ -7,7 +7,7 @@
     "telefone": "1140028922",
     "localizacao": "São Paulo",
     "titulo": "Desenvolvedor Full Stack Pleno",
-    "resumoProfissional": "Desenvolvedor com 4 anos de experi�ncia",
+    "resumoProfissional": "Desenvolvedor com 4 anos de experiência",
     "habilidades": [
       "JavaScript",
       "React",
@@ -20,17 +20,17 @@
         "cargo": "Desenvolvedor Full Stack",
         "empresa": "Tech Solutions",
         "dataInicio": "2023-01",
-        "dataFim": null,
-        "descricao": "Desenvolvimento de aplicações web",
-        "atual": true
+        "dataFim": "",
+        "atual": true,
+        "descricao": "Desenvolvimento de aplicações web"
       },
       {
         "cargo": "Estagiário",
         "empresa": "Startup XYZ",
         "dataInicio": "2021-06",
         "dataFim": "2022-12",
-        "descricao": "Auxílio no desenvolvimento",
-        "atual": false
+        "atual": false,
+        "descricao": "Auxílio no desenvolvimento"
       }
     ],
     "educacao": [
@@ -73,7 +73,7 @@
       "outros": []
     },
     "dataCriacao": "2025-10-21T21:23:08.717Z",
-    "dataAtualizacao": "2025-10-21T21:53:44.233Z"
+    "dataAtualizacao": "2025-10-27T18:40:20.319Z"
   },
   {
     "curriculoID": 41761162191498,
@@ -102,5 +102,50 @@
     },
     "dataCriacao": "2025-10-22T19:43:11.498Z",
     "dataAtualizacao": "2025-10-22T19:46:33.796Z"
+  },
+  {
+    "curriculoID": 41761590910049,
+    "userID": 1760554646358,
+    "nome": "Fernando Sanches",
+    "email": "fernando.sanches.rodrigues@outlook.com",
+    "telefone": "11 99999-9999",
+    "localizacao": "São Paulo",
+    "titulo": "asdasd",
+    "resumoProfissional": "asdasdasd",
+    "habilidades": [
+      "asdasdasda",
+      "a sdasd a",
+      "sdasdas a",
+      "sdasda",
+      "asd",
+      "sds"
+    ],
+    "experiencias": [
+      {
+        "cargo": "asdasd",
+        "empresa": "asda",
+        "dataInicio": "0001-09",
+        "dataFim": "0023-01",
+        "atual": false,
+        "descricao": "asdasdasd"
+      }
+    ],
+    "educacao": [],
+    "softSkills": [],
+    "certificados": [],
+    "idiomas": [
+      {
+        "idioma": "asdas",
+        "nivel": "Nativo"
+      }
+    ],
+    "links": {
+      "linkedin": null,
+      "github": null,
+      "portfolio": null,
+      "outros": []
+    },
+    "dataCriacao": "2025-10-27T18:48:30.049Z",
+    "dataAtualizacao": "2025-10-27T18:48:30.049Z"
   }
 ]

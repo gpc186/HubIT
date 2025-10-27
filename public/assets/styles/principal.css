@@ -3,6 +3,13 @@
     src: url(../fonts/codec-pro.regular.ttf);
 }
 
+::selection {
+  background: #2f6d888e; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #2f6d888e; /* Gecko Browsers */
+}
+
 /* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
   width: 7px; /* largura da scrollbar */
@@ -64,9 +71,22 @@ a{
     height: auto;
     background-color: #F8F7F2;
 }
+
+@media (max-width: 900px){
+    .logo{
+        margin-left: 0px !important;
+    }
+}
+
+@media (max-width: 810px){
+    .search-content{
+        display: none !important;
+    }
+}
+
 @media (max-width: 768px) {
     .row{
-        flex-wrap: nowrap !important;
+        flex-wrap: wrap !important;
     }
     
     .login-block{
@@ -1385,6 +1405,16 @@ footer{
     .post-actions{
         display: flex;
         flex-direction: column;
+    }
+
+    .buttons-filter{
+        height: auto !important;
+        flex-direction: column !important;
+        row-gap: 10px !important;
+    }
+
+    .buttons-filter button{
+        width: 100% !important;
     }
 }
 

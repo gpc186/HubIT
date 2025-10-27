@@ -70,5 +70,149 @@
     },
     "dataCandidatura": "2025-10-23T16:49:10.907Z",
     "status": "pendente"
+  },
+  {
+    "candidaturaID": 51761590925436,
+    "empregoID": 21760557376160,
+    "userID": 1760554646358,
+    "curriculoID": 41761590910049,
+    "candidato": {
+      "nome": "Fernando Sanches",
+      "email": "fernando.sanches.rodrigues@outlook.com",
+      "telefone": "11 99999-9999",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Fullstack",
+      "nivelExperiencia": "Especialista",
+      "linkedin": "https://www.linkedin.com/in/fernando-sanches-0b0947349/",
+      "github": "https://github.com/FernandoSnchs"
+    },
+    "vaga": {
+      "titulo": "Analista de Suporte Técnico",
+      "empresaNome": "Magazine Luiza",
+      "localizacao": "Franca, SP",
+      "area": "Infraestrutura / Suporte"
+    },
+    "dataCandidatura": "2025-10-27T18:48:45.436Z",
+    "status": "pendente"
+  },
+  {
+    "candidaturaID": 51761590946018,
+    "empregoID": 21760557376159,
+    "userID": 1760554646358,
+    "curriculoID": 41761590910049,
+    "candidato": {
+      "nome": "Fernando Sanches",
+      "email": "fernando.sanches.rodrigues@outlook.com",
+      "telefone": "11 99999-9999",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Fullstack",
+      "nivelExperiencia": "Especialista",
+      "linkedin": "https://www.linkedin.com/in/fernando-sanches-0b0947349/",
+      "github": "https://github.com/FernandoSnchs"
+    },
+    "vaga": {
+      "titulo": "Engenheiro de Software Backend",
+      "empresaNome": "Nubank",
+      "localizacao": "São Paulo, SP",
+      "area": "Backend"
+    },
+    "dataCandidatura": "2025-10-27T18:49:06.018Z",
+    "status": "pendente"
+  },
+  {
+    "candidaturaID": 51761590955027,
+    "empregoID": 21760557376157,
+    "userID": 1760554646358,
+    "curriculoID": 41761590910049,
+    "candidato": {
+      "nome": "Fernando Sanches",
+      "email": "fernando.sanches.rodrigues@outlook.com",
+      "telefone": "11 99999-9999",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Fullstack",
+      "nivelExperiencia": "Especialista",
+      "linkedin": "https://www.linkedin.com/in/fernando-sanches-0b0947349/",
+      "github": "https://github.com/FernandoSnchs"
+    },
+    "vaga": {
+      "titulo": "Desenvolvedor Mobile",
+      "empresaNome": "Caixa Econômica Federal",
+      "localizacao": "Rio de Janeiro, RJ",
+      "area": "Mobile"
+    },
+    "dataCandidatura": "2025-10-27T18:49:15.027Z",
+    "status": "pendente"
+  },
+  {
+    "candidaturaID": 51761590961873,
+    "empregoID": 21760557376156,
+    "userID": 1760554646358,
+    "curriculoID": 41761590910049,
+    "candidato": {
+      "nome": "Fernando Sanches",
+      "email": "fernando.sanches.rodrigues@outlook.com",
+      "telefone": "11 99999-9999",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Fullstack",
+      "nivelExperiencia": "Especialista",
+      "linkedin": "https://www.linkedin.com/in/fernando-sanches-0b0947349/",
+      "github": "https://github.com/FernandoSnchs"
+    },
+    "vaga": {
+      "titulo": "Desenvolvedor Full Stack",
+      "empresaNome": "Banco do Brasil",
+      "localizacao": "Brasília, DF",
+      "area": "Full Stack"
+    },
+    "dataCandidatura": "2025-10-27T18:49:21.873Z",
+    "status": "pendente"
+  },
+  {
+    "candidaturaID": 51761590969620,
+    "empregoID": 21760557856155,
+    "userID": 1760554646358,
+    "curriculoID": 41761590910049,
+    "candidato": {
+      "nome": "Fernando Sanches",
+      "email": "fernando.sanches.rodrigues@outlook.com",
+      "telefone": "11 99999-9999",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Fullstack",
+      "nivelExperiencia": "Especialista",
+      "linkedin": "https://www.linkedin.com/in/fernando-sanches-0b0947349/",
+      "github": "https://github.com/FernandoSnchs"
+    },
+    "vaga": {
+      "titulo": "Desenvolvedor Backend Júnior",
+      "empresaNome": "Itaú",
+      "localizacao": "São Paulo, SP",
+      "area": "Backend"
+    },
+    "dataCandidatura": "2025-10-27T18:49:29.620Z",
+    "status": "pendente"
+  },
+  {
+    "candidaturaID": 51761590991762,
+    "empregoID": 217652557376155,
+    "userID": 1760554646358,
+    "curriculoID": 41761590910049,
+    "candidato": {
+      "nome": "Fernando Sanches",
+      "email": "fernando.sanches.rodrigues@outlook.com",
+      "telefone": "11 99999-9999",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Fullstack",
+      "nivelExperiencia": "Especialista",
+      "linkedin": "https://www.linkedin.com/in/fernando-sanches-0b0947349/",
+      "github": "https://github.com/FernandoSnchs"
+    },
+    "vaga": {
+      "titulo": "Analista de Dados",
+      "empresaNome": "Amazon",
+      "localizacao": "São Paulo, SP",
+      "area": "Data / Backend"
+    },
+    "dataCandidatura": "2025-10-27T18:49:51.762Z",
+    "status": "pendente"
   }
 ]

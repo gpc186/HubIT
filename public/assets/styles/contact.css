@@ -3,6 +3,13 @@
     src: url(../fonts/codec-pro.regular.ttf);
 }
 
+::selection {
+  background: #2f6d888e; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #2f6d888e; /* Gecko Browsers */
+}
+
 /* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
   width: 7px; /* largura da scrollbar */

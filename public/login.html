@@ -94,7 +94,8 @@
                                                         style="color:#30729e">Crie</span> sua conta Hubit</h1>
                                                 <h2>Insira seus dados</h2>
                                                 <input type="email" name="email" id="emailNewUser" placeholder="E-mail">
-                                                <input type="password" name="passwd" id="passwdNewUser" placeholder="Senha">
+                                                <input type="password" name="passwd" id="passwdNewUser"
+                                                    placeholder="Senha">
                                                 <div class="passtip" id="passtip">
                                                     <h3>A senha precisa ter pelo menos:</h3>
                                                     <ul>
@@ -131,7 +132,7 @@
                                                 </div>
                                         </div>
                                         <div class="modal-footer justify-content-between">
-                                            <button type="button" class="btn btn-secondary"
+                                            <button id="btnNone" type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Fechar</button>
                                             <button type="button" class="login-block-enter"
                                                 onclick="registrarNovoUsuario()"
@@ -173,13 +174,15 @@
                     </div>
                     <div class="section-block-2">
                         <div class="section-block-content-2">
-                            <h1 class="textwSvg"> <img src="assets/img/svg/chart-histogram-one-svgrepo-com.svg" alt="">Currículo</h1>
+                            <h1 class="textwSvg"> <img src="assets/img/svg/chart-histogram-one-svgrepo-com.svg"
+                                    alt="">Currículo</h1>
                             <hr>
                             <p>Crie o seu currículo na hubit e use para <span
                                     style="color: #2F6D88;">candidatar-se</span>
                                 para vagas de empresas </p>
                             <br>
-                            <h1 class="textwSvg"> <img src="assets/img/svg/feed-svgrepo-com.svg" alt=""> Feed de vagas</h1>
+                            <h1 class="textwSvg"> <img src="assets/img/svg/feed-svgrepo-com.svg" alt=""> Feed de vagas
+                            </h1>
                             <hr>
                             <p>Explore por um feed de vagas, com inúmeras <span style="color: #2F6D88;">oportunidades de
                                     trabalho</span>, entre elas, Estágios, CLT ou PJ</p>
@@ -215,12 +218,15 @@
                     </div>
                     <div class="section-block-2">
                         <div class="section-block-content-2">
-                            <h1 class="textwSvg"><img src="assets/img/svg/coin-alt-svgrepo-com.svg" alt="">O que são os <span style="color: #30729e;">Slots</span>?</h1>
+                            <h1 class="textwSvg"><img src="assets/img/svg/coin-alt-svgrepo-com.svg" alt="">O que são os
+                                <span style="color: #30729e;">Slots</span>?
+                            </h1>
                             <hr>
                             <p>Slots são espaços de currículos configurados por você, onde podem ser utilizados para se
                                 candidatar para vagas especificas.</p>
                             <br>
-                            <h1 class="textwSvg"><img src="assets/img/svg/form-one-svgrepo-com.svg" alt=""><span style="color: #30729e;">Formato desejado</span> pelas empresas</h1>
+                            <h1 class="textwSvg"><img src="assets/img/svg/form-one-svgrepo-com.svg" alt=""><span
+                                    style="color: #30729e;">Formato desejado</span> pelas empresas</h1>
                             <hr>
                             <p>Aqui seu currículo já sai do jeitinho que as grandes empresas querem.</p>
                             <br>
@@ -293,7 +299,7 @@
                             </div>
                         </div>
                     </div>
-<!--------------------------------------------------------------------------------------------------------------->
+                    <!--------------------------------------------------------------------------------------------------------------->
                     <div id="plansEmp" class="plan1">
                         <div class="plan1-content">
                             <h1>128 bits</h1>
@@ -356,21 +362,23 @@
             document.getElementById('email').focus();
         }
 
-        function aparecerPlanInd(){
+        function aparecerPlanInd() {
             const btnInd = document.getElementById('btnInd');
             const btnEmp = document.getElementById('btnEmp');
             const plansInd = document.getElementById('plansInd');
             const plansInd2 = document.getElementById('plansInd2')
             const plansEmp = document.getElementById('plansEmp');
 
-            
+
             plansEmp.style.display = 'none';
             plansInd.style.display = 'block';
+            btnInd.style.background = '#357ab8';
+            btnEmp.style.background = '#2F6D88';
             plansInd2.style.display = 'block';
-            
+
         }
 
-        function aparecerPlanEmp(){
+        function aparecerPlanEmp() {
             const btnInd = document.getElementById('btnInd');
             const btnEmp = document.getElementById('btnEmp');
             const plansInd = document.getElementById('plansInd');
@@ -378,13 +386,26 @@
             const plansEmp = document.getElementById('plansEmp');
 
             plansEmp.style.display = 'block';
+            btnEmp.style.background = '#357ab8';
+            btnInd.style.background = '#2F6D88';
             plansInd.style.display = 'none';
             plansInd2.style.display = 'none';
-            
         }
 
-        
+        var email = document.getElementById('email');
+        var emailHasFocus = (document.activeElement === email);
 
+        var passwd = document.getElementById('passwd');
+        var passwdHasFocus = (document.activeElement === passwd);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Enter") {
+                const elementoAtivo = document.activeElement;
+                if (elementoAtivo === email || elementoAtivo === passwd) {
+                    fazerLogin();
+                }
+            }
+        });
 
         // Seleciona o elemento de texto que será animado
         const textAlt = document.getElementById('text-alt');
@@ -437,7 +458,7 @@
         const passwdNewUser = document.getElementById('passwdNewUser');
         const passtip = document.getElementById('passtip');
 
-        passwdNewUser.addEventListener('click', () =>{
+        passwdNewUser.addEventListener('click', () => {
             console.log("clicou")
             passtip.style.display = 'block'
         })
