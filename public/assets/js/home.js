@@ -450,10 +450,10 @@ function renderizarPropostas(propostas) {
                             <h6 class="fw-semibold mb-3">Sobre a Vaga</h6>
                             <h5 class="mb-3">${proposta.vaga}</h5>
                             <div class="d-flex flex-wrap gap-3 mb-3">
-                                <span class="text-muted small"><span class="me-1">💼</span>Tempo Integral</span>
-                                <span class="text-muted small"><span class="me-1">📊</span>${proposta.nivel}</span>
-                                <span class="text-muted small"><span class="me-1">📍</span>${proposta.tipoTrabalho}</span>
-                                <span class="text-muted small"><span class="me-1">📝</span>${proposta.tipoContrato}</span>
+                                <span id="modalTxtSvg" class="text-muted small"><span class="me-1"><img src="/assets/img/svg/hourglass-svgrepo-com.svg"></span>Tempo Integral</span>
+                                <span id="modalTxtSvg" class="text-muted small"><span class="me-1"><img src="/assets/img/svg/id-card-svgrepo-com.svg"></span>${proposta.nivel}</span>
+                                <span id="modalTxtSvg" class="text-muted small"><span class="me-1"><img src="/assets/img/svg/location-pin-svgrepo-com.svg"></span>${proposta.tipoTrabalho}</span>
+                                <span id="modalTxtSvg" class="text-muted small"><span class="me-1"><img src="/assets/img/svg/file-contract-svgrepo-com.svg"></span>${proposta.tipoContrato}</span>
                             </div>
                             <div class="d-flex flex-wrap gap-3 mb-3">
                                 <h6 class="fw-semibold mb-3">Pretensão salarial: ${proposta.salario}</h6>
