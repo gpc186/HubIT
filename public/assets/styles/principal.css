@@ -1741,3 +1741,19 @@ label{
     width: 15px;
     height: 15px;
 }
+
+.endMsg{
+    width: 80%;
+    height: auto;
+    padding: 15px 30px 30px 30px;
+
+    opacity: 60%;
+}
+
+.endMsg h1{
+    font-size: 14pt;
+}
+
+.endMsg a{
+    color: #17829f;
+}

@@ -696,7 +696,7 @@ section {
 .plan1:hover{
     transform: translateY(-5px);
     box-shadow: 0 5px 20px rgba(47, 109, 136, 0.15);
-    border-color: #2f6d88;
+    border-color: #3379a8;
 }
 .plan2{
     width: 35%;
