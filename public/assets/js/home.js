@@ -43,7 +43,173 @@ function mostrarSkeletonsVagas(quantidade = 5) {
 window.onload = async function () {
     await carregarPagina();
     inicializarFiltros();
+    inicializarPesquisa();
 };
+
+// === SISTEMA DE PESQUISA ===
+let empregosCacheados = []; // Cache dos empregos para pesquisa
+let filtrosAtuais = {}; // Armazena os filtros aplicados
+
+/**
+ * Inicializa o sistema de pesquisa
+ */
+function inicializarPesquisa() {
+    const searchInput = document.querySelector('.search input[type="search"]');
+    const searchButton = document.querySelector('.search img');
+    
+    if (!searchInput) {
+        console.warn('Campo de pesquisa não encontrado');
+        return;
+    }
+    
+    // Evento ao pressionar Enter
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            realizarPesquisa();
+        }
+    });
+    
+    // Evento ao clicar no ícone de pesquisa
+    if (searchButton) {
+        searchButton.style.cursor = 'pointer';
+        searchButton.addEventListener('click', realizarPesquisa);
+    }
+    
+    // Pesquisa em tempo real (opcional - comente se não quiser)
+    searchInput.addEventListener('input', debounce(realizarPesquisa, 500));
+}
+
+/**
+ * Função debounce para evitar muitas chamadas
+ */
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+/**
+ * Realiza a pesquisa nos empregos
+ */
+async function realizarPesquisa() {
+    const searchInput = document.querySelector('.search input[type="search"]');
+    const termoPesquisa = searchInput ? searchInput.value.trim().toLowerCase() : '';
+    
+    console.log('🔍 Pesquisando por:', termoPesquisa);
+    
+    if (!termoPesquisa) {
+        // Se não há termo de pesquisa, recarrega todos os empregos
+        await carregarEmpregos(filtrosAtuais);
+        return;
+    }
+    
+    // Se o cache está vazio, carrega os empregos primeiro
+    if (empregosCacheados.length === 0) {
+        await carregarEmpregos(filtrosAtuais);
+    }
+    
+    // Filtra os empregos baseado no termo de pesquisa
+    const resultadosFiltrados = empregosCacheados.filter(emprego => {
+        const titulo = (emprego.titulo || '').toLowerCase();
+        const empresa = (emprego.empresaNome || '').toLowerCase();
+        const descricao = (emprego.descricao || '').toLowerCase();
+        const localizacao = (emprego.localizacao || '').toLowerCase();
+        const area = (emprego.area || '').toLowerCase();
+        const requisitos = Array.isArray(emprego.requisitos) 
+            ? emprego.requisitos.join(' ').toLowerCase() 
+            : (emprego.requisitos || '').toLowerCase();
+        
+        return titulo.includes(termoPesquisa) ||
+               empresa.includes(termoPesquisa) ||
+               descricao.includes(termoPesquisa) ||
+               localizacao.includes(termoPesquisa) ||
+               area.includes(termoPesquisa) ||
+               requisitos.includes(termoPesquisa);
+    });
+    
+    console.log(`✅ Encontrados ${resultadosFiltrados.length} empregos`);
+    
+    // Renderiza os resultados
+    const container = document.getElementById('empregosContainer');
+    if (resultadosFiltrados.length === 0) {
+        container.innerHTML = `
+            <div class="loading" style="text-align: center; padding: 40px;">
+                <h3>🔍 Nenhum resultado encontrado para "${termoPesquisa}"</h3>
+                <p style="color: #666; margin-top: 10px;">Tente usar palavras-chave diferentes ou filtros mais amplos.</p>
+            </div>
+        `;
+    } else {
+        const propostas = resultadosFiltrados.map((emprego, index) => ({
+            id: emprego.empregoID || index + 1,
+            empresa: emprego.empresaNome || "Empresa",
+            vaga: emprego.titulo || "Vaga",
+            tempo: emprego.tempo || "Recente",
+            descricao: emprego.descricao || "Descrição não disponível",
+            requisitos: Array.isArray(emprego.requisitos) ? emprego.requisitos.join(', ') : emprego.requisitos || "Sem requisitos",
+            salario: emprego.mediaSalario ? `R$ ${emprego.mediaSalario}/Mês` : "Sem proposta de salário",
+            localizacao: emprego.localizacao || "Sem localização",
+            beneficios: Array.isArray(emprego.beneficios) ? emprego.beneficios.join(', ') : emprego.beneficios || "Sem beneficios",
+            tipoTrabalho: emprego.tipoTrabalho || "O contratador não definiu o tipo de trabalho",
+            tipoContrato: emprego.tipoContrato || "O contratador não definiu o tipo de contrato",
+            area: emprego.area || "",
+            diferenciais: Array.isArray(emprego.diferenciais) ? emprego.diferenciais.join(', ') : emprego.diferenciais || "",
+            qtdFuncionario: emprego.qtdFuncionario ? `${emprego.qtdFuncionario}+` : "Nenhum funcionário",
+            imgEmpresa: emprego.imgEmpresa || "https://via.placeholder.com/60",
+            dataCriacao: emprego.dataCriacao || "",
+            status: emprego.status || "",
+            candidatos: emprego.candidatos || "0",
+            nivel: emprego.nivel || "",
+            corDestaque: emprego.corDestaque || "#000000ff"
+        }));
+        
+        renderizarPropostas(propostas);
+    }
+}
+
+/**
+ * Função para ordenar empregos por data (mais recente primeiro)
+ */
+function ordenarEmpregoPorData(empregos) {
+    return empregos.sort((a, b) => {
+        // Converte as datas para timestamp
+        const dataA = converterDataParaTimestamp(a.dataCriacao);
+        const dataB = converterDataParaTimestamp(b.dataCriacao);
+        
+        // Ordem decrescente (mais recente primeiro)
+        return dataB - dataA;
+    });
+}
+
+/**
+ * Converte diferentes formatos de data para timestamp
+ */
+function converterDataParaTimestamp(data) {
+    if (!data) return 0;
+    
+    // Se já é um timestamp ou número
+    if (typeof data === 'number') return data;
+    
+    // Se é uma string de data ISO (2025-10-15T19:42:56.155Z)
+    if (data.includes('T') && data.includes('Z')) {
+        return new Date(data).getTime();
+    }
+    
+    // Se é formato DD/MM/YYYY
+    if (data.includes('/')) {
+        const [dia, mes, ano] = data.split('/');
+        return new Date(`${ano}-${mes}-${dia}`).getTime();
+    }
+    
+    // Tenta converter diretamente
+    const timestamp = new Date(data).getTime();
+    return isNaN(timestamp) ? 0 : timestamp;
+}
 
 // === FUNÇÕES DE PERFIL ===
 
