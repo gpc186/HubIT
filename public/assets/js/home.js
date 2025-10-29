@@ -353,7 +353,8 @@ async function carregarEmpregos(filtros = {}) {
                 dataCriacao: emprego.dataCriacao || "",
                 status: emprego.status || "",
                 candidatos: emprego.candidatos || "0",
-                nivel: emprego.nivel || ""
+                nivel: emprego.nivel || "",
+                corDestaque: emprego.corDestaque || "#2F6D88" // NOVA PROPRIEDADE
             }));
 
             console.log(dadosEmprego)
@@ -398,7 +399,7 @@ function renderizarPropostas(propostas) {
             <div class="post-header">
                 <div class="post-avatar"><img src="${proposta.imgEmpresa}" onerror="this.src='https://via.placeholder.com/60'"></div>
                 <div class="post-user-info">
-                    <div class="post-user-name">${proposta.empresa}</div>
+                    <div class="post-user-name" style="color: ${proposta.corDestaque};">${proposta.empresa}</div>
                     <div class="post-user-headline">${proposta.vaga} | ${proposta.nivel}</div>
                     <div class="post-time">${proposta.candidatos} Candidatos</div>
                 </div>
@@ -429,7 +430,7 @@ function renderizarPropostas(propostas) {
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5">${proposta.empresa}</h1>
+                        <h1 class="modal-title fs-5" style="color: ${proposta.corDestaque};">${proposta.empresa}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -439,7 +440,7 @@ function renderizarPropostas(propostas) {
                                     <img src="${proposta.imgEmpresa}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" onerror="this.src='https://via.placeholder.com/56'">
                                 </div>
                                 <div>
-                                    <h6 class="mb-1 fw-semibold">${proposta.empresa}</h6>
+                                    <h6 class="mb-1 fw-semibold" style="color: ${proposta.corDestaque};">${proposta.empresa}</h6>
                                     <p class="mb-0 text-muted small">${proposta.localizacao} • ${proposta.qtdFuncionario} funcionários</p>
                                     <p class="mb-0 text-muted small">${proposta.area}</p>
                                 </div>
@@ -489,7 +490,7 @@ function renderizarPropostas(propostas) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" style="background-color: #2F6D88;" class="btn btn-primary" onclick="enviarCandidatura(${proposta.id})">Enviar Candidatura</button>
+                        <button type="button" style="background-color: ${proposta.corDestaque}; border-color: ${proposta.corDestaque};" class="btn btn-primary" onclick="enviarCandidatura(${proposta.id})">Enviar Candidatura</button>
                     </div>
                 </div>
             </div>

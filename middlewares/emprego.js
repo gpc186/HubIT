@@ -41,7 +41,8 @@ router.post('/', async (req, res) => {
 			mediaSalario,
 			localizacao,
 			requisitos,
-			beneficios
+			beneficios,
+			corDestaque // NOVA PROPRIEDADE
 		} = req.body;
 
 		// Validações básicas
@@ -66,11 +67,10 @@ router.post('/', async (req, res) => {
 		// Criamos um id pelo /utils
 		let empregoID = criarIDEmprego()
 		
-		// CORREÇÃO: Criar a variável data
 		const data = new Date();
 		const ano = data.getUTCFullYear()
 		const dia = data.getUTCDate()
-		const mes = data.getUTCMonth() + 1 // +1 porque getUTCMonth() retorna 0-11
+		const mes = data.getUTCMonth() + 1
 		
 		// Aqui criamos um objeto com todas as informações
 		const novoEmprego = {
@@ -86,6 +86,7 @@ router.post('/', async (req, res) => {
 			localizacao: localizacao.trim(),
 			requisitos: requisitos,
 			beneficios: beneficios,
+			corDestaque: corDestaque || '#000000ff', // Cor padrão se não for fornecida
 			dataCriacao: `${dia}/${mes}/${ano}`,
 			status: 'ativo'
 		};

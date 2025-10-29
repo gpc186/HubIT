@@ -7,7 +7,7 @@
     <title>Hubit - Perfil</title>
     <link rel="stylesheet" href="/assets/styles/pg-perfil.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
@@ -50,695 +50,867 @@
                         </a>
                         <a class="d-none d-lg-block">
                             <div class="dropdown dropstart">
-                                <a class="login-btn dropdown-toggle dropstart" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  <img src="/assets/img/svg/user-circle-svgrepo-com.svg" alt="">
+                                <a class="login-btn dropdown-toggle dropstart" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="/assets/img/svg/user-circle-svgrepo-com.svg" alt="">
                                 </a>
-                              
+
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                  <li><a class="dropdown-item" onclick="sair()">Sair</a></li>
+                                    <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                    <li><a class="dropdown-item" onclick="sair()">Sair</a></li>
                                 </ul>
-                              </div>
+                            </div>
                         </a>
                     </div>
                 </div>
         </nav>
     </header>
-    <main >
-         <br><br><br>
-        <button class="mudarInfo-B" data-bs-toggle="modal"  onclick="abrirModalEdicao()">Mudar informações</button>
-        
-       
+    <main>
+        <br><br><br>
+        <button class="mudarInfo-B" data-bs-toggle="modal" onclick="abrirModalEdicao()">Mudar informações</button>
+
+
 
         <!--front-->
-             <div class="container-banner">
-                <div class="img-banner">
-                 <img src="/assets/img/imagem-perfil.jpg" alt="banner img">
-                 
-                </div>
-                
-                <div class="img-perfil">
-                    <img src="/assets/img/svg/Hubit_icon_profile.svg" alt="img perfil">
-                </div>
-                
-                <div class="container-info">
-                    <div class="ladoEsquerdo">
-                            <!--NOME+OQ FAZ + LOCALIDADE-->
-                        <h1 id='nomePrincipal'></h1>
-                        <h2 id="trabalho"></h2>
-                        <h3 id="localizacao"><h3>
-                        
-                        
-                    </div>
-                    <div class="ladoDireito">
-                        <!--Links+ Bio-->
-                        <div class="links">
-                            <ul>
-                                <li><a id="lkdn" href=""></a></li>
-                                <li><a id="gthb" href="" ></a></li>
-                                
-                            </ul>
-                        </div>
-                        <div class="bio">
+        <div class="container-banner">
+            <div class="img-banner">
+                <img src="/assets/img/imagem-perfil.jpg" alt="banner img">
 
+            </div>
+
+            <div class="img-perfil">
+                <img src="/assets/img/svg/Hubit_icon_profile.svg" alt="img perfil">
+            </div>
+
+            <div class="container-info">
+                <div class="ladoEsquerdo">
+                    <!--NOME+OQ FAZ + LOCALIDADE-->
+                    <h1 id='nomePrincipal'></h1>
+                    <h2 id="trabalho"></h2>
+                    <h3 id="localizacao">
+                        <h3>
+
+
+                </div>
+                <div class="ladoDireito">
+                    <!--Links+ Bio-->
+                    <div class="links">
+                        <ul>
+                            <li><a id="lkdn" href=""></a></li>
+                            <li><a id="gthb" href=""></a></li>
+
+                        </ul>
+                    </div>
+                    <div class="bio">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNovoEmprego">
+            Launch demo modal
+        </button>
+
+        <!-- CONTAINER EMPREGOS (só para empresas) -->
+        <div class="container-empregos" id="container-empregos" style="display: none;">
+            <div class="title">
+                <h1>Minhas Vagas</h1>
+                <p style="color: #a6a6a6; font-size: 14px; margin-top: 5px;">Gerencie as vagas que você publicou</p>
+                <div class="modal fade" id="modalNovoEmprego" tabindex="-1" aria-labelledby="modalNovoEmpregoLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalNovoEmpregoLabel">Criar Nova Oportunidade</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="formNovoEmprego">
+
+                                    <!-- Título da Vaga -->
+                                    <div class="mb-3">
+                                        <label for="empregoTitulo" class="form-label">Título da Vaga <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="empregoTitulo"
+                                            placeholder="Ex: Desenvolvedor Full Stack" required>
+                                    </div>
+
+                                    <!-- Cor de Destaque -->
+                                    <div class="mb-3">
+                                        <label for="empregoCorDestaque" class="form-label">
+                                            Cor de Destaque da Empresa <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <input type="color" class="form-control form-control-color"
+                                                id="empregoCorDestaque" value="#2F6D88" title="Escolha a cor">
+                                            <small class="text-muted">Esta cor será aplicada ao nome da empresa nos
+                                                posts</small>
+                                        </div>
+                                        <div class="form-text">
+                                            <div class="mt-2 p-3 border rounded" style="background-color: #f8f9fa;">
+                                                <strong>Preview:</strong>
+                                                <div class="d-flex align-items-center gap-2 mt-2">
+                                                    <div
+                                                        style="width: 40px; height: 40px; background: #ddd; border-radius: 50%;">
+                                                    </div>
+                                                    <div>
+                                                        <div id="previewNomeEmpresa"
+                                                            style="font-weight: 600; font-size: 14px; color: #2F6D88;">
+                                                            Nome da Empresa</div>
+                                                        <small class="text-muted">Cargo | Localização</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Descrição -->
+                                    <div class="mb-3">
+                                        <label for="empregoDescricao" class="form-label">Descrição <span
+                                                class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="empregoDescricao" rows="4"
+                                            placeholder="Descreva a vaga..." required></textarea>
+                                    </div>
+
+                                    <!-- Área -->
+                                    <div class="mb-3">
+                                        <label for="empregoArea" class="form-label">Área <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" id="empregoArea" required>
+                                            <option value="">Selecione...</option>
+                                            <option value="Backend">Backend</option>
+                                            <option value="Frontend">Frontend</option>
+                                            <option value="Full Stack">Full Stack</option>
+                                            <option value="Mobile">Mobile</option>
+                                            <option value="Data / Backend">Data / Backend</option>
+                                            <option value="Infraestrutura / Suporte">Infraestrutura / Suporte</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Tipo de Contrato e Trabalho -->
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="empregoContrato" class="form-label">Tipo de Contrato <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select" id="empregoContrato" required>
+                                                <option value="">Selecione...</option>
+                                                <option value="CLT">CLT</option>
+                                                <option value="PJ">PJ</option>
+                                                <option value="Estágio">Estágio</option>
+                                                <option value="Temporário">Temporário</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="empregoTrabalho" class="form-label">Tipo de Trabalho <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select" id="empregoTrabalho" required>
+                                                <option value="">Selecione...</option>
+                                                <option value="Remoto">Remoto</option>
+                                                <option value="Presencial">Presencial</option>
+                                                <option value="Híbrido">Híbrido</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Salário e Localização -->
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="empregoSalario" class="form-label">Média Salarial (R$)</label>
+                                            <input type="number" class="form-control" id="empregoSalario"
+                                                placeholder="Ex: 5000">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="empregoLocalizacao" class="form-label">Localização <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="empregoLocalizacao"
+                                                placeholder="Ex: São Paulo, SP" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Requisitos -->
+                                    <div class="mb-3">
+                                        <label for="empregoRequisitos" class="form-label">Requisitos</label>
+                                        <textarea class="form-control" id="empregoRequisitos" rows="3"
+                                            placeholder="Separe os requisitos por vírgula"></textarea>
+                                        <div class="form-text">Exemplo: JavaScript, React, Node.js</div>
+                                    </div>
+
+                                    <!-- Benefícios -->
+                                    <div class="mb-3">
+                                        <label for="empregoBeneficios" class="form-label">Benefícios</label>
+                                        <textarea class="form-control" id="empregoBeneficios" rows="3"
+                                            placeholder="Separe os benefícios por vírgula"></textarea>
+                                        <div class="form-text">Exemplo: Vale alimentação, Plano de saúde, Home office
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" onclick="publicarEmprego()">Publicar
+                                    Vaga</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- CONTAINER EMPREGOS (só para empresas) -->
-<div class="container-empregos" id="container-empregos" style="display: none;">
-    <div class="title">
-        <h1>Minhas Vagas</h1>
-        <p style="color: #a6a6a6; font-size: 14px; margin-top: 5px;">Gerencie as vagas que você publicou</p>
-    </div>
-    
-    <div class="sem-empregos" id="semEmpregos" style="display: none;">
-        <ion-icon name="briefcase-outline" style="font-size: 48px; color: #ccc;"></ion-icon>
-        <p>Você ainda não publicou nenhuma vaga</p>
-    </div>
-    
-    <div id="empregosLista" class="empregos-lista"></div>
-</div>
 
-<!-- CONTAINER CANDIDATOS (só para empresas) -->
-<div class="container-candidatos" id="container-candidatos" style="display: none;">
-    <div class="title">
-        <h1>Candidatos Recentes</h1>
-    </div>
-    <div id="candidatosRecentes"></div>
-</div>
-        
-<div class="container-Analise " id="container-Analise">
-    <div class="title">
-        <h1>Candidaturas</h1>
-    </div>
-    <div class="views">
-        <!-- Container para o carrossel -->
-        <div id="candidaturasCarousel" class="candidaturas-carousel">
-            <!-- Mensagem de carregamento -->
-            <div class="loading-candidaturas" id="loadingCandidaturas">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Carregando...</span>
-                </div>
-            </div>
-            
-            <!-- Mensagem quando não há candidaturas -->
-            <div class="sem-candidaturas" id="semCandidaturas" style="display: none;">
+            <div class="sem-empregos" id="semEmpregos" style="display: none;">
                 <ion-icon name="briefcase-outline" style="font-size: 48px; color: #ccc;"></ion-icon>
-                <p>Você ainda não se candidatou a nenhuma vaga</p>
-                <a href="/home" class="btn btn-primary mt-3">Ver Vagas Disponíveis</a>
+                <p>Você ainda não publicou nenhuma vaga</p>
             </div>
-            
-            <!-- Container dos cards de candidatura -->
-            <div class="candidaturas-wrapper" id="candidaturasWrapper" style="display: none;">
-                <button class="carousel-btn prev" id="prevBtn" onclick="moverCarrossel(-1)">
-                    <ion-icon name="chevron-back-outline"></ion-icon>
-                </button>
-                
-                <div class="candidaturas-track" id="candidaturasTrack">
-                    <!-- Cards serão inseridos aqui via JS -->
-                </div>
-                
-                <button class="carousel-btn next" id="nextBtn" onclick="moverCarrossel(1)">
-                    <ion-icon name="chevron-forward-outline"></ion-icon>
-                </button>
-            </div>
-            
-            <!-- Indicadores de página -->
-            <div class="carousel-indicators" id="carouselIndicators"></div>
-        </div>
-    </div>
-</div>
-<div class="container-curriculos " id="container-curriculos">
-    <div class="title">
-        <h1>Currículos</h1>
-        <p style="color: #a6a6a6; font-size: 14px; margin-top: 5px;">Crie até 3 currículos diferentes para vagas específicas</p>
-    </div>
-    <div class="curriculos">
-        <!-- Currículo 1 -->
-        <div class="curriculo" id="curriculo-1">
-            <div class="curriculo-header">
-                <h3>Currículo 1</h3>
-                <span class="status-curriculo" id="status-curriculo-1">Não criado</span>
-            </div>
-            <div class="curriculo-preview" id="preview-curriculo-1">
-                <p class="sem-curriculo">Nenhum currículo criado ainda</p>
-            </div>
-            <button class="btn-criar-curriculo" onclick="abrirModalCurriculo(1)">
-                <ion-icon name="add-circle-outline"></ion-icon>
-                Criar Currículo
-            </button>
+
+            <div id="empregosLista" class="empregos-lista"></div>
         </div>
 
-        <!-- Currículo 2 -->
-        <div class="curriculo" id="curriculo-2">
-            <div class="curriculo-header">
-                <h3>Currículo 2</h3>
-                <span class="status-curriculo" id="status-curriculo-2">Não criado</span>
+        <!-- CONTAINER CANDIDATOS (só para empresas) -->
+        <div class="container-candidatos" id="container-candidatos" style="display: none;">
+            <div class="title">
+                <h1>Candidatos Recentes</h1>
             </div>
-            <div class="curriculo-preview" id="preview-curriculo-2">
-                <p class="sem-curriculo">Nenhum currículo criado ainda</p>
-            </div>
-            <button class="btn-criar-curriculo" onclick="abrirModalCurriculo(2)">
-                <ion-icon name="add-circle-outline"></ion-icon>
-                Criar Currículo
-            </button>
+            <div id="candidatosRecentes"></div>
         </div>
 
-        <!-- Currículo 3 -->
-        <div class="curriculo" id="curriculo-3">
-            <div class="curriculo-header">
-                <h3>Currículo 3</h3>
-                <span class="status-curriculo" id="status-curriculo-3">Não criado</span>
+        <div class="container-Analise " id="container-Analise">
+            <div class="title">
+                <h1>Candidaturas</h1>
             </div>
-            <div class="curriculo-preview" id="preview-curriculo-3">
-                <p class="sem-curriculo">Nenhum currículo criado ainda</p>
-            </div>
-            <button class="btn-criar-curriculo" onclick="abrirModalCurriculo(3)">
-                <ion-icon name="add-circle-outline"></ion-icon>
-                Criar Currículo
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- MODAL: LISTA DE CANDIDATOS DE UMA VAGA -->
-<div class="modal fade" id="modalCandidatos" tabindex="-1">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h5 class="modal-title" id="tituloVagaModal">Candidatos da Vaga</h5>
-                    <p class="text-muted mb-0 small">
-                        <span id="empresaNomeModal"></span> • 
-                        <span id="totalCandidatos">0 candidatos</span>
-                    </p>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div id="listaCandidatos">
-                    <!-- Candidatos serão carregados via JS -->
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- MODAL: DETALHES DE UM CANDIDATO -->
-<div class="modal fade" id="modalDetalhesCandidato" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Detalhes do Candidato</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Informações do Candidato -->
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h6 class="mb-0">
-                            <ion-icon name="person-outline"></ion-icon>
-                            Informações Pessoais
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="text-muted small mb-1">Nome Completo</label>
-                                <p class="mb-0 fw-bold" id="detalhesNome">-</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small mb-1">Email</label>
-                                <p class="mb-0" id="detalhesEmail">-</p>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="text-muted small mb-1">Telefone</label>
-                                <p class="mb-0" id="detalhesTelefone">-</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small mb-1">Localização</label>
-                                <p class="mb-0" id="detalhesLocalizacao">-</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Informações Profissionais -->
-                <div class="card mb-4">
-                    <div class="card-header bg-success text-white">
-                        <h6 class="mb-0">
-                            <ion-icon name="briefcase-outline"></ion-icon>
-                            Informações Profissionais
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="text-muted small mb-1">Área de Atuação</label>
-                                <p class="mb-0" id="detalhesArea">-</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small mb-1">Nível de Experiência</label>
-                                <p class="mb-0" id="detalhesNivel">-</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Links Profissionais -->
-                        <div id="detalhesLinks" style="display: none;">
-                            <label class="text-muted small mb-2 d-block">Links Profissionais</label>
-                            <div class="d-flex gap-2 flex-wrap">
-                                <a id="detalhesLinkedin" href="#" target="_blank" 
-                                   class="btn btn-sm btn-outline-primary">
-                                    <ion-icon name="logo-linkedin"></ion-icon>
-                                    LinkedIn
-                                </a>
-                                <a id="detalhesGithub" href="#" target="_blank" 
-                                   class="btn btn-sm btn-outline-dark">
-                                    <ion-icon name="logo-github"></ion-icon>
-                                    GitHub
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Informações da Candidatura -->
-                <div class="card">
-                    <div class="card-header bg-info text-white">
-                        <h6 class="mb-0">
-                            <ion-icon name="document-text-outline"></ion-icon>
-                            Informações da Candidatura
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label class="text-muted small mb-1">Vaga</label>
-                                <p class="mb-0" id="detalhesVagaTitulo">-</p>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="text-muted small mb-1">Data da Candidatura</label>
-                                <p class="mb-0" id="detalhesDataCandidatura">-</p>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="text-muted small mb-1">Currículo</label>
-                                <p class="mb-0">
-                                    <span class="badge bg-secondary">
-                                        ID: <span id="detalhesCurriculoID">-</span>
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <a id="btnContatarCandidato" href="#" class="btn btn-primary">
-                    <ion-icon name="mail-outline"></ion-icon>
-                    Entrar em Contato
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- MODAL CURRÍCULO 1 -->
-<div class="modal fade" id="modalCurriculo1" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Currículo 1</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formCurriculo1">
-                    <!-- Informações Básicas -->
-                    <h6 class="mb-3">Informações Básicas</h6>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Título do Currículo <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="titulo-1" placeholder="Ex: Desenvolvedor Full Stack" required>
+            <div class="views">
+                <!-- Container para o carrossel -->
+                <div id="candidaturasCarousel" class="candidaturas-carousel">
+                    <!-- Mensagem de carregamento -->
+                    <div class="loading-candidaturas" id="loadingCandidaturas">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Carregando...</span>
                         </div>
                     </div>
 
-                    <!-- Objetivo Profissional -->
-                    <div class="mb-3">
-                        <label class="form-label">Objetivo Profissional <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="objetivo-1" rows="3" placeholder="Descreva seu objetivo profissional..." required></textarea>
+                    <!-- Mensagem quando não há candidaturas -->
+                    <div class="sem-candidaturas" id="semCandidaturas" style="display: none;">
+                        <ion-icon name="briefcase-outline" style="font-size: 48px; color: #ccc;"></ion-icon>
+                        <p>Você ainda não se candidatou a nenhuma vaga</p>
+                        <a href="/home" class="btn btn-primary mt-3">Ver Vagas Disponíveis</a>
                     </div>
 
-                    <hr class="my-4">
+                    <!-- Container dos cards de candidatura -->
+                    <div class="candidaturas-wrapper" id="candidaturasWrapper" style="display: none;">
+                        <button class="carousel-btn prev" id="prevBtn" onclick="moverCarrossel(-1)">
+                            <ion-icon name="chevron-back-outline"></ion-icon>
+                        </button>
 
-                    <!-- Experiências -->
-                    <h6 class="mb-3">Experiências Profissionais</h6>
-                    <div id="experiencias-container-1">
-                        <div class="experiencia-item mb-3">
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Cargo">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Empresa">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Início">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Fim">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="atual-1-0">
-                                        <label class="form-check-label" for="atual-1-0">Trabalho atual</label>
+                        <div class="candidaturas-track" id="candidaturasTrack">
+                            <!-- Cards serão inseridos aqui via JS -->
+                        </div>
+
+                        <button class="carousel-btn next" id="nextBtn" onclick="moverCarrossel(1)">
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        </button>
+                    </div>
+
+                    <!-- Indicadores de página -->
+                    <div class="carousel-indicators" id="carouselIndicators"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container-curriculos " id="container-curriculos">
+            <div class="title">
+                <h1>Currículos</h1>
+                <p style="color: #a6a6a6; font-size: 14px; margin-top: 5px;">Crie até 3 currículos diferentes para vagas
+                    específicas</p>
+            </div>
+            <div class="curriculos">
+                <!-- Currículo 1 -->
+                <div class="curriculo" id="curriculo-1">
+                    <div class="curriculo-header">
+                        <h3>Currículo 1</h3>
+                        <span class="status-curriculo" id="status-curriculo-1">Não criado</span>
+                    </div>
+                    <div class="curriculo-preview" id="preview-curriculo-1">
+                        <p class="sem-curriculo">Nenhum currículo criado ainda</p>
+                    </div>
+                    <button class="btn-criar-curriculo" onclick="abrirModalCurriculo(1)">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        Criar Currículo
+                    </button>
+                </div>
+
+                <!-- Currículo 2 -->
+                <div class="curriculo" id="curriculo-2">
+                    <div class="curriculo-header">
+                        <h3>Currículo 2</h3>
+                        <span class="status-curriculo" id="status-curriculo-2">Não criado</span>
+                    </div>
+                    <div class="curriculo-preview" id="preview-curriculo-2">
+                        <p class="sem-curriculo">Nenhum currículo criado ainda</p>
+                    </div>
+                    <button class="btn-criar-curriculo" onclick="abrirModalCurriculo(2)">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        Criar Currículo
+                    </button>
+                </div>
+
+                <!-- Currículo 3 -->
+                <div class="curriculo" id="curriculo-3">
+                    <div class="curriculo-header">
+                        <h3>Currículo 3</h3>
+                        <span class="status-curriculo" id="status-curriculo-3">Não criado</span>
+                    </div>
+                    <div class="curriculo-preview" id="preview-curriculo-3">
+                        <p class="sem-curriculo">Nenhum currículo criado ainda</p>
+                    </div>
+                    <button class="btn-criar-curriculo" onclick="abrirModalCurriculo(3)">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        Criar Currículo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: LISTA DE CANDIDATOS DE UMA VAGA -->
+        <div class="modal fade" id="modalCandidatos" tabindex="-1">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <h5 class="modal-title" id="tituloVagaModal">Candidatos da Vaga</h5>
+                            <p class="text-muted mb-0 small">
+                                <span id="empresaNomeModal"></span> •
+                                <span id="totalCandidatos">0 candidatos</span>
+                            </p>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="listaCandidatos">
+                            <!-- Candidatos serão carregados via JS -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: DETALHES DE UM CANDIDATO -->
+        <div class="modal fade" id="modalDetalhesCandidato" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detalhes do Candidato</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Informações do Candidato -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0">
+                                    <ion-icon name="person-outline"></ion-icon>
+                                    Informações Pessoais
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="text-muted small mb-1">Nome Completo</label>
+                                        <p class="mb-0 fw-bold" id="detalhesNome">-</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-muted small mb-1">Email</label>
+                                        <p class="mb-0" id="detalhesEmail">-</p>
                                     </div>
                                 </div>
-                                <div class="col-md-12 mb-2">
-                                    <textarea class="form-control" rows="2" placeholder="Descrição das atividades"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarExperiencia(1)">
-                        <ion-icon name="add-outline"></ion-icon> Adicionar Experiência
-                    </button>
-
-                    <hr class="my-4">
-
-                    <!-- Formação Acadêmica -->
-                    <h6 class="mb-3">Formação Acadêmica</h6>
-                    <div id="formacao-container-1">
-                        <div class="formacao-item mb-3">
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Curso">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Instituição">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Início">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Conclusão">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarFormacao(1)">
-                        <ion-icon name="add-outline"></ion-icon> Adicionar Formação
-                    </button>
-
-                    <hr class="my-4">
-
-                    <!-- Habilidades -->
-                    <h6 class="mb-3">Habilidades</h6>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="habilidades-1" placeholder="Ex: JavaScript, React, Node.js (separadas por vírgula)">
-                    </div>
-
-                    <!-- Idiomas -->
-                    <h6 class="mb-3">Idiomas</h6>
-                    <div id="idiomas-container-1">
-                        <div class="idioma-item mb-2 row">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Idioma">
-                            </div>
-                            <div class="col-md-6">
-                                <select class="form-select">
-                                    <option value="">Nível</option>
-                                    <option value="Básico">Básico</option>
-                                    <option value="Intermediário">Intermediário</option>
-                                    <option value="Avançado">Avançado</option>
-                                    <option value="Fluente">Fluente</option>
-                                    <option value="Nativo">Nativo</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarIdioma(1)">
-                        <ion-icon name="add-outline"></ion-icon> Adicionar Idioma
-                    </button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" onclick="salvarCurriculo(1)">Salvar Currículo</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- MODAL CURRÍCULO 2 -->
-<div class="modal fade" id="modalCurriculo2" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Currículo 2</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formCurriculo2">
-                    <!-- Informações Básicas -->
-                    <h6 class="mb-3">Informações Básicas</h6>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Título do Currículo <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="titulo-2" placeholder="Ex: Desenvolvedor Frontend" required>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Objetivo Profissional <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="objetivo-2" rows="3" placeholder="Descreva seu objetivo profissional..." required></textarea>
-                    </div>
-
-                    <hr class="my-4">
-
-                    <h6 class="mb-3">Experiências Profissionais</h6>
-                    <div id="experiencias-container-2">
-                        <div class="experiencia-item mb-3">
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Cargo">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Empresa">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Início">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Fim">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="atual-2-0">
-                                        <label class="form-check-label" for="atual-2-0">Trabalho atual</label>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="text-muted small mb-1">Telefone</label>
+                                        <p class="mb-0" id="detalhesTelefone">-</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-muted small mb-1">Localização</label>
+                                        <p class="mb-0" id="detalhesLocalizacao">-</p>
                                     </div>
                                 </div>
-                                <div class="col-md-12 mb-2">
-                                    <textarea class="form-control" rows="2" placeholder="Descrição das atividades"></textarea>
-                                </div>
                             </div>
                         </div>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarExperiencia(2)">
-                        <ion-icon name="add-outline"></ion-icon> Adicionar Experiência
-                    </button>
 
-                    <hr class="my-4">
-
-                    <h6 class="mb-3">Formação Acadêmica</h6>
-                    <div id="formacao-container-2">
-                        <div class="formacao-item mb-3">
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Curso">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Instituição">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Início">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Conclusão">
-                                </div>
+                        <!-- Informações Profissionais -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-success text-white">
+                                <h6 class="mb-0">
+                                    <ion-icon name="briefcase-outline"></ion-icon>
+                                    Informações Profissionais
+                                </h6>
                             </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarFormacao(2)">
-                        <ion-icon name="add-outline"></ion-icon> Adicionar Formação
-                    </button>
-
-                    <hr class="my-4">
-
-                    <h6 class="mb-3">Habilidades</h6>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="habilidades-2" placeholder="Ex: HTML, CSS, JavaScript (separadas por vírgula)">
-                    </div>
-
-                    <h6 class="mb-3">Idiomas</h6>
-                    <div id="idiomas-container-2">
-                        <div class="idioma-item mb-2 row">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Idioma">
-                            </div>
-                            <div class="col-md-6">
-                                <select class="form-select">
-                                    <option value="">Nível</option>
-                                    <option value="Básico">Básico</option>
-                                    <option value="Intermediário">Intermediário</option>
-                                    <option value="Avançado">Avançado</option>
-                                    <option value="Fluente">Fluente</option>
-                                    <option value="Nativo">Nativo</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarIdioma(2)">
-                        <ion-icon name="add-outline"></ion-icon> Adicionar Idioma
-                    </button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" onclick="salvarCurriculo(2)">Salvar Currículo</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- MODAL CURRÍCULO 3 -->
-<div class="modal fade" id="modalCurriculo3" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Currículo 3</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formCurriculo3">
-                    <!-- Informações Básicas -->
-                    <h6 class="mb-3">Informações Básicas</h6>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Título do Currículo <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="titulo-3" placeholder="Ex: Desenvolvedor Backend" required>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Objetivo Profissional <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="objetivo-3" rows="3" placeholder="Descreva seu objetivo profissional..." required></textarea>
-                    </div>
-
-                    <hr class="my-4">
-
-                    <h6 class="mb-3">Experiências Profissionais</h6>
-                    <div id="experiencias-container-3">
-                        <div class="experiencia-item mb-3">
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Cargo">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Empresa">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Início">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Fim">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="atual-3-0">
-                                        <label class="form-check-label" for="atual-3-0">Trabalho atual</label>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="text-muted small mb-1">Área de Atuação</label>
+                                        <p class="mb-0" id="detalhesArea">-</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-muted small mb-1">Nível de Experiência</label>
+                                        <p class="mb-0" id="detalhesNivel">-</p>
                                     </div>
                                 </div>
-                                <div class="col-md-12 mb-2">
-                                    <textarea class="form-control" rows="2" placeholder="Descrição das atividades"></textarea>
+
+                                <!-- Links Profissionais -->
+                                <div id="detalhesLinks" style="display: none;">
+                                    <label class="text-muted small mb-2 d-block">Links Profissionais</label>
+                                    <div class="d-flex gap-2 flex-wrap">
+                                        <a id="detalhesLinkedin" href="#" target="_blank"
+                                            class="btn btn-sm btn-outline-primary">
+                                            <ion-icon name="logo-linkedin"></ion-icon>
+                                            LinkedIn
+                                        </a>
+                                        <a id="detalhesGithub" href="#" target="_blank"
+                                            class="btn btn-sm btn-outline-dark">
+                                            <ion-icon name="logo-github"></ion-icon>
+                                            GitHub
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Informações da Candidatura -->
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <h6 class="mb-0">
+                                    <ion-icon name="document-text-outline"></ion-icon>
+                                    Informações da Candidatura
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="text-muted small mb-1">Vaga</label>
+                                        <p class="mb-0" id="detalhesVagaTitulo">-</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="text-muted small mb-1">Data da Candidatura</label>
+                                        <p class="mb-0" id="detalhesDataCandidatura">-</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="text-muted small mb-1">Currículo</label>
+                                        <p class="mb-0">
+                                            <span class="badge bg-secondary">
+                                                ID: <span id="detalhesCurriculoID">-</span>
+                                            </span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarExperiencia(3)">
-                        <ion-icon name="add-outline"></ion-icon> Adicionar Experiência
-                    </button>
-
-                    <hr class="my-4">
-
-                    <h6 class="mb-3">Formação Acadêmica</h6>
-                    <div id="formacao-container-3">
-                        <div class="formacao-item mb-3">
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Curso">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" placeholder="Instituição">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Início">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="month" class="form-control" placeholder="Data Conclusão">
-                                </div>
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <a id="btnContatarCandidato" href="#" class="btn btn-primary">
+                            <ion-icon name="mail-outline"></ion-icon>
+                            Entrar em Contato
+                        </a>
                     </div>
-                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarFormacao(3)">
-                        <ion-icon name="add-outline"></ion-icon> Adicionar Formação
-                    </button>
-
-                    <hr class="my-4">
-
-                    <h6 class="mb-3">Habilidades</h6>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="habilidades-3" placeholder="Ex: Python, Django, PostgreSQL (separadas por vírgula)">
-                    </div>
-
-                    <h6 class="mb-3">Idiomas</h6>
-                    <div id="idiomas-container-3">
-                        <div class="idioma-item mb-2 row">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Idioma">
-                            </div>
-                            <div class="col-md-6">
-                                <select class="form-select">
-                                    <option value="">Nível</option>
-                                    <option value="Básico">Básico</option>
-                                    <option value="Intermediário">Intermediário</option>
-                                    <option value="Avançado">Avançado</option>
-                                    <option value="Fluente">Fluente</option>
-                                    <option value="Nativo">Nativo</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarIdioma(3)">
-                        <ion-icon name="add-outline"></ion-icon> Adicionar Idioma
-                    </button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" onclick="salvarCurriculo(3)">Salvar Currículo</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-             <div class="modal fade" id="modalCompletarPerfil" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+
+
+        <!-- MODAL CURRÍCULO 1 -->
+        <div class="modal fade" id="modalCurriculo1" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Currículo 1</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formCurriculo1">
+                            <!-- Informações Básicas -->
+                            <h6 class="mb-3">Informações Básicas</h6>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Título do Currículo <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="titulo-1"
+                                        placeholder="Ex: Desenvolvedor Full Stack" required>
+                                </div>
+                            </div>
+
+                            <!-- Objetivo Profissional -->
+                            <div class="mb-3">
+                                <label class="form-label">Objetivo Profissional <span
+                                        class="text-danger">*</span></label>
+                                <textarea class="form-control" id="objetivo-1" rows="3"
+                                    placeholder="Descreva seu objetivo profissional..." required></textarea>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <!-- Experiências -->
+                            <h6 class="mb-3">Experiências Profissionais</h6>
+                            <div id="experiencias-container-1">
+                                <div class="experiencia-item mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Cargo">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Empresa">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Início">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Fim">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="atual-1-0">
+                                                <label class="form-check-label" for="atual-1-0">Trabalho atual</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <textarea class="form-control" rows="2"
+                                                placeholder="Descrição das atividades"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                onclick="adicionarExperiencia(1)">
+                                <ion-icon name="add-outline"></ion-icon> Adicionar Experiência
+                            </button>
+
+                            <hr class="my-4">
+
+                            <!-- Formação Acadêmica -->
+                            <h6 class="mb-3">Formação Acadêmica</h6>
+                            <div id="formacao-container-1">
+                                <div class="formacao-item mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Curso">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Instituição">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Início">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Conclusão">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarFormacao(1)">
+                                <ion-icon name="add-outline"></ion-icon> Adicionar Formação
+                            </button>
+
+                            <hr class="my-4">
+
+                            <!-- Habilidades -->
+                            <h6 class="mb-3">Habilidades</h6>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="habilidades-1"
+                                    placeholder="Ex: JavaScript, React, Node.js (separadas por vírgula)">
+                            </div>
+
+                            <!-- Idiomas -->
+                            <h6 class="mb-3">Idiomas</h6>
+                            <div id="idiomas-container-1">
+                                <div class="idioma-item mb-2 row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="Idioma">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-select">
+                                            <option value="">Nível</option>
+                                            <option value="Básico">Básico</option>
+                                            <option value="Intermediário">Intermediário</option>
+                                            <option value="Avançado">Avançado</option>
+                                            <option value="Fluente">Fluente</option>
+                                            <option value="Nativo">Nativo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarIdioma(1)">
+                                <ion-icon name="add-outline"></ion-icon> Adicionar Idioma
+                            </button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="salvarCurriculo(1)">Salvar
+                            Currículo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL CURRÍCULO 2 -->
+        <div class="modal fade" id="modalCurriculo2" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Currículo 2</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formCurriculo2">
+                            <!-- Informações Básicas -->
+                            <h6 class="mb-3">Informações Básicas</h6>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Título do Currículo <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="titulo-2"
+                                        placeholder="Ex: Desenvolvedor Frontend" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Objetivo Profissional <span
+                                        class="text-danger">*</span></label>
+                                <textarea class="form-control" id="objetivo-2" rows="3"
+                                    placeholder="Descreva seu objetivo profissional..." required></textarea>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <h6 class="mb-3">Experiências Profissionais</h6>
+                            <div id="experiencias-container-2">
+                                <div class="experiencia-item mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Cargo">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Empresa">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Início">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Fim">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="atual-2-0">
+                                                <label class="form-check-label" for="atual-2-0">Trabalho atual</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <textarea class="form-control" rows="2"
+                                                placeholder="Descrição das atividades"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                onclick="adicionarExperiencia(2)">
+                                <ion-icon name="add-outline"></ion-icon> Adicionar Experiência
+                            </button>
+
+                            <hr class="my-4">
+
+                            <h6 class="mb-3">Formação Acadêmica</h6>
+                            <div id="formacao-container-2">
+                                <div class="formacao-item mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Curso">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Instituição">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Início">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Conclusão">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarFormacao(2)">
+                                <ion-icon name="add-outline"></ion-icon> Adicionar Formação
+                            </button>
+
+                            <hr class="my-4">
+
+                            <h6 class="mb-3">Habilidades</h6>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="habilidades-2"
+                                    placeholder="Ex: HTML, CSS, JavaScript (separadas por vírgula)">
+                            </div>
+
+                            <h6 class="mb-3">Idiomas</h6>
+                            <div id="idiomas-container-2">
+                                <div class="idioma-item mb-2 row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="Idioma">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-select">
+                                            <option value="">Nível</option>
+                                            <option value="Básico">Básico</option>
+                                            <option value="Intermediário">Intermediário</option>
+                                            <option value="Avançado">Avançado</option>
+                                            <option value="Fluente">Fluente</option>
+                                            <option value="Nativo">Nativo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarIdioma(2)">
+                                <ion-icon name="add-outline"></ion-icon> Adicionar Idioma
+                            </button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="salvarCurriculo(2)">Salvar
+                            Currículo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL CURRÍCULO 3 -->
+        <div class="modal fade" id="modalCurriculo3" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Currículo 3</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formCurriculo3">
+                            <!-- Informações Básicas -->
+                            <h6 class="mb-3">Informações Básicas</h6>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Título do Currículo <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="titulo-3"
+                                        placeholder="Ex: Desenvolvedor Backend" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Objetivo Profissional <span
+                                        class="text-danger">*</span></label>
+                                <textarea class="form-control" id="objetivo-3" rows="3"
+                                    placeholder="Descreva seu objetivo profissional..." required></textarea>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <h6 class="mb-3">Experiências Profissionais</h6>
+                            <div id="experiencias-container-3">
+                                <div class="experiencia-item mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Cargo">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Empresa">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Início">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Fim">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="atual-3-0">
+                                                <label class="form-check-label" for="atual-3-0">Trabalho atual</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <textarea class="form-control" rows="2"
+                                                placeholder="Descrição das atividades"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                onclick="adicionarExperiencia(3)">
+                                <ion-icon name="add-outline"></ion-icon> Adicionar Experiência
+                            </button>
+
+                            <hr class="my-4">
+
+                            <h6 class="mb-3">Formação Acadêmica</h6>
+                            <div id="formacao-container-3">
+                                <div class="formacao-item mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Curso">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="text" class="form-control" placeholder="Instituição">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Início">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <input type="month" class="form-control" placeholder="Data Conclusão">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarFormacao(3)">
+                                <ion-icon name="add-outline"></ion-icon> Adicionar Formação
+                            </button>
+
+                            <hr class="my-4">
+
+                            <h6 class="mb-3">Habilidades</h6>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="habilidades-3"
+                                    placeholder="Ex: Python, Django, PostgreSQL (separadas por vírgula)">
+                            </div>
+
+                            <h6 class="mb-3">Idiomas</h6>
+                            <div id="idiomas-container-3">
+                                <div class="idioma-item mb-2 row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="Idioma">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-select">
+                                            <option value="">Nível</option>
+                                            <option value="Básico">Básico</option>
+                                            <option value="Intermediário">Intermediário</option>
+                                            <option value="Avançado">Avançado</option>
+                                            <option value="Fluente">Fluente</option>
+                                            <option value="Nativo">Nativo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="adicionarIdioma(3)">
+                                <ion-icon name="add-outline"></ion-icon> Adicionar Idioma
+                            </button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="salvarCurriculo(3)">Salvar
+                            Currículo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalCompletarPerfil" tabindex="-1" data-bs-backdrop="static"
+            data-bs-keyboard="false">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -965,11 +1137,11 @@
 
                 </div>
             </div>
-        
 
-        
+
+
     </main>
-    
+
     <footer>
         <div class="footer-main">
             <div class="footer-main-content-svg">
@@ -992,22 +1164,139 @@
                 </div>
             </div>
         </div>
-        
+
     </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 
-<!-- Carrega o pg-perfil.js PRIMEIRO (tem o carregarPagina) -->
-<script async src="/assets/js/pg-perfil.js"></script>
+    <!-- Carrega o pg-perfil.js PRIMEIRO (tem o carregarPagina) -->
+    <script async src="/assets/js/pg-perfil.js"></script>
 
-<!-- Depois carrega os outros scripts -->
-<script src="/assets/js/curriculos.js"></script>
-<script async src="/assets/js/perfil.js"></script>
-<script async src="/assets/js/logoAnim.js"></script>
+    <!-- Depois carrega os outros scripts -->
+    <script src="/assets/js/curriculos.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', () => {
+            const colorInput = document.getElementById('empregoCorDestaque');
+            const previewNome = document.getElementById('previewNomeEmpresa');
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+            if (colorInput && previewNome) {
+                colorInput.addEventListener('input', (e) => {
+                    previewNome.style.color = e.target.value;
+                });
+            }
+        });
+
+        // Função para publicar emprego
+        async function publicarEmprego() {
+            const userID = localStorage.getItem('userID');
+
+            if (!userID) {
+                alert('Você precisa estar logado!');
+                return;
+            }
+
+            // Coletar dados do formulário
+            const titulo = document.getElementById('empregoTitulo').value.trim();
+            const descricao = document.getElementById('empregoDescricao').value.trim();
+            const area = document.getElementById('empregoArea').value;
+            const tipoContrato = document.getElementById('empregoContrato').value;
+            const tipoTrabalho = document.getElementById('empregoTrabalho').value;
+            const mediaSalario = document.getElementById('empregoSalario').value;
+            const localizacao = document.getElementById('empregoLocalizacao').value.trim();
+            const requisitos = document.getElementById('empregoRequisitos').value.trim();
+            const beneficios = document.getElementById('empregoBeneficios').value.trim();
+            const corDestaque = document.getElementById('empregoCorDestaque').value; // NOVA LINHA
+
+            // Validações
+            if (!titulo) {
+                alert('Por favor, preencha o título da vaga!');
+                return;
+            }
+
+            if (!descricao) {
+                alert('Por favor, descreva a vaga!');
+                return;
+            }
+
+            if (!area) {
+                alert('Por favor, selecione uma área!');
+                return;
+            }
+
+            if (!tipoContrato) {
+                alert('Por favor, selecione o tipo de contrato!');
+                return;
+            }
+
+            if (!tipoTrabalho) {
+                alert('Por favor, selecione o tipo de trabalho!');
+                return;
+            }
+
+            if (!localizacao) {
+                alert('Por favor, informe a localização!');
+                return;
+            }
+
+            // Montar objeto do emprego
+            const novoEmprego = {
+                titulo,
+                descricao,
+                area,
+                tipoContrato,
+                tipoTrabalho,
+                mediaSalario: mediaSalario ? parseInt(mediaSalario) : null,
+                localizacao,
+                requisitos: requisitos || null,
+                beneficios: beneficios || null,
+                corDestaque // NOVA LINHA
+            };
+
+            console.log('📤 Enviando emprego:', novoEmprego);
+
+            try {
+                const response = await fetch('/api/emprego', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'user-id': userID
+                    },
+                    body: JSON.stringify(novoEmprego)
+                });
+
+                const dados = await response.json();
+                console.log('📥 Resposta da API:', dados);
+
+                if (dados.ok) {
+                    // Fechar o modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('modalNovoEmprego'));
+                    if (modal) modal.hide();
+
+                    // Limpar o formulário
+                    document.getElementById('formNovoEmprego').reset();
+                    document.getElementById('empregoCorDestaque').value = '#2F6D88';
+                    document.getElementById('previewNomeEmpresa').style.color = '#2F6D88';
+
+                    // Mostrar mensagem de sucesso
+                    alert('🎉 Vaga publicada com sucesso!');
+
+                    // Recarregar os empregos (se houver função de carregamento)
+                    if (typeof carregarEmpregos === 'function') {
+                        await carregarEmpregos();
+                    }
+                } else {
+                    alert('Erro ao publicar vaga: ' + dados.error);
+                }
+            } catch (error) {
+                console.error('❌ Erro ao publicar vaga:', error);
+                alert('Erro ao publicar vaga. Tente novamente.');
+            }
+        }</script>
+    <script async src="/assets/js/perfil.js"></script>
+    <script async src="/assets/js/logoAnim.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
