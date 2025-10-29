@@ -1100,8 +1100,10 @@ footer{
         .post-user-name {
             text-align: start;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 2px;
+
+            font-family: Codec;
         }
 
         .post-user-headline {
@@ -1211,8 +1213,10 @@ footer{
 
         .news-title {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 200;
             margin-bottom: 4px;
+
+            font-family: Codec;
         }
 
         .news-meta {
