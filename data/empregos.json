@@ -34,6 +34,7 @@
       "Seguro de Vida",
       "Auxílio Home Office"
     ],
+    "corDestaque": "#DE1C42",
     "dataCriacao": "2025-10-15T19:42:56.155Z",
     "candidatos": 1222,
     "status": "ativo"
@@ -71,6 +72,7 @@
       "Programa de Mentoria",
       "Day Off no Aniversário"
     ],
+    "corDestaque": "#FF6201",
     "dataCriacao": "2025-10-15T19:42:56.155Z",
     "candidatos": 5574,
     "status": "ativo"
@@ -110,6 +112,7 @@
       "Gympass",
       "Auxílio Educação"
     ],
+    "corDestaque": "#241F1F",
     "dataCriacao": "2025-10-15T19:42:56.155Z",
     "candidatos": 4837,
     "status": "ativo"
@@ -149,6 +152,7 @@
       "Seguro de Vida",
       "Auxílio Educação"
     ],
+    "corDestaque": "#2F3192",
     "dataCriacao": "2025-10-22T12:00:00.000Z",
     "candidatos": 531,
     "status": "ativo"
@@ -187,6 +191,7 @@
       "Auxílio Creche",
       "Seguro de Vida"
     ],
+    "corDestaque": "#0D71AC",
     "dataCriacao": "2025-10-22T12:15:00.000Z",
     "candidatos": 4522,
     "status": "ativo"
@@ -226,6 +231,7 @@
       "Auxílio Home Office",
       "Stock Options"
     ],
+    "corDestaque": "#b339d5",
     "dataCriacao": "2025-10-22T13:00:00.000Z",
     "candidatos": 7202,
     "status": "ativo"
@@ -265,8 +271,26 @@
       "Descontos em produtos",
       "Participação nos Lucros"
     ],
+    "corDestaque": "#0E89FF",
     "dataCriacao": "2025-10-22T13:10:00.000Z",
     "candidatos": 2827,
+    "status": "ativo"
+  },
+  {
+    "empregoID": 21761747349791,
+    "empresaID": "1759968679341",
+    "empresaNome": "asdasdasdas",
+    "titulo": "Teste",
+    "descricao": "teste",
+    "area": "Backend",
+    "tipoContrato": "CLT",
+    "tipoTrabalho": "Remoto",
+    "mediaSalario": 1500,
+    "localizacao": "SP",
+    "requisitos": null,
+    "beneficios": null,
+    "corDestaque": "#b339d5",
+    "dataCriacao": "29/10/2025",
     "status": "ativo"
   }
 ]
