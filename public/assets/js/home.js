@@ -354,7 +354,7 @@ async function carregarEmpregos(filtros = {}) {
                 status: emprego.status || "",
                 candidatos: emprego.candidatos || "0",
                 nivel: emprego.nivel || "",
-                corDestaque: emprego.corDestaque || "#2F6D88" // NOVA PROPRIEDADE
+                corDestaque: emprego.corDestaque || "#000000ff"
             }));
 
             console.log(dadosEmprego)

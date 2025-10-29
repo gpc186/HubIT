@@ -79,6 +79,7 @@ async function carregarPagina() {
         const containerAnalise = document.getElementById('container-Analise');
         const containerEmpregos = document.getElementById('container-empregos');
         const containerCandidatos = document.getElementById('container-candidatos');
+        const propostaBtn = document.getElementById('propostaBtn');
 
         if (usuarioAtual.tipoConta === 'usuario') {
             // Mostrar containers de usuário
@@ -88,6 +89,7 @@ async function carregarPagina() {
             // Esconder containers de empresa
             if (containerEmpregos) containerEmpregos.style.display = 'none';
             if (containerCandidatos) containerCandidatos.style.display = 'none';
+            if (propostaBtn) propostaBtn.style.display = 'none'
             
             // Carregar dados de usuário
             preencherDadosUsuario(usuarioAtual);

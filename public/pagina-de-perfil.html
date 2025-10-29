@@ -67,7 +67,14 @@
     </header>
     <main>
         <br><br><br>
-        <button class="mudarInfo-B" data-bs-toggle="modal" onclick="abrirModalEdicao()">Mudar informações</button>
+        <div class="buttons-create">
+            <button class="mudarInfo-B" data-bs-toggle="modal" onclick="abrirModalEdicao()">
+                Mudar informações
+            </button>
+            <button id="propostaBtn" type="button" class="mudarInfo-B" data-bs-toggle="modal" data-bs-target="#modalNovoEmprego">
+                Criar nova proposta
+            </button>
+        </div>
 
 
 
@@ -108,14 +115,10 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNovoEmprego">
-            Launch demo modal
-        </button>
-
         <!-- CONTAINER EMPREGOS (só para empresas) -->
         <div class="container-empregos" id="container-empregos" style="display: none;">
             <div class="title">
-                <h1>Minhas Vagas</h1>
+                <h1>Minhas Propostas</h1>
                 <p style="color: #a6a6a6; font-size: 14px; margin-top: 5px;">Gerencie as vagas que você publicou</p>
                 <div class="modal fade" id="modalNovoEmprego" tabindex="-1" aria-labelledby="modalNovoEmpregoLabel"
                     aria-hidden="true">
