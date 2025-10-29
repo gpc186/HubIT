@@ -6,6 +6,10 @@ const dataHours = dataNow.getHours();
 // Variável global para armazenar currículos
 let curriculosUsuario = [];
 
+// === SISTEMA DE PESQUISA ===
+let empregosCacheados = []; // Cache dos empregos para pesquisa
+let filtrosAtuais = {}; // Armazena os filtros aplicados
+
 function mostrarSkeletonsVagas(quantidade = 5) {
     const container = document.getElementById('empregosContainer');
     if (!container) return;
@@ -39,43 +43,32 @@ function mostrarSkeletonsVagas(quantidade = 5) {
     container.innerHTML = html;
 }
 
-// === INICIALIZAÇÃO ===
-window.onload = async function () {
-    await carregarPagina();
-    inicializarFiltros();
-    inicializarPesquisa();
-};
-
-// === SISTEMA DE PESQUISA ===
-let empregosCacheados = []; // Cache dos empregos para pesquisa
-let filtrosAtuais = {}; // Armazena os filtros aplicados
-
 /**
  * Inicializa o sistema de pesquisa
  */
 function inicializarPesquisa() {
     const searchInput = document.querySelector('.search input[type="search"]');
     const searchButton = document.querySelector('.search img');
-    
+
     if (!searchInput) {
         console.warn('Campo de pesquisa não encontrado');
         return;
     }
-    
+
     // Evento ao pressionar Enter
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             realizarPesquisa();
         }
     });
-    
+
     // Evento ao clicar no ícone de pesquisa
     if (searchButton) {
         searchButton.style.cursor = 'pointer';
         searchButton.addEventListener('click', realizarPesquisa);
     }
-    
-    // Pesquisa em tempo real (opcional - comente se não quiser)
+
+    // Pesquisa em tempo real (opcional)
     searchInput.addEventListener('input', debounce(realizarPesquisa, 500));
 }
 
@@ -100,20 +93,20 @@ function debounce(func, wait) {
 async function realizarPesquisa() {
     const searchInput = document.querySelector('.search input[type="search"]');
     const termoPesquisa = searchInput ? searchInput.value.trim().toLowerCase() : '';
-    
+
     console.log('🔍 Pesquisando por:', termoPesquisa);
-    
+
     if (!termoPesquisa) {
         // Se não há termo de pesquisa, recarrega todos os empregos
         await carregarEmpregos(filtrosAtuais);
         return;
     }
-    
+
     // Se o cache está vazio, carrega os empregos primeiro
     if (empregosCacheados.length === 0) {
         await carregarEmpregos(filtrosAtuais);
     }
-    
+
     // Filtra os empregos baseado no termo de pesquisa
     const resultadosFiltrados = empregosCacheados.filter(emprego => {
         const titulo = (emprego.titulo || '').toLowerCase();
@@ -121,20 +114,22 @@ async function realizarPesquisa() {
         const descricao = (emprego.descricao || '').toLowerCase();
         const localizacao = (emprego.localizacao || '').toLowerCase();
         const area = (emprego.area || '').toLowerCase();
-        const requisitos = Array.isArray(emprego.requisitos) 
-            ? emprego.requisitos.join(' ').toLowerCase() 
+        const requisitos = Array.isArray(emprego.requisitos)
+            ? emprego.requisitos.join(' ').toLowerCase()
             : (emprego.requisitos || '').toLowerCase();
-        
-        return titulo.includes(termoPesquisa) ||
-               empresa.includes(termoPesquisa) ||
-               descricao.includes(termoPesquisa) ||
-               localizacao.includes(termoPesquisa) ||
-               area.includes(termoPesquisa) ||
-               requisitos.includes(termoPesquisa);
+
+        return (
+            titulo.includes(termoPesquisa) ||
+            empresa.includes(termoPesquisa) ||
+            descricao.includes(termoPesquisa) ||
+            localizacao.includes(termoPesquisa) ||
+            area.includes(termoPesquisa) ||
+            requisitos.includes(termoPesquisa)
+        );
     });
-    
+
     console.log(`✅ Encontrados ${resultadosFiltrados.length} empregos`);
-    
+
     // Renderiza os resultados
     const container = document.getElementById('empregosContainer');
     if (resultadosFiltrados.length === 0) {
@@ -145,30 +140,7 @@ async function realizarPesquisa() {
             </div>
         `;
     } else {
-        const propostas = resultadosFiltrados.map((emprego, index) => ({
-            id: emprego.empregoID || index + 1,
-            empresa: emprego.empresaNome || "Empresa",
-            vaga: emprego.titulo || "Vaga",
-            tempo: emprego.tempo || "Recente",
-            descricao: emprego.descricao || "Descrição não disponível",
-            requisitos: Array.isArray(emprego.requisitos) ? emprego.requisitos.join(', ') : emprego.requisitos || "Sem requisitos",
-            salario: emprego.mediaSalario ? `R$ ${emprego.mediaSalario}/Mês` : "Sem proposta de salário",
-            localizacao: emprego.localizacao || "Sem localização",
-            beneficios: Array.isArray(emprego.beneficios) ? emprego.beneficios.join(', ') : emprego.beneficios || "Sem beneficios",
-            tipoTrabalho: emprego.tipoTrabalho || "O contratador não definiu o tipo de trabalho",
-            tipoContrato: emprego.tipoContrato || "O contratador não definiu o tipo de contrato",
-            area: emprego.area || "",
-            diferenciais: Array.isArray(emprego.diferenciais) ? emprego.diferenciais.join(', ') : emprego.diferenciais || "",
-            qtdFuncionario: emprego.qtdFuncionario ? `${emprego.qtdFuncionario}+` : "Nenhum funcionário",
-            imgEmpresa: emprego.imgEmpresa || "https://via.placeholder.com/60",
-            dataCriacao: emprego.dataCriacao || "",
-            status: emprego.status || "",
-            candidatos: emprego.candidatos || "0",
-            nivel: emprego.nivel || "",
-            corDestaque: emprego.corDestaque || "#000000ff"
-        }));
-        
-        renderizarPropostas(propostas);
+        renderizarPropostas(resultadosFiltrados);
     }
 }
 
@@ -455,6 +427,8 @@ function inicializarFiltros() {
     });
 }
 
+
+
 /**
  * Carrega os empregos da API com ou sem filtros
  */
@@ -527,6 +501,7 @@ async function carregarEmpregos(filtros = {}) {
 
             renderizarPropostas(propostas);
             console.log(`${propostas.length} vagas carregadas`);
+            empregosCacheados = propostas; // Atualiza o cache global com os empregos carregados
         } else {
             container.innerHTML = '<div class="loading">:( Nenhuma vaga encontrada.</div>';
         }
@@ -782,3 +757,10 @@ function sair() {
     alert('Você saiu da conta');
     window.location.href = '/';
 }
+
+// === INICIALIZAÇÃO ===
+window.onload = async function () {
+    await carregarPagina();
+    inicializarFiltros();
+    inicializarPesquisa();
+};
