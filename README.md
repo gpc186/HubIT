@@ -62,7 +62,7 @@ Cor terciária:#000000 (Preto)
 | Atividade        | Responsável       | Prazo    |
 | ---------------- | ----------------- | -------- |
 | Documentação     | Gustavo Cagega    | 1 semana |
-| Protótipo design | Henrique Berdoldi e Fernando Sanches | 1 semana |
+| Protótipo design | Henrique Berdoldi | 1 semana |
 ### Ferramentas
 
 - [Canva](https://www.canva.com/design/DAG0kGld3IU/sPwNyhWepc-rpi5JbhvEXQ/edit?utm_content=DAG0kGld3IU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
