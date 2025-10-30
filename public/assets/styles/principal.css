@@ -777,6 +777,7 @@ footer{
 .search input{
     border: none;
     background-color: #fcfcfa00;
+    padding: 7px;
 }
 
 .search input:focus{
@@ -1768,4 +1769,106 @@ label{
 .accordion-button:not(.collapsed){
     color: #000000 !important;
     background-color: rgb(255, 255, 255) !important;
+}
+
+.offcanvas{
+    width: 100dvw !important;
+    height: 100dvh !important;
+    bottom: 0px !important;
+    display: none !important;
+
+    border-left: 0px !important;
+
+    background-color: #F8F7F2 !important;
+
+    z-index: 800 !important;
+}
+
+.offcanvas-header{
+    background-color: #f1f0ec !important;
+    height: 80px !important;
+}
+
+.offcanvas-header .btn-close{
+    margin-right: 25px !important;
+}
+
+.offcanvas-body{
+    display: flex !important;
+    background-color: #F8F7F2 !important;
+
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.offcanvas-body hr{
+    background-color: #106083;
+    color: #106083;
+    border-color: #106083;
+}
+
+.offcanvas-body ul{
+    display: flex;
+    width: 90% !important;
+    text-align: start !important;
+
+    background-color: #17829f00;
+}
+
+.offcanvas-body li{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background-color: #00000000 !important;
+
+    font-size: 15pt;
+
+    color: #106083;
+    padding: 15px !important;
+    transition: background-color 0.2s !important;
+
+    z-index: 840 !important;
+}
+
+.offcanvas-body li:hover{
+    cursor: pointer !important;
+    background-color: rgba(222, 222, 222, 0.34) !important;
+}
+
+.offcanvas-body span{
+    font-size: 20pt;
+}
+
+.offcanvas-body a{
+    color: #106083 !important;
+}
+
+.offcanvas-backdrop{
+    background-color: #00000000 !important;
+    z-index: 8;
+    display: none !important;
+}
+
+.btn-close{
+    --bs-btn-close-color: #106083 !important;
+    filter: none !important;
+}
+
+#logo-animation{
+    z-index: 810 !important;
+}
+
+@media (max-width: 991px) {
+    .offcanvas{
+        display: block !important;
+    }
+}
+
+.text-bg-dark{
+    background-color: #F8F7F2 !important;
+}
+
+.navbar-toggler{
+    border: none !important;
 }
