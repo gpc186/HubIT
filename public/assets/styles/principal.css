@@ -777,6 +777,7 @@ footer{
 .search input{
     border: none;
     background-color: #fcfcfa00;
+    padding: 7px;
 }
 
 .search input:focus{
@@ -1813,17 +1814,26 @@ label{
     text-align: start !important;
 
     background-color: #17829f00;
-    padding: 15px !important;
 }
 
 .offcanvas-body li{
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
+    background-color: #00000000 !important;
 
     font-size: 15pt;
 
     color: #106083;
+    padding: 15px !important;
+    transition: background-color 0.2s !important;
+
+    z-index: 840 !important;
+}
+
+.offcanvas-body li:hover{
+    cursor: pointer !important;
+    background-color: rgba(222, 222, 222, 0.34) !important;
 }
 
 .offcanvas-body span{
@@ -1837,6 +1847,7 @@ label{
 .offcanvas-backdrop{
     background-color: #00000000 !important;
     z-index: 8;
+    display: none !important;
 }
 
 .btn-close{
@@ -1852,4 +1863,12 @@ label{
     .offcanvas{
         display: block !important;
     }
+}
+
+.text-bg-dark{
+    background-color: #F8F7F2 !important;
+}
+
+.navbar-toggler{
+    border: none !important;
 }
