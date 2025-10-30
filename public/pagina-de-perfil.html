@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
 </head>
@@ -1178,123 +1179,7 @@
 
     <!-- Depois carrega os outros scripts -->
     <script src="/assets/js/curriculos.js"></script>
-    <script>document.addEventListener('DOMContentLoaded', () => {
-            const colorInput = document.getElementById('empregoCorDestaque');
-            const previewNome = document.getElementById('previewNomeEmpresa');
-
-            if (colorInput && previewNome) {
-                colorInput.addEventListener('input', (e) => {
-                    previewNome.style.color = e.target.value;
-                });
-            }
-        });
-
-        // Função para publicar emprego
-        async function publicarEmprego() {
-            const userID = localStorage.getItem('userID');
-
-            if (!userID) {
-                alert('Você precisa estar logado!');
-                return;
-            }
-
-            // Coletar dados do formulário
-            const titulo = document.getElementById('empregoTitulo').value.trim();
-            const descricao = document.getElementById('empregoDescricao').value.trim();
-            const area = document.getElementById('empregoArea').value;
-            const tipoContrato = document.getElementById('empregoContrato').value;
-            const tipoTrabalho = document.getElementById('empregoTrabalho').value;
-            const mediaSalario = document.getElementById('empregoSalario').value;
-            const localizacao = document.getElementById('empregoLocalizacao').value.trim();
-            const requisitos = document.getElementById('empregoRequisitos').value.trim();
-            const beneficios = document.getElementById('empregoBeneficios').value.trim();
-            const corDestaque = document.getElementById('empregoCorDestaque').value; // NOVA LINHA
-
-            // Validações
-            if (!titulo) {
-                alert('Por favor, preencha o título da vaga!');
-                return;
-            }
-
-            if (!descricao) {
-                alert('Por favor, descreva a vaga!');
-                return;
-            }
-
-            if (!area) {
-                alert('Por favor, selecione uma área!');
-                return;
-            }
-
-            if (!tipoContrato) {
-                alert('Por favor, selecione o tipo de contrato!');
-                return;
-            }
-
-            if (!tipoTrabalho) {
-                alert('Por favor, selecione o tipo de trabalho!');
-                return;
-            }
-
-            if (!localizacao) {
-                alert('Por favor, informe a localização!');
-                return;
-            }
-
-            // Montar objeto do emprego
-            const novoEmprego = {
-                titulo,
-                descricao,
-                area,
-                tipoContrato,
-                tipoTrabalho,
-                mediaSalario: mediaSalario ? parseInt(mediaSalario) : null,
-                localizacao,
-                requisitos: requisitos || null,
-                beneficios: beneficios || null,
-                corDestaque // NOVA LINHA
-            };
-
-            console.log('📤 Enviando emprego:', novoEmprego);
-
-            try {
-                const response = await fetch('/api/emprego', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'user-id': userID
-                    },
-                    body: JSON.stringify(novoEmprego)
-                });
-
-                const dados = await response.json();
-                console.log('📥 Resposta da API:', dados);
-
-                if (dados.ok) {
-                    // Fechar o modal
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('modalNovoEmprego'));
-                    if (modal) modal.hide();
-
-                    // Limpar o formulário
-                    document.getElementById('formNovoEmprego').reset();
-                    document.getElementById('empregoCorDestaque').value = '#2F6D88';
-                    document.getElementById('previewNomeEmpresa').style.color = '#2F6D88';
-
-                    // Mostrar mensagem de sucesso
-                    alert('🎉 Vaga publicada com sucesso!');
-
-                    // Recarregar os empregos (se houver função de carregamento)
-                    if (typeof carregarEmpregos === 'function') {
-                        await carregarEmpregos();
-                    }
-                } else {
-                    alert('Erro ao publicar vaga: ' + dados.error);
-                }
-            } catch (error) {
-                console.error('❌ Erro ao publicar vaga:', error);
-                alert('Erro ao publicar vaga. Tente novamente.');
-            }
-        }</script>
+    <script></script>
     <script async src="/assets/js/perfil.js"></script>
     <script async src="/assets/js/logoAnim.js"></script>
 

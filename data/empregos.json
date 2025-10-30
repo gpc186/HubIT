@@ -292,5 +292,22 @@
     "corDestaque": "#b339d5",
     "dataCriacao": "29/10/2025",
     "status": "ativo"
+  },
+  {
+    "empregoID": 21761844672776,
+    "empresaID": "1759968679341",
+    "empresaNome": "asdasdasdas",
+    "titulo": "Programador front-end",
+    "descricao": "Precisamos de alguém que saiba usar o bootstrap para fazer projetos simples em next.js",
+    "area": "Frontend",
+    "tipoContrato": "CLT",
+    "tipoTrabalho": "Presencial",
+    "mediaSalario": 1600,
+    "localizacao": "Itajai, SP",
+    "requisitos": "Javascript, Node.js, Next.js, CSS, HTML, Express.js",
+    "beneficios": "VR, VT, Wellhub, Café",
+    "corDestaque": "#00d5ff",
+    "dataCriacao": "30/10/2025",
+    "status": "ativo"
   }
 ]
