@@ -209,6 +209,13 @@ async function carregarPagina() {
 
         if (!usuarioAtual.dados) {
             alert('Por favor cadastre seus dados');
+            window.location.href = '/'
+            return;
+        }
+
+        if (usuarioAtual.tipoConta === "empresa"){
+            alert("Você não pode ver empregos! XD")
+            window.location.href = '/'
             return;
         }
 
