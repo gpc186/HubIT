@@ -344,19 +344,28 @@ li a {
     height: 50%;
 }
 
+
+
 /* ===== BOTÃO MUDAR INFO ===== */
+.container-empregos .title .mudarInfo-B{
+    border-radius: 10px;
+}
+
 .mudarInfo-B {
     z-index: 998;
-    padding: 10px 20px;
     background-color: #2f6d88;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 50px;
     font-family: Codec;
     cursor: pointer;
     transition: all 0.3s;
+    right: 15em;
 }
-
+    .mudarInfo-B img{
+        width: 30px;
+        height: 30px;
+    }
 .mudarInfo-B:hover {
     background-color: #1e4d5f;
     transform: scale(1.05);
@@ -1373,14 +1382,16 @@ h3 {
 
 /* Estilos para empregos da empresa */
 .container-empregos {
+    display: flex;
     background-color: white; /* ADICIONE ESTA LINHA */
-    width: 60%;
-    max-width: 60%;
+    width: 100%;
+    max-width: 90%;
     min-height: 400px;
     border: #70707079 solid 3px;
-    margin: 0 auto 50px;
     border-radius: 20px;
     padding: 20px;
+    height: auto;
+    margin: 120px auto 50px;
 }
 
 .container-candidatos {
@@ -1616,4 +1627,27 @@ h3 {
 
     align-items: center;
     justify-content: center;
+}
+@media (max-width: 500px) {
+    .buttons-create{
+        width: 240px;
+        height: 100px;
+    
+        
+
+    }
+    
+     .mudarInfo-B span{
+        opacity: 0;
+    }
+      .container-info .changeInfo .mudarInfo-B {
+        background-image: url('/assets/img/svg/pencil-svg-branco.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 33px;
+        height: 33px;
+        margin-left: 15em;
+        padding: 2px;
+    }
 }
