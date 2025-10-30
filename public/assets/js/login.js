@@ -1,13 +1,24 @@
 
 window.onload = async function () {
-    await loginAuto();
+	await loginAuto();
 };
 
-function loginAuto(){
+async function loginAuto() {
 	const userID = localStorage.getItem('userID');
 
-	if (userID){
-		location.href = "/home"
+	const resposta = await fetch(`/api/usuario/${userID}`, {
+		headers: { 'user-id': userID }
+	});
+
+	const dados = await resposta.json();
+	const usuarioAtual = dados.usuario;
+
+	if (usuarioAtual.tipoConta === "empresa"){
+		location.href = '/portfolio'
+	}
+
+	if (usuarioAtual.tipoConta === "usuario"){
+		location.href = '/home'
 	}
 }
 
@@ -20,7 +31,7 @@ function registrarNovoUsuario() {
 
 	// radio de tipo da conta inativo, esperando ser selecionado
 	let tipoConta = false
-    
+
 	// Verificador de condição para o tipo da conta
 	if (usuario) {
 		tipoConta = 'usuario'
@@ -52,32 +63,32 @@ function registrarNovoUsuario() {
 		},
 		body: JSON.stringify({ email, passwd, tipoConta }) // -d (Aqui é pego os dados inseridos nos inputs e transformados em um body para requisição)
 	})
-	.then(res => res.json())
-	.then(data => {
+		.then(res => res.json())
+		.then(data => {
 
-		// Constante para pegar valor informado no Modal do Bootstrap
-		const modal = bootstrap.Modal.getInstance(
-                document.getElementById('exampleModal')
-            );
+			// Constante para pegar valor informado no Modal do Bootstrap
+			const modal = bootstrap.Modal.getInstance(
+				document.getElementById('exampleModal')
+			);
 
-        modal.hide();
-            
-        document.getElementById('emailNewUser').value = '';
-        document.getElementById('passwdNewUser').value = '';
+			modal.hide();
 
-		if (data.success) {
-			alert('Usuário registrado com sucesso!');
-		} 
-		//Tratamento de erro em registrar o usuário
-		else {
-			alert('Erro ao registrar usuário: ' + (data.error || 'erro desconhecido'));
-		}
-	})
-	// Tratamento de erro
-	.catch(err => {
-		console.error(err);
-		alert('Erro de comunicação com o servidor');
-	});
+			document.getElementById('emailNewUser').value = '';
+			document.getElementById('passwdNewUser').value = '';
+
+			if (data.success) {
+				alert('Usuário registrado com sucesso!');
+			}
+			//Tratamento de erro em registrar o usuário
+			else {
+				alert('Erro ao registrar usuário: ' + (data.error || 'erro desconhecido'));
+			}
+		})
+		// Tratamento de erro
+		.catch(err => {
+			console.error(err);
+			alert('Erro de comunicação com o servidor');
+		});
 }
 
 // Fazer login
@@ -85,7 +96,7 @@ function fazerLogin() {
 	// Constantes de inputs do Login de usuário
 	const email = document.getElementById('email').value;
 	const passwd = document.getElementById('passwd').value;
-	
+
 	// Verifica se foi inserido dados
 	if (!email || !passwd) {
 		alert('Preencha todos os campos!');
@@ -98,35 +109,35 @@ function fazerLogin() {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({email, passwd})
+		body: JSON.stringify({ email, passwd })
 	})
-	.then(res => res.json())
-	.then(data =>{
-		if(data.success){
-			// Constante que recebe o userID do user.json
-			const userID = data.usuario.userID;
+		.then(res => res.json())
+		.then(data => {
+			if (data.success) {
+				// Constante que recebe o userID do user.json
+				const userID = data.usuario.userID;
 
-			// Aqui é armazenado "variáveis" com valores para serem vistos no JSON
-			localStorage.setItem('userID', userID);
-			localStorage.setItem('userEmail', data.usuario.email);
-			localStorage.setItem('userTipo', data.usuario.tipoConta);
+				// Aqui é armazenado "variáveis" com valores para serem vistos no JSON
+				localStorage.setItem('userID', userID);
+				localStorage.setItem('userEmail', data.usuario.email);
+				localStorage.setItem('userTipo', data.usuario.tipoConta);
 
-			// Redireciona o usuário logado para página dele
-			window.location.href = `/perfil/${userID}`;
-			alert('Usuario logado com sucesso!');
+				// Redireciona o usuário logado para página dele
+				window.location.href = `/perfil/${userID}`;
+				alert('Usuario logado com sucesso!');
 
-		} 
-		
-		// Tratamento de erros ao logar
-		else {
-			alert('Erro ao logar o usuário: ' + (data.error || 'erro desconhecido'));
-		}
-	})
-	// Tratamento de erros
-	.catch(error =>{
-		console.error(error);
-        alert('Erro ao carregar perfil');
-	})
+			}
+
+			// Tratamento de erros ao logar
+			else {
+				alert('Erro ao logar o usuário: ' + (data.error || 'erro desconhecido'));
+			}
+		})
+		// Tratamento de erros
+		.catch(error => {
+			console.error(error);
+			alert('Erro ao carregar perfil');
+		})
 };
 
 
