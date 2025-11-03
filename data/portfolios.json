@@ -72,5 +72,21 @@
     ],
     "dataCriacao": "2025-10-19T00:03:27.741Z",
     "curtidas": 0
+  },
+  {
+    "portfolioID": 31762191765658,
+    "userID": 1760554646358,
+    "usuarioNome": "Fernando Sanches",
+    "titulo": "Sistema de AI para automação",
+    "descricao": "Sistema interativo de AI que automatiza funções na indústria...",
+    "tecnologias": [
+      "Python"
+    ],
+    "categoria": "Machine Learning",
+    "linkGithub": "https://github.com/FernandoSnchs/generative-ai-for-beginners",
+    "linkDemo": null,
+    "linkOutros": [],
+    "dataCriacao": "2025-11-03T17:42:45.658Z",
+    "curtidas": 0
   }
 ]
