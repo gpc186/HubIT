@@ -44,14 +44,12 @@ function mostrarSkeletonsPortfolios(quantidade = 4) {
 
 // ===== INICIALIZAÇÃO =====
 window.onload = async function () {
-    console.log('🔄 Página carregando...');
     await carregarPagina();
 };
 
 // ===== FUNÇÃO PRINCIPAL DE CARREGAMENTO =====
 async function carregarPagina() {
     const userID = localStorage.getItem('userID');
-    console.log('📋 UserID:', userID);
 
     if (!userID) {
         alert('Você precisa fazer login!');
@@ -61,14 +59,13 @@ async function carregarPagina() {
 
     try {
         // Buscar dados do usuário
-        console.log('🔍 Buscando dados do usuário...');
         const resposta = await fetch(`/api/usuario/${userID}`, {
             method: 'GET',
             headers: { 'user-id': userID }
         });
 
         const dados = await resposta.json();
-        console.log('✅ Dados do usuário:', dados);
+        console.log('Dados do usuário:', dados);
         
         const usuarioAtual = dados.usuario;
 
@@ -81,17 +78,15 @@ async function carregarPagina() {
         atualizarPerfil(usuarioAtual);
 
         // Carregar portfólios
-        console.log('🔍 Iniciando carregamento de portfólios...');
         await carregarPortfolios();
 
     } catch (error) {
-        console.error('❌ Erro ao carregar página:', error);
+        console.error('Erro ao carregar página:', error);
     }
 }
 
 // ===== ATUALIZAR PERFIL DO USUÁRIO =====
 function atualizarPerfil(usuarioAtual) {
-    console.log('👤 Atualizando perfil com dados:', usuarioAtual.dados);
     
     const mensagemGreeting = document.getElementById('mensagemGreeting');
     const nomePrincipal = document.getElementById('nomePrincipal');
@@ -107,7 +102,7 @@ function atualizarPerfil(usuarioAtual) {
     if (usuarioAtual.tipoConta === 'usuario') {
         if (nomePrincipal) {
             nomePrincipal.innerText = usuarioAtual.dados.nome || 'Seu Nome';
-            console.log('✅ Nome principal atualizado');
+            console.log('Nome principal atualizado');
         }
         if (nomeGreeting) nomeGreeting.innerText = usuarioAtual.dados.nome || 'Seu Nome';
         if (nomeLocal) nomeLocal.innerText = usuarioAtual.dados.localizacao || 'Localização';
@@ -159,7 +154,6 @@ function atualizarPerfil(usuarioAtual) {
         }
     }
 
-    console.log('✅ Perfil carregado com sucesso!');
 }
 
 // ===== CARREGAR PORTFÓLIOS =====
@@ -167,11 +161,8 @@ async function carregarPortfolios() {
     const container = document.getElementById('portfoliosContainer');
     const userID = localStorage.getItem('userID');
     
-    console.log('📦 Container:', container);
-    console.log('🆔 UserID para portfolios:', userID);
-    
     if (!container) {
-        console.error('❌ Container portfoliosContainer não encontrado!');
+        console.error('Container portfoliosContainer não encontrado!');
         return;
     }
     
@@ -183,62 +174,52 @@ async function carregarPortfolios() {
     mostrarSkeletonsPortfolios(4);
 
     try {
-        console.log('🌐 Fazendo requisição para /api/portfolio');
         const response = await fetch('/api/portfolio', {
             method: 'GET',
             headers: { 'user-id': userID }
         });
 
-        console.log('📡 Status da resposta:', response.status);
-        console.log('📡 Response OK?:', response.ok);
-
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('❌ Erro na resposta:', errorText);
+            console.error('Erro na resposta:', errorText);
             throw new Error(`Erro ${response.status}: ${errorText}`);
         }
 
         const dados = await response.json();
-        console.log('📊 Dados recebidos:', dados);
-        console.log('📊 Portfolios:', dados.portfolios);
-        console.log('📊 Quantidade:', dados.portfolios ? dados.portfolios.length : 0);
         
         if (dados.ok && dados.portfolios && dados.portfolios.length > 0) {
-            console.log('✅ Renderizando', dados.portfolios.length, 'portfólios');
             renderizarPortfolios(dados.portfolios);
-            console.log(`✅ ${dados.portfolios.length} portfólios carregados`);
+            console.log(`${dados.portfolios.length} portfólios carregados`);
         } else {
-            console.log('⚠️ Nenhum portfólio encontrado');
-            container.innerHTML = '<div class="loading">🔍 Nenhum portfólio encontrado.</div>';
+            console.log('Nenhum portfólio encontrado');
+            container.innerHTML = '<div class="loading"> Nenhum portfólio encontrado.</div>';
         }
 
     } catch (error) {
-        console.error('❌ Erro ao carregar portfólios:', error);
-        console.error('❌ Stack:', error.stack);
-        container.innerHTML = `<div class="loading">❌ Erro ao carregar portfólios: ${error.message}</div>`;
+        console.error('Erro ao carregar portfólios:', error);
+        console.error('Stack:', error.stack);
+        container.innerHTML = `<div class="loading">Erro ao carregar portfólios: ${error.message}</div>`;
     }
 }
 
 // ===== RENDERIZAR PORTFÓLIOS =====
 function renderizarPortfolios(portfolios) {
-    console.log('🎨 Iniciando renderização de', portfolios.length, 'portfólios');
     const container = document.getElementById('portfoliosContainer');
     
     if (!container) {
-        console.error('❌ Container portfoliosContainer não encontrado!');
+        console.error('Container portfoliosContainer não encontrado!');
         return;
     }
     
     container.innerHTML = '';
 
     if (!portfolios || portfolios.length === 0) {
-        console.log('⚠️ Array de portfólios vazio');
+        console.log('Array de portfólios vazio');
         container.innerHTML = '<div class="loading">🔍 Nenhum portfólio encontrado.</div>';
         return;
     }
 
     portfolios.forEach((portfolio, index) => {
-        console.log(`🎨 Renderizando portfólio ${index + 1}:`, portfolio);
         
         const postCard = document.createElement('div');
         postCard.className = 'post-card fade-in-content';
@@ -278,7 +259,7 @@ function renderizarPortfolios(portfolios) {
             </div>
             <div class="post-engagement">
                 <span><img src="/assets/img/svg/thumbup-svgrepo-com.svg"> <span id="curtidas-${portfolio.portfolioID}">${portfolio.curtidas || 0}</span> curtidas</span>
-                <span><img src="/assets/img/svg/zip-svgrepo-com.svg"> ${portfolio.categoria}</span>
+                <span><img src="/assets/img/svg/file-horizontal-svgrepo-com.svg"> ${portfolio.categoria}</span>
             </div>
             <div class="post-actions">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPortfolio${portfolio.portfolioID}">
@@ -291,13 +272,10 @@ function renderizarPortfolios(portfolios) {
         `;
         
         container.appendChild(postCard);
-        console.log(`✅ Card ${index + 1} adicionado ao container`);
 
         // Criar Modal para cada portfólio
         criarModalPortfolio(portfolio, dataCriacao, jaCurtiuEste, botaoCurtirClass, botaoCurtirTexto);
     });
-    
-    console.log('✅ Renderização completa!');
 }
 
 // ===== CRIAR MODAL DO PORTFÓLIO =====
@@ -349,9 +327,9 @@ function criarModalPortfolio(portfolio, dataCriacao, jaCurtiuEste, botaoCurtirCl
                         <h6 class="fw-semibold mb-3">Sobre o Projeto</h6>
                         
                         <div class="d-flex flex-wrap gap-3 mb-3">
-                            <span class="text-muted small"><span class="me-1">📁</span>${portfolio.categoria || 'Sem categoria'}</span>
-                            <span class="text-muted small"><span class="me-1">❤️</span><span id="curtidas-modal-${portfolio.portfolioID}">${portfolio.curtidas || 0}</span> curtidas</span>
-                            <span class="text-muted small"><span class="me-1">📅</span>${dataCriacao}</span>
+                            <span id="modalTxtSvg" class="text-muted small"><span class="me-1"><img src="/assets/img/svg/file-horizontal-svgrepo-com.svg"></span>${portfolio.categoria || 'Sem categoria'}</span>
+                            <span id="modalTxtSvg" class="text-muted small"><span class="me-1"><img src="/assets/img/svg/heart-svgrepo-com.svg"></span><span id="curtidas-modal-${portfolio.portfolioID}">${portfolio.curtidas || 0}</span> curtidas</span>
+                            <span id="modalTxtSvg" class="text-muted small"><span class="me-1"><img src="/assets/img/svg/calendar-alt-svgrepo-com.svg"></span>${dataCriacao}</span>
                         </div>
                         
                         <h6 class="fw-semibold mb-2">Descrição:</h6>
@@ -607,8 +585,6 @@ async function publicarPortfolio() {
         linkOutros
     };
 
-    console.log('📤 Enviando portfólio:', novoPortfolio);
-
     try {
         const response = await fetch('/api/portfolio', {
             method: 'POST',
@@ -620,7 +596,6 @@ async function publicarPortfolio() {
         });
 
         const dados = await response.json();
-        console.log('📥 Resposta da API:', dados);
 
         if (dados.ok) {
             // Fechar o modal
@@ -639,7 +614,7 @@ async function publicarPortfolio() {
             alert('Erro ao publicar portfólio: ' + dados.error);
         }
     } catch (error) {
-        console.error('❌ Erro ao publicar portfólio:', error);
+        console.error('Erro ao publicar portfólio:', error);
         alert('Erro ao publicar portfólio. Tente novamente.');
     }
 }
