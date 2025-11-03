@@ -669,7 +669,7 @@ h3 {
 
     .navigation {
         margin-right: 40px;
-        column-gap: 40px;
+        column-gap: 20px;
     }
 
     .nav-item ion-icon {
@@ -749,7 +749,7 @@ h3 {
 
     .navigation {
         margin-right: 80px;
-        column-gap: 50px;
+        column-gap: 20px;
     }
 
     .nav-item ion-icon {
