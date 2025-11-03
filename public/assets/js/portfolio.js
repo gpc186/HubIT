@@ -100,30 +100,62 @@ function atualizarPerfil(usuarioAtual) {
     const areaAtuacao = document.getElementById('areaAtuacao');
     const nivelExperiencia = document.getElementById('nivelExperiencia');
     const weatherIconImg = document.getElementById('weatherIconImg');
+    const empregosButton = document.getElementById('empregosButton');
+    const searchButton = document.getElementById('searchButton')
 
     // Atualizar nome e informações
-    if (nomePrincipal) {
-        nomePrincipal.innerText = usuarioAtual.dados.nome || 'Seu Nome';
-        console.log('✅ Nome principal atualizado');
+    if (usuarioAtual.tipoConta === 'usuario') {
+        if (nomePrincipal) {
+            nomePrincipal.innerText = usuarioAtual.dados.nome || 'Seu Nome';
+            console.log('✅ Nome principal atualizado');
+        }
+        if (nomeGreeting) nomeGreeting.innerText = usuarioAtual.dados.nome || 'Seu Nome';
+        if (nomeLocal) nomeLocal.innerText = usuarioAtual.dados.localizacao || 'Localização';
+        if (areaAtuacao) areaAtuacao.innerText = usuarioAtual.dados.areaAtuacao || 'Área';
+        if (nivelExperiencia) nivelExperiencia.innerText = usuarioAtual.dados.nivelExperiencia || 'Nível';
+    
+        // Atualizar mensagem de greeting com base na hora
+        if (mensagemGreeting && weatherIconImg) {
+            const nome = usuarioAtual.dados.nome || 'Usuário';
+            
+            if (dataHours < 13) {
+                weatherIconImg.src = "assets/img/svg/sun-svgrepo-com.svg";
+                mensagemGreeting.innerHTML = `Bom dia, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
+            } else if (dataHours < 18) {
+                weatherIconImg.src = "assets/img/svg/partly-cloudy-svgrepo-com.svg";
+                mensagemGreeting.innerHTML = `Boa tarde, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
+            } else {
+                weatherIconImg.src = "assets/img/svg/moon-svgrepo-com.svg";
+                mensagemGreeting.innerHTML = `Boa noite, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
+            }
+        }
     }
-    if (nomeGreeting) nomeGreeting.innerText = usuarioAtual.dados.nome || 'Seu Nome';
-    if (nomeLocal) nomeLocal.innerText = usuarioAtual.dados.localizacao || 'Localização';
-    if (areaAtuacao) areaAtuacao.innerText = usuarioAtual.dados.areaAtuacao || 'Área';
-    if (nivelExperiencia) nivelExperiencia.innerText = usuarioAtual.dados.nivelExperiencia || 'Nível';
 
-    // Atualizar mensagem de greeting com base na hora
-    if (mensagemGreeting && weatherIconImg) {
-        const nome = usuarioAtual.dados.nome || 'Usuário';
-        
-        if (dataHours < 13) {
-            weatherIconImg.src = "assets/img/svg/sun-svgrepo-com.svg";
-            mensagemGreeting.innerHTML = `Bom dia, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
-        } else if (dataHours < 18) {
-            weatherIconImg.src = "assets/img/svg/partly-cloudy-svgrepo-com.svg";
-            mensagemGreeting.innerHTML = `Boa tarde, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
-        } else {
-            weatherIconImg.src = "assets/img/svg/moon-svgrepo-com.svg";
-            mensagemGreeting.innerHTML = `Boa noite, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
+    if (usuarioAtual.tipoConta === 'empresa') {
+        empregosButton.style.display = 'none'
+        searchButton.style.display = 'none'
+        if (nomePrincipal) {
+            nomePrincipal.innerText = usuarioAtual.dados.nomeEmpresa || 'Seu Nome';
+        }
+        if (nomeGreeting) nomeGreeting.innerText = usuarioAtual.dados.nomeEmpresa || 'Seu Nome';
+        if (nomeLocal) nomeLocal.innerText = usuarioAtual.dados.localizacao || 'Localização';
+        if (areaAtuacao) areaAtuacao.innerText = usuarioAtual.dados.setor || 'Setor';
+        if (nivelExperiencia) nivelExperiencia.innerText = usuarioAtual.dados.descricao || 'descrição';
+    
+        // Atualizar mensagem de greeting com base na hora
+        if (mensagemGreeting && weatherIconImg) {
+            const nome = usuarioAtual.dados.nome || 'Usuário';
+            
+            if (dataHours < 13) {
+                weatherIconImg.src = "assets/img/svg/sun-svgrepo-com.svg";
+                mensagemGreeting.innerHTML = `Bom dia, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
+            } else if (dataHours < 18) {
+                weatherIconImg.src = "assets/img/svg/partly-cloudy-svgrepo-com.svg";
+                mensagemGreeting.innerHTML = `Boa tarde, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
+            } else {
+                weatherIconImg.src = "assets/img/svg/moon-svgrepo-com.svg";
+                mensagemGreeting.innerHTML = `Boa noite, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Explore os <span style="color: #2F6D88; font-family: Codec;">portfólios</span> de hoje!`;
+            }
         }
     }
 

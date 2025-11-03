@@ -207,7 +207,6 @@ li a {
     column-gap: 20px;
     overflow: visible !important;
 }
-
 .login-btn {
     display: flex;
     width: auto;
@@ -239,6 +238,10 @@ li a {
     height: 100%;
 
     transition: all 0.3s;
+}
+
+.empregosButton{
+    display: none !important;
 }
 
 /*===== FIM DO HEADER====== */
@@ -1308,7 +1311,7 @@ footer{
 
 .modal-dialog {
     width: auto !important;
-    max-width: 600px !important;
+    max-width: 750px !important;
     margin: 0 !important;
 }
 
@@ -1872,3 +1875,4 @@ label{
 .navbar-toggler{
     border: none !important;
 }
+
