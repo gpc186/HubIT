@@ -5,7 +5,7 @@ logoImg.addEventListener('mouseover', function () {
     if (!animating) {
         animating = true;
         // Adiciona timestamp para forçar o navegador a recarregar o GIF do início
-        logoImg.src = '/assets/img/video/hubit_animated.gif?' + new Date().getTime();
+        logoImg.src = '/assets/img/video/hubit_animated2.gif?' + new Date().getTime();
 
         // Volta para SVG após a duração do GIF
         setTimeout(function () {
@@ -14,10 +14,10 @@ logoImg.addEventListener('mouseover', function () {
 
             // Troca para SVG após um pequeno fade
             setTimeout(function () {
-                logoImg.src = '/assets/img/svg/Hubit_svg_logo.svg';
+                logoImg.src = '/assets/img/hubit_png_default.png';
                 logoImg.style.opacity = '1';
                 animating = false;
-            }, 100); // 100ms de delay para suavizar a transição
+            },0);
 
         }, 1700); // Ajuste esse tempo para corresponder exatamente à duração do seu GIF
     }
