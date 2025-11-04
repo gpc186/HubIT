@@ -51,13 +51,14 @@ async function carregarPerfil() {
         if (dados.ok) {
             // Aqui é para verificar e preencher dados
             usuarioAtual = dados.usuario;
-            console.log(usuarioAtual)
+
             tipoContaAtual = usuarioAtual.tipoConta;
-            console.log(tipoContaAtual);
+
+            if(tipoContaAtual === 'empresa'){
+                document.getElementById('empregosButton').style.display = 'none';
+            }
 
             perfilEraIncompleto = !usuarioAtual.perfilCompleto;
-            console.log(perfilEraIncompleto);
-
 
             if (perfilEraIncompleto) {
                 console.log('Usuario verificado')
@@ -67,7 +68,7 @@ async function carregarPerfil() {
                 console.log("Mensagem criada");
 
 
-                if (usuarioAtual.tipoConta === 'usuario') {
+                if (tipoContaAtual === 'usuario') {
                     document.getElementById('formUsuario').style.display = 'block';
                     document.getElementById('formEmpresa').style.display = 'none';
                     console.log("usuario tipo usuario");

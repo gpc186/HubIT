@@ -908,7 +908,7 @@ footer{
 
 .section-block-1-steps{
     display: flex;
-    height: 200px;
+    height: 400px;
     width: 100%;
 
     background-color: rgba(250, 235, 215, 0);
@@ -919,17 +919,26 @@ footer{
 
 .section-block-img-1-steps {
     width: 85%;
-    height: auto;
+    height: 100%;
 
     margin-right: 40px;
 }
 
 .section-block-img-1-steps img {
     width: 55%;
+    height: 100%;
 }
 
 .section-steps{
     height: auto;
+}
+
+.about h1{
+    transition: transform 0.2s;
+}
+
+.about h1:hover{
+    transform: scale(1.05);
 }
 
 .about-steps{
@@ -944,6 +953,13 @@ footer{
     background-color: #2f6d8800;
 
     border-top: 60px;
+}
+
+.plans-content-options{
+    padding: 15px;
+    background-color: #2F6D88;
+
+    border-radius: 10px;
 }
 
 hr{
@@ -1006,10 +1022,13 @@ hr{
     margin-top: 20px;
 }
 
-.plans-options button{
+.plans-options button:hover{
+    background-color: #21576e
+}
+
+.plans-options-active{
     width: 120px;
     border: none;
-    background-color: #2F6D88;
     padding: 10px;
 
     color: white;
@@ -1017,10 +1036,20 @@ hr{
     border-radius: 10px;
 
     transition: background-color 0.2s;
+    background-color: #357AB8;
 }
 
-.plans-options button:hover{
-    background-color: #24596f
+.plans-options-disable{
+    width: 120px;
+    border: none;
+    padding: 10px;
+
+    color: white;
+    font-family: Codec;
+    border-radius: 10px;
+
+    transition: background-color 0.2s;
+    background-color: #2F6D88;
 }
 
 #plansInd{
