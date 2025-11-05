@@ -1,5 +1,4 @@
 // === CONFIGURAÇÕES ===
-const API_URL = 'http://localhost:3000/api/emprego';
 const dataNow = new Date();
 const dataHours = dataNow.getHours();
 
@@ -467,7 +466,7 @@ async function carregarEmpregos(filtros = {}) {
         if (filtros.salarioMax) params.append('salarioMax', filtros.salarioMax);
         if (filtros.nivel) params.append('nivel', filtros.nivel);
 
-        const url = params.toString() ? `${API_URL}?${params.toString()}` : API_URL;
+        const url = params.toString() ? `/api/emprego?${params.toString()}` : '/api/emprego';
 
         const response = await fetch(url, {
             headers: { 'user-id': userID }
