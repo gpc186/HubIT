@@ -1823,7 +1823,6 @@ label{
 .offcanvas-body li{
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
     background-color: #00000000 !important;
 
     font-size: 15pt;
@@ -1875,5 +1874,17 @@ label{
 
 .navbar-toggler{
     border: none !important;
+}
+
+.nav-item span{
+    margin-left: auto !important;
+}
+
+.nav-link.active{
+    color: #0a66c2 !important;
+}
+
+.nav-link.active span{
+    color: #0a66c2 !important;
 }
 
