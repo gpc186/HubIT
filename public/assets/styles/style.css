@@ -168,7 +168,7 @@ a{
     }
 }
 
-@media (max-width: 390px){
+@media (max-width: 510px){
     .section-block-content-2{
         text-align: center !important;
     }
