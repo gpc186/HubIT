@@ -168,6 +168,38 @@ a{
     }
 }
 
+@media (max-width: 390px){
+    .section-block-content-2{
+        text-align: center !important;
+    }
+
+    .textwSvg{
+        display: flex;
+        justify-content: center;
+    }
+
+    .section-block-content-2 a{
+        display: flex;
+        justify-content: center;
+    }
+
+    .section-block-img-2{
+        margin-right: 0px !important;
+    }
+
+    .plans-content{
+        padding: 20px;
+    }
+
+    .plan1-content{
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 @media (max-width: 347px){
     .login-btn{
         display: none !important;
@@ -934,6 +966,14 @@ footer{
     height: auto;
 }
 
+.about{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}
+
 .about h1{
     transition: transform 0.2s;
 }
@@ -943,7 +983,12 @@ footer{
 }
 
 .about-steps{
+    display: flex;
     height: auto;
+
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .about-content-steps{
@@ -1059,4 +1104,8 @@ hr{
 
 #plansEmp{
     display: none;
+}
+
+.about-steps-text{
+    width: 84%;
 }
