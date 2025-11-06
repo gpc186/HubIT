@@ -74,6 +74,12 @@ async function carregarPagina() {
             return;
         }
 
+        const createpostx = document.getElementById('create-postx')
+
+        if (usuarioAtual.tipoConta === 'empresa') {
+            if (createpostx) createpostx.style.display = 'none';
+        }
+
         // Atualizar informações do perfil
         atualizarPerfil(usuarioAtual);
 
