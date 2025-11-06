@@ -1149,6 +1149,7 @@ h3 {
     justify-content: center;
     gap: 8px;
     margin-top: 20px;
+    margin-bottom: 0px !important;
 }
 
 .indicator-dot {
@@ -1169,8 +1170,8 @@ h3 {
 /* Responsivo - Tablet (768px+) */
 @media (min-width: 768px) {
     .candidatura-card {
-        flex: 0 0 calc(50% - 10px); /* 2 cards por vez */
-        max-width: calc(50% - 10px);
+        flex: 0 0 calc(100% - 10px); /* 1 card por vez */
+        max-width: calc(100% - 10px);
     }
     
     .candidaturas-wrapper {
@@ -1194,8 +1195,8 @@ h3 {
 /* Responsivo - Desktop (1024px+) */
 @media (min-width: 1024px) {
     .candidatura-card {
-        flex: 0 0 calc(33.333% - 14px); /* 3 cards por vez */
-        max-width: calc(33.333% - 14px);
+        flex: 0 0 calc(100% - 14px); /* 3 cards por vez */
+        max-width: calc(100% - 14px);
     }
     
     .candidaturas-wrapper {

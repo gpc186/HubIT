@@ -214,5 +214,29 @@
     },
     "dataCandidatura": "2025-10-27T18:49:51.762Z",
     "status": "pendente"
+  },
+  {
+    "candidaturaID": 51762431211385,
+    "empregoID": 21761844672776,
+    "userID": 1759967977156,
+    "curriculoID": 41761081788717,
+    "candidato": {
+      "nome": "Fernando Sanches",
+      "email": "guguinha@gmail.com",
+      "telefone": "11 99999-9999",
+      "localizacao": "São Paulo",
+      "areaAtuacao": "Frontend",
+      "nivelExperiencia": "Especialista",
+      "linkedin": "https://www.linkedin.com/in/fernando-sanches-0b0947349/",
+      "github": "https://github.com/FernandoSnchs"
+    },
+    "vaga": {
+      "titulo": "Programador front-end",
+      "empresaNome": "asdasdasdas",
+      "localizacao": "Itajai, SP",
+      "area": "Frontend"
+    },
+    "dataCandidatura": "2025-11-06T12:13:31.385Z",
+    "status": "pendente"
   }
 ]

@@ -1,6 +1,27 @@
 // ============================================
 // NAVEGAÇÃO E INDICADORES
 // ============================================
+
+// No início do arquivo pg-perfil.js
+(function() {
+    'use strict';
+    
+    // Todo o código existente aqui...
+
+// Substitua o DOMContentLoaded por isso:
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inicializarPagina);
+} else {
+    // DOM já carregado
+    inicializarPagina();
+}
+
+async function inicializarPagina() {
+    await carregarPagina();
+}
+
+})();
+
 window.addEventListener('DOMContentLoaded', () => {
     const activeItem = document.querySelector('.nav-item.active');
     if (activeItem) {
@@ -328,7 +349,7 @@ function atualizarCardsVisiveis() {
 function moverCarrossel(direcao) {
     if (totalCandidaturas === 0) return;
     
-    const maxIndex = Math.ceil(totalCandidaturas / cardsVisiveis) - 1;
+    const maxIndex = Math.ceil(totalCandidaturas);
     
     candidaturasAtual += direcao;
     
@@ -354,7 +375,7 @@ function atualizarBotoes() {
     
     if (!prevBtn || !nextBtn) return;
     
-    const maxIndex = Math.ceil(totalCandidaturas / cardsVisiveis) - 1;
+    const maxIndex = Math.ceil(cardsVisiveis);
     
     prevBtn.disabled = candidaturasAtual === 0;
     nextBtn.disabled = candidaturasAtual >= maxIndex;
@@ -369,7 +390,7 @@ function criarIndicadores() {
     
     container.innerHTML = '';
     
-    const totalPaginas = Math.ceil(totalCandidaturas / cardsVisiveis);
+    const totalPaginas = Math.ceil(totalCandidaturas);
     
     if (totalPaginas <= 1) {
         container.style.display = 'none';
@@ -395,7 +416,7 @@ function atualizarIndicadores() {
 }
 
 function irParaPagina(index) {
-    const maxIndex = Math.ceil(totalCandidaturas / cardsVisiveis) - 1;
+    const maxIndex = Math.ceil(totalCandidaturas) - 1;
     candidaturasAtual = Math.min(Math.max(0, index), maxIndex);
     moverCarrossel(0);
 }

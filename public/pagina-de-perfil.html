@@ -10,104 +10,111 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+    
 </head>
 
 <body>
-   <header >
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a href="/" target="_self">
-                <div class="logo">
-                    <img id="logo-animation" src="../assets/img/svg/Hubit_svg_logo.svg" alt="">
-                </div>
-            </a>
-            <div class="navbar-search">
-                <!-- Botão do offcanvas (menu mobile) -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                
-                <!-- Offcanvas (Menu Mobile) -->
-                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-                    <div class="offcanvas-header">
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a href="/" target="_self">
+                    <div class="logo">
+                        <img id="logo-animation" src="../assets/img/svg/Hubit_svg_logo.svg" alt="">
                     </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <div onclick="location.href = '/home'">
-                                <li class="nav-item">
-                                  <a class="nav-link">Home</a>
-                                  <span>+</span>
-                                </li>
-                            </div>
-                            <hr>
-                            <div onclick="location.href = '/portfolio'">
-                                <li class="nav-item">
-                                  <a class="nav-link">Portfólios</a>
-                                  <span>+</span>
-                                </li>
-                            </div>
-                            <hr>
-                            <div aria-current="page" onclick="redirecionarPerfil()">
-                                <li class="nav-item">
-                                    <a class="nav-link active">Perfil</a>
-                                    <span>+</span>
-                                </li>
-                            </div>
-                            <hr>
-                            <div onclick="sair()">
-                                <li class="nav-item">
-                                    <a class="nav-link">Sair</a>
-                                </li>
-                            </div>
-                            </ul>
-                    </div>
-                </div>
-                
-                <!-- Navegação Desktop -->
-                <div class="navigation collapse navbar-collapse mb-2 mb-lg-0" id="navbarSupportedContent">
-                    <a href="/home" class="d-none d-lg-block">
-                        <div class="login-btn" id="empregosButton">
-                            <img src="/assets/img/svg/home-02-svgrepo-com.svg" alt="">
+                </a>
+                <div class="navbar-search">
+                    <!-- Botão do offcanvas (menu mobile) -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Offcanvas (Menu Mobile) -->
+                    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                        aria-labelledby="offcanvasDarkNavbarLabel">
+                        <div class="offcanvas-header">
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
                         </div>
-                    </a>
-                    <a href="/portfolio" class="d-none d-lg-block">
-                        <div class="login-btn">
-                            <img src="/assets/img/svg/briefcase-02-svgrepo-com.svg" alt="">
-                        </div>
-                    </a>
-                    <a href="#" class="d-none d-lg-block">
-                        <div class="login-btn">
-                            <img src="/assets/img/svg/notification-bell-svgrepo-com.svg" alt="">
-                        </div>
-                    </a>
-                    
-                    <a class="d-none d-lg-block">
-                        <div class="dropdown dropstart">
-                            <a class="login-btn dropdown-toggle dropstart" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/assets/img/svg/user-circle-svgrepo-com.svg" alt="">
-                            </a>
-                            
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" onclick="redirecionarPerfil()">Perfil</a></li>
-                                <li><a class="dropdown-item" onclick="sair()">Sair</a></li>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                <div onclick="location.href = '/home'">
+                                    <li class="nav-item">
+                                        <a class="nav-link">Home</a>
+                                        <span>+</span>
+                                    </li>
+                                </div>
+                                <hr>
+                                <div onclick="location.href = '/portfolio'">
+                                    <li class="nav-item">
+                                        <a class="nav-link">Portfólios</a>
+                                        <span>+</span>
+                                    </li>
+                                </div>
+                                <hr>
+                                <div aria-current="page" onclick="redirecionarPerfil()">
+                                    <li class="nav-item">
+                                        <a class="nav-link active">Perfil</a>
+                                        <span>+</span>
+                                    </li>
+                                </div>
+                                <hr>
+                                <div onclick="sair()">
+                                    <li class="nav-item">
+                                        <a class="nav-link">Sair</a>
+                                    </li>
+                                </div>
                             </ul>
                         </div>
-                    </a>
+                    </div>
+
+                    <!-- Navegação Desktop -->
+                    <div class="navigation collapse navbar-collapse mb-2 mb-lg-0" id="navbarSupportedContent">
+                        <a href="/home" class="d-none d-lg-block">
+                            <div class="login-btn" id="empregosButton">
+                                <img src="/assets/img/svg/home-02-svgrepo-com.svg" alt="">
+                            </div>
+                        </a>
+                        <a href="/portfolio" class="d-none d-lg-block">
+                            <div class="login-btn">
+                                <img src="/assets/img/svg/briefcase-02-svgrepo-com.svg" alt="">
+                            </div>
+                        </a>
+                        <a href="#" class="d-none d-lg-block">
+                            <div class="login-btn">
+                                <img src="/assets/img/svg/notification-bell-svgrepo-com.svg" alt="">
+                            </div>
+                        </a>
+
+                        <a class="d-none d-lg-block">
+                            <div class="dropdown dropstart">
+                                <a class="login-btn dropdown-toggle dropstart" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="/assets/img/svg/user-circle-svgrepo-com.svg" alt="">
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" onclick="redirecionarPerfil()">Perfil</a></li>
+                                    <li><a class="dropdown-item" onclick="sair()">Sair</a></li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
     <main>
         <br><br><br>
         <div class="buttons-create">
             <button class="mudarInfo-B" data-bs-toggle="modal" onclick="abrirModalEdicao()">
-                Mudar informações
+                Alterar seus dados
             </button>
-            <button id="propostaBtn" type="button" class="mudarInfo-B" data-bs-toggle="modal" data-bs-target="#modalNovoEmprego">
+            <button id="propostaBtn" type="button" class="mudarInfo-B" data-bs-toggle="modal"
+                data-bs-target="#modalNovoEmprego">
                 Criar nova proposta
             </button>
         </div>
@@ -1206,18 +1213,16 @@
         </div>
 
     </footer>
+    <!-- ANTES DO </body> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <!-- Carrega o pg-perfil.js PRIMEIRO (tem o carregarPagina) -->
-    <script async src="/assets/js/pg-perfil.js"></script>
-
-    <!-- Depois carrega os outros scripts -->
-    <script src="/assets/js/curriculos.js"></script>
-    <script></script>
-    <script async src="/assets/js/perfil.js"></script>
-    <script async src="/assets/js/logoAnim.js"></script>
+    <!-- Remova TODOS os async e use defer para manter a ordem -->
+    <script defer src="/assets/js/logoAnim.js"></script>
+    <script defer src="/assets/js/curriculos.js"></script>
+    <script defer src="/assets/js/perfil.js"></script>
+    <script defer src="/assets/js/pg-perfil.js"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
