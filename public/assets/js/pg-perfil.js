@@ -209,14 +209,6 @@ function preencherDadosEmpresa(empresa) {
     }
 }
 
-function abrirModalEdicao() {
-    const modal = document.getElementById('modalCompletarPerfil');
-    if (modal) {
-        const bsModal = new bootstrap.Modal(modal);
-        bsModal.show();
-    }
-}
-
 // ============================================
 // CARROSSEL DE CANDIDATURAS
 // ============================================

@@ -232,6 +232,7 @@ async function salvarDados(event) {
 function abrirModalEdicao() {
     // Esconde a mensagem   
     const mensagem = document.getElementById('mensagemBoasVindas');
+    console.log(mensagem);
     if (mensagem) mensagem.style.display = 'none';
 
     // Garante que temos os dados carregados
@@ -239,7 +240,8 @@ function abrirModalEdicao() {
         alert("Erro: dados do usuário não carregados.");
         return;
     }
-
+    console.log(usuarioAtual);
+    
     // Mostra o formulário correspondente
     if (usuarioAtual.tipoConta === 'usuario') {
         document.getElementById('formUsuario').style.display = 'block';
@@ -271,6 +273,8 @@ function abrirModalEdicao() {
         document.getElementById('alterarLinkedinEmpresa').value = usuarioAtual.linkedin || '';
         document.getElementById('alterarDescricao').value = usuarioAtual.descricao || '';
     }
+    console.log("Foi carregado os itens dentro do modal");
+    
     // Abre o modal normalmente
     const modalElement = document.getElementById('modalCompletarPerfil');
     const modal = new bootstrap.Modal(modalElement);
