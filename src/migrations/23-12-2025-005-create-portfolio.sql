@@ -1,0 +1,20 @@
+CREATE TABLE portfolios (
+    portfolioID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    usuarioNome VARCHAR(255) NOT NULL,
+    titulo VARCHAR(255) NOT NULL,
+    descricao TEXT NOT NULL,
+    tecnologias JSON,
+    categoria VARCHAR(100) NOT NULL,
+    linkGithub VARCHAR(500) NOT NULL,
+    linkDemo VARCHAR(500),
+    linkOutros JSON,
+    imagemCapa VARCHAR(500),
+    imagensAdicionais JSON,
+    dataCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    curtidas INT DEFAULT 0,
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
+    INDEX idx_categoria (categoria),
+    INDEX idx_dataCriacao (dataCriacao),
+    INDEX idx_curtidas (curtidas)
+);

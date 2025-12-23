@@ -1,0 +1,20 @@
+CREATE TABLE user_data (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT UNIQUE NOT NULL,
+    nome VARCHAR(255),
+    telefone VARCHAR(20),
+    dataNasc DATE,
+    localizacao VARCHAR(255),
+    areaAtuacao VARCHAR(100),
+    nivelExperiencia ENUM('Estudante', 'Júnior', 'Pleno', 'Sênior', 'Especialista'),
+    linkedin VARCHAR(500),
+    github VARCHAR(500),
+    biografia TEXT,
+    fotoPerfil VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
+    INDEX idx_areaAtuacao (areaAtuacao),
+    INDEX idx_nivelExperiencia (nivelExperiencia),
+    INDEX idx_localizacao (localizacao)
+);
