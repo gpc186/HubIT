@@ -6,6 +6,6 @@ CREATE TABLE educations (
     dataInicio YEAR,
     dataFim YEAR,
     status ENUM('concluido', 'cursando', 'incompleto', 'trancado') DEFAULT 'cursando',
-    FOREIGN KEY (curriculoID) REFERENCES curriculos(curriculoID) ON DELETE CASCADE,
+    FOREIGN KEY (curriculoID) REFERENCES resumes(curriculoID) ON DELETE CASCADE,
     INDEX idx_curriculoID (curriculoID)
 );

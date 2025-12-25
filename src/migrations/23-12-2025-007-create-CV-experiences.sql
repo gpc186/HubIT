@@ -7,6 +7,6 @@ CREATE TABLE experiences (
     dataFim DATE,
     atual BOOLEAN DEFAULT FALSE,
     descricao TEXT,
-    FOREIGN KEY (curriculoID) REFERENCES curriculos(curriculoID) ON DELETE CASCADE,
+    FOREIGN KEY (curriculoID) REFERENCES resumes(curriculoID) ON DELETE CASCADE,
     INDEX idx_curriculoID (curriculoID)
 );

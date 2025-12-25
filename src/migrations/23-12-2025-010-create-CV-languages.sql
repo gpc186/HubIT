@@ -3,6 +3,6 @@ CREATE TABLE languages (
     curriculoID INT NOT NULL,
     idioma VARCHAR(100) NOT NULL,
     nivel ENUM('Básico', 'Intermediário', 'Avançado', 'Fluente', 'Nativo') NOT NULL,
-    FOREIGN KEY (curriculoID) REFERENCES curriculos(curriculoID) ON DELETE CASCADE,
+    FOREIGN KEY (curriculoID) REFERENCES resumes(curriculoID) ON DELETE CASCADE,
     INDEX idx_curriculoID (curriculoID)
 );

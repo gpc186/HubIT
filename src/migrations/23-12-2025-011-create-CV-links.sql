@@ -5,5 +5,5 @@ CREATE TABLE resumes_links (
     github VARCHAR(500),
     portfolio VARCHAR(500),
     outros JSON,
-    FOREIGN KEY (curriculoID) REFERENCES curriculos(curriculoID) ON DELETE CASCADE
+    FOREIGN KEY (curriculoID) REFERENCES resumes(curriculoID) ON DELETE CASCADE
 );
