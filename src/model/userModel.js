@@ -2,9 +2,7 @@ const { query } = require('../config/database');
 const bcrypt = require('bcrypt');
 
 class User {
-    static async createAccount({ email, rawPassword, tipoConta }) {
-        const password_hash = await bcrypt.hash(rawPassword, 10);
-
+    static async createAccount({ email, password_hash, tipoConta }) {
         const sql = `INSERT INTO users (email, passwd, tipoConta) VALUES (?, ?, ?)`;
 
         const result = await query(sql, [email, password_hash, tipoConta]);

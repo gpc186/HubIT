@@ -30,7 +30,7 @@ class Resume {
         return result[0] || null
     };
 
-    static async findByUser(userID){
+    static async findByUserId(userID){
         const sql = `SELECT * FROM resumes WHERE userID = ?`;
         return await query(sql, [userID])
     };
@@ -42,4 +42,4 @@ class Resume {
     };
 };
 
-module.exports = Resumes
+module.exports = Resume
