@@ -1,5 +1,5 @@
 CREATE TABLE company_data (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    company_dataID INT AUTO_INCREMENT PRIMARY KEY,
     userID INT UNIQUE NOT NULL,
     nomeEmpresa VARCHAR(255),
     cnpj VARCHAR(14) UNIQUE,

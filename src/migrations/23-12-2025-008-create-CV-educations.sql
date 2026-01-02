@@ -1,5 +1,5 @@
 CREATE TABLE educations (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    educationsID INT AUTO_INCREMENT PRIMARY KEY,
     curriculoID INT NOT NULL,
     curso VARCHAR(255) NOT NULL,
     instituicao VARCHAR(255) NOT NULL,

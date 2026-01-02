@@ -1,5 +1,5 @@
 CREATE TABLE user_data (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_dataID INT AUTO_INCREMENT PRIMARY KEY,
     userID INT UNIQUE NOT NULL,
     nome VARCHAR(255),
     telefone VARCHAR(20),

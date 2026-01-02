@@ -1,5 +1,5 @@
 CREATE TABLE resumes_links (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    resumes_linksID INT AUTO_INCREMENT PRIMARY KEY,
     curriculoID INT UNIQUE NOT NULL,
     linkedin VARCHAR(500),
     github VARCHAR(500),

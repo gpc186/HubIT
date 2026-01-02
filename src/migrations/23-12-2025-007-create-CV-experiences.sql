@@ -1,5 +1,5 @@
 CREATE TABLE experiences (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    experiencesID INT AUTO_INCREMENT PRIMARY KEY,
     curriculoID INT NOT NULL,
     cargo VARCHAR(255) NOT NULL,
     empresa VARCHAR(255) NOT NULL,

@@ -1,5 +1,5 @@
 CREATE TABLE languages (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    languagesID INT AUTO_INCREMENT PRIMARY KEY,
     curriculoID INT NOT NULL,
     idioma VARCHAR(100) NOT NULL,
     nivel ENUM('Básico', 'Intermediário', 'Avançado', 'Fluente', 'Nativo') NOT NULL,

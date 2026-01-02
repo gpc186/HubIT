@@ -4,6 +4,7 @@ class Application {
     static async create({empregoID,
         userID,
         curriculoID,
+        status,
         candidato_nome,
         candidato_email,
         candidato_telefone,
@@ -20,6 +21,7 @@ class Application {
         const sql = `INSERT INTO applications (empregoID,
         userID,
         curriculoID,
+        status,
         candidato_nome,
         candidato_email,
         candidato_telefone,
@@ -37,6 +39,7 @@ class Application {
         const result = await query(sql, [empregoID,
         userID,
         curriculoID,
+        status,
         candidato_nome,
         candidato_email,
         candidato_telefone,
@@ -50,6 +53,11 @@ class Application {
         vaga_localizacao,
         vaga_area]);
         return result.insertId;
+    };
+
+    static async findById(candidaturaID){
+        const sql = `SELECT * FROM application WHERE candidaturaID = ? ORDER BY dataCandidatura DESC`;
+        return await query(sql, [candidaturaID]);
     };
     
     static async findByJobId(empregoID){
