@@ -309,12 +309,13 @@ h3 {
 }
 
 .text-login-block {
-    text-align: center;
+    text-align: start;
 
     margin-bottom: 30px;
 }
 
 .text-login-block h1 {
+    font-size: 45pt !important;
     line-height: 35px;
 }
 
