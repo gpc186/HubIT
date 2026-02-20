@@ -1,7 +1,4 @@
-const User = require('../model/userModel');
-const User_data = require('../model/userNormalDataModel');
 const Resume = require('../model/resumeModel');
-const Company_data = require('../model/userCompanyDataModel');
 const Job = require('../model/jobModel');
 const Application = require('../model/applicationModel');
 
@@ -79,9 +76,9 @@ class ApplicationService {
         return userApplication;
     };
 
-    static async getCandidatesByJobId({ userID, tipoUsuario, empregoID }) {
+    static async getCandidatesByJobId({ userID, tipoConta, empregoID }) {
 
-        if (tipoUsuario !== "empresa") {
+        if (tipoConta !== "empresa") {
             throw new Error("Você não pode acessar candidatos!");
         };
 
@@ -97,9 +94,9 @@ class ApplicationService {
         const jobApplications = await Application.findByJobId(empregoID);
         return jobApplications;
     };
-    static async updateApplicationStatus({ userID, tipoUsuario, candidaturaID, status }) {
+    static async updateApplicationStatus({ userID, tipoConta, candidaturaID, status }) {
 
-        if (tipoUsuario !== "empresa") {
+        if (tipoConta !== "empresa") {
             throw new Error("credenciais inválidas!");
         };
 
@@ -135,8 +132,8 @@ class ApplicationService {
         return { candidaturaID, status }
     };
 
-    static async cancelApplication({ userID, tipoUsuario, candidaturaID }) {
-        if (tipoUsuario !== 'usuario') {
+    static async cancelApplication({ userID, tipoConta, candidaturaID }) {
+        if (tipoConta !== 'usuario') {
             throw new Error("Credenciais inválidos!");
         };
 
@@ -159,23 +156,23 @@ class ApplicationService {
         return { candidaturaID, status };
     };
 
-    static async getJobApplications({userID, tipoUsuario, empregoID}){
-        if (tipoUsuario !== 'empresa') {
+    static async getJobApplications({ userID, tipoConta, empregoID }) {
+        if (tipoConta !== 'empresa') {
             throw new Error("Credenciais inválidos!");
         };
 
         const myJob = await Job.findById(empregoID);
-        if(!myJob){
+        if (!myJob) {
             throw new Error("A vaga não foi encontrada!");
         };
-        if(myJob.empresaID !== userID){
+        if (myJob.empresaID !== userID) {
             throw new Error("A vaga não é sua!");
         };
 
         const jobApplications = await Application.findByJobId(empregoID);
         return jobApplications;
     };
-    
+
 }
 
 module.exports = ApplicationService
