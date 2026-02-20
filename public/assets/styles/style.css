@@ -225,6 +225,11 @@ a{
     .text-login-block{
         display: none !important;
     }
+
+    .login-block-text{
+        flex-direction: column-reverse !important;
+        row-gap: 20px;
+    }
 }
 
 @media (max-width: 472px){
