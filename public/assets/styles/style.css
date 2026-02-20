@@ -56,6 +56,27 @@ main {
     background-color: #F8F7F2;
 }
 
+.rowr{
+    display: flex;
+    width: 100dvw;
+    height: auto;
+
+    background-color: #F8F7F2;
+
+    align-items: center;
+    justify-content: center;
+
+    column-gap: 20px;
+}
+
+main .hr-custom{
+    margin: auto !important;
+    width: 85%;
+    border: #70707088 solid 2px !important;
+
+    margin-top: 80px !important;
+}
+
 header{
 
     backdrop-filter: blur(7px);
@@ -82,7 +103,7 @@ a{
         display: none !important;
     }
 
-    .row{
+    .rowr{
         margin-top: 70px !important;
         flex-direction: column !important;
         align-items: center !important;
@@ -106,13 +127,16 @@ a{
 
 }
 
-@media (max-width: 768px) {
-    .row{
-        flex-wrap: nowrap !important;
+@media (max-width: 800px){
+    .text-login-block h1{
+        font-size: 39pt !important;
+        line-height: 45px !important;
     }
-    
-    .login-block{
-        width: 60% !important;
+}
+
+@media (max-width: 768px) {
+    .rowr{
+        flex-wrap: nowrap !important;
     }
 
     .plans-content{
@@ -132,7 +156,17 @@ a{
     }
 
     .main-block-2{
-        width: 40% !important;
+        width: 60% !important;
+    }
+
+    .main-block-1{
+        display: block !important;
+        width: 80% !important;
+    }
+
+    .text-login-block h1{
+        width: auto !important;
+        height: 140px;
     }
 }
 
@@ -184,6 +218,12 @@ a{
 
     .forgot{
         margin: 0 !important;
+    }
+}
+
+@media (max-width: 568px){
+    .text-login-block{
+        display: none !important;
     }
 }
 
@@ -430,7 +470,7 @@ li a {
 .main-block-2 {
     display: flex;
     
-    width: 40% !important;
+    width: 40%;
     height: 750px;
 
     justify-content: start;
