@@ -98,6 +98,23 @@ a{
     background-color: #F8F7F2;
 }
 
+.nav-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px;
+
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: 2px;
+}
+
+.nav-item:hover{
+    background-color: #cfcfcf;
+    color: #F8F7F2;
+    cursor: pointer;
+}
+
 @media (max-width: 1368px){
     .main-block-1 img{
         display: none !important;
@@ -418,6 +435,8 @@ li a {
     border-radius: 10px;
 
     cursor: pointer;
+
+    margin-right: 30px;
 }
 
 .login-btn:hover{
@@ -1036,15 +1055,31 @@ footer{
 
     margin-bottom: 10px;
     align-items: center;
+    text-align: center;
 }
 
 /*principal */
+
+.offcanvas{
+    width: 50dvw !important;
+    height: 100dvh !important;
+}
+
+.hide-navbar{
+    display: none !important;
+}
 
 .navbar-search{
     width: auto;
     padding: 30px;
 
     margin-left: auto;
+}
+
+@media (max-width: 991px) {
+    .hide-navbar{
+        display: flex !important;
+    }
 }
 
 .search{
@@ -1153,7 +1188,7 @@ hr{
 
 .passtip{
     display: none;
-    width: 80%;
+    width: 90%;
     background-color: #70707000;
     height: auto;
 
