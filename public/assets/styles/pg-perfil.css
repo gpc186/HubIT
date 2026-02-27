@@ -532,7 +532,7 @@ h3 {
 
 /* ===== CONTAINER BANNER ===== */
 .container-banner {
-    max-width: 60%;
+    max-width: 88%;
     height: auto;
     border: #70707079 solid 3px;
     margin: 70px auto 50px;
@@ -823,7 +823,7 @@ h3 {
     }
 
     .container-banner {
-        max-width: 60%;
+        max-width: 70%;
         height: auto;
     }
 
