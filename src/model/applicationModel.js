@@ -72,7 +72,7 @@ class Application {
 
     static async updateStatus(candidaturaID, status){
         const sql = `UPDATE applications SET status = ? WHERE candidaturaID = ?`;
-        const result = await query(sql, [candidaturaID, status]);
+        const result = await query(sql, [status, candidaturaID]);
         return result.affectedRows > 0;
     };
 

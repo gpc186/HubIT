@@ -1,5 +1,4 @@
 const { query } = require('../config/database');
-const bcrypt = require('bcrypt');
 
 class User {
     static async createAccount({ email, password_hash, tipoConta }) {
@@ -37,6 +36,24 @@ class User {
         const sql = `SELECT COUNT(*) as count FROM users WHERE email = ?`;
         const result = await query(sql, [email]);
         return result[0].count > 0;
+    };
+
+    static async storeRefreshToken(userID, refreshTokenHash) {
+        const sql = `UPDATE users SET refresh_token_hash = ? WHERE userID = ?`;
+        const result = await query(sql, [refreshTokenHash, userID]);
+        return result.affectedRows > 0;
+    };
+
+    static async getRefreshToken(userID){
+        const sql = `SELECT refresh_token_hash FROM users WHERE userID = ?`;
+        const result = await query(sql, [userID]);
+        return result[0];
+    };
+
+    static async clearRefreshToken(userID){
+        const sql = `UPDATE users SET refresh_token_hash = NULL WHERE userID = ?`;
+        const result  = await query(sql, [userID]);
+        return result.affectedRows > 0;
     };
 };
 

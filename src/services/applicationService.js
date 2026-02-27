@@ -73,7 +73,7 @@ class ApplicationService {
         return userApplication;
     };
 
-    static async getCandidatesByJobId({ userID, tipoUsuario, empregoID }) {
+    static async getCandidatesByJobId({ userID, tipoConta, empregoID }) {
 
         if (tipoUsuario !== "empresa") {
             throw new AppError("Você não pode acessar candidatos!", 403);
@@ -91,7 +91,7 @@ class ApplicationService {
         const jobApplications = await Application.findByJobId(empregoID);
         return jobApplications;
     };
-    static async updateApplicationStatus({ userID, tipoUsuario, candidaturaID, status }) {
+    static async updateApplicationStatus({ userID, tipoConta, candidaturaID, status }) {
 
         if (tipoUsuario !== "empresa") {
             throw new AppError("credenciais inválidas!", 403);

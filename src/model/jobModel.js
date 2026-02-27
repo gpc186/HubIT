@@ -24,15 +24,21 @@ class Job {
         return result.affectedRows > 0;
     };
 
-    static async findById(id) {
+    static async updateStatus(empregoID, status){
+        const sql = `UPDATE jobs SET status = ? WHERE empregoID = ?`;
+        const result = await query(sql, [status, empregoID]);
+        return result.affectedRows > 0;
+    };
+
+    static async findById(empregoID) {
         const sql = `SELECT * FROM jobs WHERE empregoID = ?`;
-        const result = await query(sql, [id]);
+        const result = await query(sql, [empregoID]);
         return result[0] || null;
     };
 
-    static async findByCompany(company) {
+    static async findByCompany(empresaID) {
         const sql = `SELECT * FROM jobs WHERE empresaID = ? ORDER BY dataCriacao DESC`;
-        return await query(sql, [company]);
+        return await query(sql, [empresaID]);
     };
 
     static async findAll({nivel, tipoTrabalho, localizacao, status = 'ativo'} = {}){
@@ -61,9 +67,9 @@ class Job {
         return await query(sql, params);
     };
 
-    static async delete(id) {
+    static async delete(empregoID) {
         const sql = `DELETE FROM jobs WHERE empregoID = ?`;
-        const result = await query(sql, [id]);
+        const result = await query(sql, [empregoID]);
         return result.affectedRows > 0;
     };
 };
