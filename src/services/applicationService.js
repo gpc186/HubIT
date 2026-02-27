@@ -4,21 +4,7 @@ const Job = require('../model/jobModel');
 const Application = require('../model/applicationModel');
 
 class ApplicationService {
-    static async applyToJob({ empregoID,
-        userID,
-        curriculoID,
-        candidato_nome,
-        candidato_email,
-        candidato_telefone,
-        candidato_localizacao,
-        candidato_areaAtuacao,
-        candidato_nivelExperiencia,
-        candidato_linkedin,
-        candidato_github,
-        vaga_titulo,
-        vaga_empresaNome,
-        vaga_localizacao,
-        vaga_area }) {
+    static async applyToJob({ empregoID, userID, curriculoID }) {
 
         const job = await Job.findById(empregoID);
         if (!job) {
@@ -40,19 +26,19 @@ class ApplicationService {
                 empregoID,
                 userID,
                 curriculoID,
-                status: APPLICATION_STATUS.PENDENTE,
-                candidato_nome,
-                candidato_email,
-                candidato_telefone,
-                candidato_localizacao,
-                candidato_areaAtuacao,
-                candidato_nivelExperiencia,
-                candidato_linkedin,
-                candidato_github,
-                vaga_titulo,
-                vaga_empresaNome,
-                vaga_localizacao,
-                vaga_area
+                vaga_titulo: job.titulo,
+                vaga_empresaNome: job.empresaNome,
+                vaga_localizacao: job.localizacao,
+                vaga_area: job.area,
+                candidato_nome: userResume.nome,
+                candidato_email: userResume.email,
+                candidato_telefone: userResume.telefone,
+                candidato_localizacao: userResume.localizacao,
+                candidato_areaAtuacao: userResume.areaAtuacao,
+                candidato_nivelExperiencia: userResume.nivelExperiencia,
+                candidato_linkedin: userResume.linkedin,
+                candidato_github: userResume.github,
+                status: APPLICATION_STATUS.PENDENTE
             });
 
             return applicationID;
@@ -121,12 +107,12 @@ class ApplicationService {
         if (application.status === APPLICATION_STATUS.PENDENTE && status !== APPLICATION_STATUS.EM_ANALISE) {
             throw new AppError("Não se é possivel pular etapas da aplicação!", 409);
         };
-        if (application.status === APPLICATION_STATUS.EM_ANALISE && ![ APPLICATION_STATUS.APROVADO, APPLICATION_STATUS.REJEITADO ].includes(status)) {
+        if (application.status === APPLICATION_STATUS.EM_ANALISE && ![APPLICATION_STATUS.APROVADO, APPLICATION_STATUS.REJEITADO].includes(status)) {
             throw new AppError("Não é possivel voltar o status da aplicação!", 409);
         };
 
         await Application.updateStatus(candidaturaID, status);
-        
+
         return { candidaturaID, status }
     };
 

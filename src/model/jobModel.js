@@ -1,11 +1,11 @@
 const { query } = require('../config/database');
 
 class Job {
-    static async create({empresaID, empresaNome, imgEmpresa, qtdFuncionario, titulo, descricao, area, nivel, tipoContrato, cargaHoraria, mediaSalario, localizacao, requisitos, diferenciais, beneficios, corDestaque}){
+    static async create({empresaID, empresaNome, imgEmpresa, qtdFuncionario, titulo, descricao, area, nivel, tipoContrato, cargaHoraria, mediaSalario, localizacao, requisitos, diferenciais, beneficios, corDestaque, status}){
         const sql = `INSERT INTO jobs 
-        (empresaID, empresaNome, imgEmpresa, qtdFuncionario, titulo, descricao, area, nivel, tipoContrato, cargaHoraria, mediaSalario, localizacao, requisitos, diferenciais, beneficios, corDestaque)
+        (empresaID, empresaNome, imgEmpresa, qtdFuncionario, titulo, descricao, area, nivel, tipoContrato, cargaHoraria, mediaSalario, localizacao, requisitos, diferenciais, beneficios, corDestaque, status)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-        const result = await query(sql, [empresaID, empresaNome, imgEmpresa, qtdFuncionario, titulo, descricao, area, nivel, tipoContrato, cargaHoraria, mediaSalario, localizacao, requisitos, diferenciais, beneficios, corDestaque]);
+        const result = await query(sql, [empresaID, empresaNome, imgEmpresa, qtdFuncionario, titulo, descricao, area, nivel, tipoContrato, cargaHoraria, mediaSalario, localizacao, requisitos, diferenciais, beneficios, corDestaque, status]);
         return result.insertId;
     };
 
