@@ -12,7 +12,7 @@ let filtrosAtuais = {}; // Armazena os filtros aplicados
 function mostrarSkeletonsVagas(quantidade = 5) {
     const container = document.getElementById('empregosContainer');
     if (!container) return;
-    
+
     let html = '';
     for (let i = 0; i < quantidade; i++) {
         html += `
@@ -151,7 +151,7 @@ function ordenarEmpregoPorData(empregos) {
         // Converte as datas para timestamp
         const dataA = converterDataParaTimestamp(a.dataCriacao);
         const dataB = converterDataParaTimestamp(b.dataCriacao);
-        
+
         // Ordem decrescente (mais recente primeiro)
         return dataB - dataA;
     });
@@ -162,21 +162,21 @@ function ordenarEmpregoPorData(empregos) {
  */
 function converterDataParaTimestamp(data) {
     if (!data) return 0;
-    
+
     // Se já é um timestamp ou número
     if (typeof data === 'number') return data;
-    
+
     // Se é uma string de data ISO (2025-10-15T19:42:56.155Z)
     if (data.includes('T') && data.includes('Z')) {
         return new Date(data).getTime();
     }
-    
+
     // Se é formato DD/MM/YYYY
     if (data.includes('/')) {
         const [dia, mes, ano] = data.split('/');
-        return new Date(`${ano}-${mes}-${dia}`).getTime();
+        return new Date(`${dia}-${mes}-${ano}`);
     }
-    
+
     // Tenta converter diretamente
     const timestamp = new Date(data).getTime();
     return isNaN(timestamp) ? 0 : timestamp;
@@ -212,7 +212,7 @@ async function carregarPagina() {
             return;
         }
 
-        if (usuarioAtual.tipoConta === "empresa"){
+        if (usuarioAtual.tipoConta === "empresa") {
             alert("Você não pode ver empregos! XD")
             window.location.href = '/'
             return;
@@ -257,10 +257,10 @@ function atualizarPerfil(usuarioAtual) {
             weatherIconImg.src = ("assets/img/svg/sun-svgrepo-com.svg")
             mensagemGreeting.innerHTML = `Bom dia, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
         } else if (dataHours < 18) {
-            weatherIconImg.src = ("assets/img/svg/partly-cloudy-svgrepo-com.svg") 
+            weatherIconImg.src = ("assets/img/svg/partly-cloudy-svgrepo-com.svg")
             mensagemGreeting.innerHTML = `Boa tarde, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
         } else {
-            weatherIconImg.src = ("assets/img/svg/moon-svgrepo-com.svg") 
+            weatherIconImg.src = ("assets/img/svg/moon-svgrepo-com.svg")
             mensagemGreeting.innerHTML = `Boa noite, <span style="color:#106083; font-family: Codec;">${nome}!</span> <br> Aqui estão suas oportunidades de hoje`;
         }
     }
@@ -275,7 +275,7 @@ function atualizarPerfil(usuarioAtual) {
  */
 async function carregarCurriculosUsuario() {
     const userID = localStorage.getItem('userID');
-    
+
     if (!userID) return;
 
     try {
@@ -286,7 +286,7 @@ async function carregarCurriculosUsuario() {
 
         if (resposta.ok) {
             const dados = await resposta.json();
-            
+
             if (dados.ok && dados.curriculos) {
                 curriculosUsuario = dados.curriculos;
                 console.log(`${curriculosUsuario.length} currículos carregados`);
@@ -309,7 +309,7 @@ async function carregarCurriculosUsuario() {
  */
 function preencherSelectCurriculos(empregoID) {
     const select = document.getElementById(`curriculoSelect${empregoID}`);
-    
+
     if (!select) {
         console.error('Select não encontrado para emprego:', empregoID);
         return;
@@ -321,11 +321,11 @@ function preencherSelectCurriculos(empregoID) {
     // Verifica se há currículos
     if (!curriculosUsuario || curriculosUsuario.length === 0) {
         select.innerHTML = '<option value="" selected disabled>Você não possui currículos cadastrados</option>';
-        
+
         // Adiciona mensagem informativa no modal
         const selectContainer = select.parentElement;
         let avisoDiv = selectContainer.querySelector('.aviso-sem-curriculo');
-        
+
         if (!avisoDiv) {
             avisoDiv = document.createElement('div');
             avisoDiv.className = 'aviso-sem-curriculo alert alert-warning mt-2';
@@ -338,7 +338,7 @@ function preencherSelectCurriculos(empregoID) {
             `;
             selectContainer.appendChild(avisoDiv);
         }
-        
+
         return;
     }
 
@@ -346,14 +346,14 @@ function preencherSelectCurriculos(empregoID) {
     curriculosUsuario.forEach(curriculo => {
         const option = document.createElement('option');
         option.value = curriculo.curriculoID;
-        
+
         // Monta descrição da opção
         let descricao = curriculo.titulo;
-        
+
         if (curriculo.experiencias && curriculo.experiencias.length > 0) {
             descricao += ` (${curriculo.experiencias.length} exp.)`;
         }
-        
+
         option.textContent = descricao;
         select.appendChild(option);
     });
@@ -396,7 +396,7 @@ async function enviarCandidatura(empregoID) {
 
             // Mostra mensagem de sucesso
             alert('Candidatura enviada com sucesso!');
-            
+
             // Confete de celebração após enviar curriculo
             if (typeof confetti !== 'undefined') {
                 confetti({
@@ -421,7 +421,7 @@ async function enviarCandidatura(empregoID) {
  */
 function inicializarFiltros() {
     const filtroInputs = document.querySelectorAll('#filtroArea, #filtroLocalizacao, #filtroContrato, #filtroTrabalho, #salarioMin, #salarioMax, #filtroNivelEx');
-    
+
     filtroInputs.forEach(element => {
         if (element) {
             element.addEventListener('keypress', (e) => {
@@ -440,7 +440,7 @@ function inicializarFiltros() {
  */
 async function carregarEmpregos(filtros = {}) {
     const container = document.getElementById('empregosContainer');
-    
+
     if (!container) {
         console.error('Container empregosContainer não encontrado!');
         return;
@@ -450,7 +450,7 @@ async function carregarEmpregos(filtros = {}) {
 
     try {
         const userID = localStorage.getItem('userID');
-        
+
         if (!userID) {
             container.innerHTML = '<div class="loading">Por favor, faça login primeiro.</div>';
             return;
@@ -478,7 +478,7 @@ async function carregarEmpregos(filtros = {}) {
         }
 
         const dadosEmprego = await response.json();
-        
+
         if (dadosEmprego.ok && dadosEmprego.empregos && dadosEmprego.empregos.length > 0) {
             const propostas = dadosEmprego.empregos.map((emprego, index) => ({
                 id: emprego.empregoID || index + 1,
@@ -511,7 +511,7 @@ async function carregarEmpregos(filtros = {}) {
         } else {
             container.innerHTML = '<div class="loading">:( Nenhuma vaga encontrada.</div>';
         }
-        
+
         atualizarFiltrosAtivos(filtros);
 
     } catch (error) {
@@ -525,12 +525,12 @@ async function carregarEmpregos(filtros = {}) {
  */
 function renderizarPropostas(propostas) {
     const container = document.getElementById('empregosContainer');
-    
+
     if (!container) {
         console.error('Container empregosContainer não encontrado!');
         return;
     }
-    
+
     container.innerHTML = '';
 
     if (!propostas || propostas.length === 0) {
@@ -541,7 +541,7 @@ function renderizarPropostas(propostas) {
     propostas.forEach((proposta) => {
         const postCard = document.createElement('div');
         postCard.className = 'post-card fade-in-content';
-        
+
         postCard.innerHTML = `
             <div class="post-header">
                 <div class="post-avatar"><img src="${proposta.imgEmpresa}" onerror="this.src='https://via.placeholder.com/60'"></div>
@@ -559,11 +559,15 @@ function renderizarPropostas(propostas) {
                 <span>Status: ${proposta.status}</span>
             </div>
             <div class="post-actions">
-                <div class="new-button">Oportunidade nova!</div>
+            ${(() => {
+                const ts = converterDataParaTimestamp(proposta.dataCriacao);
+                const diffDias = (Date.now() - ts) / (1000 * 60 * 60 * 24);
+                return (ts && diffDias <= 2) ? '<div class="new-button">Oportunidade nova!</div>' : '';
+            })()}
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVagaEmprego${proposta.id}" onclick="preencherSelectCurriculos(${proposta.id})">Saber mais</button>
             </div>
         `;
-        
+
         container.appendChild(postCard);
 
         // Criar Modal para cada proposta
@@ -572,7 +576,7 @@ function renderizarPropostas(propostas) {
         modal.id = `modalVagaEmprego${proposta.id}`;
         modal.setAttribute('tabindex', '-1');
         modal.setAttribute('aria-hidden', 'true');
-        
+
         modal.innerHTML = `
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
@@ -642,7 +646,7 @@ function renderizarPropostas(propostas) {
                 </div>
             </div>
         `;
-        
+
         document.body.appendChild(modal);
     });
 }
@@ -652,7 +656,7 @@ function renderizarPropostas(propostas) {
  */
 function aplicarFiltros() {
     const filtros = {};
-    
+
     const area = document.getElementById('filtroArea');
     const localizacao = document.getElementById('filtroLocalizacao');
     const contrato = document.getElementById('filtroContrato');
@@ -692,7 +696,7 @@ function limparFiltros() {
     if (salMin) salMin.value = '';
     if (salMax) salMax.value = '';
     if (nivel) nivel.value = '';
-    
+
     carregarEmpregos();
 }
 
@@ -701,9 +705,9 @@ function limparFiltros() {
  */
 function atualizarFiltrosAtivos(filtros) {
     const container = document.getElementById('activeFiltros');
-    
+
     if (!container) return;
-    
+
     if (Object.keys(filtros).length === 0) {
         container.innerHTML = '';
         return;
@@ -745,7 +749,7 @@ function removerFiltro(key) {
     if (elemento) {
         elemento.value = '';
     }
-    
+
     aplicarFiltros();
 }
 
