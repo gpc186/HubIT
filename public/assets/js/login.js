@@ -47,10 +47,10 @@ function registrarNovoUsuario() {
 	};
 
 	// Verifica regras de senha
-	const senhaForte = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+	const senhaForte = /^(?=.*[A-Z])(?=.*\d).{5,}$/;
 
 	if (!senhaForte.test(passwd)) {
-		alert('[Senha fraca] Sua senha precisa ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais.');
+		alert('[Senha fraca] Sua senha precisa ter pelo menos 5 caracteres, incluindo letras maiúsculas, e números.');
 		return;
 	}
 
