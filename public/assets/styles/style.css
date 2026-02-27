@@ -56,6 +56,27 @@ main {
     background-color: #F8F7F2;
 }
 
+.rowr{
+    display: flex;
+    width: 100dvw;
+    height: auto;
+
+    background-color: #F8F7F2;
+
+    align-items: center;
+    justify-content: center;
+
+    column-gap: 20px;
+}
+
+main .hr-custom{
+    margin: auto !important;
+    width: 85%;
+    border: #70707088 solid 2px !important;
+
+    margin-top: 80px !important;
+}
+
 header{
 
     backdrop-filter: blur(7px);
@@ -76,13 +97,46 @@ a{
     height: auto;
     background-color: #F8F7F2;
 }
-@media (max-width: 768px) {
-    .row{
-        flex-wrap: nowrap !important;
+
+@media (max-width: 1368px){
+    .main-block-1 img{
+        display: none !important;
     }
-    
+
+    .rowr{
+        margin-top: 70px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        row-gap: 50px;
+    }
+
+    .main-block-2{
+        width: 55% !important;
+        height: auto !important;
+    }
+
     .login-block{
-        width: 60% !important;
+        width: 100% !important;
+    }
+
+    input{
+        padding: 15px !important;
+    }
+
+}
+
+@media (max-width: 800px){
+    .text-login-block h1{
+        font-size: 39pt !important;
+        line-height: 45px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .rowr{
+        flex-wrap: nowrap !important;
     }
 
     .plans-content{
@@ -99,6 +153,20 @@ a{
 
     .section-block-img-1-steps{
         margin-right: 0px !important;
+    }
+
+    .main-block-2{
+        width: 60% !important;
+    }
+
+    .main-block-1{
+        display: block !important;
+        width: 80% !important;
+    }
+
+    .text-login-block h1{
+        width: auto !important;
+        height: 140px;
     }
 }
 
@@ -150,6 +218,12 @@ a{
 
     .forgot{
         margin: 0 !important;
+    }
+}
+
+@media (max-width: 568px){
+    .text-login-block{
+        display: none !important;
     }
 }
 
@@ -359,8 +433,8 @@ li a {
 
     flex-direction: column;
 
-    width: 390px;
-    height: auto;
+    width: 490px;
+    height: 65%;
     border: #70707091 solid 2px;
     background-color: #f8f7f200;
 
@@ -381,18 +455,26 @@ li a {
 .main-block-1 {
     display: flex;
     flex-direction: column;
-    width: 50%; 
+    width: 60% !important; 
 
     align-items: center;
     justify-content: center;
 }
 
+.main-block-1 img{
+    display: flex;
+    align-self: flex-end;
+    margin-right: 120px;
+}
+
 .main-block-2 {
     display: flex;
     
+    width: 40%;
     height: 750px;
 
     justify-content: start;
+    align-items: center;
 }
 
 .main-block-2 img {
@@ -416,13 +498,23 @@ h3 {
 }
 
 .text-login-block {
-    text-align: center;
+    text-align: start;
 
     margin-bottom: 30px;
 }
 
 .text-login-block h1 {
-    line-height: 35px;
+    width: 700px;
+    font-size: 55pt;
+    line-height: 60px;
+}
+
+.text-login-block h2 {
+    width: 540px;
+    font-size: 20pt !important;
+    line-height: 25px;
+
+    margin-top: 30px;
 }
 
 .login-block-enter {
@@ -445,6 +537,47 @@ h3 {
     font-weight: lighter;
 }
 
+.login-block p{
+
+    color: #4d4d4d;
+    font-family: Codec;
+    font-size: 24.5pt;
+    font-weight: lighter;
+    margin: 0;
+    
+}
+
+.login-block hr{
+    width: 90%;
+    border: #70707088 solid 1px !important;
+}
+
+.login-block span{
+    color: #2F6D88;
+    font-family: Codec;
+    font-size: 22pt;
+    font-weight: bold;
+}
+
+.login-block-text{
+    display: flex;
+    width: 100%;
+    height: auto;
+
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 25px;
+    padding-right: 25px;
+
+}
+
+.login-block-text img{
+    width: 30px;
+    height: 30px;
+
+    opacity: 70%;
+}
+
 .login-block-enter:hover{
     transform: scale(1.006);
 }
@@ -455,7 +588,7 @@ h3 {
 
 input {
     width: 90%;
-    height: 19%;
+    height: 12%;
 
     border-radius: 15px;
     border: #70707079 solid 2px;
