@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../model/userModel');
 const { generateAccessToken, generateRefreshToken, verifyRefreshToken } = require('../utils/tokenUtil');
+const AppError = require('../utils/AppError');
 
 
 class AuthService {
@@ -8,7 +9,7 @@ class AuthService {
         const userExists = await User.findByEmail(email);
 
         if (userExists) {
-            throw new Error("Email já cadastrado!");
+            throw new AppError("Email já cadastrado!", 400);
         };
 
         const passwordHash = await bcrypt.hash(senha, 10);
@@ -21,12 +22,12 @@ class AuthService {
     static async login({ email, passwd }) {
         const user = await User.findByEmail(email);
         if (!user) {
-            throw new Error('Usuário não foi encontrado!');
+            throw new AppError('Usuário não foi encontrado!', 404);
         };
 
         const validLogin = await bcrypt.compare(passwd, user.passwd);
         if (!validLogin) {
-            throw new Error('Credenciais inválidos!');
+            throw new AppError('Credenciais inválidos!', 401);
         };
         const accessToken = generateAccessToken({
             userID: user.userID,
@@ -57,17 +58,17 @@ class AuthService {
 
             const user = await User.findById(userID);
             if (!user) {
-                throw new Error("Usuário não encontrado!");
+                throw new AppError("Usuário não encontrado!", 404);
             };
 
             const oldRefreshHash = await User.getRefreshToken(userID);
             if (!oldRefreshHash || !oldRefreshHash.refresh_token_hash) {
-                throw new Error("Refresh token inexistente!");
+                throw new AppError("Refresh token inexistente!", 401);
             }
 
             const validRefreshToken = await bcrypt.compare(refreshToken, oldRefreshHash.refresh_token_hash);
             if (!validRefreshToken) {
-                throw new Error("Token não válido!");
+                throw new AppError("Token não válido!", 403);
             };
 
             const accessToken = generateAccessToken({
@@ -77,14 +78,14 @@ class AuthService {
 
             return accessToken;
         } catch (error) {
-            throw new Error("Refresh inválido!");
+            throw new AppError("Refresh inválido!", 403);
         };
     };
 
     static async logout({ userID }) {
         const user = await User.findById(userID);
         if (!user) {
-            throw new Error("Usuário não foi encontrado!");
+            throw new AppError("Usuário não foi encontrado!", 404);
         };
 
         await User.clearRefreshToken(userID);
