@@ -1180,6 +1180,9 @@ footer{
             width: 20%;
             flex-direction: column;
             gap: 8px;
+
+            position: sticky;
+            top: 90px;
         }
 
         .news-card {
