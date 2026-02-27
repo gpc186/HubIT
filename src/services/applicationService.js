@@ -1,7 +1,5 @@
-const User = require('../model/userModel');
-const User_data = require('../model/userNormalDataModel');
+const { JOB_STATUS, APPLICATION_STATUS } = require('../constants/status.constants');
 const Resume = require('../model/resumeModel');
-const Company_data = require('../model/userCompanyDataModel');
 const Job = require('../model/jobModel');
 const Application = require('../model/applicationModel');
 
@@ -24,51 +22,47 @@ class ApplicationService {
 
         const job = await Job.findById(empregoID);
         if (!job) {
-            throw new Error('Não foi possivel localizar o emprego!');
+            throw new AppError('Não foi possivel localizar o emprego!', 404);
         };
 
-        if (job.status !== "ativo") {
-            throw new Error('A vaga não está mais disponivel!');
-        };
-
-        const jobApplication = await Application.findByJobId(empregoID);
-        const userAlreadyApplied = await Application.findByUserId(userID);
-        if (jobApplication.userID === userAlreadyApplied.userID) {
-            throw new Error('Usuário já aplicou para a vaga');
+        if (job.status !== JOB_STATUS.ATIVA) {
+            throw new AppError('A vaga não está mais disponivel!', 404);
         };
 
         const userResume = await Resume.findById(curriculoID);
-        if (!userResume) {
-            throw new Error("O currículo não foi encontrado!");
-        }
-        const userResumeVerifier = await Resume.findByUserId(userID);
-        if (!userResumeVerifier) {
-            throw new Error("O currículo não foi encontrado!");
+
+        if (!userResume || userResume.userID !== userID) {
+            throw new AppError("O currículo não foi encontrado!", 404);
         }
 
-        if (userResume.userID !== userResumeVerifier.userID) {
-            throw new Error('O currículo não é seu!');
-        };
+        try {
+            const applicationID = await Application.create({
+                empregoID,
+                userID,
+                curriculoID,
+                status: APPLICATION_STATUS.PENDENTE,
+                candidato_nome,
+                candidato_email,
+                candidato_telefone,
+                candidato_localizacao,
+                candidato_areaAtuacao,
+                candidato_nivelExperiencia,
+                candidato_linkedin,
+                candidato_github,
+                vaga_titulo,
+                vaga_empresaNome,
+                vaga_localizacao,
+                vaga_area
+            });
 
-        const applicationID = await Application.create({
-            empregoID,
-            userID,
-            curriculoID,
-            candidato_nome,
-            candidato_email,
-            candidato_telefone,
-            candidato_localizacao,
-            candidato_areaAtuacao,
-            candidato_nivelExperiencia,
-            candidato_linkedin,
-            candidato_github,
-            vaga_titulo,
-            vaga_empresaNome,
-            vaga_localizacao,
-            vaga_area
-        });
+            return applicationID;
+        } catch (error) {
+            if (error.code === 'ER_DUP_ENTRY') {
+                throw new AppError('Usuário já aplicou para essa vaga', 409);
+            };
 
-        return applicationID;
+            throw error;
+        }
     };
     // TODO: filtros de applicações
     static async getUserApplications({ userID }) {
@@ -82,16 +76,16 @@ class ApplicationService {
     static async getCandidatesByJobId({ userID, tipoUsuario, empregoID }) {
 
         if (tipoUsuario !== "empresa") {
-            throw new Error("Você não pode acessar candidatos!");
+            throw new AppError("Você não pode acessar candidatos!", 403);
         };
 
-        const job = Job.findById(empregoID);
+        const job = await Job.findById(empregoID);
 
         if (!job) {
-            throw new Error("O emprego não foi encontrado!");
+            throw new AppError("O emprego não foi encontrado!", 404);
         };
         if (job.empresaID !== userID) {
-            throw new Error("O emprego não te pertence!");
+            throw new AppError("O emprego não te pertence!", 403);
         };
 
         const jobApplications = await Application.findByJobId(empregoID);
@@ -100,82 +94,81 @@ class ApplicationService {
     static async updateApplicationStatus({ userID, tipoUsuario, candidaturaID, status }) {
 
         if (tipoUsuario !== "empresa") {
-            throw new Error("credenciais inválidas!");
+            throw new AppError("credenciais inválidas!", 403);
         };
 
         const application = await Application.findById(candidaturaID);
 
         if (!application) {
-            throw new Error("A candidatura não existe!");
+            throw new AppError("A candidatura não existe!", 404);
         };
         if (application.empresaID !== userID) {
-            throw new Error("A vaga não é sua!");
+            throw new AppError("A vaga não é sua!", 403);
         };
-        if (application.status === 'aprovado' || application.status === 'rejeitado' || application.status === 'cancelado') {
-            throw new Error("Não é mais possivel alterar o status!");
+        if (application.status === APPLICATION_STATUS.APROVADO || application.status === APPLICATION_STATUS.REJEITADO || application.status === APPLICATION_STATUS.CANCELADO) {
+            throw new AppError("Não é mais possivel alterar o status!", 409);
         };
 
         const job = await Job.findById(application.empregoID);
 
         if (!job) {
-            throw new Error("Emprego não encontrado ou não existe mais!");
+            throw new AppError("Emprego não encontrado ou não existe mais!", 404);
         };
-        if (job.status !== 'ativo') {
-            throw new Error("Emprego está encerrado ou não existe mais!");
+        if (job.status !== JOB_STATUS.ATIVA) {
+            throw new AppError("Emprego está encerrado ou não existe mais!", 404);
         };
 
-        if (application.status === "pendente" && status !== 'em_analise') {
-            throw new Error("Não se é possivel pular etapas da aplicação!");
+        if (application.status === APPLICATION_STATUS.PENDENTE && status !== APPLICATION_STATUS.EM_ANALISE) {
+            throw new AppError("Não se é possivel pular etapas da aplicação!", 409);
         };
-        if (application.status === 'em_analise' && status !== 'aprovado' && status !== 'rejeitado') {
-            throw new Error("Não é possivel voltar o status da aplicação!");
+        if (application.status === APPLICATION_STATUS.EM_ANALISE && ![ APPLICATION_STATUS.APROVADO, APPLICATION_STATUS.REJEITADO ].includes(status)) {
+            throw new AppError("Não é possivel voltar o status da aplicação!", 409);
         };
 
         await Application.updateStatus(candidaturaID, status);
+        
         return { candidaturaID, status }
     };
 
     static async cancelApplication({ userID, tipoUsuario, candidaturaID }) {
         if (tipoUsuario !== 'usuario') {
-            throw new Error("Credenciais inválidos!");
+            throw new AppError("Credenciais inválidos!", 403);
         };
 
         const application = await Application.findById(candidaturaID);
 
         if (!application) {
-            throw new Error("A candidatura não foi encontrada!");
+            throw new AppError("A candidatura não foi encontrada!", 404);
         };
         if (application.userID !== userID) {
-            throw new Error("Você não pode cancelar esse currículo!");
+            throw new AppError("Você não pode cancelar esse currículo!", 403);
         };
-        if (application.status === 'cancelado' || application.status === 'aprovado' || application.status === 'rejeitado') {
-            throw new Error("Não é mais possivel alterar o status da aplicação!");
+        if (application.status === APPLICATION_STATUS.CANCELADO || application.status === APPLICATION_STATUS.APROVADO || application.status === APPLICATION_STATUS.REJEITADO) {
+            throw new AppError("Não é mais possivel alterar o status da aplicação!", 409);
         };
 
-        const status = 'cancelada';
-
-        await Application.updateStatus(candidaturaID, status);
+        await Application.updateStatus(candidaturaID, APPLICATION_STATUS.CANCELADO);
 
         return { candidaturaID, status };
     };
 
-    static async getJobApplications({userID, tipoUsuario, empregoID}){
+    static async getJobApplications({ userID, tipoUsuario, empregoID }) {
         if (tipoUsuario !== 'empresa') {
-            throw new Error("Credenciais inválidos!");
+            throw new AppError("Credenciais inválidos!", 403);
         };
 
         const myJob = await Job.findById(empregoID);
-        if(!myJob){
-            throw new Error("A vaga não foi encontrada!");
+        if (!myJob) {
+            throw new AppError("A vaga não foi encontrada!", 404);
         };
-        if(myJob.empresaID !== userID){
-            throw new Error("A vaga não é sua!");
+        if (myJob.empresaID !== userID) {
+            throw new AppError("A vaga não é sua!", 403);
         };
 
         const jobApplications = await Application.findByJobId(empregoID);
         return jobApplications;
     };
-    
+
 }
 
 module.exports = ApplicationService

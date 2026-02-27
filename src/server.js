@@ -11,6 +11,7 @@ const empregosRoute = require('./middlewares/emprego');
 const portfoliosRoute = require('./middlewares/portfolio');
 const curriculosRoute = require('./middlewares/curriculo');
 const candidaturasRoute = require('./middlewares/candidatura');
+const errorHandler = require('./middlewares/errorHandler')
 
 // Ativa requisitos para funcionamento de json e path
 app.use(express.static(path.join(__dirname, 'public')));
@@ -23,7 +24,8 @@ app.use('/api/usuario', userData);
 app.use('/api/emprego', empregosRoute);
 app.use('/api/portfolio', portfoliosRoute);
 app.use('/api/curriculo', curriculosRoute);
-app.use('/api/candidatura', candidaturasRoute)
+app.use('/api/candidatura', candidaturasRoute);
+app.use(errorHandler);
 
 // Página Inicial que pega login.html
 app.get('/', (req, res)=>{

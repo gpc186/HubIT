@@ -8,7 +8,7 @@ class AuthService {
         const userExists = await User.findByEmail(email);
         
         if (userExists){
-            throw new Error("Email já cadastrado!");
+            throw new AppError("Email já cadastrado!", );
         };
 
         const passwordHash = await bcrypt.hash(senha, 10);
@@ -22,12 +22,12 @@ class AuthService {
 
         const user = await User.findByEmail(email);;
         if(!user) {
-            throw new Error('Usuário não foi encontrado!');
+            throw new AppError('Usuário não foi encontrado!');
         };
 
         const validLogin = await bcrypt.compare(passwd, user.passwd);
         if(!validLogin){
-            throw new Error('Credenciais inválidos!');
+            throw new AppError('Credenciais inválidos!');
         };
 
         const token = jwt.sign({userID: user.userID, tipoUsuario: user.tipoUsuario}, process.env.JWT_SECRET, {expiresIn: "1d"});
