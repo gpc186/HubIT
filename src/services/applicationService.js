@@ -2,6 +2,7 @@ const { JOB_STATUS, APPLICATION_STATUS } = require('../constants/status.constant
 const Resume = require('../model/resumeModel');
 const Job = require('../model/jobModel');
 const Application = require('../model/applicationModel');
+const AppError = require('../utils/AppError');
 
 class ApplicationService {
     static async applyToJob({ empregoID, userID, curriculoID }) {
@@ -61,7 +62,7 @@ class ApplicationService {
 
     static async getCandidatesByJobId({ userID, tipoConta, empregoID }) {
 
-        if (tipoUsuario !== "empresa") {
+        if (tipoConta !== "empresa") {
             throw new AppError("Você não pode acessar candidatos!", 403);
         };
 
@@ -77,9 +78,28 @@ class ApplicationService {
         const jobApplications = await Application.findByJobId(empregoID);
         return jobApplications;
     };
+
+    static async getApllicationsByJobId({ userID, tipoConta, empregoID }){
+        if(tipoConta !== 'empresa'){
+            throw new AppError('credenciais inválidas!', 403);
+        };
+
+        const job = await Job.findById(empregoID);
+
+        if(!job){
+            throw new AppError("Não foi encontrado emprego!", 404);
+        };
+
+        if(job.empresaID !== userID){
+            throw new AppError("Você não tem permissão para ver os currículos!", 403);
+        };
+
+        return await Application.findByJobId(empregoID);
+    }
+
     static async updateApplicationStatus({ userID, tipoConta, candidaturaID, status }) {
 
-        if (tipoUsuario !== "empresa") {
+        if (tipoConta !== "empresa") {
             throw new AppError("credenciais inválidas!", 403);
         };
 
@@ -116,8 +136,8 @@ class ApplicationService {
         return { candidaturaID, status }
     };
 
-    static async cancelApplication({ userID, tipoUsuario, candidaturaID }) {
-        if (tipoUsuario !== 'usuario') {
+    static async cancelApplication({ userID, tipoConta, candidaturaID }) {
+        if (tipoConta !== 'usuario') {
             throw new AppError("Credenciais inválidos!", 403);
         };
 
@@ -138,8 +158,8 @@ class ApplicationService {
         return { candidaturaID, status };
     };
 
-    static async getJobApplications({ userID, tipoUsuario, empregoID }) {
-        if (tipoUsuario !== 'empresa') {
+    static async getJobApplications({ userID, tipoConta, empregoID }) {
+        if (tipoConta !== 'empresa') {
             throw new AppError("Credenciais inválidos!", 403);
         };
 

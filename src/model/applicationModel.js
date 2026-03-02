@@ -55,6 +55,11 @@ class Application {
         return result.insertId;
     };
 
+    static async rejectAllOpenByJob(empregoID){
+        const sql = `UPDATE applications SET status = 'rejeitado' WHERE empregoID = ? AND status IN ('pendente', 'em_analise')`;
+        return await query(sql, [empregoID]);
+    }
+
     static async findById(candidaturaID){
         const sql = `SELECT * FROM application WHERE candidaturaID = ? ORDER BY dataCandidatura DESC`;
         return await query(sql, [candidaturaID]);
