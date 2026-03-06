@@ -1,7 +1,7 @@
 const { query } = require('../config/database');
 
 class Job {
-    static async create({empresaID, empresaNome, imgEmpresa, qtdFuncionario, titulo, descricao, area, nivel, tipoContrato, cargaHoraria, mediaSalario, localizacao, requisitos, diferenciais, beneficios, corDestaque, status}){
+    static async create({ empresaID, empresaNome, imgEmpresa, qtdFuncionario, titulo, descricao, area, nivel, tipoContrato, cargaHoraria, mediaSalario, localizacao, requisitos, diferenciais, beneficios, corDestaque, status }) {
         const sql = `INSERT INTO jobs 
         (empresaID, empresaNome, imgEmpresa, qtdFuncionario, titulo, descricao, area, nivel, tipoContrato, cargaHoraria, mediaSalario, localizacao, requisitos, diferenciais, beneficios, corDestaque, status)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
@@ -9,7 +9,7 @@ class Job {
         return result.insertId;
     };
 
-    static async update(id, {titulo, descricao, nivel, tipoContrato, tipoTrabalho, localizacao, mediaSalario, status}){
+    static async update(id, { titulo, descricao, nivel, tipoContrato, tipoTrabalho, localizacao, mediaSalario, status }) {
         const sql = `UPDATE jobs SET titulo = ?,
         descricao = ?,
         nivel = ?,
@@ -24,7 +24,7 @@ class Job {
         return result.affectedRows > 0;
     };
 
-    static async updateStatus(empregoID, status){
+    static async updateStatus(empregoID, status) {
         const sql = `UPDATE jobs SET status = ? WHERE empregoID = ?`;
         const result = await query(sql, [status, empregoID]);
         return result.affectedRows > 0;
@@ -41,31 +41,71 @@ class Job {
         return await query(sql, [empresaID]);
     };
 
-    static async findAll({nivel, tipoTrabalho, localizacao, status = 'ativo'} = {}){
+    static async findAll({
+        nivel,
+        tipoTrabalho,
+        localizacao,
+        area,
+        tipoContrato,
+        salarioMin,
+        salarioMax,
+        status = 'ativa',
+        orderBy = 'dataCriacao',
+        order = 'DESC',
+        limit = 20,
+        offset = 0
+    } = {}) {
+
         let sql = `SELECT * FROM jobs WHERE 1=1`;
-        let params = []
+        let params = [];
 
         if (status) {
             sql += ` AND status = ?`;
-            params.push(status)
+            params.push(status);
         }
+
         if (localizacao) {
             sql += ` AND localizacao LIKE ?`;
-            params.push(`%${localizacao}%`)
+            params.push(`%${localizacao}%`);
         }
+
         if (nivel) {
             sql += ` AND nivel = ?`;
-            params.push(nivel)
+            params.push(nivel);
         }
+
         if (tipoTrabalho) {
             sql += ` AND tipoTrabalho = ?`;
-            params.push(tipoTrabalho)
+            params.push(tipoTrabalho);
         }
 
-        sql += ` ORDER BY dataCriacao DESC`;
+        if (area) {
+            sql += ` AND area = ?`;
+            params.push(area);
+        }
+
+        if (tipoContrato) {
+            sql += ` AND tipoContrato = ?`;
+            params.push(tipoContrato);
+        }
+
+        if (salarioMin) {
+            sql += ` AND mediaSalario >= ?`;
+            params.push(salarioMin);
+        }
+
+        if (salarioMax) {
+            sql += ` AND mediaSalario <= ?`;
+            params.push(salarioMax);
+        }
+
+        sql += ` ORDER BY ${orderBy} ${order}`;
+
+        sql += ` LIMIT ? OFFSET ?`;
+        params.push(limit, offset);
 
         return await query(sql, params);
-    };
+    }
 
     static async delete(empregoID) {
         const sql = `DELETE FROM jobs WHERE empregoID = ?`;

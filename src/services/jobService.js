@@ -6,7 +6,7 @@ const Application = require('../model/applicationModel');
 class JobService {
     static async createJob({ userID, tipoConta, empresaNome, imgEmpresa, qtdFuncionario, titulo, descricao, area, nivel, tipoContrato, cargaHoraria, mediaSalario, localizacao, requisitos, diferenciais, beneficios, corDestaque }) {
         if (tipoConta !== "empresa") {
-            throw new AppError("Apenas empresas podem se candidatar!", 403);
+            throw new AppError("Apenas empresas podem criar vagas!", 403);
         };
 
         const empregoID = await Job.create({
@@ -34,6 +34,34 @@ class JobService {
 
     static async getActiveJobs() {
         return await Job.findAll({ status: JOB_STATUS.ATIVA });
+    }
+
+    static async getJobById(empregoID) {
+        const job = await Job.findById(empregoID);
+
+        if (!job) {
+            throw new AppError("Vaga não encontrada!", 404);
+        }
+
+        return job;
+    };
+
+    static async searchJobs(filters) {
+
+        const allowedOrder = ['dataCriacao', 'mediaSalario', 'titulo'];
+
+        if (!allowedOrder.includes(filters.orderBy)) {
+            filters.orderBy = 'dataCriacao';
+        }
+
+        const jobs = await Job.findAll({
+            ...filters,
+            status: JOB_STATUS.ATIVA
+        });
+
+
+
+        return jobs;
     }
 
     static async getCompanyJobs({ userID, tipoConta }) {
@@ -87,7 +115,7 @@ class JobService {
             return obj;
         }, {});
 
-        if (Object.keys(filteredData).length() === 0) {
+        if (Object.keys(filteredData).length === 0) {
             throw new AppError("Não foi enviado nenhum campo válido!", 400);
         };
 
@@ -149,6 +177,8 @@ class JobService {
 
         return { empregoID, status };
     };
+
+
 }
 
 module.exports = JobService;
