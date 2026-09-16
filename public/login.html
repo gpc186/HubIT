@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="./assets/styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/styles/landing.css">
+    <script defer src="./assets/js/vendor/gsap.min.js"></script>
+    <script defer src="./assets/js/vendor/ScrollTrigger.min.js"></script>
+    <script defer src="./assets/js/landing.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
@@ -22,7 +26,7 @@
                         <img id="logo-animation" src="./assets/img/svg/Hubit_svg_logo.svg" alt="">
                     </div>
                 </a>
-                <a href="" class="d-lg-none ms-auto">
+                <a href="#email" class="d-lg-none ms-auto" onclick="focar()">
                     <div class="login-btn">
                         Login
                     </div>
@@ -91,7 +95,6 @@
         </nav>
     </header>
     <main>
-        <br><br><br><br>
         <div class="main-content-1 container-fluid">
             <div class="rowr">
                 <div class="col-md-6 col-12 main-block-1">
@@ -193,9 +196,7 @@
             </div>
         </div>
 
-        <div id="about"></div>
-        <div></div>
-        <section>
+        <section id="about">
             <div class="about">
                 <div class="about-steps-text">
                     <h1>Conheça o hubit</h1>
@@ -246,8 +247,7 @@
 
         <hr class="hr-custom">
 
-        <div id="slots"></div>
-        <section>
+        <section id="slots">
             <div class="about">
                 <div class="about-steps-text">
                     <h1>Slots</h1>
@@ -277,7 +277,6 @@
                                     Experimente agora
                                 </div>
                             </a>
-                            <div id="plans"></div>
                         </div>
                     </div>
                 </div>
@@ -286,7 +285,7 @@
 
         <hr class="hr-custom">
 
-        <section>
+        <section id="plans">
             <div class="about">
                 <h1>Planos</h1>
                 <h2> Começe hoje mesmo! <br>Selecione um plano hubit</h2>
@@ -299,18 +298,13 @@
                 </div>
 
                 <div class="plans-content">
-                    <div id="plansInd" class="plan1">
+                    <div id="plansInd" class="plan1 shine-plan">
                         <div class="plan1-content">
-                            <h1>8 bits</h1>
-                            <hr>
-                            <h2>Standard <span style="color: #2F6D88;">bits</span></h2>
-                            <h3>Grátis</h3>
+                            <div class="plan-heading"><h1>8 bits</h1><span class="plan-badge">Standard</span></div>
+                            <p class="plan-price">Grátis</p>
 
-                            <div class="plan-a-btn">
-                                Começar hoje
-                            </div>
+                            <button type="button" class="plan-a-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Começar hoje <span aria-hidden="true">↗</span></button>
 
-                            <br>
                             <div class="plan-content">
                                 <ul>
                                     <li>1 Slot de currículo</li>
@@ -323,16 +317,11 @@
                             </div>
                         </div>
                     </div>
-                    <div id="plansInd2" class="plan1">
+                    <div id="plansInd2" class="plan1 shine-plan">
                         <div class="plan1-content">
-                            <h1>64 bits</h1>
-                            <hr>
-                            <h2>Premium bits</span></h2>
-                            <h3>R$ 29.90 /Mês</h3>
-                            <div class="plan-a-btn-2">
-                                Experimente agora
-                            </div>
-                            <br>
+                            <div class="plan-heading"><h1>64 bits</h1><span class="plan-badge">Premium</span></div>
+                            <p class="plan-price">R$ 29,90 <span>/mês</span></p>
+                            <button type="button" class="plan-a-btn-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Experimente agora <span aria-hidden="true">↗</span></button>
                             <div class="plan-content">
                                 <ul>
                                     <li>Slots ilimitados</li>
@@ -344,16 +333,11 @@
                         </div>
                     </div>
                     <!--------------------------------------------------------------------------------------------------------------->
-                    <div id="plansEmp" class="plan1">
+                    <div id="plansEmp" class="plan1 shine-plan">
                         <div class="plan1-content">
-                            <h1>128 bits</h1>
-                            <hr>
-                            <h2>Premium bits</span></h2>
-                            <h3>Preço precisa ser combinado</h3>
-                            <div class="plan-a-btn-2">
-                                Contatar vendas
-                            </div>
-                            <br>
+                            <div class="plan-heading"><h1>128 bits</h1><span class="plan-badge">Empresarial</span></div>
+                            <p class="plan-price plan-price-custom">Preço precisa ser combinado</p>
+                            <a class="plan-a-btn-2" href="contact.html">Contatar vendas <span aria-hidden="true">↗</span></a>
                             <div class="plan-content">
                                 <ul>
                                     <li>1 Slot de currículo</li>
@@ -471,6 +455,11 @@
          * Escreve e apaga as palavras do array 'palavrasAlt' no elemento 'textAlt'.
          */
         function typeWriter() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                textAlt.textContent = 'futuro.';
+                setTimeout(typeWriter, 1300);
+                return;
+            }
             // Palavra atual a ser exibida
             const palavraAtual = palavrasAlt[palavraIndex];
 
