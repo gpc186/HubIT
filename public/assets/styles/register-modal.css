@@ -14,7 +14,7 @@
 #exampleModal .modal-header { padding: 22px 28px 14px; border: 0; }
 #exampleModal .register-eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--register-blue); font-size: 11px; font-weight: 700; letter-spacing: .14em; }
 #exampleModal .register-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--register-blue); box-shadow: 0 0 0 5px rgba(47, 109, 136, .08); }
-#exampleModal .btn-close { width: 32px; height: 32px; margin: 0; padding: 8px; border-radius: 9px; background-size: 12px; opacity: .55; }
+#exampleModal .btn-close { width: 32px; height: 32px; margin: 0 0 0 auto; padding: 8px; border-radius: 9px; background-size: 12px; opacity: .55; }
 #exampleModal .btn-close:hover { background-color: #e9f1f3; opacity: 1; }
 #exampleModal .modal-body { padding: 10px 28px 28px; text-align: left; }
 #exampleModal .register-intro { margin-bottom: 26px; }
@@ -37,6 +37,7 @@
 #exampleModal .radio-modal:checked + .account-option-surface { border-color: var(--register-blue); background: #eef5f7; box-shadow: 0 0 0 2px rgba(47, 109, 136, .11); }
 #exampleModal .radio-modal:focus-visible + .account-option-surface { outline: 3px solid #7ab5cf; outline-offset: 3px; }
 #exampleModal .account-option-icon { display: grid; place-items: center; width: 36px; height: 36px; flex: 0 0 36px; border-radius: 10px; background: #edf3f5; color: var(--register-blue); font-size: 21px; }
+#exampleModal .account-option-icon img { display: block; width: 19px; height: 19px; opacity: .65; }
 #exampleModal .account-option-copy { display: grid; min-width: 0; gap: 2px; }
 #exampleModal .account-option-copy strong { color: var(--register-ink); font-size: 14px; font-weight: 400; }
 #exampleModal .account-option-copy small { color: var(--register-muted); font-size: 11px; line-height: 1.25; }
