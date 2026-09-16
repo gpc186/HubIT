@@ -30,9 +30,9 @@ app.get('/', (req, res)=>{
 	res.status(200).sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// Página Contato que pega contact.html
+// Mantém o endereço antigo apontando para a seção de contato na landing.
 app.get('/contact', (req, res)=>{
-	res.status(200).sendFile(path.join(__dirname, 'public', 'contact.html'));
+	res.redirect(302, '/#contact');
 });
 
 // Página Perfil que pega pagina-de-perfil.html

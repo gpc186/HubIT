@@ -1,0 +1,78 @@
+/* Contact content from contact-page.css, scoped to the landing page. */
+.landing-contact { --contact-blue: #2f6d88; --contact-ink: #203f4d; --contact-muted: #66777d; --contact-line: #dce3e3; color: var(--contact-ink); }
+main > section.landing-contact { display: block; width: 100%; max-width: none; min-height: 0; margin: 0; padding: 0; background: #f8f7f2; text-align: left; }
+.landing-contact .shell { width: min(1180px, calc(100% - 80px)); margin-inline: auto; }
+.landing-contact h1, .landing-contact h2, .landing-contact p { margin: 0; font-family: Codec, Arial, sans-serif; }
+.landing-contact a { text-decoration: none; }
+.landing-contact img { display: block; max-width: 100%; }
+.landing-contact .contact-hero { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: clamp(40px,6vw,100px); padding-block: clamp(64px,7vw,110px); }
+.landing-contact .hero-copy, .landing-contact .contact-card { min-width: 0; }
+.landing-contact .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--contact-blue); font-size: 11px; letter-spacing: .16em; font-weight: bold; }
+.landing-contact .small-dot { width: 7px; height: 7px; background: var(--contact-blue); border-radius: 50%; box-shadow: 0 0 0 5px #2f6d880c; }
+.landing-contact h1 { max-width: 570px; font-weight: 400; font-size: clamp(38px,4vw,58px); letter-spacing: -.04em; line-height: 1.08; margin: 24px 0; }
+.landing-contact h1 span { color: var(--contact-blue); }
+.landing-contact .hero-description { max-width: 420px; font-size: 19px; color: var(--contact-muted); line-height: 1.65; }
+.landing-contact .text-link { display: inline-flex; align-items: center; gap: 18px; color: var(--contact-blue); font-size: 15px; margin-top: 24px; }
+.landing-contact .text-link:hover { text-decoration: underline; text-underline-offset: 5px; }
+.landing-contact .hero-note { display: flex; gap: 16px; align-items: center; margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--contact-line); font-size: 13px; color: var(--contact-muted); }
+.landing-contact .hero-note strong { font-weight: 400; color: var(--contact-ink); }
+.landing-contact .note-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: #e9eff0; flex-shrink: 0; }
+.landing-contact .note-icon img { width: 23px; }
+.landing-contact .contact-card { position: relative; isolation: isolate; overflow: hidden; padding: clamp(24px,3vw,40px); background: #285f77; color: white; border-radius: 26px; border: 1px solid #417d94; box-shadow: 0 24px 60px -30px #204d6260; }
+.landing-contact .contact-card::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(circle, #b4d7e660 1px, transparent 1.5px); background-size: 17px 17px; mask-image: linear-gradient(210deg,#000,transparent 45%); }
+.landing-contact .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.landing-contact .card-label { font-size: 10px; letter-spacing: .16em; color: #c6dce5; }
+.landing-contact .card-mark { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #ffffff38; border-radius: 50%; font-size: 22px; }
+.landing-contact .contact-card h2 { color: white !important; font-size: clamp(26px,2.3vw,32px) !important; font-weight: 400; letter-spacing: -.025em; line-height: 1.2; }
+.landing-contact .card-description { margin: 12px 0 30px; font-size: 15px; color: #cfdee5; }
+.landing-contact .contact-channel { display: flex; align-items: center; gap: 14px; padding: 20px 0; border-top: 1px solid #ffffff25; }
+.landing-contact .channel-icon { display: grid; place-items: center; width: 42px; height: 42px; background: #ffffff12; border: 1px solid #ffffff20; border-radius: 12px; flex-shrink: 0; }
+.landing-contact .channel-icon img { width: 21px; filter: brightness(0) invert(1); }
+.landing-contact .channel-content { min-width: 0; flex: 1; }
+.landing-contact .channel-label { display: block; margin-bottom: 4px; color: #c2d6df; font-size: 12px; }
+.landing-contact .channel-content a { color: white; font-size: clamp(14px,1.3vw,18px); overflow-wrap: anywhere; }
+.landing-contact .channel-content a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.landing-contact .copy-button { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; background: transparent; border: 1px solid transparent; border-radius: 9px; color: #d5e6ed; cursor: pointer; }
+.landing-contact .copy-button:hover { background: #ffffff12; border-color: #ffffff25; }
+.landing-contact .copy-button svg { width: 21px; }
+.landing-contact .button { min-height: 44px; display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; padding: 10px 22px; border-radius: 9px; background: var(--contact-blue); color: #fff; font-size: 15px; transition: background .2s, box-shadow .2s; }
+.landing-contact .button:hover { background: #245c74; box-shadow: 0 6px 18px -9px var(--contact-blue); }
+.landing-contact .card-cta { display: flex; justify-content: space-between; background: #f8f7f2; color: var(--contact-blue); margin-top: 22px; }
+.landing-contact .card-cta:hover { background: #fff; }
+.landing-contact .contact-status { min-height: 36px; margin-top: 16px; font-size: 11px; color: #d0e1e8; text-align: center; }
+.landing-contact .faq-section { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; padding-block: 64px 80px; border-top: 1px solid var(--contact-line); }
+.landing-contact .faq-intro h2 { margin: 18px 0; color: var(--contact-ink) !important; font-size: clamp(28px,3vw,38px) !important; line-height: 1.15; letter-spacing: -.03em; font-weight: 400; }
+.landing-contact .faq-intro p { max-width: 300px; color: var(--contact-muted); font-size: 16px; }
+.landing-contact .faq-list { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.landing-contact .faq-item { border: 1px solid var(--contact-line); border-radius: 14px; background: #fffefa; }
+.landing-contact .faq-item[open] { border-color: #a5c3cf; background: #f2f7f8; }
+.landing-contact .faq-item summary { display: flex; align-items: center; gap: 16px; padding: 22px; cursor: pointer; list-style: none; font-size: 16px; line-height: 1.4; }
+.landing-contact .faq-item summary::-webkit-details-marker { display: none; }
+.landing-contact .faq-number { color: #86a3af; font-size: 12px; }
+.landing-contact .faq-plus { margin-left: auto; color: var(--contact-blue); font-size: 22px; transition: transform .2s; }
+.landing-contact .faq-item[open] .faq-plus { transform: rotate(45deg); }
+.landing-contact .faq-answer { padding: 0 24px 24px 54px; font-size: 15px; line-height: 1.7; color: #536b75; overflow-wrap: anywhere; }
+.landing-contact .faq-answer a { color: var(--contact-blue); text-decoration: underline; text-underline-offset: 3px; }
+.landing-contact .contact-banner { display: flex; align-items: center; justify-content: space-between; gap: 24px; border: 1px solid #d4e2e7; background: #eaf1f3; border-radius: 18px; padding: 30px 36px; margin-bottom: 64px; }
+.landing-contact .contact-banner h2 { color: var(--contact-ink) !important; font-size: 24px !important; font-weight: 400; letter-spacing: -.02em; margin-top: 8px; }
+.landing-contact .contact-banner .button { flex-shrink: 0; }
+@media (max-width: 900px) {
+    .landing-contact .contact-hero { gap: 36px; }
+    .landing-contact .contact-channel { gap: 8px; }
+    .landing-contact .channel-icon { display: none; }
+    .landing-contact .faq-section { gap: 36px; }
+}
+@media (max-width: 700px) {
+    .landing-contact .shell { width: calc(100% - 40px); }
+    .landing-contact .contact-hero { grid-template-columns: 1fr; padding-block: 48px; }
+    .landing-contact h1 { max-width: 480px; }
+    .landing-contact .hero-note { margin-top: 28px; }
+    .landing-contact .contact-card { width: 100%; }
+    .landing-contact .channel-icon { display: grid; }
+    .landing-contact .faq-section { grid-template-columns: 1fr; padding-block: 40px; gap: 28px; }
+    .landing-contact .faq-intro p { max-width: none; }
+    .landing-contact .faq-item summary { padding: 18px; gap: 12px; font-size: 15px; }
+    .landing-contact .faq-answer { padding: 0 18px 20px; }
+    .landing-contact .contact-banner { flex-direction: column; align-items: flex-start; padding: 24px; margin-bottom: 40px; }
+}
+@media (max-width: 360px) { .landing-contact .channel-icon { display: none; } .landing-contact .contact-card { padding: 22px; } }

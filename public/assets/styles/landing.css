@@ -8,6 +8,7 @@
 }
 
 html, body { overflow-x: clip; }
+body { font-family: Codec, Arial, sans-serif; background-color: #f8f7f2; }
 header { width: 100%; top: 0; }
 nav.navbar { height: auto; min-height: var(--landing-header); padding: 8px 0; }
 .navbar > .container-fluid {

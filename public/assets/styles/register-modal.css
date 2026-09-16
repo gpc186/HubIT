@@ -1,0 +1,69 @@
+#exampleModal {
+    --register-blue: #2f6d88;
+    --register-ink: #203f4d;
+    --register-muted: #65767d;
+    --register-line: #dce5e7;
+    font-family: Codec, Arial, sans-serif;
+    color: var(--register-ink);
+}
+
+#exampleModal span { color: inherit; font-size: inherit; font-weight: inherit; }
+#exampleModal p { color: inherit; font-size: inherit; font-weight: inherit; }
+#exampleModal .modal-dialog { max-width: 540px; margin-inline: auto; padding-inline: 16px; }
+#exampleModal .modal-content { overflow: hidden; border: 1px solid #d8e3e6; border-radius: 24px; background: #fffefa; box-shadow: 0 28px 90px rgba(25, 61, 75, .22); }
+#exampleModal .modal-header { padding: 22px 28px 14px; border: 0; }
+#exampleModal .register-eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--register-blue); font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+#exampleModal .register-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--register-blue); box-shadow: 0 0 0 5px rgba(47, 109, 136, .08); }
+#exampleModal .btn-close { width: 32px; height: 32px; margin: 0; padding: 8px; border-radius: 9px; background-size: 12px; opacity: .55; }
+#exampleModal .btn-close:hover { background-color: #e9f1f3; opacity: 1; }
+#exampleModal .modal-body { padding: 10px 28px 28px; text-align: left; }
+#exampleModal .register-intro { margin-bottom: 26px; }
+#exampleModal .modal-title { max-width: 410px; margin: 0 0 10px; color: var(--register-ink) !important; font-size: clamp(30px, 4vw, 38px) !important; font-weight: 400; line-height: 1.13; letter-spacing: -.035em; }
+#exampleModal .modal-title span { color: var(--register-blue); }
+#exampleModal .register-intro p { margin: 0; color: var(--register-muted); font-size: 15px; line-height: 1.5; }
+#exampleModal .register-fields { display: grid; gap: 16px; }
+#exampleModal .register-field label { display: block; margin-bottom: 7px; color: var(--register-ink); font-size: 13px; }
+#exampleModal .register-field input { display: block; width: 100%; height: 48px; padding: 0 15px; border: 1px solid #c9d7db; border-radius: 11px; outline: none; background: #fff; color: var(--register-ink); font-family: inherit; font-size: 15px; transition: border-color .2s, box-shadow .2s; }
+#exampleModal .register-field input::placeholder { color: #9ca9ad; }
+#exampleModal .register-field input:focus { border-color: var(--register-blue); box-shadow: 0 0 0 3px rgba(47, 109, 136, .12); }
+#exampleModal .password-hint { margin: 7px 0 0; color: var(--register-muted); font-size: 12px; line-height: 1.45; }
+#exampleModal .account-type { min-width: 0; margin: 24px 0 0; padding: 0; border: 0; }
+#exampleModal .account-type legend { float: none; width: auto; margin: 0 0 11px; color: var(--register-ink); font-size: 14px; }
+#exampleModal .selection-modal { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+#exampleModal .account-option { position: relative; display: block; min-width: 0; cursor: pointer; }
+#exampleModal .radio-modal { position: absolute; width: 1px; height: 1px; opacity: 0; }
+#exampleModal .account-option-surface { display: flex; align-items: center; gap: 10px; min-height: 76px; padding: 13px; border: 1px solid var(--register-line); border-radius: 13px; background: #fff; transition: border-color .2s, background-color .2s, box-shadow .2s, transform .2s; }
+#exampleModal .account-option:hover .account-option-surface { border-color: #a9c6d1; transform: translateY(-2px); }
+#exampleModal .radio-modal:checked + .account-option-surface { border-color: var(--register-blue); background: #eef5f7; box-shadow: 0 0 0 2px rgba(47, 109, 136, .11); }
+#exampleModal .radio-modal:focus-visible + .account-option-surface { outline: 3px solid #7ab5cf; outline-offset: 3px; }
+#exampleModal .account-option-icon { display: grid; place-items: center; width: 36px; height: 36px; flex: 0 0 36px; border-radius: 10px; background: #edf3f5; color: var(--register-blue); font-size: 21px; }
+#exampleModal .account-option-copy { display: grid; min-width: 0; gap: 2px; }
+#exampleModal .account-option-copy strong { color: var(--register-ink); font-size: 14px; font-weight: 400; }
+#exampleModal .account-option-copy small { color: var(--register-muted); font-size: 11px; line-height: 1.25; }
+#exampleModal .account-option-check { width: 15px; height: 15px; flex: 0 0 15px; margin-left: auto; border: 1px solid #a7bdc5; border-radius: 50%; background: #fff; }
+#exampleModal .radio-modal:checked + .account-option-surface .account-option-check { border: 4px solid var(--register-blue); }
+#exampleModal .modal-footer { display: flex; justify-content: space-between; gap: 12px; padding: 18px 28px 24px; border-top: 1px solid var(--register-line); background: #f6f9f8; }
+#exampleModal .modal-footer button { min-height: 44px; padding: 10px 18px; border-radius: 9px; font-family: inherit; font-size: 14px; transition: background-color .2s, border-color .2s, transform .2s; }
+#exampleModal .register-cancel { border: 1px solid var(--register-line); background: transparent; color: var(--register-muted); }
+#exampleModal .register-cancel:hover { border-color: #abc4cd; background: #fff; }
+#exampleModal .register-submit { display: inline-flex; align-items: center; justify-content: center; gap: 26px; border: 1px solid var(--register-blue); background: var(--register-blue); color: #fff; }
+#exampleModal .register-submit:hover { background: #255d75; transform: translateY(-1px); }
+#exampleModal .register-submit span { font-size: 17px; }
+#exampleModal .btn-close:focus-visible, #exampleModal .modal-footer button:focus-visible { outline: 3px solid #7ab5cf; outline-offset: 3px; box-shadow: none; }
+
+@media (max-width: 500px) {
+    #exampleModal .modal-dialog { margin-block: 10px; padding-inline: 8px; }
+    #exampleModal .modal-header { padding: 20px 22px 10px; }
+    #exampleModal .modal-body { padding: 8px 22px 22px; }
+    #exampleModal .modal-footer { padding: 16px 22px 20px; }
+}
+
+@media (max-width: 390px) {
+    #exampleModal .selection-modal { grid-template-columns: 1fr; gap: 8px; }
+    #exampleModal .account-option-surface { min-height: 62px; }
+    #exampleModal #btnNone { display: inline-flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #exampleModal .account-option-surface, #exampleModal .modal-footer button { transition-duration: .01ms; }
+}

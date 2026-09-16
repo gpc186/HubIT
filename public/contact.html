@@ -4,62 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contato — Hubit</title>
-    <link rel="icon" href="./assets/img/favicon/favicon.ico">
-    <link rel="stylesheet" href="./assets/styles/contact-page.css">
-    <script defer src="./assets/js/vendor/gsap.min.js"></script>
-    <script defer src="./assets/js/contact-page.js"></script>
+    <meta http-equiv="refresh" content="0; url=login.html#contact">
+    <script>location.replace('login.html#contact');</script>
 </head>
 <body>
-    <a class="skip-link" href="#main">Ir para o conteúdo</a>
-    <header class="site-header">
-        <nav class="nav-shell" aria-label="Navegação principal">
-            <a class="brand" href="login.html" aria-label="Hubit — início"><img src="assets/img/svg/Hubit_svg_logo.svg" alt="Hubit"></a>
-            <div class="desktop-links"><a href="login.html#about">Conheça o hubit</a><a href="login.html#slots">Slots</a><a href="login.html#plans">Planos</a><a href="contact.html" aria-current="page">Contato</a></div>
-            <a class="button nav-login" href="login.html#email">Login</a>
-            <details class="mobile-menu">
-                <summary aria-label="Menu de navegação"><span></span><span></span><span></span></summary>
-                <div class="mobile-links"><a href="login.html#about">Conheça o hubit</a><a href="login.html#slots">Slots</a><a href="login.html#plans">Planos</a><a href="contact.html" aria-current="page">Contato</a></div>
-            </details>
-        </nav>
-    </header>
-    <main id="main">
-        <section class="contact-hero shell" aria-labelledby="contact-title">
-            <div class="hero-copy">
-                <span class="eyebrow"><span class="small-dot" aria-hidden="true"></span> CONTATO HUBIT</span>
-                <h1 id="contact-title">Toda conexão começa com uma <span>boa conversa.</span></h1>
-                <p class="hero-description">Uma dúvida, uma ideia ou o próximo passo da sua empresa. Fale com a gente.</p>
-                <a class="text-link" href="#faq">Talvez sua resposta esteja aqui <span aria-hidden="true">↓</span></a>
-                <div class="hero-note"><span class="note-icon"><img src="assets/img/svg/headset-alt-svgrepo-com.svg" alt=""></span><p>Sobre a sua conta ou sobre o Hubit.<br><strong>Vamos encontrar o melhor caminho.</strong></p></div>
-            </div>
-            <div class="contact-card" aria-labelledby="channels-title">
-                <div class="card-top"><span class="card-label">VAMOS CONVERSAR</span><span class="card-mark" aria-hidden="true">↗</span></div>
-                <h2 id="channels-title">Como podemos ajudar?</h2>
-                <p class="card-description">Escolha o melhor canal para entrar em contato.</p>
-                <div class="contact-channel">
-                    <span class="channel-icon"><img src="assets/img/svg/mail-svgrepo-com.svg" alt=""></span>
-                    <div class="channel-content"><span class="channel-label">E-mail</span><a href="mailto:hubitcontato@gmail.com">hubitcontato@gmail.com</a></div>
-                    <button class="copy-button" type="button" data-copy="hubitcontato@gmail.com" aria-label="Copiar e-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button>
-                </div>
-                <div class="contact-channel">
-                    <span class="channel-icon"><img src="assets/img/svg/telephone-svgrepo-com.svg" alt=""></span>
-                    <div class="channel-content"><span class="channel-label">Telefone</span><a href="tel:+551190008999">(11) 9000-8999</a></div>
-                    <button class="copy-button" type="button" data-copy="11-9000-8999" aria-label="Copiar telefone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button>
-                </div>
-                <a class="button card-cta" href="mailto:hubitcontato@gmail.com">Escrever um e-mail <span aria-hidden="true">↗</span></a>
-                <p class="contact-status" id="contact-status" role="status" aria-live="polite">Prefere copiar? Use o ícone ao lado de cada contato.</p>
-            </div>
-        </section>
-        <section class="faq-section shell" id="faq" aria-labelledby="faq-title">
-            <div class="faq-intro"><span class="eyebrow">ANTES DE ENVIAR</span><h2 id="faq-title">Um atalho para<br> a sua dúvida.</h2><p>Respostas para começar a explorar as possibilidades do Hubit.</p><a class="text-link" href="mailto:hubitcontato@gmail.com">Minha dúvida é outra <span aria-hidden="true">↗</span></a></div>
-            <div class="faq-list">
-                <details class="faq-item"><summary><span class="faq-number">01</span>Como criar minha conta?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-answer"><p>Na <a href="login.html#email">página inicial</a>, selecione “Primeira vez aqui?” no bloco de login. Preencha seu e-mail e senha e escolha o tipo de conta: Funcionário ou Empresa.</p></div></details>
-                <details class="faq-item"><summary><span class="faq-number">02</span>O que são os Slots?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-answer"><p>São espaços para configurar seus currículos e utilizá-los ao se candidatar a vagas. Você pode conhecer a proposta na <a href="login.html#slots">seção Slots</a>.</p></div></details>
-                <details class="faq-item"><summary><span class="faq-number">03</span>Onde encontro os planos?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-answer"><p>Na <a href="login.html#plans">seção de planos</a>, você pode comparar as opções individuais e empresariais e conferir os benefícios de cada uma.</p></div></details>
-                <details class="faq-item"><summary><span class="faq-number">04</span>Como falar sobre um plano empresarial?<span class="faq-plus" aria-hidden="true">+</span></summary><div class="faq-answer"><p>Envie um e-mail para <a href="mailto:hubitcontato@gmail.com">hubitcontato@gmail.com</a> contando um pouco sobre sua empresa e o que você procura no Hubit.</p></div></details>
-            </div>
-        </section>
-        <aside class="contact-banner shell"><div><span class="eyebrow">SEU PRÓXIMO PASSO</span><h2>Novas conexões esperam por você.</h2></div><a class="button" href="login.html">Explorar o Hubit <span aria-hidden="true">↗</span></a></aside>
-    </main>
-    <footer class="site-footer"><div class="footer-shell shell"><a href="login.html" aria-label="Hubit — início"><img src="assets/img/svg/Hubit_svg_logo_footer.svg" alt="Hubit"></a><p>Conectando talentos e oportunidades em tecnologia.</p><a class="footer-github" href="https://github.com/gpc186/HubIT" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><small>Por Henrique Fiorotti, Gustavo Cagega e Fernando Sanches.</small></div></footer>
+    <p>O contato agora está na <a href="login.html#contact">página inicial da Hubit</a>.</p>
 </body>
 </html>
