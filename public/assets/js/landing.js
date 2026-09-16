@@ -1,5 +1,21 @@
 /* GSAP 3.13: progressive enhancement; the page stays visible without animation. */
 (() => {
+    const menu = document.querySelector('.mobile-menu');
+    if (menu) {
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && menu.open) {
+                menu.open = false;
+                menu.querySelector('summary').focus();
+            }
+        });
+        document.addEventListener('click', event => {
+            if (!menu.contains(event.target)) menu.open = false;
+        });
+        menu.querySelectorAll('.mobile-links a').forEach(link => {
+            link.addEventListener('click', () => { menu.open = false; });
+        });
+    }
+
     // Adapted from shadcn-space/shine-border-03 (mouse spotlight):
     // https://shadcnspace.com/r/shine-border-03.json
     const shineMedia = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');

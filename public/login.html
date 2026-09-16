@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/styles/landing.css">
+    <link rel="stylesheet" href="./assets/styles/site-chrome.css">
     <script defer src="./assets/js/vendor/gsap.min.js"></script>
     <script defer src="./assets/js/vendor/ScrollTrigger.min.js"></script>
     <script defer src="./assets/js/landing.js"></script>
@@ -18,80 +19,21 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <a href="/" target="_self">
-                    <div class="logo">
-                        <img id="logo-animation" src="./assets/img/svg/Hubit_svg_logo.svg" alt="">
-                    </div>
-                </a>
-                <a href="#email" class="d-lg-none ms-auto" onclick="focar()">
-                    <div class="login-btn">
-                        Login
-                    </div>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                      </button>
-                      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-                        <div class="offcanvas-header">
-                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                          <!-- Conteúdo do offcanvas (você pode adicionar o que quiser aqui) -->
-                          <ul class="hide-navbar navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <div onclick="location.href = '#about'">
-                                <li class="nav-item">
-                                  <a class="nav-link">Conheça o hubit</a>
-                                  <span>+</span>
-                                </li>
-                            </div>
-                            <hr>
-                            <div aria-current="page" onclick="location.href = '#slots'">
-                                <li class="nav-item">
-                                  <a class="nav-link active">Slots</a>
-                                  <span>+</span>
-                                </li>
-                            </div>
-                            <hr>
-                            <div aria-current="page" onclick="location.href = '#plans'">
-                                <li class="nav-item">
-                                  <a class="nav-link active">Planos</a>
-                                  <span>+</span>
-                                </li>
-                            </div>
-                            <hr>
-                            <div aria-current="page" onclick="location.href = 'contact.html'">
-                                <li class="nav-item">
-                                  <a class="nav-link active">Contato</a>
-                                  <span>+</span>
-                                </li>
-                            </ul>
-                        </div>
-                      </div>
-                <div class="navigation collapse navbar-collapse ms-auto mb-2 mb-lg-0" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#about">Conheça o hubit</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#slots">Slots</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#plans">Planos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contato</a>
-                        </li>
-                    </ul>
-                    <a class="d-none d-lg-block">
-                        <div class="login-btn" onclick="focar()">
-                            Login
-                        </div>
-                    </a>
-                </div>
+    <header class="site-header">
+        <nav class="nav-shell" aria-label="Navegação principal">
+            <a class="brand" href="login.html" aria-label="Hubit — início"><img id="logo-animation" src="assets/img/svg/Hubit_svg_logo.svg" alt="Hubit"></a>
+            <div class="desktop-links">
+                <a href="#about">Conheça o hubit</a><a href="#slots">Slots</a>
+                <a href="#plans">Planos</a><a href="contact.html">Contato</a>
             </div>
+            <a class="button nav-login" href="#email" onclick="focar()">Login</a>
+            <details class="mobile-menu">
+                <summary aria-label="Menu de navegação"><span></span><span></span><span></span></summary>
+                <div class="mobile-links">
+                    <a href="#about">Conheça o hubit</a><a href="#slots">Slots</a>
+                    <a href="#plans">Planos</a><a href="contact.html">Contato</a>
+                </div>
+            </details>
         </nav>
     </header>
     <main>
@@ -355,29 +297,13 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer-main">
-            <div class="footer-main-content-svg">
-                <img src="assets/img/svg/Hubit_svg_logo_footer.svg" alt="">
-                <div class="footer-social-svg">
-                    <ul>
-                        <a href="" target="_blank">
-                            <li><img src="assets/img/svg/facebook-svgrepo-com.svg" alt=""></li>
-                        </a>
-                        <a href="" target="_blank">
-                            <li><img src="assets/img/svg/instagram-167-svgrepo-com.svg" alt=""></li>
-                        </a>
-                        <a href="https://github.com/gpc186/HubIT" target="_blank">
-                            <li><img src="assets/img/svg/github-142-svgrepo-com.svg" alt=""></li>
-                        </a>
-                    </ul>
-                </div>
-                <div class="authors">
-                    <span>By Henrique Fiorotti; Gustavo <br> Cagega; Fernando Sanches</span>
-                </div>
-            </div>
+    <footer class="site-footer">
+        <div class="footer-shell shell">
+            <a href="login.html" aria-label="Hubit — início"><img src="assets/img/svg/Hubit_svg_logo_footer.svg" alt="Hubit"></a>
+            <p>Conectando talentos e oportunidades em tecnologia.</p>
+            <a class="footer-github" href="https://github.com/gpc186/HubIT" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <small>Por Henrique Fiorotti, Gustavo Cagega e Fernando Sanches.</small>
         </div>
-
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

@@ -1,0 +1,42 @@
+/* Header e footer da página de contato, aplicados também à landing. */
+.site-header, .site-footer { --blue: #2f6d88; --ink: #203f4d; --line: #dce3e3; font-family: Codec, Arial, sans-serif; font-size: 16px; line-height: 1.5; font-weight: 400; }
+.site-header { position: sticky; top: 0; z-index: 999; width: 100%; background: rgba(248,247,242,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.site-header .nav-shell { display: flex; align-items: center; gap: 32px; width: min(1440px, calc(100% - 80px)); min-height: 72px; height: auto; margin: auto; padding: 0; background: none; }
+.site-header .brand { display: block; width: 120px; flex-shrink: 0; }
+.site-header .brand img { display: block; width: 100%; height: 44px; object-fit: contain; }
+.site-header .desktop-links { display: flex; align-items: center; gap: 28px; margin-left: auto; font-size: 15px; color: #59666a; }
+.site-header .desktop-links a { padding: 12px 0; color: inherit; text-decoration: none; }
+.site-header .desktop-links a:hover, .site-header .desktop-links [aria-current] { color: var(--blue); }
+.site-header .desktop-links [aria-current] { box-shadow: inset 0 -2px var(--blue); }
+.site-header .button { display: inline-flex; align-items: center; justify-content: center; gap: 24px; min-height: 44px; padding: 10px 22px; border-radius: 9px; background: var(--blue); color: #fff; font-size: 15px; text-decoration: none; transition: background .2s, box-shadow .2s; }
+.site-header .button:hover { background: #245c74; box-shadow: 0 6px 18px -9px var(--blue); }
+.site-header .mobile-menu { display: none; position: relative; }
+.site-header .mobile-menu summary { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; list-style: none; }
+.site-header .mobile-menu summary::-webkit-details-marker { display: none; }
+.site-header .mobile-menu summary span { width: 18px; height: 1px; background: var(--ink); }
+.site-header .mobile-links { position: absolute; right: 0; top: 54px; width: 230px; padding: 12px; border: 1px solid var(--line); border-radius: 14px; background: #fff; box-shadow: 0 16px 35px #203f4d18; }
+.site-header .mobile-links a { display: block; padding: 12px; border-radius: 8px; color: var(--ink); text-decoration: none; }
+.site-header .mobile-links a:hover { background: #edf4f6; }
+.site-footer { height: auto; padding: 40px 0 24px; background: var(--blue); color: #d8e6ec; }
+.site-footer .shell { width: min(1180px, calc(100% - 80px)); margin-inline: auto; }
+.site-footer .footer-shell { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
+.site-footer img { display: block; width: 100px; max-width: 100%; }
+.site-footer p { margin: 0; font-size: 14px; }
+.site-footer .footer-github { margin-left: auto; font-size: 14px; }
+.site-footer a { color: inherit; text-decoration: none; }
+.site-footer small { width: 100%; padding-top: 18px; border-top: 1px solid #ffffff25; color: #c0d5df; font-size: 11px; }
+.site-header a:focus-visible, .site-header summary:focus-visible, .site-footer a:focus-visible { outline: 3px solid #7ab5cf; outline-offset: 5px; }
+.site-header + main { padding-top: 0; }
+@media (max-width: 900px) {
+    .site-header .desktop-links { display: none; }
+    .site-header .nav-login { margin-left: auto; }
+    .site-header .mobile-menu { display: block; }
+}
+@media (max-width: 700px) {
+    .site-header .nav-shell, .site-footer .shell { width: calc(100% - 40px); }
+    .site-header .nav-shell { min-height: 64px; gap: 12px; }
+    .site-header .brand { width: 100px; }
+    .site-header .nav-login { padding-inline: 16px; }
+    .site-footer p { width: 100%; }
+    .site-footer .footer-github { margin-left: 0; }
+}
