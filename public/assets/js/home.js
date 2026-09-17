@@ -157,31 +157,6 @@ function ordenarEmpregoPorData(empregos) {
     });
 }
 
-/**
- * Converte diferentes formatos de data para timestamp
- */
-function converterDataParaTimestamp(data) {
-    if (!data) return 0;
-
-    // Se já é um timestamp ou número
-    if (typeof data === 'number') return data;
-
-    // Se é uma string de data ISO (2025-10-15T19:42:56.155Z)
-    if (data.includes('T') && data.includes('Z')) {
-        return new Date(data).getTime();
-    }
-
-    // Se é formato DD/MM/YYYY
-    if (data.includes('/')) {
-        const [dia, mes, ano] = data.split('/');
-        return new Date(`${dia}-${mes}-${ano}`);
-    }
-
-    // Tenta converter diretamente
-    const timestamp = new Date(data).getTime();
-    return isNaN(timestamp) ? 0 : timestamp;
-}
-
 // === FUNÇÕES DE PERFIL ===
 
 /**
@@ -555,7 +530,7 @@ function renderizarPropostas(propostas) {
                 ${proposta.descricao}
             </div>
             <div class="post-engagement">
-                <span>Criado em ${proposta.dataCriacao}</span>
+                <span>Criado em ${formatarDataBR(proposta.dataCriacao)}</span>
                 <span>Status: ${proposta.status}</span>
             </div>
             <div class="post-actions">

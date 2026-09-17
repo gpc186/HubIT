@@ -1156,6 +1156,7 @@ export default function PerfilPage() {
 				{ src: "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" },
 				{ src: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" },
 				{ src: "/assets/js/logoAnim.js" },
+				{ src: "/assets/js/datas.js" },
 				{ src: "/assets/js/curriculos.js" },
 				{ src: "/assets/js/perfil.js" },
 				{ src: "/assets/js/pg-perfil.js" },

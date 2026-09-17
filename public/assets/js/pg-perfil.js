@@ -522,7 +522,7 @@ function renderizarEmpregos(empregos) {
                 </div>
                 <div class="info-item">
                     <ion-icon name="calendar-outline"></ion-icon>
-                    <span>${emprego.dataCriacao}</span>
+                    <span>${formatarDataBR(emprego.dataCriacao)}</span>
                 </div>
             </div>
             
