@@ -540,11 +540,6 @@ function renderizarEmpregos(empregos) {
     });
 }
 
-async function verCandidatos(empregoID) {
-    // Redirecionar para página de candidatos ou abrir modal
-    window.location.href = ``;
-}
-
 async function deletarEmprego(empregoID) {
     if (!confirm('Tem certeza que deseja deletar esta vaga?')) {
         return;
