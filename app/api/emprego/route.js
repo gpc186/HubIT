@@ -1,6 +1,7 @@
 import { json, erro, lerCorpo, idDoHeader, erroInterno } from '@/lib/api';
 import { criarIDEmprego } from '@/lib/geradorID';
 import { buscarUsuarioPorID, criarEmprego, listarEmpregos } from '@/lib/db/models';
+import { maisRecentePrimeiro } from '@/lib/datas';
 
 // POST - Criar novo emprego
 export async function POST(request) {
@@ -55,11 +56,6 @@ export async function POST(request) {
 			return erro('Localização é obrigatória!', 400);
 		}
 
-		const data = new Date();
-		const ano = data.getUTCFullYear();
-		const dia = data.getUTCDate();
-		const mes = data.getUTCMonth() + 1;
-
 		// Aqui criamos um objeto com todas as informações
 		const novoEmprego = criarEmprego({
 			empregoID: criarIDEmprego(),
@@ -75,7 +71,7 @@ export async function POST(request) {
 			requisitos,
 			beneficios,
 			corDestaque: corDestaque || '#000000ff', // Cor padrão se não for fornecida
-			dataCriacao: `${dia}/${mes}/${ano}`,
+			dataCriacao: new Date().toISOString(),
 			status: 'ativo',
 		});
 
@@ -133,7 +129,7 @@ export async function GET(request) {
 		}
 
 		// Ordenar por data de criação (mais recente primeiro)
-		resultado.sort((a, b) => new Date(b.dataCriacao) - new Date(a.dataCriacao));
+		resultado.sort(maisRecentePrimeiro('dataCriacao'));
 
 		return json({ ok: true, empregos: resultado });
 	} catch (error) {

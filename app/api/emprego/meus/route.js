@@ -1,5 +1,6 @@
 import { json, erro, idNumericoDoHeader, erroInterno } from '@/lib/api';
 import { listarEmpregosDaEmpresa } from '@/lib/db/models';
+import { maisRecentePrimeiro } from '@/lib/datas';
 
 // GET /meus - Listar empregos da empresa
 export async function GET(request) {
@@ -16,7 +17,7 @@ export async function GET(request) {
 			return erro('Nenhum emprego encontrado!', 404);
 		}
 
-		empregosMeus.sort((a, b) => new Date(b.dataCriacao) - new Date(a.dataCriacao));
+		empregosMeus.sort(maisRecentePrimeiro('dataCriacao'));
 
 		return json({
 			ok: true,

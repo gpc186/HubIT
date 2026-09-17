@@ -290,7 +290,7 @@
     "requisitos": null,
     "beneficios": null,
     "corDestaque": "#b339d5",
-    "dataCriacao": "29/10/2025",
+    "dataCriacao": "2025-10-29T00:00:00.000Z",
     "status": "ativo"
   },
   {
@@ -307,7 +307,7 @@
     "requisitos": "Javascript, Node.js, Next.js, CSS, HTML, Express.js",
     "beneficios": "VR, VT, Wellhub, Café",
     "corDestaque": "#00d5ff",
-    "dataCriacao": "30/10/2025",
+    "dataCriacao": "2025-10-30T00:00:00.000Z",
     "status": "ativo"
   }
 ]
