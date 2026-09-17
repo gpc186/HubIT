@@ -69,3 +69,69 @@ Cor terciária:#000000 (Preto)
 - [Figma](https://www.figma.com/site/IdbyzYJKUWhjjsXexnTA9Q/Sem-t%C3%ADtulo?node-id=0-1&t=JrBRalb5UlEjX8GJ-1)
 - [ClickUp](https://app.clickup.com/90131499698/v/s/901310955873)
 - [Github](https://github.com/gpc186/HubIT)
+
+---
+
+## Stack e estrutura
+
+O projeto roda em **Next.js 16 (App Router)** com React 19 e componentes em `.jsx`.
+Os dados ficam em **SQLite** (`data/hubit.db`), acessado pelo módulo nativo
+`node:sqlite` — sem dependência de banco para instalar.
+
+### Como rodar
+
+```bash
+npm install
+npm run db:seed   # cria data/hubit.db a partir dos arquivos data/*.json
+npm run dev       # http://localhost:3000
+```
+
+`npm run db:seed` pode ser rodado de novo a qualquer momento para voltar o banco
+ao estado inicial — ele recria as tabelas a partir dos JSON.
+
+| Script | O que faz |
+| --- | --- |
+| `npm run dev` | Servidor de desenvolvimento |
+| `npm run build` / `npm start` | Build e servidor de produção |
+| `npm run db:seed` | Popula/reinicia o SQLite a partir de `data/*.json` |
+| `npm run test:navegador` | Teste de fumaça das páginas num Edge/Chrome headless |
+
+### Organização
+
+```
+app/
+  layout.jsx            <head> comum a todas as páginas
+  page.jsx              landing + login   (era public/login.html)
+  home/page.jsx         feed de vagas     (era public/principal.html)
+  portfolio/page.jsx    feed de portfólios
+  perfil/[id]/page.jsx  página de perfil
+  contato/page.jsx      contato
+  not-found.jsx         404
+  api/…/route.js        a API (era middlewares/*.js no Express)
+components/
+  ScriptsLegados.jsx    carrega os scripts de /public/assets/js
+lib/
+  db/                   conexão, esquema e acesso ao SQLite
+  api.js                ajudantes dos route handlers
+  legado.js             ponte para os handlers onclick do HTML antigo
+public/assets/          css, imagens e js exatamente como antes
+scripts/                seed, conversor de HTML e teste de navegador
+```
+
+### Sobre o código legado
+
+As páginas foram convertidas de HTML para JSX mantendo a marcação igual: os
+mesmos arquivos `.css` e os mesmos scripts de `public/assets/js` continuam
+valendo, e nenhum deles precisou ser reescrito.
+
+Dois pontos merecem atenção na hora de mexer nessas páginas:
+
+- **`components/ScriptsLegados.jsx`** carrega os scripts antigos em ordem e
+  redispara `DOMContentLoaded` e `load` depois — os handlers de `window.onload`
+  nunca rodariam sozinhos, porque esses eventos já passaram quando o React monta
+  a página.
+- **`lib/legado.js`** avalia as expressões que eram atributos `onclick` no HTML,
+  chamando as funções globais definidas nos scripts de `public/assets/js`.
+
+Quando uma página for reescrita em React de verdade, o caminho é trocar o script
+correspondente por estado e efeitos e tirar a página da ponte.
