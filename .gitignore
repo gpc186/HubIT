@@ -1,1 +1,8 @@
 /node_modules
+/.next
+/out
+/data/hubit.db
+/data/hubit.db-journal
+/data/hubit.db-wal
+/data/hubit.db-shm
+.env*.local
